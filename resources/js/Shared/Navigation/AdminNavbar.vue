@@ -1,5 +1,5 @@
 <script setup>
-    import { BellIcon } from '../Icons/Icons';
+    import { BellIcon, AppLogo } from '../Icons/Icons';
 </script>
 
 <template>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="navbar-center">
-            <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+            <a class="btn btn-ghost normal-case text-xl"><AppLogo/></a>
         </div>
         <div class="navbar-end">
             <button class="btn btn-ghost btn-circle">
