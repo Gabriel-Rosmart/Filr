@@ -1,5 +1,6 @@
 <script setup>
-    import { BellIcon, AppLogo } from '../Icons/Icons';
+    import { BellIcon, HomeIcon, ManageUsersIcon, SettingsIcon, AppLogo } from '../Icons/Icons';
+    import { Link } from '@inertiajs/inertia-vue3';
 </script>
 
 <template>
@@ -15,9 +16,24 @@
                 </label>
                 <ul tabindex="0"
                     class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a>Homepage</a></li>
-                    <li><a>Manage Users</a></li>
-                    <li><a>Settings</a></li>
+                    <li>
+                        <Link>
+                            <HomeIcon/>
+                            Dashboard
+                        </Link>
+                    </li>
+                    <li>
+                        <Link>
+                            <ManageUsersIcon/>
+                            Manage Users
+                        </Link>
+                    </li>
+                    <li>
+                        <Link>
+                            <SettingsIcon/>
+                            Settings
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </div>
