@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="navbar-center">
-            <a class="btn btn-ghost normal-case text-xl"><AppLogo/></a>
+            <a class="btn btn-ghost normal-case text-xl"><AppLogo class="w-6 fill-cyan-500"/></a>
         </div>
         <div class="navbar-end">
             <button class="btn btn-ghost btn-circle">
