@@ -1,5 +1,5 @@
 <template>
-    <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs mx-4" />
+    <input type="text" placeholder="Search..." class="input input-bordered w-full max-w-xs mx-4" />
     <select class="select select-bordered w-full max-w-xs">
         <option disabled selected>Employee Type</option>
         <option>Teacher</option>

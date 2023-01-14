@@ -1,6 +1,54 @@
+<script setup>
+    import { ref, onMounted } from 'vue';
+
+    let userTheme = ref('')
+
+    /** Default light and dark themes, see daisyUI themes for more info */
+    const lightTheme = 'cmyk'
+    const darkTheme = 'night'
+
+    // Get browser theme preference
+    const getMediaPreference = () => {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 
+            darkTheme : lightTheme
+    }
+
+    const getTheme = () => {
+        return localStorage.getItem('theme')
+    }
+
+    const setTheme = (theme) => {
+        const html = document.querySelector('html')
+        localStorage.setItem("theme", theme);
+        userTheme = theme;
+
+        // Set daisyUI theme preference
+        html.setAttribute('data-theme', theme)
+
+        // Toggle Tailwind dark mode
+        if(userTheme === darkTheme) html.classList.add('dark')
+        if(userTheme === lightTheme) html.classList.remove('dark')
+    }
+
+    const toggleTheme = () => {
+        const activeTheme = localStorage.getItem("theme");
+        if (activeTheme === lightTheme) setTheme(darkTheme);
+        else setTheme(lightTheme);
+    }
+
+    onMounted(() => {
+        // Get user preference theme, or if null, get browser preference
+        const initUserTheme = getTheme() || getMediaPreference()
+        setTheme(initUserTheme)
+
+        // Mark theme toggler checkbox as checked for correct ui initialization
+        document.getElementById('themeToggle').checked = (initUserTheme === 'dark')
+    })
+</script>
+
 <template>
     <label class="swap swap-rotate mr-4">
-        <input type="checkbox" />
+        <input type="checkbox" @change="toggleTheme" id="themeToggle"/>
 
 
         <svg class="swap-on fill-current w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -18,6 +66,7 @@
 </template>
 
 <style scoped>
+    /** Prevents the checkbox to be visible */
     input[type=checkbox] {
         display: none;
     }
