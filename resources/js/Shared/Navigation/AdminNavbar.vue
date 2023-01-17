@@ -3,6 +3,8 @@
     import NotificationDropdown from './NotificationDropdown.vue';
     import ThemeToggle from './ThemeToggle.vue'
     import { Link } from '@inertiajs/inertia-vue3';
+
+    import LanguageDropdown from './LanguageDropdown.vue';
 </script>
 
 <template>
@@ -43,6 +45,7 @@
             <a class="btn btn-ghost normal-case text-xl"><AppLogo class="w-6 fill-cyan-400"/></a>
         </div>
         <div class="navbar-end">
+            <LanguageDropdown/>
             <ThemeToggle/>
             <NotificationDropdown/>
         </div>
