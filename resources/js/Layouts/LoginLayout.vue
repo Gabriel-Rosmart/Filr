@@ -8,7 +8,7 @@ import { AppLogo } from '@/Shared/Icons/Icons'
             <AppLogo class="h-20 w-20 fill-cyan-400"/>
             <span class="text-6xl">FILR</span>
         </div>
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 shadow-md overflow-hidden sm:rounded-lg border-2 border-gray-800">
+        <div class="w-full sm:max-w-md mt-6 px-6 py-4 shadow-md overflow-hidden sm:rounded-lg border-2 dark:border-gray-800">
             <slot />
         </div>
     </div>
