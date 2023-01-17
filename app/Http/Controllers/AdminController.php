@@ -14,6 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+        // TODO: Pass data to the view
         return Inertia::render('Admin/Dashboard');
     }
 

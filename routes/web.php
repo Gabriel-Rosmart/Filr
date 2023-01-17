@@ -19,6 +19,7 @@ use Inertia\Inertia;
 
 Route::redirect('/', '/login');
 
+// TODO: Add necessary middlewares (auth, admin)
 Route::get('/admin', [AdminController::class, 'index']);
 
 Route::get('/dashboard', function () {
