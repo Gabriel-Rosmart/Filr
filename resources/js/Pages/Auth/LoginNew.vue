@@ -7,6 +7,10 @@ import FormPrimaryButton from '@/Shared/Forms/FormPrimaryButton.vue'
 import LoginLayout from '@/Layouts/LoginLayout.vue'
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
 
+import { onMounted } from 'vue'
+
+import { getMediaPreference, setTheme, getTheme } from "@/Shared/Navigation/Theme"
+
 defineProps({
     canResetPassword: Boolean,
     status: String,
@@ -23,6 +27,11 @@ const submit = () => {
         onFinish: () => form.reset('password'),
     });
 };
+
+onMounted(() => {
+        const initUserTheme = getTheme() || getMediaPreference()
+        setTheme(initUserTheme)
+})
 </script>
 
 <template>
