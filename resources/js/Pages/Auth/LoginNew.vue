@@ -56,7 +56,7 @@ const submit = () => {
             <div class="block mt-4">
                 <label class="flex items-center">
                     <FormCheckbox name="remember" v-model:checked="form.remember" />
-                    <span class="ml-2 text-base label">Remember me</span>
+                    <span class="ml-2 label">Remember me</span>
                 </label>
             </div>
 
@@ -66,7 +66,7 @@ const submit = () => {
                 Forgot your password?
                 </Link>
 
-                <FormPrimaryButton class="ml-4 text-base" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <FormPrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
                 </FormPrimaryButton>
             </div>

@@ -19,7 +19,7 @@
 
 <template>
     <input
-        class="input input-bordered w-full max-w-xs"
+        class="input input-bordered input-primary w-full max-w-xs"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
         ref="input"
