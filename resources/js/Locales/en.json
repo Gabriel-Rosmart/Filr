@@ -2,7 +2,18 @@
     "hello": "hello",
     "admin": {
         "navbar": {
-            "notification": "New message"
+            "notification": "New message",
+            "dropdown": {
+                "dashboard": "Dashboard",
+                "users": "Manage users",
+                "settings": "Settings"
+            }
+        },
+        "query": {
+            "search": "Search...",
+            "employee": {
+                "main": "Employee type"
+            }
         }
     }
 }

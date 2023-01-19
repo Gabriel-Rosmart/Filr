@@ -2,7 +2,18 @@
     "hello": "hola",
     "admin": {
         "navbar": {
-            "notification": "Nuevo mensaje"
+            "notification": "Nuevo mensaje",
+            "dropdown": {
+                "dashboard": "Dashboard",
+                "users": "Administrar usuarios",
+                "settings": "Ajustes"
+            }
+        },
+        "query": {
+            "search": "Buscar...",
+            "employee": {
+                "main": "Tipo de empleado"
+            }
         }
     }
 }
