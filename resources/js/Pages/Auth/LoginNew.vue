@@ -29,8 +29,8 @@ const submit = () => {
 };
 
 onMounted(() => {
-        const initUserTheme = getTheme() || getMediaPreference()
-        setTheme(initUserTheme)
+    const initUserTheme = getTheme() || getMediaPreference()
+    setTheme(initUserTheme)
 })
 </script>
 
@@ -43,7 +43,7 @@ onMounted(() => {
             {{ status }}
         </div>
 
-        <form @submit.prevent="">
+        <form @submit.prevent="submit">
             <div>
                 <FormLabel for="email" value="Email" />
 
