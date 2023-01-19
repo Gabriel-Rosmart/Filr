@@ -1,5 +1,9 @@
 <script setup>
     import LanguageIcon from '../Icons/LanguageIcon.vue';
+    import { useI18n } from 'vue-i18n'
+
+    let { locale } = useI18n()
+
     const languages = [
         {
             'lang': 'English',
@@ -10,8 +14,9 @@
             'code': 'es'
         }
     ]
-    const changeLocale = (locale) => {
-        console.log(locale)
+    const changeLocale = (newLocale) => {
+        locale.value = newLocale
+        localStorage.setItem('locale', newLocale)
     }
 </script>
 
@@ -25,7 +30,7 @@
                 v-for="language in languages" 
                 class="cursor-pointer dark:hover:text-cyan-500 hover:font-bold"
                 @click="changeLocale(language.code)">
-                {{ language.lang }}
+                <a @click.prevent="">{{ language.lang }}</a>
             </li>
         </ul>
     </div>

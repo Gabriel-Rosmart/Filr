@@ -1,5 +1,8 @@
 <script setup>
     import { BellIcon } from '../Icons/Icons';
+    import { useI18n } from 'vue-i18n'
+
+    const { t } = useI18n()
 </script>
 
 <template>
@@ -11,7 +14,7 @@
             </div>
         </button>
         <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 whitespace-nowrap">
-            <li><a>New message</a></li>
+            <li><a>{{ t('admin.navbar.notification') }}</a></li>
         </ul>
     </div>
 </template>

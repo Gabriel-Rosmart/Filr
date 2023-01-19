@@ -1,0 +1,8 @@
+{
+    "hello": "hola",
+    "admin": {
+        "navbar": {
+            "notification": "Nuevo mensaje"
+        }
+    }
+}
