@@ -1,5 +1,6 @@
 <script setup>
     import { ref } from 'vue'
+    import { Link } from '@inertiajs/inertia-vue3'
 
     const users = [
         {
@@ -37,7 +38,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user of users">
+                <tr v-for="user of users" class="hover">
                     <td>
                         <div class="flex items-center space-x-3">
                             <div class="avatar">
@@ -57,12 +58,12 @@
                     </td>
                     <td>
                         <div class="indicator ">
-                        <span class="indicator-item indicator-middle indicator-start badge" :class="{'badge-success': user.status === 'Active', 'badge-error': user.status === 'Leave'}"></span>
+                        <span class="indicator-item indicator-middle indicator-start badge" :class="{'badge-info': user.status === 'Active', 'badge-error': user.status === 'Leave'}"></span>
                         <div class="ml-6">{{ user.status }}</div>
                         </div>
                     </td>
                     <th>
-                        <button class="btn btn-ghost btn-xs">details</button>
+                        <Link as="button" class="btn btn-ghost btn-xs">details</Link>
                     </th>
                 </tr>
             </tbody>
