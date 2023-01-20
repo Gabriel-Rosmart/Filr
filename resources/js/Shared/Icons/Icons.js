@@ -3,6 +3,7 @@ import SettingsIcon from './SettingsIcon.vue'
 import HomeIcon from './HomeIcon.vue'
 import BellIcon from './BellIcon.vue'
 import CalendarIcon from './CalendarIcon.vue'
+import FolderIcon from './FolderIcon.vue'
 import AppLogo from './AppLogo.vue'
 
 export {
@@ -11,5 +12,6 @@ export {
     HomeIcon,
     BellIcon,
     CalendarIcon,
+    FolderIcon,
     AppLogo
 }
