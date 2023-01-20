@@ -8,7 +8,7 @@
 
 <template>
     <AdminLayout>
-        <Breadcrumbs class="ml-5 mt-6"/>
+        <Breadcrumbs class="ml-5 mt-6" :pages="['Dashboard']"/>
         <div class="flex items-center mt-8">
             <QueryFilters/>
             <Pagination class="ml-24"/>
