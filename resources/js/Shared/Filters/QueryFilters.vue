@@ -30,6 +30,6 @@
         <option value="teacher">Teacher</option>
         <option value="administrative">Administrative</option>
     </select>
-    <button class="btn btn-primary ml-8">Filter</button>
+    <button class="btn btn-primary btn-outline ml-8">Filter</button>
     <button class="btn btn-ghost ml-4" @click="clearInput">Reset</button>
 </template>
