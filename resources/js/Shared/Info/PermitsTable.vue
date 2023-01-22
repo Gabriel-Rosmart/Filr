@@ -1,5 +1,6 @@
 <script setup>
     import { ref } from "vue"
+    import { CheckIcon, XIcon } from "../Icons/Icons";
 
     const permits = ref([
         {
@@ -12,7 +13,7 @@
             "pid": "176595k",
             "requested_by": "Jake",
             "requested_at": "2023-1-20",
-            "status": "pending"
+            "status": "denied"
         },
         {
             "pid": "778354p",
@@ -53,7 +54,14 @@
                         </div>
                     </th>
                     <th v-else>
-                        {{ permit.status }}
+                        <div v-if="permit.status === 'accepted'" class="flex">
+                            <CheckIcon class="stroke-green-500"/>
+                            <span class="ml-6">{{ permit.status }}</span>
+                        </div>
+                        <div v-else class="flex">
+                            <XIcon class="stroke-red-500"/>
+                            <span class="ml-6">{{ permit.status }}</span>
+                        </div>
                     </th>
                 </tr>
             </tbody>

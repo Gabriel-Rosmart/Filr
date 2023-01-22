@@ -5,6 +5,8 @@ import BellIcon from './BellIcon.vue'
 import CalendarIcon from './CalendarIcon.vue'
 import FolderIcon from './FolderIcon.vue'
 import PlusIcon from './PlusIcon.vue'
+import CheckIcon from './CheckIcon.vue'
+import XIcon from './XIcon.vue'
 import AppLogo from './AppLogo.vue'
 
 export {
@@ -15,5 +17,7 @@ export {
     CalendarIcon,
     FolderIcon,
     PlusIcon,
+    CheckIcon,
+    XIcon,
     AppLogo
 }
