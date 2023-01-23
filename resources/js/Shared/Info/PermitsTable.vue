@@ -1,4 +1,5 @@
 <script setup>
+    import { Inertia } from "@inertiajs/inertia";
     import { ref } from "vue"
     import { CheckIcon, XIcon } from "../Icons/Icons";
 
@@ -22,6 +23,20 @@
             "status": "accepted"
         }
     ])
+
+    const accept = (pid) => {
+        Inertia.post('/permits', {
+            id: pid,
+            action: 'accept'
+        })
+    }
+
+    const deny = (pid) => {
+        Inertia.post('/permits', {
+            id: pid,
+            action: 'deny'
+        })
+    }
 
 </script>
 
@@ -49,8 +64,8 @@
                     </td>
                     <th v-if="permit.status === 'pending'">
                         <div>
-                            <button class="btn btn-outline btn-success">Accept</button>
-                            <button class="btn btn-outline btn-error ml-8">Deny</button>
+                            <button class="btn btn-outline btn-success" @click="accept(permit.pid)">Accept</button>
+                            <button class="btn btn-outline btn-error ml-8" @click="deny(permit.pid)">Deny</button>
                         </div>
                     </th>
                     <th v-else>
