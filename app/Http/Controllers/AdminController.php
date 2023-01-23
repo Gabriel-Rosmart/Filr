@@ -33,6 +33,11 @@ class AdminController extends Controller
         return Inertia::render('Admin/ManagePermits');
     }
 
+    public function details()
+    {
+        return Inertia::render('Admin/UserDetails');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
