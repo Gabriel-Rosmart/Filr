@@ -58,7 +58,7 @@
                     </td>
                     <td>
                         <div class="indicator ">
-                        <span class="indicator-item indicator-middle indicator-start badge" :class="{'badge-info': user.status === 'Active', 'badge-error': user.status === 'Leave'}"></span>
+                        <span class="indicator-item indicator-middle indicator-start badge h-2" :class="{'badge-info': user.status === 'Active', 'badge-error': user.status === 'Leave'}"></span>
                         <div class="ml-6">{{ user.status }}</div>
                         </div>
                     </td>
