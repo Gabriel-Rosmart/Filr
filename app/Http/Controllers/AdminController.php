@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Permit;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -30,7 +31,13 @@ class AdminController extends Controller
 
     public function permits()
     {
-        return Inertia::render('Admin/ManagePermits');
+        return Inertia::render('Admin/ManagePermits', [
+            'permits' => Permit::with([
+                'user' => function($query){
+                    $query->select('id', 'name');
+                }
+            ])->get()
+        ]);
     }
 
     /**

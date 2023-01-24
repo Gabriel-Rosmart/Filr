@@ -4,6 +4,10 @@
     import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
     import Pagination from '@/Shared/Filters/Pagination.vue';
     import NameFilter from '@/Shared/Filters/NameFilter.vue';
+
+    defineProps({
+        permits: Object
+    })
 </script>
 
 <template>
@@ -14,7 +18,7 @@
             <Pagination class="ml-4"/>
         </div>
         <div class="flex justify-center">
-            <PermitsTable class="w-full mx-4 mt-8"/>
+            <PermitsTable class="w-full mx-4 mt-8" :permits="permits"/>
         </div>
     </AdminLayout>
 </template>
