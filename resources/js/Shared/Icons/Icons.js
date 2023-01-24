@@ -7,6 +7,7 @@ import FolderIcon from './FolderIcon.vue'
 import PlusIcon from './PlusIcon.vue'
 import CheckIcon from './CheckIcon.vue'
 import XIcon from './XIcon.vue'
+import LogOutIcon from './LogOutIcon.vue'
 import AppLogo from './AppLogo.vue'
 
 export {
@@ -19,5 +20,6 @@ export {
     PlusIcon,
     CheckIcon,
     XIcon,
+    LogOutIcon,
     AppLogo
 }
