@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->char('dni', 9)->unique();
-            $table->char('telephone', 9)->unique();
+            $table->char('phone', 9)->unique();
             $table->boolean('is_admin')->default(false);
             $table->boolean('active')->default(false);
             $table->foreignId('role_id');
