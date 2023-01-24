@@ -25,5 +25,7 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
             'active' => true
         ]);
+
+        \App\Models\Permit::factory(5)->create();
     }
 }
