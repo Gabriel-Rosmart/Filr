@@ -1,5 +1,5 @@
 <script setup>
-    import { HomeIcon, ManageUsersIcon, FolderIcon, LogOutIcon, AppLogo } from '../Icons/Icons';
+    import { HomeIcon, ManageUsersIcon, FileIcon, LogOutIcon, AppLogo } from '../Icons/Icons';
     import NotificationDropdown from './NotificationDropdown.vue';
     import ThemeToggle from './ThemeToggle.vue'
     import { Link } from '@inertiajs/inertia-vue3';
@@ -37,7 +37,7 @@
                     </li>
                     <li>
                         <Link href="/admin/permits">
-                            <FolderIcon/>
+                            <FileIcon/>
                             Permits
                         </Link>
                     </li>
