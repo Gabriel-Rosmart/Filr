@@ -2,6 +2,7 @@
 
     import { ref, watch } from "vue"
     import { useI18n } from 'vue-i18n'
+    import { throttle } from 'lodash'
 
     const { t } = useI18n()
 
@@ -17,9 +18,9 @@
         console.log(document.getElementById('typeSelect').value)
     }
 
-    watch(search, () => {
+    watch(search, throttle(() => {
         console.log(search.value)
-    })
+    }, 300))
 
 </script>
 
@@ -30,6 +31,6 @@
         <option value="teacher">Teacher</option>
         <option value="administrative">Administrative</option>
     </select>
-    <button class="btn btn-primary ml-8">Filter</button>
+    <button class="btn btn-primary btn-outline ml-8">Filter</button>
     <button class="btn btn-ghost ml-4" @click="clearInput">Reset</button>
 </template>

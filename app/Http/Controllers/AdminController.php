@@ -19,6 +19,21 @@ class AdminController extends Controller
     }
 
     /**
+     * Show a listing of all users
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function listing()
+    {
+        return Inertia::render('Admin/ManageUsers');
+    }
+
+    public function permits()
+    {
+        return Inertia::render('Admin/ManagePermits');
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

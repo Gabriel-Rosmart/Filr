@@ -1,13 +1,10 @@
 <script setup>
-    import { HomeIcon, ManageUsersIcon, SettingsIcon, FolderIcon, AppLogo } from '../Icons/Icons';
+    import { HomeIcon, CalendarIcon, SettingsIcon, AppLogo } from '../Icons/Icons';
     import NotificationDropdown from './NotificationDropdown.vue';
     import ThemeToggle from './ThemeToggle.vue'
     import { Link } from '@inertiajs/inertia-vue3';
 
     import LanguageDropdown from './LanguageDropdown.vue';
-    import { useI18n } from 'vue-i18n'
-
-    const { t } = useI18n()
 </script>
 
 <template>
@@ -24,27 +21,21 @@
                 <ul tabindex="0"
                     class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                     <li>
-                        <Link href="/admin">
+                        <Link>
                             <HomeIcon/>
-                            {{ t('admin.navbar.dropdown.dashboard') }}
+                            Profile
                         </Link>
                     </li>
                     <li>
-                        <Link href="/admin/manage">
-                            <ManageUsersIcon/>
-                            {{ t('admin.navbar.dropdown.users') }}
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/admin/permits">
-                            <FolderIcon/>
-                            Permits
+                        <Link>
+                            <CalendarIcon/>
+                            Schedules
                         </Link>
                     </li>
                     <li>
                         <Link>
                             <SettingsIcon/>
-                            {{ t('admin.navbar.dropdown.settings') }}
+                            Settings
                         </Link>
                     </li>
                 </ul>
