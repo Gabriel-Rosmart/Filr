@@ -1,5 +1,5 @@
 <script setup>
-    import { HomeIcon, ManageUsersIcon, SettingsIcon, FolderIcon, AppLogo } from '../Icons/Icons';
+    import { HomeIcon, ManageUsersIcon, FileIcon, LogOutIcon, AppLogo } from '../Icons/Icons';
     import NotificationDropdown from './NotificationDropdown.vue';
     import ThemeToggle from './ThemeToggle.vue'
     import { Link } from '@inertiajs/inertia-vue3';
@@ -37,14 +37,14 @@
                     </li>
                     <li>
                         <Link href="/admin/permits">
-                            <FolderIcon/>
+                            <FileIcon/>
                             Permits
                         </Link>
                     </li>
                     <li>
                         <Link>
-                            <SettingsIcon/>
-                            {{ t('admin.navbar.dropdown.settings') }}
+                            <LogOutIcon/>
+                            Logout
                         </Link>
                     </li>
                 </ul>

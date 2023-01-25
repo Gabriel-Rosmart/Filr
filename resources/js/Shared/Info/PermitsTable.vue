@@ -1,28 +1,10 @@
 <script setup>
     import { Inertia } from "@inertiajs/inertia";
-    import { ref } from "vue"
     import { CheckIcon, XIcon } from "../Icons/Icons";
 
-    const permits = ref([
-        {
-            "pid": "456793h",
-            "requested_by": "John",
-            "requested_at": "2023-1-12",
-            "status": "pending"
-        },
-        {
-            "pid": "176595k",
-            "requested_by": "Jake",
-            "requested_at": "2023-1-20",
-            "status": "denied"
-        },
-        {
-            "pid": "778354p",
-            "requested_by": "Trudy",
-            "requested_at": "2022-12-21",
-            "status": "accepted"
-        }
-    ])
+    defineProps({
+        permits: Object
+    })
 
     const accept = (pid) => {
         Inertia.post('/permits', {
@@ -54,10 +36,10 @@
             <tbody>
                 <tr v-for="permit of permits" class="hover">
                     <td>
-                        {{ permit.pid }}
+                        {{ permit.uuid }}
                     </td>
                     <td>
-                        {{ permit.requested_by }}
+                        {{ permit.user.name }}
                     </td>
                     <td>
                         {{ permit.requested_at }}

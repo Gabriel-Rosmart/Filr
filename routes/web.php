@@ -23,6 +23,7 @@ Route::redirect('/', '/login');
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/admin/manage', [AdminController::class, 'listing']);
 Route::get('/admin/permits', [AdminController::class, 'permits']);
+Route::get('/admin/details', [AdminController::class, 'details']);
 
 Route::get('/user', [UserController::class, 'index']);
 
