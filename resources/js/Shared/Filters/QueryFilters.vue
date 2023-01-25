@@ -25,7 +25,7 @@
 
     watch(search, throttle((value) => {
         Inertia.get(props.url, {
-            search: value
+            search: value,
         },
         {
             preserveState: true
@@ -37,7 +37,7 @@
 <template>
     <input type="text" :placeholder="t('admin.query.search')" class="input input-bordered w-full max-w-xs mx-4" id="search" v-model="search" />
     <select class="select select-bordered w-full max-w-xs" id="typeSelect" @change="retrieve">
-        <option disabled selected>{{ t('admin.query.employee.main') }}</option>
+        <option disabled selected value="">{{ t('admin.query.employee.main') }}</option>
         <option value="teacher">Teacher</option>
         <option value="administrative">Administrative</option>
     </select>
