@@ -1,27 +1,24 @@
 <script setup>
-    import { ref } from "vue"
+    import { Inertia } from "@inertiajs/inertia";
     import { CheckIcon, XIcon } from "../Icons/Icons";
 
-    const permits = ref([
-        {
-            "pid": "456793h",
-            "requested_by": "John",
-            "requested_at": "2023-1-12",
-            "status": "pending"
-        },
-        {
-            "pid": "176595k",
-            "requested_by": "Jake",
-            "requested_at": "2023-1-20",
-            "status": "denied"
-        },
-        {
-            "pid": "778354p",
-            "requested_by": "Trudy",
-            "requested_at": "2022-12-21",
-            "status": "accepted"
-        }
-    ])
+    defineProps({
+        permits: Object
+    })
+
+    const accept = (pid) => {
+        Inertia.post('/permits', {
+            id: pid,
+            action: 'accept'
+        })
+    }
+
+    const deny = (pid) => {
+        Inertia.post('/permits', {
+            id: pid,
+            action: 'deny'
+        })
+    }
 
 </script>
 
@@ -39,18 +36,18 @@
             <tbody>
                 <tr v-for="permit of permits" class="hover">
                     <td>
-                        {{ permit.pid }}
+                        {{ permit.uuid }}
                     </td>
                     <td>
-                        {{ permit.requested_by }}
+                        {{ permit.user.name }}
                     </td>
                     <td>
                         {{ permit.requested_at }}
                     </td>
                     <th v-if="permit.status === 'pending'">
                         <div>
-                            <button class="btn btn-outline btn-success">Accept</button>
-                            <button class="btn btn-outline btn-error ml-8">Deny</button>
+                            <button class="btn btn-outline btn-success" @click="accept(permit.pid)">Accept</button>
+                            <button class="btn btn-outline btn-error ml-8" @click="deny(permit.pid)">Deny</button>
                         </div>
                     </th>
                     <th v-else>
