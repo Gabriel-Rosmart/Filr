@@ -40,6 +40,11 @@ class AdminController extends Controller
         ]);
     }
 
+    public function details()
+    {
+        return Inertia::render('Admin/UserDetails');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
