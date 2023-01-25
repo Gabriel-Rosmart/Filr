@@ -15,7 +15,7 @@
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="['Admin', 'Manage Users']"/>
         <div class="flex items-center mt-8">
-            <QueryFilters/>
+            <QueryFilters url="/admin/manage"/>
             <Pagination class="ml-24"/>
             <div class="mr-8 w-full flex justify-end">
                 <CreateUser class="btn-outline btn-primary"/>

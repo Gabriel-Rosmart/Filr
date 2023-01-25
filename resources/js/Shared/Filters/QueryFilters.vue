@@ -3,10 +3,15 @@
     import { ref, watch } from "vue"
     import { useI18n } from 'vue-i18n'
     import { throttle } from 'lodash'
+    import { Inertia } from "@inertiajs/inertia";
 
     const { t } = useI18n()
 
     let search = ref('')
+
+    const props = defineProps({
+        url: String
+    })
 
     const clearInput = () => {
         document.getElementById('typeSelect').selectedIndex = 0
@@ -18,8 +23,13 @@
         console.log(document.getElementById('typeSelect').value)
     }
 
-    watch(search, throttle(() => {
-        console.log(search.value)
+    watch(search, throttle((value) => {
+        Inertia.get(props.url, {
+            search: value
+        },
+        {
+            preserveState: true
+        })
     }, 300))
 
 </script>

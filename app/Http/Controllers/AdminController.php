@@ -25,10 +25,15 @@ class AdminController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function listing()
+    public function listing(Request $request)
     {
         return Inertia::render('Admin/ManageUsers', [
-            'users' => User::select('id', 'name', 'email', 'active', 'role_id')
+            'users' => User::query()
+                ->when($request->input('search'), function($query, $search){
+                   $query->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%"); 
+                })
+                ->select('id', 'name', 'email', 'active', 'role_id')
                 ->with(['role' => function($query){
                     $query->select('id', 'role_name');
                 }])
