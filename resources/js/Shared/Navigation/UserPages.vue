@@ -34,7 +34,20 @@ switch (props.activePage) {
 
 
 <template>
-    <div class="btn-group">
+    <div class="flex justify-center content-center">
+        <div class="tabs">
+            <a class="tab tab-bordered" :class="{ 'tab-active': isActiveDash }">
+                <HomeIcon class="w-20" />
+            </a>
+            <a class="tab tab-bordered" :class="{ 'tab-active': isActiveWarns }">
+                <infoIcon class="w-20" />
+            </a>
+            <a class="tab tab-bordered" :class="{ 'tab-active': isActiveStats }">
+                <statsIcon class="w-20" />
+            </a>
+        </div>
+    </div>
+    <!-- <div class="btn-group">
 
         <button class="btn " :class="{ 'btn-active': isActiveDash }">
             <HomeIcon class="h-5 w-96" fill="none" />
@@ -48,5 +61,5 @@ switch (props.activePage) {
             <statsIcon class="h-5 w-96" fill="none" />
         </button>
 
-    </div>
+    </div> -->
 </template>
