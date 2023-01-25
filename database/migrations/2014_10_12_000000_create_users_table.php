@@ -21,7 +21,8 @@ return new class extends Migration
             $table->char('phone', 9)->unique()->nullable(false);
             $table->boolean('is_admin')->default(false);
             $table->boolean('active')->default(false);
-            $table->foreignId('role_id');
+            $table->foreignId('role_id')->nullable(false);
+            $table->foreignId('date_range_id')->nullable(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
