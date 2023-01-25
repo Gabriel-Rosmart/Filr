@@ -18,8 +18,8 @@ class DateRangeFactory extends Factory
     {
         return [
             'user_id' => fake()->numberBetween(1, 10),
-            'start_date' => fake()->date(),
-            'end_date' => fake()->date()
+            'start_date' => fake()->dateTimeBetween('-2 months', '+2 days')->format('Y-m-d'),
+            'end_date' => fake()->dateTimeBetween('+2 months', '+8 months')->format('Y-m-d')
         ];
     }
 }
