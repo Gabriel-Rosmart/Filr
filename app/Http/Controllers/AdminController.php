@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Permit;
 use Illuminate\Http\Request;
@@ -26,7 +27,13 @@ class AdminController extends Controller
      */
     public function listing()
     {
-        return Inertia::render('Admin/ManageUsers');
+        return Inertia::render('Admin/ManageUsers', [
+            'users' => User::select('id', 'name', 'email', 'active', 'role_id')
+                ->with(['role' => function($query){
+                    $query->select('id', 'role_name');
+                }])
+                ->get()
+        ]);
     }
 
     public function permits()
