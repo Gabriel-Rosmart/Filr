@@ -42,7 +42,7 @@
                     <td>
                         <div class="indicator ">
                         <span class="indicator-item indicator-middle indicator-start badge h-2" :class="{'badge-info': user.active, 'badge-error': !user.active}"></span>
-                        <div class="ml-6">{{ user.status ? 'Active' : 'Leave' }}</div>
+                        <div class="ml-6">{{ user.active ? 'Active' : 'Leave' }}</div>
                         </div>
                     </td>
                     <th>
