@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('permits', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->nullable(false);
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->date('requested_at')->nullable(false);
             $table->enum('status', ['pending', 'accepted', 'denied'])->default('pending');
             $table->timestamps();

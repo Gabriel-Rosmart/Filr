@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('date_ranges', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->date('start_date')->nullable(false);
             $table->date('end_date')->nullable(false);
+            $table->timestamps();
         });
     }
 

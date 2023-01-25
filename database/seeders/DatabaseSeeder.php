@@ -27,5 +27,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Permit::factory(5)->create();
+        \App\Models\DateRange::factory(5)->create();
     }
 }

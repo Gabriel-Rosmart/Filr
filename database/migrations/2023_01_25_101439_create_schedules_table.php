@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('date_range_id')->constrained();
+            $table->foreignId('date_range_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])->nullable(false);
             $table->time('starts_at')->nullable(false);
             $table->time('ends_at')->nullable(false);
