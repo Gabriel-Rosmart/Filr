@@ -29,11 +29,11 @@ class AdminController extends Controller
     {
         return Inertia::render('Admin/ManageUsers', [
             'users' => User::query()
-                ->when($request->input('search'), function($query, $search){
-                   $query->where('name', 'like', "%{$search}%")
-                        ->orWhere('email', 'like', "%{$search}%"); 
-                })
                 ->select('id', 'name', 'email', 'active', 'role_id')
+                ->when($request->input('search'), function($query, $search){
+                    $query->where('name', 'like', "%{$search}%")
+                         ->orWhere('email', 'like', "%{$search}%"); 
+                 })
                 ->with(['role' => function($query){
                     $query->select('id', 'role_name');
                 }])
