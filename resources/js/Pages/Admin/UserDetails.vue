@@ -1,7 +1,7 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
-import PermitsTable from "@/Shared/Info/PermitsTable.vue";
+import TimeTable from "@/Shared/Info/TimeTable.vue";
 </script>
 
 <template>
@@ -12,7 +12,7 @@ import PermitsTable from "@/Shared/Info/PermitsTable.vue";
                 <div></div>
                 <div class="divider divider-vertical"></div>
                 <div>
-                    <PermitsTable />
+                    <TimeTable />
                 </div>
             </div>
         </div>
