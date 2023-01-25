@@ -1,10 +1,10 @@
-<script>
+<script setup>
     import { ref } from "vue";
 
     const days = ref([
         {
             "day": "Monday",
-            "in1": "8:10",
+            "in1": "08:10",
             "out1": "14:30",
             "in2": null,
             "out2": null
@@ -18,14 +18,14 @@
         },
         {
             "day": "Wednesday",
-            "in1": "8:10",
+            "in1": "08:10",
             "out1": "12:50",
             "in2": null,
             "out2": null
         },
         {
             "day": "Thursday",
-            "in1": "8:10",
+            "in1": "08:10",
             "out1": "14:30",
             "in2": null,
             "out2": null
