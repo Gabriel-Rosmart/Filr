@@ -17,15 +17,24 @@
         document.getElementById('typeSelect').selectedIndex = 0
         document.getElementById('search').value = ""
         search.value = ''
+        Inertia.get(props.url)
     }
 
     const retrieve = () => {
         console.log(document.getElementById('typeSelect').value)
+        Inertia.get(props.url, {
+            search: search.value,
+            type: document.getElementById('typeSelect').value
+        },
+        {
+            preserveState: true
+        })
     }
 
     watch(search, throttle((value) => {
         Inertia.get(props.url, {
             search: value,
+            type: document.getElementById('typeSelect').value
         },
         {
             preserveState: true
@@ -38,8 +47,9 @@
     <input type="text" :placeholder="t('admin.query.search')" class="input input-bordered w-full max-w-xs mx-4" id="search" v-model="search" />
     <select class="select select-bordered w-full max-w-xs" id="typeSelect" @change="retrieve">
         <option disabled selected value="">{{ t('admin.query.employee.main') }}</option>
-        <option value="teacher">Teacher</option>
-        <option value="administrative">Administrative</option>
+        <option value="profesor">Teacher</option>
+        <option value="administrativo">Administrative</option>
+        <option value="limpieza">Limpieza</option>
     </select>
     <button class="btn btn-primary btn-outline ml-8">Filter</button>
     <button class="btn btn-ghost ml-4" @click="clearInput">Reset</button>
