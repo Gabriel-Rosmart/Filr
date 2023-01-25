@@ -20,7 +20,7 @@ const userData = {
                 <img :src="userData.image" />
             </div>
         </div>
-        <div>
+        <div class="ml-5 mt-3">
             <div class="flex gap-4 items-end">
                 <span class="text-5xl">{{ userData.name }}</span>
                 <span class="text-2xl">{{ userData.surname }}</span>
