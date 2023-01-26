@@ -1,7 +1,7 @@
 <script setup>
     import AdminLayout from '@/Layouts/AdminLayout.vue'
     import PermitsTable from '@/Shared/Info/PermitsTable.vue';
-    import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
+    import Breadcrumbs from '@/Shared/Navigation/BreadcrumbsLegacy.vue';
     import Pagination from '@/Shared/Filters/Pagination.vue';
     import NameFilter from '@/Shared/Filters/NameFilter.vue';
 

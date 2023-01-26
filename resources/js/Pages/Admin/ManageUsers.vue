@@ -1,7 +1,7 @@
 <script setup>
     import AdminLayout from '@/Layouts/AdminLayout.vue'
     import UsersTable from '@/Shared/Info/UsersTable.vue';
-    import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
+    import Breadcrumbs from '@/Shared/Navigation/BreadcrumbsLegacy.vue';
     import CreateUser from '@/Shared/Actions/CreateUser.vue';
     import QueryFilters from '@/Shared/Filters/QueryFilters.vue';
     import Pagination from '@/Shared/Filters/Pagination.vue';
