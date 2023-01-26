@@ -6,7 +6,6 @@ use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Permit;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -26,7 +25,7 @@ class AdminController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function listing(Request $request)
+    public function listing()
     {
 
         return Inertia::render('Admin/ManageUsers', [
