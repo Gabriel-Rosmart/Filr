@@ -19,14 +19,14 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class
         ]);
 
-        \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(100)->create();
         \App\Models\User::factory()->create([
             'email' => 'admin@gmail.com',
             'is_admin' => true,
             'active' => true
         ]);
 
-        \App\Models\Permit::factory(5)->create();
+        \App\Models\Permit::factory(50)->create();
         \App\Models\DateRange::factory(5)->create();
         \App\Models\Schedule::factory(20)->create();
 

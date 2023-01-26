@@ -15,7 +15,7 @@ class FileSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 1; $i <= 10; $i++){
+        for($i = 1; $i <= 100; $i++){
             DB::table('files')->insert([
                 [
                     'user_id' => $i,

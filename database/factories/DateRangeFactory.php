@@ -17,7 +17,7 @@ class DateRangeFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => fake()->numberBetween(1, 10),
+            'user_id' => fake()->numberBetween(1, 100),
             'start_date' => fake()->dateTimeBetween('-2 months', '+2 days')->format('Y-m-d'),
             'end_date' => fake()->dateTimeBetween('+2 months', '+8 months')->format('Y-m-d')
         ];

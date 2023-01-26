@@ -36,7 +36,7 @@ class AdminController extends Controller
             ->with(['role' => function($query){
                 $query->select('id', 'role_name');
             }])
-            ->paginate(5)
+            ->paginate(15)
             ->withQueryString(),
             'filters' => request()->only('search', 'type')
         ]);
@@ -55,7 +55,7 @@ class AdminController extends Controller
                     $query->where('name', 'like', "%{$search}%");
                 });
             })
-            ->paginate(2)
+            ->paginate(20)
         ]);
     }
 
