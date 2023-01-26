@@ -1,16 +1,16 @@
 <script setup>
     import AdminLayout from '@/Layouts/AdminLayout.vue';
-    import QueryFilters from '@/Shared/Filters/QueryFilters.vue';
     import Pagination from '@/Shared/Filters/Pagination.vue';
     import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue'
     import FilesTable from '@/Shared/Info/FilesTable.vue';
+    import FiltersDashboard from '@/Shared/Filters/FiltersDashboard.vue';
 </script>
 
 <template>
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Dashboard', '/admin']]"/>
         <div class="flex items-center mt-8">
-            <QueryFilters url="/admin" :filters="{}"/>
+            <FiltersDashboard/>
             <Pagination class="ml-24" :links="null"/>
         </div>
         <div class="flex justify-center">

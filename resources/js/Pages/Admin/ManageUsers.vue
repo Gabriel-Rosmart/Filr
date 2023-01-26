@@ -3,7 +3,7 @@
     import UsersTable from '@/Shared/Info/UsersTable.vue';
     import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
     import CreateUser from '@/Shared/Actions/CreateUser.vue';
-    import QueryFilters from '@/Shared/Filters/QueryFilters.vue';
+    import FiltersUsers from '@/Shared/Filters/FiltersUsers.vue';
     import Pagination from '@/Shared/Filters/Pagination.vue';
 
     defineProps({
@@ -16,7 +16,7 @@
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage']]"/>
         <div class="flex items-center mt-8">
-            <QueryFilters url="/admin/manage" :filters="filters"/>
+            <FiltersUsers url="/admin/manage" :filters="filters"/>
             <Pagination class="ml-24" :links="users.links"/>
             <div class="mr-8 w-full flex justify-end">
                 <CreateUser class="btn-outline btn-primary"/>
