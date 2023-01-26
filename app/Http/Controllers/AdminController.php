@@ -28,45 +28,15 @@ class AdminController extends Controller
      */
     public function listing(Request $request)
     {
-        /*
-        $users = User::query()
-        ->select('id', 'name', 'email', 'active', 'role_id')
-        ->when($request->input('search'), function($query, $search){
-            $query->where('name', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%"); 
-        })
-        ->when($request->input('type'), function($query, $type){
-            $query->whereHas('role', function($query) use ($type){
-                $query->where('role_name', '=', $type);
-            });
-        })
-        ->with(['role' => function($query){
-            $query->select('id', 'role_name');
-        }])
-        ->get();
-        */
-
-        $users = User::query()
-        ->select('id', 'name', 'email', 'active', 'role_id')
-        ->when($request->input('search'), function($query, $search){
-            $query->where(function($query) use ($search) {
-                $query->where('name', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%");
-            });
-        })
-        ->when($request->input('type'), function($query, $type){
-            $query->whereHas('role', function($query) use ($type){
-                $query->where('role_name', '=', $type);
-            });
-        })
-        ->with(['role' => function($query){
-            $query->select('id', 'role_name');
-        }])
-        ->get();
-
 
         return Inertia::render('Admin/ManageUsers', [
-            'users' => $users
+            'users' => User::query()
+            ->select('id', 'name', 'email', 'active', 'role_id')
+            ->filter(request(['search', 'type']))
+            ->with(['role' => function($query){
+                $query->select('id', 'role_name');
+            }])
+            ->get()
         ]);
     }
 

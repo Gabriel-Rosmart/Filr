@@ -42,6 +42,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function scopeFilter($query, array $filters) {
+        $query->when($filters['search'] ?? false, function($query, $search) {
+            $query->where(function($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
+            });
+        })
+        ->when($filters['type'] ?? false, function($query, $type){
+            $query->whereHas('role', function($query) use ($type){
+                $query->where('role_name', '=', $type);
+            });
+        });
+    }
+
     public function permits()
     {
         return $this->hasMany(Permit::class);
