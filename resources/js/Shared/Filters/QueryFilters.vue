@@ -51,10 +51,16 @@
     <input type="text" :placeholder="t('admin.query.search')" class="input input-bordered w-full max-w-xs mx-4" id="search" v-model="search" />
     <select class="select select-bordered w-full max-w-xs" id="typeSelect" @change="retrieve">
         <option disabled selected value="">{{ t('admin.query.employee.main') }}</option>
-        <option value="profesor">Teacher</option>
-        <option value="administrativo">Administrative</option>
+        <option value="">Todos</option>
+        <option value="profesor">Profesor</option>
+        <option value="administrativo">Administrativo</option>
         <option value="limpieza">Limpieza</option>
     </select>
-    <button class="btn btn-primary btn-outline ml-8">Filter</button>
+    <select class="select select-bordered w-full max-w-xs ml-4">
+        <option disabled selected value="">Estado</option>
+        <option value="">Cualquiera</option>
+        <option value="">Activo</option>
+        <option value="">De baja</option>
+    </select>
     <button class="btn btn-ghost ml-4" @click="clearInput">Reset</button>
 </template>

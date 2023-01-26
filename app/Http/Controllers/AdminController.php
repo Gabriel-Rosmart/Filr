@@ -55,6 +55,7 @@ class AdminController extends Controller
                     $query->where('name', 'like', "%{$search}%");
                 });
             })
+            ->orderBy('requested_at', 'desc')
             ->paginate(20)
         ]);
     }
