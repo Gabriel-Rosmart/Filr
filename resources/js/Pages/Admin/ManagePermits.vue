@@ -6,7 +6,7 @@
     import NameFilter from '@/Shared/Filters/NameFilter.vue';
 
     defineProps({
-        permits: Object
+        permits: Array
     })
 </script>
 
@@ -14,7 +14,7 @@
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Permits', '/admin/permits']]"/>
         <div class="flex items-center mt-8">
-            <NameFilter/>
+            <NameFilter url="/admin/permits"/>
             <Pagination class="ml-4"/>
         </div>
         <div class="flex justify-center">

@@ -1,12 +1,23 @@
 <script setup>
 
     import { ref, watch } from "vue"
+    import { throttle } from 'lodash'
+    import { Inertia } from '@inertiajs/inertia'
 
     let search = ref('')
 
-    watch(search, () => {
-        console.log(search.value)
+    const props = defineProps({
+        url: String
     })
+
+    watch(search, throttle((value) => {
+        Inertia.get(props.url, {
+            search: value
+        },
+        {
+            preserveState: true
+        })
+    }, 300))
 
 </script>
 
