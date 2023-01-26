@@ -7,7 +7,7 @@
     import Pagination from '@/Shared/Filters/Pagination.vue';
 
     defineProps({
-        users: Array
+        users: Object
     })
 </script>
 
@@ -16,13 +16,13 @@
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage']]"/>
         <div class="flex items-center mt-8">
             <QueryFilters url="/admin/manage"/>
-            <Pagination class="ml-24"/>
+            <Pagination class="ml-24" :links="users.links"/>
             <div class="mr-8 w-full flex justify-end">
                 <CreateUser class="btn-outline btn-primary"/>
             </div>
         </div>
         <div class="flex justify-center">
-            <UsersTable class="w-full mx-4 mt-8" :users="users"/>
+            <UsersTable class="w-full mx-4 mt-8" :users="users.data"/>
         </div>
     </AdminLayout>
 </template>

@@ -27,7 +27,8 @@
             type: document.getElementById('typeSelect').value
         },
         {
-            preserveState: true
+            preserveState: true,
+            remember: true
         })
     }
 
@@ -37,7 +38,8 @@
             type: document.getElementById('typeSelect').value
         },
         {
-            preserveState: true
+            preserveState: true,
+            remember: true
         })
     }, 300))
 

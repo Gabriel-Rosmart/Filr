@@ -36,7 +36,8 @@ class AdminController extends Controller
             ->with(['role' => function($query){
                 $query->select('id', 'role_name');
             }])
-            ->get()
+            ->paginate(15)
+            ->withQueryString()
         ]);
     }
 
