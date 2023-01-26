@@ -47,7 +47,13 @@ class AdminController extends Controller
                 'user' => function($query){
                     $query->select('id', 'name');
                 }
-            ])->get()
+            ])
+            ->whereHas('user', function($query){
+                $query->when(request('search'), function($query, $search){
+                    $query->where('name', 'like', "%{$search}%");
+                });
+            })
+            ->get()
         ]);
     }
 
