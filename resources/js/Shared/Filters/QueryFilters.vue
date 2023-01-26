@@ -7,11 +7,13 @@
 
     const { t } = useI18n()
 
-    let search = ref('')
 
     const props = defineProps({
-        url: String
+        url: String,
+        filters: Object
     })
+
+    let search = ref(props.filters.search ?? '')
 
     const clearInput = () => {
         document.getElementById('typeSelect').selectedIndex = 0
