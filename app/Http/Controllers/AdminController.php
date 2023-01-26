@@ -31,13 +31,13 @@ class AdminController extends Controller
         return Inertia::render('Admin/ManageUsers', [
             'users' => User::query()
             ->select('id', 'name', 'email', 'active', 'role_id')
-            ->filter(request(['search', 'type']))
+            ->filter(request(['search', 'active', 'type']))
             ->with(['role' => function($query){
                 $query->select('id', 'role_name');
             }])
             ->paginate(15)
             ->withQueryString(),
-            'filters' => request()->only('search', 'type')
+            'filters' => request()->only('search', 'type', 'active')
         ]);
     }
 
