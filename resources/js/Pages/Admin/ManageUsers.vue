@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="flex justify-center">
-            <UsersTable class="w-full mx-4 mt-8" :users="users.data"/>
+            <UsersTable class="w-full mx-4 mt-8" :users="users.data" :filters="filters"/>
         </div>
     </AdminLayout>
 </template>

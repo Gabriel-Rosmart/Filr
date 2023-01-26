@@ -2,9 +2,17 @@
     import { ref } from 'vue'
     import { Link } from '@inertiajs/inertia-vue3'
 
-    defineProps({
-        users: Array
+    const props = defineProps({
+        users: Array,
+        filters: Object
     })
+
+    const highlight = (text, reg) => {
+        if(reg == null) return text
+        return text.replace(new RegExp(reg, "gi"), match => {
+            return '<span class="text-red-600">' + match + '</span>'
+        })
+    }
 
     const imgURL = ref('https://imgv3.fotor.com/images/blog-cover-image/10-profile-picture-ideas-to-make-you-stand-out.jpg')
 </script>
@@ -31,8 +39,8 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="font-bold">{{ user.name }}</div>
-                                <div class="text-sm opacity-50">{{ user.email }}</div>
+                                <div class="font-bold" v-html="highlight(user.name, filters.search)"></div>
+                                <div class="text-sm opacity-50" v-html="highlight(user.email, filters.search)"></div>
                             </div>
                         </div>
                     </td>
