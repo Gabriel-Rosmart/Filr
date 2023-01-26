@@ -55,7 +55,7 @@ class AdminController extends Controller
                     $query->where('name', 'like', "%{$search}%");
                 });
             })
-            ->get()
+            ->paginate(2)
         ]);
     }
 

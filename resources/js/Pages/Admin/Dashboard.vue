@@ -10,8 +10,8 @@
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Dashboard', '/admin']]"/>
         <div class="flex items-center mt-8">
-            <QueryFilters url="/admin"/>
-            <Pagination class="ml-24"/>
+            <QueryFilters url="/admin" :filters="{}"/>
+            <Pagination class="ml-24" :links="null"/>
         </div>
         <div class="flex justify-center">
             <FilesTable class="w-full mx-4 mt-8"/>
