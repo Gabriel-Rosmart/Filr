@@ -1,6 +1,7 @@
 <script setup>
     import { Inertia } from "@inertiajs/inertia";
     import { CheckIcon, XIcon } from "../Icons/Icons";
+    import translate from '@/Shared/Beautifier/translate'
 
     defineProps({
         permits: Array
@@ -53,11 +54,11 @@
                     <th v-else>
                         <div v-if="permit.status === 'accepted'" class="flex">
                             <CheckIcon class="stroke-green-500"/>
-                            <span class="ml-6">{{ permit.status }}</span>
+                            <span class="ml-6">{{ translate(permit.status) }}</span>
                         </div>
                         <div v-else class="flex">
                             <XIcon class="stroke-red-500"/>
-                            <span class="ml-6">{{ permit.status }}</span>
+                            <span class="ml-6">{{ translate(permit.status) }}</span>
                         </div>
                     </th>
                 </tr>
