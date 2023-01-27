@@ -28,6 +28,7 @@ Route::get('/admin/details', [AdminController::class, 'details']);
 Route::post('/permits', PermitController::class);
 
 Route::get('/user', [UserController::class, 'index']);
+Route::get('/user/warnings', [UserController::class, 'showWarnings']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

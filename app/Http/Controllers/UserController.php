@@ -15,4 +15,12 @@ class UserController extends Controller
     {
         return Inertia::render('User/Dashboard');
     }
+    /**
+     * Displays current warnings for the user
+     * @return \Illuminate\Http\Response
+     */
+    public function showWarnings()
+    {
+        return Inertia::render('User/UserWarnings');
+    }
 }
