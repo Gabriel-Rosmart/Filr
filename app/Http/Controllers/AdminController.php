@@ -49,6 +49,9 @@ class AdminController extends Controller
                     $query->select('id', 'name');
                 }
             ])
+            ->when(request()->input('status') ?? false, function($query, $status){
+                $query->where('status', $status);
+            })
             ->whereHas('user', function($query){
                 $query->when(request('search'), function($query, $search){
                     $query->where('name', 'like', "%{$search}%");
@@ -56,6 +59,8 @@ class AdminController extends Controller
             })
             ->orderBy('requested_at', 'desc')
             ->paginate(20)
+            ->withQueryString(),
+            'filters' => request()->only('search', 'status')
         ]);
     }
 
