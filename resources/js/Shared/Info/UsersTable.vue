@@ -43,11 +43,11 @@
                     <td>
                         <div class="indicator ">
                         <span class="indicator-item indicator-middle indicator-start badge h-2" :class="{'badge-info': user.active, 'badge-error': !user.active}"></span>
-                        <div class="ml-6">{{ user.active ? 'Active' : 'Leave' }}</div>
+                        <div class="ml-6">{{ user.active ? 'Activo' : 'De baja' }}</div>
                         </div>
                     </td>
                     <th>
-                        <Link as="button" class="btn btn-ghost btn-xs">details</Link>
+                        <Link as="button" class="btn btn-ghost btn-xs">detalles</Link>
                     </th>
                 </tr>
             </tbody>

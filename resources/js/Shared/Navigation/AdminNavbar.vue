@@ -5,9 +5,6 @@
     import { Link } from '@inertiajs/inertia-vue3';
 
     import LanguageDropdown from './LanguageDropdown.vue';
-    import { useI18n } from 'vue-i18n'
-
-    const { t } = useI18n()
 </script>
 
 <template>
@@ -26,25 +23,25 @@
                     <li>
                         <Link href="/admin">
                             <HomeIcon/>
-                            {{ t('admin.navbar.dropdown.dashboard') }}
+                            Dashboard
                         </Link>
                     </li>
                     <li>
                         <Link href="/admin/manage">
                             <ManageUsersIcon/>
-                            {{ t('admin.navbar.dropdown.users') }}
+                            Administrar Usuarios
                         </Link>
                     </li>
                     <li>
                         <Link href="/admin/permits">
                             <FileIcon/>
-                            Permits
+                            Permisos
                         </Link>
                     </li>
                     <li>
                         <Link>
                             <LogOutIcon/>
-                            Logout
+                            Cerrar Sesión
                         </Link>
                     </li>
                 </ul>

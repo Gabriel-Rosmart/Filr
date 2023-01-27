@@ -31,7 +31,7 @@
 </script>
 
 <template>
-    <input type="text" placeholder="Search..." class="input input-bordered w-full max-w-xs mx-4" id="search" v-model="search" />
+    <input type="text" placeholder="Buscar..." class="input input-bordered w-full max-w-xs mx-4" v-model="search" />
     <select class="select select-bordered w-full max-w-xs ml-4" v-model="option">
         <option disabled selected value="">Estado</option>
         <option value="">Todos</option>

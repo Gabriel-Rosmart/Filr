@@ -1,5 +1,5 @@
 <template>
-    <input type="text" placeholder="Search" class="input input-bordered w-full max-w-xs mx-4" id="search" />
+    <input type="text" placeholder="Buscar..." class="input input-bordered w-full max-w-xs mx-4" />
     <select class="select select-bordered w-full max-w-xs" id="typeSelect">
         <option disabled selected value="">Tipo de empleado</option>
         <option value="">Todos</option>
