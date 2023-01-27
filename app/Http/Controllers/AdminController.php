@@ -18,20 +18,10 @@ class AdminController extends Controller
     public function index()
     {
         /*
-        $users = User::whereHas('ranges')
-                    ->with(['ranges' => function($query){
-                        $query->where(function($query){
-                            $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
-                        })
-                        ->whereHas('schedules')
-                        ->with(['schedules' => function($query){
-                            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
-                        }]);
-                    }])
-                    ->get();
-                    */
-                    
-        $users = User::with(['ranges', 'ranges.schedules' => function($query){
+        $users = User::with(['ranges' => function($query){
+            $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
+        }, 
+        'ranges.schedules' => function($query){
             $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
         }])
         ->whereHas('ranges', function($query){
@@ -43,7 +33,23 @@ class AdminController extends Controller
             });
         })
         ->get();
-                    
+        */
+        
+        $users = User::with(['range' => function($query){
+            $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
+        }, 
+        'range.schedule' => function($query){
+            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+        }])
+        ->whereHas('range', function($query){
+            $query->where(function($query){
+                $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
+            })
+            ->whereHas('schedule', function($query){
+                $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+            });
+        })
+        ->get();
 
         // TODO: Pass data to the view
         return Inertia::render('Admin/Dashboard', [

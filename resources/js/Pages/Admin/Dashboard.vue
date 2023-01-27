@@ -20,7 +20,7 @@
             <Pagination class="ml-24" :links="null"/>
         </div>
         <div class="flex justify-center">
-            <FilesTable class="w-full mx-4 mt-8"/>
+            <FilesTable class="w-full mx-4 mt-8" :users="users"/>
         </div>
     </AdminLayout>
 </template>

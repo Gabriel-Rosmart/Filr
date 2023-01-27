@@ -2,6 +2,10 @@
     import { ref } from "vue"
     import { Link } from "@inertiajs/inertia-vue3";
 
+    defineProps({
+        users: Array,
+    })
+    /*
     const users = ref([
         {
             "name": "John",
@@ -21,7 +25,7 @@
             "end": "12:50",
             "message": "Is late"
         }
-    ])
+    ])*/
 </script>
 
 <template>
@@ -38,8 +42,8 @@
             <tbody>
                 <tr v-for="user of users" class="hover">
                     <th><Link class="dark:hover:text-cyan-400 hover:underline">{{ user.name }}</Link></th>
-                    <td>{{ user.start }}</td>
-                    <td>{{ user.end }}</td>
+                    <td>{{ user.range.schedule.starts_at }}</td>
+                    <td>{{ user.range.schedule.ends_at }}</td>
                     <td>{{ user.message }}</td>
                 </tr>
             </tbody>
