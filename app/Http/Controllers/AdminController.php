@@ -6,6 +6,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Permit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -16,8 +17,38 @@ class AdminController extends Controller
      */
     public function index()
     {
+        /*
+        $users = User::whereHas('ranges')
+                    ->with(['ranges' => function($query){
+                        $query->where(function($query){
+                            $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
+                        })
+                        ->whereHas('schedules')
+                        ->with(['schedules' => function($query){
+                            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+                        }]);
+                    }])
+                    ->get();
+                    */
+                    
+        $users = User::with(['ranges', 'ranges.schedules' => function($query){
+            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+        }])
+        ->whereHas('ranges', function($query){
+            $query->where(function($query){
+                $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
+            })
+            ->whereHas('schedules', function($query){
+                $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+            });
+        })
+        ->get();
+                    
+
         // TODO: Pass data to the view
-        return Inertia::render('Admin/Dashboard');
+        return Inertia::render('Admin/Dashboard', [
+            'users' => $users
+        ]);
     }
 
     /**

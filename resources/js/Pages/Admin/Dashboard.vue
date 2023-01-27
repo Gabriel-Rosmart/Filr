@@ -4,6 +4,12 @@
     import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue'
     import FilesTable from '@/Shared/Info/FilesTable.vue';
     import FiltersDashboard from '@/Shared/Filters/FiltersDashboard.vue';
+
+    const props = defineProps({
+        users: Array,
+    })
+
+    console.log(props.users)
 </script>
 
 <template>

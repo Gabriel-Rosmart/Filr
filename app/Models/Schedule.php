@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Schedule extends Model
 {
     use HasFactory;
+
+    public function date()
+    {
+        return$this->belongsTo(DateRange::class);
+    }
 }
