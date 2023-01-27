@@ -3,7 +3,7 @@
     import { CheckIcon, XIcon } from "../Icons/Icons";
 
     defineProps({
-        permits: Object
+        permits: Array
     })
 
     const accept = (pid) => {

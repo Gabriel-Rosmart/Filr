@@ -12,13 +12,13 @@
 
 <template>
     <AdminLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="['Admin', 'Permits']"/>
+        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Permits', '/admin/permits']]"/>
         <div class="flex items-center mt-8">
-            <NameFilter/>
-            <Pagination class="ml-4"/>
+            <NameFilter url="/admin/permits"/>
+            <Pagination class="ml-4" :links="permits.links"/>
         </div>
         <div class="flex justify-center">
-            <PermitsTable class="w-full mx-4 mt-8" :permits="permits"/>
+            <PermitsTable class="w-full mx-4 mt-8" :permits="permits.data"/>
         </div>
     </AdminLayout>
 </template>
