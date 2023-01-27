@@ -8,7 +8,8 @@ import UserInfo from '@/Shared/User/UserInfo.vue';
 <template>
     <AdminLayout>
         <!-- <Breadcrumbs class="ml-5 mt-6" :pages="['Admin', 'Manage Users', 'User Details']" /> -->
-        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], ['User Details', '/admin/details']]" />
+        <Breadcrumbs class="ml-5 mt-6"
+            :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], ['User Details', '/admin/details']]" />
         <div class="flex justify-center content-center">
             <div class="flex flex-col mt-10 mx-20 w-full">
                 <div>
@@ -20,6 +21,6 @@ import UserInfo from '@/Shared/User/UserInfo.vue';
                 </div>
             </div>
         </div>
-        
+
     </AdminLayout>
 </template>
