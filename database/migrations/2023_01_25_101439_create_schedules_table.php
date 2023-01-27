@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('permits', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->nullable(false);
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->date('requested_at')->nullable(false);
-            $table->enum('status', ['pending', 'accepted', 'denied'])->default('pending');
+            $table->foreignId('date_range_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])->nullable(false);
+            $table->time('starts_at')->nullable(false);
+            $table->time('ends_at')->nullable(false);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permits');
+        Schema::dropIfExists('schedules');
     }
 };

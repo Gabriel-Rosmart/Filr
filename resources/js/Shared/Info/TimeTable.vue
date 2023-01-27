@@ -18,17 +18,17 @@
         },
         {
             "day": "Wednesday",
-            "in1": "08:10",
-            "out1": "12:50",
-            "in2": null,
-            "out2": null
+            "in1": null,
+            "out1": null,
+            "in2": "13:50",
+            "out2": "18:30"
         },
         {
             "day": "Thursday",
             "in1": "08:10",
             "out1": "14:30",
-            "in2": null,
-            "out2": null
+            "in2": "15:30",
+            "out2": "18:30"
         },
         {
             "day": "Friday",

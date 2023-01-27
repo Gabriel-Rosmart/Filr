@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Permit>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DateRange>
  */
-class PermitFactory extends Factory
+class DateRangeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,10 +17,9 @@ class PermitFactory extends Factory
     public function definition()
     {
         return [
-            'uuid' => fake()->uuid(),
             'user_id' => fake()->numberBetween(1, 100),
-            'requested_at' => fake()->date(),
-            'status' => ['pending', 'accepted', 'denied'][array_rand(['pending', 'accepted', 'denied'])]
+            'start_date' => fake()->dateTimeBetween('-2 months', '+2 days')->format('Y-m-d'),
+            'end_date' => fake()->dateTimeBetween('+2 months', '+8 months')->format('Y-m-d')
         ];
     }
 }

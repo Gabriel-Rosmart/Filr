@@ -3,22 +3,23 @@
     import PermitsTable from '@/Shared/Info/PermitsTable.vue';
     import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
     import Pagination from '@/Shared/Filters/Pagination.vue';
-    import NameFilter from '@/Shared/Filters/NameFilter.vue';
+    import FiltersPermits from '@/Shared/Filters/FiltersPermits.vue';
 
     defineProps({
-        permits: Object
+        permits: Object,
+        filters: Object
     })
 </script>
 
 <template>
     <AdminLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="['Admin', 'Permits']"/>
+        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Permits', '/admin/permits']]"/>
         <div class="flex items-center mt-8">
-            <NameFilter/>
-            <Pagination class="ml-4"/>
+            <FiltersPermits url="/admin/permits" :filters="filters"/>
+            <Pagination class="ml-24" :links="permits.links"/>
         </div>
         <div class="flex justify-center">
-            <PermitsTable class="w-full mx-4 mt-8" :permits="permits"/>
+            <PermitsTable class="w-full mx-4 mt-8" :permits="permits.data"/>
         </div>
     </AdminLayout>
 </template>
