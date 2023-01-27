@@ -35,7 +35,9 @@ class AdminController extends Controller
         ->get();
         */
         
-        $users = User::with(['range' => function($query){
+        $users = User::select('id', 'name')
+        ->filter(request(['search', 'type']))
+        ->with(['files', 'range' => function($query){
             $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
         }, 
         'range.schedule' => function($query){
