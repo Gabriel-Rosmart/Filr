@@ -5,7 +5,8 @@
     import { Inertia } from "@inertiajs/inertia"
 
     const props = defineProps({
-        url: String
+        url: String,
+        filters: Object
     })
 
     const clearInput = () => {
@@ -13,8 +14,8 @@
         opt.value = ''
     }
 
-    let search = ref('')
-    let opt = ref('')
+    let search = ref(props.filters.search ?? '')
+    let opt = ref(props.filters.type ?? '')
 
     watch([search, opt], throttle(([sval, oval]) => {
         Inertia.get(props.url, {

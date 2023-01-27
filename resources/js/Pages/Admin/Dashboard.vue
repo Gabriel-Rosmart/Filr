@@ -7,6 +7,7 @@
 
     const props = defineProps({
         users: Object,
+        filters: Object
     })
 
     console.log(props.users)
@@ -16,7 +17,7 @@
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Dashboard', '/admin']]"/>
         <div class="flex items-center mt-8">
-            <FiltersDashboard url="/admin"/>
+            <FiltersDashboard url="/admin" :filters="filters"/>
             <Pagination class="ml-24" :links="users.links"/>
         </div>
         <div class="flex justify-center">

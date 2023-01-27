@@ -1,31 +1,10 @@
 <script setup>
-    import { ref } from "vue"
     import { Link } from "@inertiajs/inertia-vue3";
 
     defineProps({
         users: Array,
     })
-    /*
-    const users = ref([
-        {
-            "name": "John",
-            "start": "8:10",
-            "end": "14:30",
-            "message": null
-        },
-        {
-            "name": "Jake",
-            "start": "11:45",
-            "end": "16:30",
-            "message": null
-        },
-        {
-            "name": "Trudy",
-            "start": "8:10",
-            "end": "12:50",
-            "message": "Is late"
-        }
-    ])*/
+
 </script>
 
 <template>

@@ -38,7 +38,8 @@ class AdminController extends Controller
         ->withQueryString();
 
         return Inertia::render('Admin/Dashboard', [
-            'users' => $users
+            'users' => $users,
+            'filters' => request()->only('search', 'type')
         ]);
     }
 
