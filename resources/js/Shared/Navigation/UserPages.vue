@@ -55,19 +55,4 @@ switch (props.activePage) {
             </a>
         </div>
     </div>
-    <!-- <div class="btn-group">
-
-        <button class="btn " :class="{ 'btn-active': isActiveDash }">
-            <HomeIcon class="h-5 w-96" fill="none" />
-        </button>
-
-        <button class="btn" :class="{ 'btn-active': isActiveWarns }">
-            <infoIcon class="h-5 w-96" fill="none" />
-        </button>
-
-        <button class="btn" :class="{ 'btn-active': isActiveStats }">
-            <statsIcon class="h-5 w-96" fill="none" />
-        </button>
-
-    </div> -->
 </template>

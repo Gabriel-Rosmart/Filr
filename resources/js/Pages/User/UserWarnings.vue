@@ -1,12 +1,3 @@
-<!-- <script setup>
-import UserLayout from '@/Layouts/UserLayout.vue';
-import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
-import UserPages from '@/Shared/Navigation/UserPages.vue';
-import UserInfo from '@/Shared/User/UserInfo.vue';
-import TimeTable from '@/Shared/Info/TimeTable.vue';
-
-</script> -->
-
 <script setup>
 import UserLayout from '@/Layouts/UserLayout.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
