@@ -10,9 +10,9 @@
     <div class="text-sm breadcrumbs">
         <ul>
         <li v-for="page in pages">
-            <Link :href=page[1]>
+            <Link>
                 <FolderIcon/>
-                {{ page[0] }}
+                {{ page }}
             </Link>
         </li>
         </ul>

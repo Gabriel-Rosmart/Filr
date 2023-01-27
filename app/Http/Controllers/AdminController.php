@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
 use Inertia\Inertia;
+use App\Models\Permit;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -25,12 +27,41 @@ class AdminController extends Controller
      */
     public function listing()
     {
-        return Inertia::render('Admin/ManageUsers');
+
+        return Inertia::render('Admin/ManageUsers', [
+            'users' => User::query()
+            ->select('id', 'name', 'email', 'active', 'role_id')
+            ->filter(request(['search', 'active', 'type']))
+            ->with(['role' => function($query){
+                $query->select('id', 'role_name');
+            }])
+            ->paginate(15)
+            ->withQueryString(),
+            'filters' => request()->only('search', 'type', 'active')
+        ]);
     }
 
     public function permits()
     {
-        return Inertia::render('Admin/ManagePermits');
+        return Inertia::render('Admin/ManagePermits', [
+            'permits' => Permit::with([
+                'user' => function($query){
+                    $query->select('id', 'name');
+                }
+            ])
+            ->whereHas('user', function($query){
+                $query->when(request('search'), function($query, $search){
+                    $query->where('name', 'like', "%{$search}%");
+                });
+            })
+            ->orderBy('requested_at', 'desc')
+            ->paginate(20)
+        ]);
+    }
+
+    public function details()
+    {
+        return Inertia::render('Admin/UserDetails');
     }
 
     /**

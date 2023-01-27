@@ -2,26 +2,10 @@
     import { ref } from 'vue'
     import { Link } from '@inertiajs/inertia-vue3'
 
-    const users = [
-        {
-            "name": "John",
-            "email": "john@example.com",
-            "job": "Technician",
-            "status": "Active"
-        },
-        {
-            "name": "Jack",
-            "email": "jack@example.com",
-            "job": "Teacher",
-            "status": "Active"
-        },
-        {
-            "name": "Trudy",
-            "email": "trudy@gmail.com",
-            "job": "Administrative",
-            "status": "Leave"
-        }
-    ]
+    const props = defineProps({
+        users: Array,
+        filters: Object
+    })
 
     const imgURL = ref('https://imgv3.fotor.com/images/blog-cover-image/10-profile-picture-ideas-to-make-you-stand-out.jpg')
 </script>
@@ -54,12 +38,12 @@
                         </div>
                     </td>
                     <td>
-                        {{ user.job }}
+                        {{ user.role.role_name }}
                     </td>
                     <td>
                         <div class="indicator ">
-                        <span class="indicator-item indicator-middle indicator-start badge" :class="{'badge-info': user.status === 'Active', 'badge-error': user.status === 'Leave'}"></span>
-                        <div class="ml-6">{{ user.status }}</div>
+                        <span class="indicator-item indicator-middle indicator-start badge h-2" :class="{'badge-info': user.active, 'badge-error': !user.active}"></span>
+                        <div class="ml-6">{{ user.active ? 'Active' : 'Leave' }}</div>
                         </div>
                     </td>
                     <th>

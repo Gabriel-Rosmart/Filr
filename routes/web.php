@@ -23,6 +23,12 @@ Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/admin/manage', [AdminController::class, 'listing']);
 Route::get('/admin/permits', [AdminController::class, 'permits']);
 Route::get('/admin/edit', [AdminController::class, 'edit']);
+Route::get('/admin/details', [AdminController::class, 'details']);
+<<<<<<< HEAD
+Route::get('/admin/edit', [AdminController::class, 'edit']);
+=======
+Route::get('/admin/details', [AdminController::class, 'details']);
+>>>>>>> 8f6d1abc8a1a8f60af6281aa2ee985fff65ab24b
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
