@@ -8,15 +8,15 @@
 
     const accept = (pid) => {
         Inertia.post('/permits', {
-            id: pid,
-            action: 'accept'
+            uuid: pid,
+            status: 'accepted'
         })
     }
 
     const deny = (pid) => {
         Inertia.post('/permits', {
-            id: pid,
-            action: 'deny'
+            uuid: pid,
+            status: 'denied'
         })
     }
 
@@ -46,8 +46,8 @@
                     </td>
                     <th v-if="permit.status === 'pending'">
                         <div>
-                            <button class="btn btn-outline btn-success" @click="accept(permit.pid)">Accept</button>
-                            <button class="btn btn-outline btn-error ml-8" @click="deny(permit.pid)">Deny</button>
+                            <button class="btn btn-outline btn-success" @click="accept(permit.uuid)">Accept</button>
+                            <button class="btn btn-outline btn-error ml-8" @click="deny(permit.uuid)">Deny</button>
                         </div>
                     </th>
                     <th v-else>

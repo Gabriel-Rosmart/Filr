@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PermitController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -23,6 +24,7 @@ Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/admin/manage', [AdminController::class, 'listing']);
 Route::get('/admin/permits', [AdminController::class, 'permits']);
 Route::get('/admin/details', [AdminController::class, 'details']);
+Route::post('permits', PermitController::class);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
