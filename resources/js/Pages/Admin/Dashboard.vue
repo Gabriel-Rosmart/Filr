@@ -6,7 +6,7 @@
     import FiltersDashboard from '@/Shared/Filters/FiltersDashboard.vue';
 
     const props = defineProps({
-        users: Array,
+        users: Object,
     })
 
     console.log(props.users)
@@ -16,11 +16,11 @@
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Dashboard', '/admin']]"/>
         <div class="flex items-center mt-8">
-            <FiltersDashboard/>
-            <Pagination class="ml-24" :links="null"/>
+            <FiltersDashboard url="/admin"/>
+            <Pagination class="ml-24" :links="users.links"/>
         </div>
         <div class="flex justify-center">
-            <FilesTable class="w-full mx-4 mt-8" :users="users"/>
+            <FilesTable class="w-full mx-4 mt-8" :users="users.data"/>
         </div>
     </AdminLayout>
 </template>

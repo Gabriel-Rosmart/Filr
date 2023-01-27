@@ -16,27 +16,10 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        /*
-        $users = User::with(['ranges' => function($query){
-            $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
-        }, 
-        'ranges.schedules' => function($query){
-            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
-        }])
-        ->whereHas('ranges', function($query){
-            $query->where(function($query){
-                $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
-            })
-            ->whereHas('schedules', function($query){
-                $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
-            });
-        })
-        ->get();
-        */
-        
+    {        
         $users = User::select('id', 'name')
         ->filter(request(['search', 'type']))
+        ->where('active', DB::raw('true'))
         ->with(['files', 'range' => function($query){
             $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
         }, 
@@ -51,9 +34,9 @@ class AdminController extends Controller
                 $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
             });
         })
-        ->get();
+        ->paginate(30)
+        ->withQueryString();
 
-        // TODO: Pass data to the view
         return Inertia::render('Admin/Dashboard', [
             'users' => $users
         ]);
