@@ -25,6 +25,6 @@ class PermitController extends Controller
             'status' => $validated['status']
         ]);
 
-        return redirect('/admin/permits');
+        return redirect()->back();
     }
 }
