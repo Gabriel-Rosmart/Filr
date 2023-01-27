@@ -9,7 +9,7 @@ import TimeTable from '@/Shared/Info/TimeTable.vue';
 
 <template>
     <UserLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="['User', 'Dashboard']" />
+        <Breadcrumbs class="ml-5 mt-6" :pages="[['User', '/user'], ['Dashboard', '/user']]" />
 
         <div class="flex justify-center content-center">
             <div class="container">
