@@ -82,6 +82,6 @@ class User extends Authenticatable
 
     public function range()
     {
-        return $this->hasOne(DateRange::class);
+        return $this->belongsTo(DateRange::class);
     }
 }

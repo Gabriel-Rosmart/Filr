@@ -16,7 +16,8 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {        
+    {   
+        /*  
         $users = User::select('id', 'name')
         ->filter(request(['search', 'type']))
         ->where('active', DB::raw('true'))
@@ -35,6 +36,25 @@ class AdminController extends Controller
             });
         })
         ->paginate(30)
+        ->withQueryString();
+        */
+
+        $users = User::select('id', 'name')
+        ->filter(request(['search', 'type']))
+        ->where('active', DB::raw('true'))
+        ->with('files')
+        ->withWhereHas('ranges', function($query){
+            $query->where(function($query){
+                $query->whereRaw("curdate() between `start_date` and `end_date`");
+            })
+            ->whereHas('schedule', function($query){
+                $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+            });
+        })
+        ->with('ranges.schedule', function($query){
+            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+        })
+        ->paginate(100)
         ->withQueryString();
 
         return Inertia::render('Admin/Dashboard', [
