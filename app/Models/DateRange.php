@@ -19,8 +19,8 @@ class DateRange extends Model
         return $this->hasOne(Schedule::class);
     }
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
 }

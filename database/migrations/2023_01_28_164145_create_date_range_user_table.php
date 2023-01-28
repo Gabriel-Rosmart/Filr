@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('date_ranges', function (Blueprint $table) {
+        Schema::create('date_range_user', function (Blueprint $table) {
             $table->id();
-            $table->date('start_date')->nullable(false);
-            $table->date('end_date')->nullable(false);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('date_range_id')->nullOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('date_ranges');
+        Schema::dropIfExists('date_range_user');
     }
 };
