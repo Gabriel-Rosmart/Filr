@@ -54,7 +54,7 @@ class AdminController extends Controller
         ->with('ranges.schedule', function($query){
             $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
         })
-        ->paginate(100)
+        ->paginate(30)
         ->withQueryString();
 
         return Inertia::render('Admin/Dashboard', [

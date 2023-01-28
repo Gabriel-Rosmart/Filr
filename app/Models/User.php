@@ -79,9 +79,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(DateRange::class);
     }
-
-    public function range()
-    {
-        return $this->belongsTo(DateRange::class);
-    }
 }
