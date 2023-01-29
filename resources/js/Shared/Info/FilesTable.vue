@@ -1,5 +1,6 @@
 <script setup>
     import { Link } from "@inertiajs/inertia-vue3";
+    import diff from '@/Utilities/timediff'
 
     defineProps({
         users: Array,
@@ -23,7 +24,7 @@
                     <th><Link class="dark:hover:text-cyan-400 hover:underline">{{ user.name }}</Link></th>
                     <td>{{ user.files[0].timestamp }}</td>
                     <td>{{ user.files[1].timestamp }}</td>
-                    <td>{{ user.message }}</td>
+                    <td>{{ diff( user.ranges[0].schedule.starts_at, user.files[0].timestamp) }}</td>
                 </tr>
             </tbody>
         </table>
