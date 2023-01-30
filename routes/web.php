@@ -19,11 +19,14 @@ use App\Http\Controllers\ProfileController;
 
 Route::redirect('/', '/login');
 
+Route::middleware(['auth', 'admin'])->group(function() {
+    Route::get('/admin', [AdminController::class, 'index']);
+    Route::get('/admin/manage', [AdminController::class, 'listing']);
+    Route::get('/admin/permits', [AdminController::class, 'permits']);
+    Route::get('/admin/details', [AdminController::class, 'details']);
+});
+
 // TODO: Add necessary middlewares (auth, admin)
-Route::get('/admin', [AdminController::class, 'index'])->middleware(['auth', 'admin']);
-Route::get('/admin/manage', [AdminController::class, 'listing']);
-Route::get('/admin/permits', [AdminController::class, 'permits']);
-Route::get('/admin/details', [AdminController::class, 'details']);
 Route::post('/permits', PermitController::class);
 
 Route::get('/dashboard', function () {
