@@ -17,27 +17,6 @@ class AdminController extends Controller
      */
     public function index()
     {   
-        /*  
-        $users = User::select('id', 'name')
-        ->filter(request(['search', 'type']))
-        ->where('active', DB::raw('true'))
-        ->with(['files', 'range' => function($query){
-            $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
-        }, 
-        'range.schedule' => function($query){
-            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
-        }])
-        ->whereHas('range', function($query){
-            $query->where(function($query){
-                $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
-            })
-            ->whereHas('schedule', function($query){
-                $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
-            });
-        })
-        ->paginate(30)
-        ->withQueryString();
-        */
 
         $users = User::select('id', 'name')
         ->filter(request(['search', 'type']))
