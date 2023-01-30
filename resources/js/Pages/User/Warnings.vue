@@ -8,7 +8,7 @@ import UserInfo from '@/Shared/User/UserInfo.vue';
 
 <template>
     <UserLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="[['User', '/user'], ['Dashboard', '/user']]" />
+        <Breadcrumbs class="ml-5 mt-6" :pages="[['User', '/user'], ['Warnings', '/user/warnings']]" />
 
         <div class="flex justify-center content-center">
             <div class="container">
