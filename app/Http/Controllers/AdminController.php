@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Permit;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -15,9 +17,51 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        // TODO: Pass data to the view
-        return Inertia::render('Admin/Dashboard');
+    {   
+        /*  
+        $users = User::select('id', 'name')
+        ->filter(request(['search', 'type']))
+        ->where('active', DB::raw('true'))
+        ->with(['files', 'range' => function($query){
+            $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
+        }, 
+        'range.schedule' => function($query){
+            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+        }])
+        ->whereHas('range', function($query){
+            $query->where(function($query){
+                $query->whereRaw("curdate() between `date_ranges`.`start_date` and `date_ranges`.`end_date`");
+            })
+            ->whereHas('schedule', function($query){
+                $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+            });
+        })
+        ->paginate(30)
+        ->withQueryString();
+        */
+
+        $users = User::select('id', 'name')
+        ->filter(request(['search', 'type']))
+        ->where('active', DB::raw('true'))
+        ->with('files')
+        ->withWhereHas('ranges', function($query){
+            $query->where(function($query){
+                $query->whereRaw("curdate() between `start_date` and `end_date`");
+            })
+            ->whereHas('schedule', function($query){
+                $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+            });
+        })
+        ->with('ranges.schedule', function($query){
+            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+        })
+        ->paginate(30)
+        ->withQueryString();
+
+        return Inertia::render('Admin/Dashboard', [
+            'users' => $users,
+            'filters' => request()->only('search', 'type')
+        ]);
     }
 
     /**
@@ -27,7 +71,18 @@ class AdminController extends Controller
      */
     public function listing()
     {
-        return Inertia::render('Admin/ManageUsers');
+
+        return Inertia::render('Admin/ManageUsers', [
+            'users' => User::query()
+            ->select('id', 'name', 'email', 'active', 'role_id')
+            ->filter(request(['search', 'active', 'type']))
+            ->with(['role' => function($query){
+                $query->select('id', 'role_name');
+            }])
+            ->paginate(15)
+            ->withQueryString(),
+            'filters' => request()->only('search', 'type', 'active')
+        ]);
     }
 
     public function permits()
@@ -37,7 +92,19 @@ class AdminController extends Controller
                 'user' => function($query){
                     $query->select('id', 'name');
                 }
-            ])->get()
+            ])
+            ->when(request()->input('status') ?? false, function($query, $status){
+                $query->where('status', $status);
+            })
+            ->whereHas('user', function($query){
+                $query->when(request('search'), function($query, $search){
+                    $query->where('name', 'like', "%{$search}%");
+                });
+            })
+            ->orderBy('requested_at', 'desc')
+            ->paginate(20)
+            ->withQueryString(),
+            'filters' => request()->only('search', 'status')
         ]);
     }
 

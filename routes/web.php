@@ -3,7 +3,9 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PermitController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,10 @@ Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/admin/manage', [AdminController::class, 'listing']);
 Route::get('/admin/permits', [AdminController::class, 'permits']);
 Route::get('/admin/details', [AdminController::class, 'details']);
+Route::post('/permits', PermitController::class);
+
+Route::get('/user', [UserController::class, 'index']);
+Route::get('/user/warnings', [UserController::class, 'warnings']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -34,4 +40,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
