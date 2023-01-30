@@ -1,11 +1,8 @@
 <script setup>
 
     import { ref, watch } from "vue"
-    import { useI18n } from 'vue-i18n'
     import { throttle } from 'lodash'
     import { Inertia } from "@inertiajs/inertia";
-
-    const { t } = useI18n()
 
 
     const props = defineProps({
@@ -38,9 +35,9 @@
 </script>
 
 <template>
-    <input type="text" :placeholder="t('admin.query.search')" class="input input-bordered w-full max-w-xs mx-4" v-model="search" />
+    <input type="text" placeholder="Buscar..." class="input input-bordered w-full max-w-xs mx-4" v-model="search" />
     <select class="select select-bordered w-full max-w-xs" v-model="option">
-        <option disabled selected value="">{{ t('admin.query.employee.main') }}</option>
+        <option disabled selected value="">Tipo de empleado</option>
         <option value="">Todos</option>
         <option value="profesor">Profesor</option>
         <option value="administrativo">Administrativo</option>
