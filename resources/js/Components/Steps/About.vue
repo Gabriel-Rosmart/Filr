@@ -1,9 +1,9 @@
 <template>
-    <div class="tabs">
-        <a class="tab tab-bordered">Tab 1</a>
-        <a class="tab tab-bordered tab-active">Tab 2</a>
-        <a class="tab tab-bordered">Tab 3</a>
-    </div>
+    <ul class="steps">
+        <li class="step step-primary"></li>
+        <li class="step step-primary"></li>
+        <li class="step"></li>
+    </ul>
     <div class="my-7">
         <form>
             <div class="flex">

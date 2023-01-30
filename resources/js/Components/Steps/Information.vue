@@ -1,9 +1,9 @@
 <template>
-    <div class="tabs">
-        <a class="tab tab-bordered tab-active">Tab 1</a>
-        <a class="tab tab-bordered">Tab 2</a>
-        <a class="tab tab-bordered">Tab 3</a>
-    </div>
+    <ul class="steps">
+        <li class="step step-primary"></li>
+        <li class="step"></li>
+        <li class="step"></li>
+    </ul>
     <div class="my-7">
         <form>
             <div class="grid grid-cols-2 ">
@@ -31,10 +31,10 @@
                             class="input input-bordered input-primary w-full max-w-xs" />
                     </div>
                 </div>
-                <div class="form-control mx-7 mt-4">
+                <div class="mx-7 mt-4 flex">
                     <label class="cursor-pointer label">
+                        <input type="checkbox" class="checkbox checkbox-secondary mr-5" />
                         <span class="label-text">Its Admin?</span>
-                        <input type="checkbox" class="checkbox checkbox-secondary" />
                     </label>
                 </div>
             </div>

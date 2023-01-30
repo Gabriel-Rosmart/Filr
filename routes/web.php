@@ -27,7 +27,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/test', function () {
+Route::get('/admin/register', function () {
     return Inertia::render('Auth/MultiSteps');
 });
 
