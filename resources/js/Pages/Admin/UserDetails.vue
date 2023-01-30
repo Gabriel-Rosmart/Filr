@@ -4,8 +4,8 @@ import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import TimeTable from "@/Shared/Info/TimeTable.vue";
 import UserInfo from '@/Shared/User/UserInfo.vue';
 
-const userData = defineProps({
-    user: Object
+const props = defineProps({
+    user: Array
 })
 </script>
 
@@ -15,7 +15,7 @@ const userData = defineProps({
         <div class="flex justify-center content-center">
             <div class="flex flex-col mt-10 mx-20 w-full">
                 <div>
-                    <UserInfo :user="user.data"/>
+                    <UserInfo :user="user"/>
                 </div>
                 <div class="divider divider-vertical"></div>
                 <div>
