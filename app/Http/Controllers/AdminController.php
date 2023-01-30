@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Permit;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -42,7 +43,9 @@ class AdminController extends Controller
 
     public function details()
     {
-        return Inertia::render('Admin/UserDetails');
+        return Inertia::render('Admin/UserDetails', [
+            'user' => User::table('users')->where('id', 1)->first()
+        ]);
     }
 
     /**
