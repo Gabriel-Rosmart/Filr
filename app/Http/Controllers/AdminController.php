@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Permit;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -110,7 +111,9 @@ class AdminController extends Controller
     public function details()
     {
         return Inertia::render('Admin/UserDetails', [
-            'user' => User::table('users')->where('id', 1)->first()
+            'user' => User::query()
+            ->select('name', 'email', 'active')
+            ->where('id', 1)
         ]);
     }
 
