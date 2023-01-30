@@ -1,10 +1,11 @@
 <script setup>
     import { PlusIcon } from '../Icons/Icons';
+    import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-    <button class="btn gap-2">
+    <Link as="button" href="/admin/register" class="btn gap-2">
         <PlusIcon/>
         Add User
-    </button>
+    </Link>
 </template>

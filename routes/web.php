@@ -25,10 +25,8 @@ Route::middleware(['auth', 'admin'])->group(function() {
     Route::get('/admin/manage', [AdminController::class, 'listing']);
     Route::get('/admin/permits', [AdminController::class, 'permits']);
     Route::get('/admin/details', [AdminController::class, 'details']);
+    Route::post('/permits', PermitController::class);
 });
-
-// TODO: Add necessary middlewares (auth, admin)
-Route::post('/permits', PermitController::class);
 
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/warnings', [UserController::class, 'warnings']);
