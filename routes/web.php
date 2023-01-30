@@ -20,7 +20,7 @@ use App\Http\Controllers\ProfileController;
 Route::redirect('/', '/login');
 
 // TODO: Add necessary middlewares (auth, admin)
-Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/admin', [AdminController::class, 'index'])->middleware(['auth', 'admin']);
 Route::get('/admin/manage', [AdminController::class, 'listing']);
 Route::get('/admin/permits', [AdminController::class, 'permits']);
 Route::get('/admin/details', [AdminController::class, 'details']);

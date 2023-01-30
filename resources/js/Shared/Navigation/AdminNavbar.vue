@@ -39,7 +39,7 @@
                         </Link>
                     </li>
                     <li>
-                        <Link>
+                        <Link href="/logout" method="post">
                             <LogOutIcon/>
                             Cerrar Sesión
                         </Link>
