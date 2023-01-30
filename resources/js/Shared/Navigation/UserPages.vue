@@ -49,9 +49,12 @@ switch (props.activePage) {
             </a>
             </Link>
 
+            <Link href="/user/stats">
             <a class="tab tab-bordered" :class="{ 'tab-active': isActiveStats }">
                 <statsIcon class="w-20" />
             </a>
+            </Link>
+
         </div>
     </div>
 </template>
