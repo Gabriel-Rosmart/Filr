@@ -111,9 +111,10 @@ class AdminController extends Controller
     public function details()
     {
         return Inertia::render('Admin/UserDetails', [
+            $id = request()->input('id'),
             'user' => User::
             select('name', 'email', 'active')
-            ->where('id', 3)
+            ->where('id', $id)
             ->get()
         ]);
     }
