@@ -3,6 +3,10 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import TimeTable from "@/Shared/Info/TimeTable.vue";
 import UserInfo from '@/Shared/User/UserInfo.vue';
+
+const props = defineProps({
+    user: Array
+})
 </script>
 
 <template>
@@ -11,7 +15,7 @@ import UserInfo from '@/Shared/User/UserInfo.vue';
         <div class="flex justify-center content-center">
             <div class="flex flex-col mt-10 mx-20 w-full">
                 <div>
-                    <UserInfo />
+                    <UserInfo :user="user"/>
                 </div>
                 <div class="divider divider-vertical"></div>
                 <div>

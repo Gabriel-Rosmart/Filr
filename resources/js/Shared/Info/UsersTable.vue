@@ -47,7 +47,7 @@
                         </div>
                     </td>
                     <th>
-                        <Link as="button" class="btn btn-ghost btn-xs">detalles</Link>
+                        <Link :href="'/admin/details?id=' + user.id" as="button" class="btn btn-ghost btn-xs">detalles</Link>
                     </th>
                 </tr>
             </tbody>

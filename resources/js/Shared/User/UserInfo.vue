@@ -1,13 +1,8 @@
 <script setup>
 
-const userData = {
-    name: "Pepe",
-    surname: "Pepez Pepez",
-    email: "pepe@pepez.ez",
-    image: "https://imgv3.fotor.com/images/blog-cover-image/10-profile-picture-ideas-to-make-you-stand-out.jpg"
-}
-
-
+const props = defineProps({
+    user: Array
+})
 
 
 </script>
@@ -15,19 +10,18 @@ const userData = {
 
 <template>
     <div class="flex justify-start">
-        <div class="avatar online">
+        <div :class="{ 'avatar online' : user[0].active}">
             <div class="w-24 rounded-full">
-                <img :src="userData.image" />
+                <img src="userData.image" />
             </div>
         </div>
         <div class="ml-5 mt-3">
             <div class="flex gap-4 items-end">
-                <span class="text-5xl">{{ userData.name }}</span>
-                <span class="text-2xl">{{ userData.surname }}</span>
+                <span class="text-5xl">{{ user[0].name }}</span>
             </div>
             <div>
                 <span>
-                    &lt {{ userData.email }} &gt
+                    &lt {{ user[0].email }} &gt
                 </span>
             </div>
 
