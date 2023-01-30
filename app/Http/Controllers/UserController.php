@@ -23,4 +23,12 @@ class UserController extends Controller
     {
         return Inertia::render('User/Warnings');
     }
+    /**
+     * Displays permits and incidents associated to the user 
+     * @return \Illuminate\Http\Response
+     */
+    public function stats()
+    {
+        return Inertia::render('User/Stats');
+    }
 }

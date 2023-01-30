@@ -20,7 +20,7 @@ use App\Http\Controllers\UserController;
 
 Route::redirect('/', '/login');
 
-Route::middleware(['auth', 'admin'])->group(function() {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);
     Route::get('/admin/manage', [AdminController::class, 'listing']);
     Route::get('/admin/permits', [AdminController::class, 'permits']);
@@ -32,6 +32,7 @@ Route::post('/permits', PermitController::class);
 
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/warnings', [UserController::class, 'warnings']);
+Route::get('user/stats', [UserController::class, 'stats']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
