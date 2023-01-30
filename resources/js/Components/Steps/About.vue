@@ -1,30 +1,22 @@
 <template>
-    <div class="object-center">
-        <ul class="steps">
-            <li class="step step-primary"></li>
-            <li class="step step-primary"></li>
-            <li class="step"></li>
-        </ul>
+    <div class="tabs">
+        <a class="tab tab-bordered">Tab 1</a>
+        <a class="tab tab-bordered tab-active">Tab 2</a>
+        <a class="tab tab-bordered">Tab 3</a>
     </div>
-    <div class="my-4">
+    <div class="my-7">
         <form>
             <div class="flex">
-                <div class="p-5">
-                    <div class="mb-4">
+                <div class="grid grid-cols-2">
+                    <div class="mb-4 mx-7">
                         <label class="block mb-1" for="email">Date in</label>
-                        <input type="text" placeholder="Type here"
+                        <input type="date" placeholder="Type here"
                             class="input input-bordered input-primary w-full max-w-xs" />
                     </div>
-                    <div class="mb-4">
+                    <div class="mb-4 mx-7">
                         <label class="block mb-1" for="email">Date out</label>
-                        <input type="text" placeholder="Type here"
+                        <input type="date" placeholder="Type here"
                             class="input input-bordered input-primary w-full max-w-xs" />
-                    </div>
-                    <div class="form-control">
-                        <label class="cursor-pointer label">
-                            <span class="label-text">Admin</span>
-                            <input type="checkbox" class="checkbox checkbox-secondary" />
-                        </label>
                     </div>
                 </div>
             </div>
@@ -33,7 +25,5 @@
 </template>
 
 <script>
-export default {
-    name: 'About',
-}
+
 </script>
