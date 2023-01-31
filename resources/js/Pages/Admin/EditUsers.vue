@@ -1,7 +1,6 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 import FormEditUser from '@/Shared/Forms/FormEditUser.vue';
-//import EditUser from '@/Shared/Info/EditTable.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import UserInfo from '@/Shared/User/UserInfo.vue';
 </script>
