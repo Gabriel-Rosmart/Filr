@@ -1,6 +1,7 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue'
-import EditUser from '@/Shared/Info/EditTable.vue';
+import FormEditUser from '@/Shared/Forms/FormEditUser.vue';
+//import EditUser from '@/Shared/Info/EditTable.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import UserInfo from '@/Shared/User/UserInfo.vue';
 </script>
@@ -15,8 +16,8 @@ import UserInfo from '@/Shared/User/UserInfo.vue';
             </div>
             <div class="divider divider-vertical"></div>
         </div>
-        <div class="flex justify-center">
-            <EditUser />
+        <div class="flex items-center mt-8">
+            <FormEditUser/>
         </div>
     </AdminLayout>
 </template>
