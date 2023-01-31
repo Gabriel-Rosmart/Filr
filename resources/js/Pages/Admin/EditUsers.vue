@@ -10,7 +10,7 @@ import UserInfo from '@/Shared/User/UserInfo.vue';
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6"
             :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], ['Edit User', '/admin/edit']]" />
-        <div class="flex flex-col mt-10 mx-20 w-full">
+        <div class="flex px-10 pt-10 w-full">
             <div>
                 <UserInfo />
             </div>

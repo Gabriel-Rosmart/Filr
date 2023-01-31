@@ -10,18 +10,27 @@
     const role = [ 'Admin' ,'User'];
     const shift =['Morning' , 'Afternoon'];
     
+    const users = ref([
+    {
+        "id": 1,
+        "dni": "456454654R",
+        "name": "Pepe Pepez Pepez",
+        "email": "pepe@pepez.ez",
+        "start": "2023-05-12",
+        "end": "2024-12-20",
+        "startm": "08:10",
+        "endm": "14:30",
+    }
+])
+
 </script>
 
 <template>
     <div class="px-10">
-        
-        <div class="tabs pb-3">
-            <a class="tab tab-bordered tab-active">Profile</a>
-            <a class="tab tab-bordered">Schedule</a>
-        </div>
-        <div class="grid grid-cols-2">
-            <div class="w-full py-10 border-2 border-solid px-10 rounded-2xl">
-                <form>
+        <form>
+            <div class="grid grid-cols-3">
+                <div class="w-full py-10 border-2 border-solid px-10 rounded-2xl">
+
                     <div class="grid grid-cols-2 gap-6">
                         <div class="grid row-span-2 justify-center">
                             <label>Photo</label>
@@ -32,39 +41,30 @@
                             </div>
                             <button class="btn btn-outline">Change</button>
                         </div>
-                        <InputForm tittle="ID"/>
-                        <InputForm tittle="NAME" typ="text"/>
-                        <SelectForm tittle="Role" :data='role'/>
-                        <InputForm tittle="DNI" typ="text"/>
-                        <InputForm tittle="Email" typ="text"/>
-                        <div/>
-                        <div>
-                            <button class="btn btn-outline btn-success px-10">Save</button>
-                        </div>
-                        <div class="grid place-items-end">
-                            <button class="btn btn-outline btn-error px-10">Cancel</button>
-                        </div>
+                        <InputForm tittle="ID" :value='users[0].id'/>
+                        <InputForm tittle="Email" typ="email" :value='users[0].email'/>
+                        <SelectForm tittle="Role" :data='role' />
+                        <InputForm tittle="DNI" typ="text" :value='users[0].dni'/>
+                        <InputForm class="grid col-span-2" tittle="NAME" typ="text" :value='users[0].name'/>
                     </div>
-                </form>
-            </div>
-            <div class="w-full mx-20 py-10 border-2 border-solid px-10 rounded-2xl">
-                <form>
+                </div>
+                <div class="w-full mx-10 py-10 border-2 border-solid px-10 rounded-2xl">
                     <div class="grid grid-cols-2 gap-6">
-                        <InputForm tittle="START" typ="date"/>
-                        <InputForm tittle="END" typ="date"/>
-                        <SelectForm tittle="Weekday" :data="weekend"/>
-                        <SelectForm tittle="Shift" :data="shift"/>
-                        <InputForm tittle="IN" typ="time"/>
-                        <InputForm tittle="OUT" typ="time"/>
-                        <div>
-                            <button class="btn btn-outline btn-success px-10">Save</button>
-                        </div>
-                        <div class="grid place-items-end">
-                            <button class="btn btn-outline btn-error px-10">Cancel</button>
-                        </div>
+                        <InputForm tittle="START" typ="date" :value='users[0].start' />
+                        <InputForm tittle="END" typ="date" :value='users[0].end'/>
+                        <SelectForm tittle="Weekday" :data="weekend" />
+                        <SelectForm tittle="Shift" :data="shift" />
+                        <InputForm tittle="IN" typ="time" :value='users[0].startm' />
+                        <InputForm tittle="OUT" typ="time" :value='users[0].endm' />
                     </div>
-                </form>
+                </div>
+                <div class="w-90 h-40 mx-20 py-10 border-2 border-solid px-10 rounded-2xl">
+                    <div>
+                        <button class="btn btn-outline btn-success px-10">Save</button>
+                        <button class="mx-10 btn btn-outline btn-error px-10">Cancel</button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </template>
