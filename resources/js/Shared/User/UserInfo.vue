@@ -1,8 +1,7 @@
 <script setup>
 
 const userData = {
-    name: "Pepe",
-    surname: "Pepez Pepez",
+    name: "Pepe Pepez Pepez",
     email: "pepe@pepez.ez",
     image: "https://imgv3.fotor.com/images/blog-cover-image/10-profile-picture-ideas-to-make-you-stand-out.jpg"
 }
@@ -22,13 +21,10 @@ const userData = {
         </div>
         <div class="ml-5 mt-3">
             <div class="flex gap-4 items-end">
-                <span class="text-5xl">{{ userData.name }}</span>
-                <span class="text-2xl">{{ userData.surname }}</span>
+                <span class="text-5xl">{{ userData.name }} </span>
             </div>
             <div>
-                <span>
-                    &lt {{ userData.email }} &gt
-                </span>
+                <span>{{ userData.email }} </span>
             </div>
 
         </div>
