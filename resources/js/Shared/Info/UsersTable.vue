@@ -7,7 +7,9 @@
         filters: Object
     })
 
-    const imgURL = ref('https://imgv3.fotor.com/images/blog-cover-image/10-profile-picture-ideas-to-make-you-stand-out.jpg')
+    const storage = ref('/storage/')
+    const defautAvatar = ref('prof.jpg')
+
 </script>
 
 <template>
@@ -27,8 +29,8 @@
                         <div class="flex items-center space-x-3">
                             <div class="avatar">
                                 <div class="mask mask-squircle w-12 h-12">
-                                    <img :src="imgURL"
-                                        alt="Avatar Tailwind CSS Component" />
+                                    <img :src="storage + (user.profile_pic ?? defautAvatar)"
+                                        alt="Avatar" />
                                 </div>
                             </div>
                             <div>

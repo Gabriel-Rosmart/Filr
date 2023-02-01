@@ -53,7 +53,7 @@ class AdminController extends Controller
 
         return Inertia::render('Admin/ManageUsers', [
             'users' => User::query()
-            ->select('id', 'name', 'email', 'active', 'role_id')
+            ->select('id', 'name', 'email', 'active', 'profile_pic', 'role_id')
             ->filter(request(['search', 'active', 'type']))
             ->with(['role' => function($query){
                 $query->select('id', 'role_name');
@@ -92,7 +92,7 @@ class AdminController extends Controller
         return Inertia::render('Admin/UserDetails', [
             $id = request()->input('id'),
             'user' => User::
-            select('name', 'email', 'active')
+            select('name', 'email', 'active', 'profile_pic')
             ->where('id', $id)
             ->get()
         ]);
