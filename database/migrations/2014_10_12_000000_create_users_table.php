@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreignId('role_id')->nullable(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('profile_pic')->nullable();
+            $table->string('profile_pic')->default('0fe194e2c89b5188129fbbcff5781d60001129fc684039ab57ca8364913339ae.jpg');
             $table->rememberToken();
             $table->timestamps();
         });

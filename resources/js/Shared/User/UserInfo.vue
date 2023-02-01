@@ -7,7 +7,6 @@ const props = defineProps({
 })
 
 const storage = ref('/storage/')
-const defautAvatar = ref('prof.jpg')
 
 </script>
 
@@ -16,7 +15,7 @@ const defautAvatar = ref('prof.jpg')
     <div class="flex justify-start">
         <div class="avatar">
             <div class="w-24 rounded-full">
-                <img :src="storage + (user[0].profile_pic ?? defautAvatar)" />
+                <img :src="storage + user[0].profile_pic" />
             </div>
         </div>
         <div class="ml-5 mt-3">

@@ -8,7 +8,6 @@
     })
 
     const storage = ref('/storage/')
-    const defautAvatar = ref('prof.jpg')
 
 </script>
 
@@ -29,7 +28,7 @@
                         <div class="flex items-center space-x-3">
                             <div class="avatar">
                                 <div class="mask mask-squircle w-12 h-12">
-                                    <img :src="storage + (user.profile_pic ?? defautAvatar)"
+                                    <img :src="storage + user.profile_pic"
                                         alt="Avatar" />
                                 </div>
                             </div>
