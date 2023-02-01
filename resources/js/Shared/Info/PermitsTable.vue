@@ -47,8 +47,8 @@
                     </td>
                     <th v-if="permit.status === 'pending'">
                         <div>
-                            <button class="btn btn-outline btn-success" @click="accept(permit.uuid)">Accept</button>
-                            <button class="btn btn-outline btn-error ml-8" @click="deny(permit.uuid)">Deny</button>
+                            <button class="btn btn-outline btn-success" @click="accept(permit.uuid)">Aceptar</button>
+                            <button class="btn btn-outline btn-error ml-8" @click="deny(permit.uuid)">Denegar</button>
                         </div>
                     </th>
                     <th v-else>
