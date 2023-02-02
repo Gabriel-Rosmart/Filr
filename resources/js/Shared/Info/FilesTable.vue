@@ -1,6 +1,6 @@
 <script setup>
     import { Link } from "@inertiajs/inertia-vue3";
-    import getErrors from '@/Utilities/timediff'
+    import getUserTimeShiftMessages from "@/Utilities/timediff";
 
     defineProps({
         users: Array,
@@ -34,7 +34,7 @@
                     <td>{{ getAfternoonShift(user.files) }}</td>
                     <td>
                         <div class="flex justify-start">
-                            <span class="ml-4" v-for="error in getErrors(user.files, user.ranges[0].schedule)">
+                            <span class="ml-4" v-for="error in getUserTimeShiftMessages(user.files, user.ranges[0].schedule)">
                                 {{ error }}
                             </span>
                         </div>

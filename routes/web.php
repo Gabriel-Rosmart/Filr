@@ -21,10 +21,10 @@ use App\Http\Controllers\UserController;
 Route::redirect('/', '/login');
 
 Route::middleware(['auth', 'admin'])->group(function() {
-    Route::get('/admin', [AdminController::class, 'index']);
-    Route::get('/admin/manage', [AdminController::class, 'listing']);
-    Route::get('/admin/permits', [AdminController::class, 'permits']);
-    Route::get('/admin/details', [AdminController::class, 'details']);
+    Route::get('/admin', [AdminController::class, 'listAllActiveUsersFiles']);
+    Route::get('/admin/manage', [AdminController::class, 'listAllUsers']);
+    Route::get('/admin/permits', [AdminController::class, 'listAllPermits']);
+    Route::get('/admin/details', [AdminController::class, 'getUserDetails']);
     Route::post('/permits', PermitController::class);
 });
 
