@@ -5,6 +5,8 @@
     import FilesTable from '@/Shared/Info/FilesTable.vue';
     import FiltersDashboard from '@/Shared/Filters/FiltersDashboard.vue';
 
+    import { Head } from '@inertiajs/inertia-vue3';
+
     const props = defineProps({
         users: Object,
         filters: Object
@@ -14,6 +16,7 @@
 </script>
 
 <template>
+    <Head title="Dashboard" />
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Dashboard', '/admin']]"/>
         <div class="flex items-center mt-8">

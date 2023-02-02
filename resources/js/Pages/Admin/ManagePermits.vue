@@ -5,6 +5,8 @@
     import Pagination from '@/Shared/Filters/Pagination.vue';
     import FiltersPermits from '@/Shared/Filters/FiltersPermits.vue';
 
+    import { Head } from '@inertiajs/inertia-vue3';
+
     defineProps({
         permits: Object,
         filters: Object
@@ -12,6 +14,7 @@
 </script>
 
 <template>
+    <Head title="Manage Permits" />
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Permits', '/admin/permits']]"/>
         <div class="flex items-center mt-8">

@@ -4,12 +4,15 @@ import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import TimeTable from "@/Shared/Info/TimeTable.vue";
 import UserInfo from '@/Shared/User/UserInfo.vue';
 
+import { Head } from '@inertiajs/inertia-vue3';
+
 const props = defineProps({
     user: Array
 })
 </script>
 
 <template>
+    <Head title="User Details" />
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], ['User Details', '/admin/details']]" />
         <div class="flex justify-center content-center">

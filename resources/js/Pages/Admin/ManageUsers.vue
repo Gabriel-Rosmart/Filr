@@ -6,6 +6,8 @@
     import FiltersUsers from '@/Shared/Filters/FiltersUsers.vue';
     import Pagination from '@/Shared/Filters/Pagination.vue';
 
+    import { Head } from '@inertiajs/inertia-vue3';
+
     defineProps({
         users: Object,
         filters: Object
@@ -13,6 +15,7 @@
 </script>
 
 <template>
+    <Head title="Manage Users" />
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage']]"/>
         <div class="flex items-center mt-8">
