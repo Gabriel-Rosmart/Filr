@@ -6,9 +6,16 @@ import UserInfo from '@/Shared/User/UserInfo.vue';
 
 import { Head } from '@inertiajs/inertia-vue3';
 
+import TestTable from '@/Shared/Info/TestTable.vue'
+import { ref } from 'vue'
+
 const props = defineProps({
     user: Array
 })
+
+const tabs = [TimeTable, TestTable]
+let currentComponentIndex = ref(0)
+
 </script>
 
 <template>
@@ -21,11 +28,14 @@ const props = defineProps({
                     <UserInfo :user="user"/>
                 </div>
                 <div class="divider divider-vertical"></div>
+                <div class="tabs mb-8">
+                    <span class="tab tab-bordered" @click="currentComponentIndex = 0" :class="{'tab-active': currentComponentIndex == 0}">Horarios</span> 
+                    <span class="tab tab-bordered" @click="currentComponentIndex = 1" :class="{'tab-active': currentComponentIndex == 1}">Datos Personales</span> 
+                </div>
                 <div>
-                    <TimeTable />
+                    <component :is="tabs[currentComponentIndex]"/>
                 </div>
             </div>
-        </div>
-        
+        </div>    
     </AdminLayout>
 </template>
