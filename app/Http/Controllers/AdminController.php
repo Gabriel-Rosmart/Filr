@@ -103,11 +103,15 @@ class AdminController extends Controller
             ->join('users', 'date_range_user.user_id', '=', 'users.id')
             ->where('users.id', $id)
             ->get();
+
+            $user = User::
+            select('name', 'email', 'active', 'profile_pic')
+            ->where('id', $id)
+            ->get()
+            ->first();
+            
             return Inertia::render('Admin/UserDetails', [
-                'user' => User::
-                select('name', 'email', 'active', 'profile_pic')
-                ->where('id', $id)
-                ->get(),
+                'user' => $user,
                 'timetable' => $timetable
             ]);
         }
