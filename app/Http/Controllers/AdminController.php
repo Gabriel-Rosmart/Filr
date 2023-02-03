@@ -97,4 +97,14 @@ class AdminController extends Controller
         ]);
     }
 
+    public function edit(){
+        return Inertia::render('Admin/EditUsers', [
+            $id = request()->input('id'),
+            'user' => User::
+            select('name', 'email', 'active', 'profile_pic')
+            ->where('id', $id)
+            ->get()
+        ]);
+    }
+
 }
