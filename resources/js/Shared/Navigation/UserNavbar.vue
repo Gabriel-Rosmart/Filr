@@ -1,10 +1,10 @@
 <script setup>
-    import { HomeIcon, CalendarIcon, SettingsIcon, AppLogo } from '../Icons/Icons';
-    import NotificationDropdown from './NotificationDropdown.vue';
-    import ThemeToggle from './ThemeToggle.vue'
-    import { Link } from '@inertiajs/inertia-vue3';
+import { HomeIcon, CalendarIcon, SettingsIcon, AppLogo, LogOutIcon } from '../Icons/Icons';
+import NotificationDropdown from './NotificationDropdown.vue';
+import ThemeToggle from './ThemeToggle.vue'
+import { Link } from '@inertiajs/inertia-vue3';
 
-    import LanguageDropdown from './LanguageDropdown.vue';
+import LanguageDropdown from './LanguageDropdown.vue';
 </script>
 
 <template>
@@ -22,32 +22,40 @@
                     class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                     <li>
                         <Link>
-                            <HomeIcon/>
-                            Profile
+                        <HomeIcon />
+                        Profile
                         </Link>
                     </li>
                     <li>
                         <Link>
-                            <CalendarIcon/>
-                            Schedules
+                        <CalendarIcon />
+                        Schedules
                         </Link>
                     </li>
                     <li>
                         <Link>
-                            <SettingsIcon/>
-                            Settings
+                        <SettingsIcon />
+                        Settings
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/logout" method="post">
+                        <LogOutIcon />
+                        Cerrar Sesión
                         </Link>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="navbar-center">
-            <a class="btn btn-ghost normal-case text-xl"><AppLogo class="w-6 fill-cyan-400"/></a>
+            <a class="btn btn-ghost normal-case text-xl">
+                <AppLogo class="w-6 fill-cyan-400" />
+            </a>
         </div>
         <div class="navbar-end">
-            <LanguageDropdown/>
-            <ThemeToggle/>
-            <NotificationDropdown/>
+            <LanguageDropdown />
+            <ThemeToggle />
+            <NotificationDropdown />
         </div>
     </div>
 </template>
