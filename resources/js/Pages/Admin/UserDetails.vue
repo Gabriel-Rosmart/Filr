@@ -10,7 +10,8 @@ import TestTable from '@/Shared/Info/TestTable.vue'
 import { ref } from 'vue'
 
 const props = defineProps({
-    user: Array
+    user: Array,
+    timetable: Object
 })
 
 const tabs = [TimeTable, TestTable]
