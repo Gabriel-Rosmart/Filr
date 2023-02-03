@@ -2,7 +2,6 @@
     import { Inertia } from "@inertiajs/inertia";
     import { CheckIcon, XIcon } from "../Icons/Icons";
     import translate from '@/Shared/Beautifier/translate'
-    import { Link } from '@inertiajs/inertia-vue3'
 
     defineProps({
         permits: Array
@@ -41,7 +40,7 @@
                         {{ permit.uuid }}
                     </td>
                     <td>
-                        <Link class="dark:hover:text-cyan-400 hover:underline" :href="'/admin/details?id=' + permit.user.id">{{ permit.user.name }}</Link>
+                        {{ permit.user.name }}
                     </td>
                     <td>
                         {{ permit.requested_at }}
