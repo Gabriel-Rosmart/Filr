@@ -37,22 +37,24 @@ switch (props.activePage) {
 <template>
     <div class="flex justify-center content-center">
         <div class="tabs">
-            <Link href='/user'>
+            <Link href="/user">
             <a class="tab tab-bordered" :class="{ 'tab-active': isActiveDash }">
                 <HomeIcon class="w-20" />
             </a>
             </Link>
 
-            <Link href='/user/warnings'>
+            <Link href="/user/warnings">
             <a class="tab tab-bordered" :class="{ 'tab-active': isActiveWarns }">
                 <infoIcon class="w-20" />
             </a>
-
             </Link>
 
+            <Link href="/user/stats">
             <a class="tab tab-bordered" :class="{ 'tab-active': isActiveStats }">
                 <statsIcon class="w-20" />
             </a>
+            </Link>
+
         </div>
     </div>
 </template>

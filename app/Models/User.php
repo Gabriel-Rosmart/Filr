@@ -74,4 +74,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(File::class);
     }
+
+    public function ranges()
+    {
+        return $this->belongsToMany(DateRange::class);
+    }
 }

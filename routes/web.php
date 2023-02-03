@@ -20,19 +20,27 @@ use App\Http\Controllers\UserController;
 
 Route::redirect('/', '/login');
 
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index']);
+    Route::get('/admin/manage', [AdminController::class, 'listing']);
+    Route::get('/admin/permits', [AdminController::class, 'permits']);
+    Route::get('/admin/details', [AdminController::class, 'details']);
+});
+
 // TODO: Add necessary middlewares (auth, admin)
-Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/admin/manage', [AdminController::class, 'listing']);
-Route::get('/admin/permits', [AdminController::class, 'permits']);
-Route::get('/admin/details', [AdminController::class, 'details']);
 Route::post('/permits', PermitController::class);
 
 Route::get('/user', [UserController::class, 'index']);
-Route::get('/user/warnings', [UserController::class, 'showWarnings']);
+Route::get('/user/warnings', [UserController::class, 'warnings']);
+Route::get('user/stats', [UserController::class, 'stats']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/admin/register', function () {
+    return Inertia::render('Auth/MultiSteps');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
