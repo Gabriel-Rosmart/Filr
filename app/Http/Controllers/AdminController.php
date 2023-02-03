@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Schedule;
 use Inertia\Inertia;
 use App\Models\Permit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use function PHPUnit\Framework\isEmpty;
 
 class AdminController extends Controller
 {
@@ -89,13 +92,23 @@ class AdminController extends Controller
 
     public function details()
     {
-        return Inertia::render('Admin/UserDetails', [
-            $id = request()->input('id'),
-            'user' => User::
-            select('name', 'email', 'active', 'profile_pic')
-            ->where('id', $id)
-            ->get()
-        ]);
+        //SELECT day, starts_at, ends_at, schedules.date_range_id FROM schedules INNER JOIN date_range_user ON schedules.date_range_id = date_range_user.date_range_id;
+        $id = request()->input('id');
+        if (!empty($id))
+        {
+            $timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id')
+            ->join('date_range_user', 'date_range_user.date_range_id', '=', 'schedules.date_range_id')
+            ->get();
+            return Inertia::render('Admin/UserDetails', [
+                'user' => User::
+                select('name', 'email', 'active', 'profile_pic')
+                ->where('id', $id)
+                ->get(),
+                'timetable' => $timetable
+            ]);
+        }
+        else
+            return redirect('/admin');
     }
 
     /**

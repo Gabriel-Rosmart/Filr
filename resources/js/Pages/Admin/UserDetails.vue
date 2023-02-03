@@ -5,7 +5,8 @@ import TimeTable from "@/Shared/Info/TimeTable.vue";
 import UserInfo from '@/Shared/User/UserInfo.vue';
 
 const props = defineProps({
-    user: Array
+    user: Array,
+    timetable: Object
 })
 </script>
 
@@ -19,7 +20,7 @@ const props = defineProps({
                 </div>
                 <div class="divider divider-vertical"></div>
                 <div>
-                    <TimeTable />
+                    <TimeTable  :timetable="timetable" />
                 </div>
             </div>
         </div>
