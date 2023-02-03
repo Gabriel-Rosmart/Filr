@@ -52,7 +52,7 @@ class AdminController extends Controller
 
         return Inertia::render('Admin/ManageUsers', [
             'users' => User::query()
-            ->select('id', 'name', 'email', 'active', 'role_id')
+            ->select('id', 'name', 'email', 'active', 'role_id', 'profile_pic')
             ->filter(request(['search', 'active', 'type']))
             ->with(['role' => function($query){
                 $query->select('id', 'role_name');
@@ -95,74 +95,6 @@ class AdminController extends Controller
             ->where('id', $id)
             ->get()
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit()
-    {
-        return Inertia::render('Admin/EditUsers');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-
-        return Inertia::render('Admin/UserDetails', [
-            $id = request()->input('id'),
-            'user' => User::
-            select('name', 'email', 'active', 'profile_pic')
-            ->where('id', $id)
-            ->get()
-        ]);
-        return Inertia::render('Admin/UserDetails');
     }
 
 }
