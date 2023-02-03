@@ -1,12 +1,16 @@
 <script setup>
 
-import { ref } from 'vue'
+    /** Function imports */
+    import { ref } from 'vue'
 
-const props = defineProps({
-    user: Array
-})
+    /** Config imports */
+    import appconfig from '@/appconfig';
 
-const storage = ref('/storage/')
+    const props = defineProps({
+        user: Array
+    })
+
+    const storage = ref(appconfig.STORAGE_URL)
 
 </script>
 
@@ -27,9 +31,6 @@ const storage = ref('/storage/')
                     {{ user[0].email }}
                 </span>
             </div>
-
         </div>
     </div>
-
-
 </template>

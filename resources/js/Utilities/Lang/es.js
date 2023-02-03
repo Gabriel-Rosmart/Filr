@@ -5,5 +5,7 @@ export default {
     "thursday": "jueves",
     "friday": "viernes",
     "saturday": "sabado",
-    "sunday": "domingo"
+    "sunday": "domingo",
+    "accepted": "aceptado",
+    "denied": "denegado"
 }

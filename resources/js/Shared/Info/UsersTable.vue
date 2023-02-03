@@ -1,13 +1,20 @@
 <script setup>
-    import { ref } from 'vue'
+
+    /** component imports */
     import { Link } from '@inertiajs/inertia-vue3'
+
+    /** Function imports */
+    import { ref } from 'vue'
+
+    /** Config imports */
+    import appconfig  from '@/appconfig'
 
     const props = defineProps({
         users: Array,
         filters: Object
     })
 
-    const storage = ref('/storage/')
+    const storage = ref(appconfig.STORAGE_URL)
 
 </script>
 
