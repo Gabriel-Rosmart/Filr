@@ -24,13 +24,11 @@
 ])
 
 </script>
-
 <template>
     <div class="px-10">
         <form>
             <div class="grid grid-cols-3">
-                <div class="w-full py-10 border-2 border-solid px-10 rounded-2xl">
-
+                <div class="w-full py-10 px-10 ">
                     <div class="grid grid-cols-2 gap-6">
                         <div class="grid row-span-2 justify-center">
                             <label>Photo</label>
@@ -39,7 +37,6 @@
                                     <img :src="imgURL" alt="Avatar Tailwind CSS Component" />
                                 </div>
                             </div>
-                            <button class="btn btn-outline">Change</button>
                         </div>
                         <InputForm tittle="ID" :value='users[0].id'/>
                         <InputForm tittle="Email" typ="email" :value='users[0].email'/>
@@ -47,8 +44,15 @@
                         <InputForm tittle="DNI" typ="text" :value='users[0].dni'/>
                         <InputForm class="grid col-span-2" tittle="NAME" typ="text" :value='users[0].name'/>
                     </div>
+                    <div class="w-90 h-40 mx-20 py-10 px-10">
+                    <div>
+                        <button class="btn btn-outline btn-success ">Save</button>
+                        <button class="mx-10 btn btn-outline btn-error ">Cancel</button>
+                    </div>
                 </div>
-                <div class="w-full mx-10 py-10 border-2 border-solid px-10 rounded-2xl">
+                </div>
+                <!--
+                <div class="w-full mx-10 py-10 px-10">
                     <div class="grid grid-cols-2 gap-6">
                         <InputForm tittle="START" typ="date" :value='users[0].start' />
                         <InputForm tittle="END" typ="date" :value='users[0].end'/>
@@ -58,12 +62,8 @@
                         <InputForm tittle="OUT" typ="time" :value='users[0].endm' />
                     </div>
                 </div>
-                <div class="w-90 h-40 mx-20 py-10 border-2 border-solid px-10 rounded-2xl">
-                    <div>
-                        <button class="btn btn-outline btn-success px-10">Save</button>
-                        <button class="mx-10 btn btn-outline btn-error px-10">Cancel</button>
-                    </div>
-                </div>
+                -->
+               
             </div>
         </form>
     </div>
