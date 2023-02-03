@@ -38,5 +38,12 @@
         <option value="administrativo">Administrativo</option>
         <option value="limpieza">Limpieza</option>
     </select>
+    <select class="select select-bordered w-full max-w-xs ml-4">
+        <option disabled selected value="">Rango</option>
+        <option>Hoy</option>
+        <option>Ayer</option>
+        <option>Última semana</option>
+        <option>Último mes</option>
+    </select>
     <button class="btn btn-ghost ml-4" @click="clearInput">Reset</button>
 </template>
