@@ -59,17 +59,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="day of days" class="hover">
+                <tr v-for="day of timetable" class="hover">
                     <th>{{ day.day }}</th>
-                    <td>{{ day.in1 }}</td>
-                    <td>{{ day.out1 }}</td>
+                    <td>{{ day.starts_at }}</td>
+                    <td>{{ day.ends_at }}</td>
                     <td>{{ day.in2 }}</td>
                     <td>{{ day.out2 }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div>
+    <!--<div>
         <table class="table w-full">
             <thead>
                 <tr>
@@ -88,5 +88,5 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div>-->
 </template>
