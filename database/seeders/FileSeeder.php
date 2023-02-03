@@ -18,10 +18,12 @@ class FileSeeder extends Seeder
         for($i = 1; $i <= 100; $i++){
             DB::table('files')->insert([
                 [
+                    'date' => date('Y-m-d'),
                     'user_id' => $i,
                     'timestamp' => date('H:m:s', rand(25200, 43200)),
                 ],
                 [
+                    'date' => date('Y-m-d'),
                     'user_id' => $i,
                     'timestamp' => date('H:m:s', rand(43600, 79200))
                 ]
