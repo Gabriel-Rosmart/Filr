@@ -97,6 +97,9 @@ class AdminController extends Controller
         {
             $timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id')
             ->join('date_range_user', 'date_range_user.date_range_id', '=', 'schedules.date_range_id')
+            ->join('date_ranges', 'date_range_user.date_range_id', '=', 'date_ranges.id')
+            ->where('date_ranges.start_date', '<=', DB::raw('curdate()'))
+            ->where('date_ranges.end_date', '>=', DB::raw('curdate()'))
             ->join('users', 'date_range_user.user_id', '=', 'users.id')
             ->where('users.id', $id)
             ->get();
