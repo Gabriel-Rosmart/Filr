@@ -155,12 +155,7 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-}
 
-
-<<<<<<< HEAD
         return Inertia::render('Admin/UserDetails', [
             $id = request()->input('id'),
             'user' => User::
@@ -168,66 +163,7 @@ class AdminController extends Controller
             ->where('id', $id)
             ->get()
         ]);
-=======
         return Inertia::render('Admin/UserDetails');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit()
-    {
-        return Inertia::render('Admin/EditUsers');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
->>>>>>> 4cc221a3e870930d23ff989a2376c76abbed138b
+}
