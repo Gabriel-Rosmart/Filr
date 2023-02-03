@@ -1,6 +1,6 @@
 <script setup>
     import { ref } from "vue";
-
+    
     const days = ref([
         {
             "day": "Monday",

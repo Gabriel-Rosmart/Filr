@@ -1,15 +1,10 @@
+import gal from '@/Utilities/Lang/gal'
+import es from '@/Utilities/Lang/es'
 
-// TODO: get this data from external json data
 
 const availableLocales = {
-    'es': {
-        'monday': 'lunes',
-        'tuesday': 'martes'
-    },
-    'ga' : {
-        'monday': 'luns',
-        'tuesday': 'xoves'
-    }
+    'es': es,
+    'gal' : gal
 }
 
 export default function trans(text: string, locale: string): string {
