@@ -15,19 +15,37 @@ class FileSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 1; $i <= 100; $i++){
-            DB::table('files')->insert([
-                [
-                    'date' => date('Y-m-d'),
+        $data = [];
+
+        for($days = 40; $days >= 1; $days--){
+            $date = date('Y-m-d', strtotime("-$days days"));
+            for($i = 1; $i <= 100; $i++){
+                $data[] = [
+                    'date' => $date,
                     'user_id' => $i,
                     'timestamp' => date('H:m:s', rand(25200, 43200)),
-                ],
-                [
-                    'date' => date('Y-m-d'),
+                ];
+                $data[] = [
+                    'date' => $date,
                     'user_id' => $i,
                     'timestamp' => date('H:m:s', rand(43600, 79200))
-                ]
-            ]);
+                ];
+            }
         }
+
+        for($i = 1; $i <= 100; $i++){
+            $data[] = [
+                'date' => date('Y-m-d'),
+                'user_id' => $i,
+                'timestamp' => date('H:m:s', rand(25200, 43200)),
+            ];
+            $data[] = [
+                'date' => date('Y-m-d'),
+                'user_id' => $i,
+                'timestamp' => date('H:m:s', rand(43600, 79200))
+            ];
+        }
+
+        DB::table('files')->insert($data);
     }
 }

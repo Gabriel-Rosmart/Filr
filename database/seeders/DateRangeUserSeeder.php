@@ -15,11 +15,15 @@ class DateRangeUserSeeder extends Seeder
      */
     public function run()
     {
+        $data = [];
+        
         for($i = 1; $i <= 100; $i++){
-            DB::table('date_range_user')->insert([
+            $data[] = [
                 'user_id' => $i,
                 'date_range_id' => $i
-            ]);
+            ];
         }
+
+        DB::table('date_range_user')->insert($data);
     }
 }
