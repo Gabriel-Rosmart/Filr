@@ -95,9 +95,15 @@ class AdminController extends Controller
     public function listAllIncidences()
     {
         return Inertia::render('Admin/Incidences', [
-            'incidences' => Incidence::with(['user' => function($query){
-                $query->select('id', 'name');
-            }])->get()
+            'incidences' => Incidence::withWhereHas('user', function($query){
+                $query->select('id', 'name')->filter(request(['search']));
+            })
+            ->when(request()->input('subject') ?? false, function($query, $subject){
+                $query->where('subject', $subject);
+            })
+            ->paginate(20)
+            ->withQueryString(),
+            'filters' => request()->only('search', 'subject')
         ]);
     }
 
