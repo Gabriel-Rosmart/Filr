@@ -25,6 +25,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/manage', [AdminController::class, 'listAllUsers']);
     Route::get('/admin/permits', [AdminController::class, 'listAllPermits']);
     Route::get('/admin/details', [AdminController::class, 'getUserDetails']);
+    Route::get('/admin/incidences', [AdminController::class, 'listAllIncidences']);
     Route::get('/admin/edit', [AdminController::class, 'edit']);
     Route::post('/permits', PermitController::class);
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Incidence;
 use App\Models\User;
 use App\Models\Schedule;
 use Inertia\Inertia;
@@ -88,6 +89,15 @@ class AdminController extends Controller
             ->paginate(20)
             ->withQueryString(),
             'filters' => request()->only('search', 'status')
+        ]);
+    }
+
+    public function listAllIncidences()
+    {
+        return Inertia::render('Admin/Incidences', [
+            'incidences' => Incidence::with(['user' => function($query){
+                $query->select('id', 'name');
+            }])->get()
         ]);
     }
 
