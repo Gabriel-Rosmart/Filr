@@ -1,43 +1,4 @@
 <script setup>
-    import { ref } from "vue";
-
-    const days = ref([
-        {
-            "day": "Monday",
-            "in1": "08:10",
-            "out1": "14:30",
-            "in2": null,
-            "out2": null
-        },
-        {
-            "day": "Tuesday",
-            "in1": "11:45",
-            "out1": "16:30",
-            "in2": null,
-            "out2": null
-        },
-        {
-            "day": "Wednesday",
-            "in1": null,
-            "out1": null,
-            "in2": "13:50",
-            "out2": "18:30"
-        },
-        {
-            "day": "Thursday",
-            "in1": "08:10",
-            "out1": "14:30",
-            "in2": "15:30",
-            "out2": "18:30"
-        },
-        {
-            "day": "Friday",
-            "in1": "11:45",
-            "out1": "16:30",
-            "in2": null,
-            "out2": null
-        }
-    ])
 
     const props = defineProps({
         timetable: Object
@@ -49,7 +10,7 @@
 </script>
 
 <template>
-    <div>
+    <!-- <div>
         <table class="table w-full">
             <thead>
                 <tr class="hover">
@@ -72,8 +33,8 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-    <!--<div>
+    </div> -->
+    <div>
         <table class="table w-full">
             <thead>
                 <tr>
@@ -94,5 +55,5 @@
                 </tr>
             </tbody>
         </table>
-    </div>-->
+    </div>
 </template>
