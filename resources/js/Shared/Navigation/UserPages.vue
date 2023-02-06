@@ -39,19 +39,22 @@ switch (props.activePage) {
         <div class="tabs">
             <Link href="/user">
             <a class="tab tab-bordered" :class="{ 'tab-active': isActiveDash }">
-                <HomeIcon class="w-20" />
+                <!-- <HomeIcon class="w-20" />-->Schedule
             </a>
             </Link>
 
             <Link href="/user/warnings">
             <a class="tab tab-bordered" :class="{ 'tab-active': isActiveWarns }">
-                <infoIcon class="w-20" />
+                <!-- <infoIcon class="w-20" /> -->Warnings
             </a>
             </Link>
 
+            <Link href="/user/stats">
             <a class="tab tab-bordered" :class="{ 'tab-active': isActiveStats }">
-                <statsIcon class="w-20" />
+                <!-- <statsIcon class="w-20" /> -->Statistics
             </a>
+            </Link>
+
         </div>
     </div>
 </template>

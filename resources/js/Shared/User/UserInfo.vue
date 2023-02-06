@@ -1,16 +1,16 @@
 <script setup>
 
-    /** Function imports */
-    import { ref } from 'vue'
+/** Function imports */
+import { ref } from 'vue'
 
-    /** Config imports */
-    import appconfig from '@/appconfig';
+/** Config imports */
+import appconfig from '@/appconfig';
 
-    const props = defineProps({
-        user: Array
-    })
+const props = defineProps({
+    user: Array
+})
 
-    const storage = ref(appconfig.STORAGE_URL)
+const storage = ref(appconfig.STORAGE_URL)
 
 </script>
 
@@ -31,6 +31,7 @@
                     {{ user[0].email }}
                 </span>
             </div>
+
         </div>
     </div>
 </template>

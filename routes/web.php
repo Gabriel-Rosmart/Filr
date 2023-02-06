@@ -20,7 +20,7 @@ use App\Http\Controllers\UserController;
 
 Route::redirect('/', '/login');
 
-Route::middleware(['auth', 'admin'])->group(function() {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'listAllActiveUsersFiles']);
     Route::get('/admin/manage', [AdminController::class, 'listAllUsers']);
     Route::get('/admin/permits', [AdminController::class, 'listAllPermits']);
@@ -29,12 +29,15 @@ Route::middleware(['auth', 'admin'])->group(function() {
     Route::post('/permits', PermitController::class);
 });
 
-Route::get('/user', [UserController::class, 'index']);
-Route::get('/user/warnings', [UserController::class, 'warnings']);
+Route::middleware('auth')->group(function () {
+    Route::get('/user', [UserController::class, 'index']);
+    Route::get('/user/warnings', [UserController::class, 'warnings']);
+    Route::get('user/stats', [UserController::class, 'stats']);
+});
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return Inertia::render('User/Dashboard');
+})->middleware(['auth', 'verified'])->name('user');
 
 Route::get('/admin/register', function () {
     return Inertia::render('Auth/MultiSteps');
