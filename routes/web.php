@@ -30,13 +30,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
 // TODO: Add necessary middlewares (auth, admin)
 Route::post('/permits', PermitController::class);
 
-Route::get('/user', [UserController::class, 'index']);
-Route::get('/user/warnings', [UserController::class, 'warnings']);
-Route::get('user/stats', [UserController::class, 'stats']);
+Route::middleware('auth')->group(function () {
+    Route::get('/user', [UserController::class, 'index']);
+    Route::get('/user/warnings', [UserController::class, 'warnings']);
+    Route::get('user/stats', [UserController::class, 'stats']);
+});
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return Inertia::render('User/Dashboard');
+})->middleware(['auth', 'verified'])->name('user');
 
 Route::get('/admin/register', function () {
     return Inertia::render('Auth/MultiSteps');
