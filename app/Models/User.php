@@ -79,4 +79,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(DateRange::class);
     }
+
+    public function incidences()
+    {
+        return $this->hasMany(Incidence::class);
+    }
 }

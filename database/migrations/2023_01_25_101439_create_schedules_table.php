@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])->nullable(false);
             $table->time('starts_at')->nullable(false);
             $table->time('ends_at')->nullable(false);
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 

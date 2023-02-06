@@ -35,5 +35,7 @@ class DatabaseSeeder extends Seeder
             ScheduleSeeder::class,
             FileSeeder::class
         ]);
+
+        \App\Models\Incidence::factory(30)->create();
     }
 }
