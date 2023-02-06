@@ -50,7 +50,9 @@ class AdminController extends Controller
         ->with(['files' => function($query){
             $query->where('date', DB::raw('CURDATE()'));
         },
-        'incidences'])
+        'incidences' => function($query){
+            $query->where('date', DB::raw('CURDATE()'));
+        }])
         ->withWhereHas('ranges', function($query){
             $query->where(function($query){
                 $query->whereRaw("curdate() between `start_date` and `end_date`");
