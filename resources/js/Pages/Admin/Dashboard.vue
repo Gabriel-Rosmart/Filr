@@ -1,10 +1,11 @@
 <script setup>
+
+    /** Component imports */
     import AdminLayout from '@/Layouts/AdminLayout.vue';
     import Pagination from '@/Shared/Filters/Pagination.vue';
     import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue'
     import FilesTable from '@/Shared/Info/FilesTable.vue';
     import FiltersDashboard from '@/Shared/Filters/FiltersDashboard.vue';
-
     import { Head } from '@inertiajs/inertia-vue3';
 
     const props = defineProps({
@@ -12,17 +13,18 @@
         filters: Object
     })
 
-    console.log(props.users)
 </script>
 
 <template>
     <Head title="Dashboard" />
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Dashboard', '/admin']]"/>
+
         <div class="flex items-center mt-8">
             <FiltersDashboard url="/admin" :filters="filters"/>
             <Pagination class="ml-24" :links="users.links"/>
         </div>
+
         <div class="flex justify-center">
             <FilesTable class="w-full mx-4 mt-8" :users="users.data"/>
         </div>

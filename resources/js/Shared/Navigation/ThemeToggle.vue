@@ -1,4 +1,6 @@
 <script setup>
+
+    /** Function imports */
     import { ref, onMounted } from 'vue';
 
     let userTheme = ref('')

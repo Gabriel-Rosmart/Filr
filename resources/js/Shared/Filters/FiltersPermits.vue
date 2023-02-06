@@ -1,5 +1,6 @@
 <script setup>
 
+    /** Function imports */
     import { ref, watch } from "vue"
     import { throttle } from 'lodash'
     import { Inertia } from '@inertiajs/inertia'

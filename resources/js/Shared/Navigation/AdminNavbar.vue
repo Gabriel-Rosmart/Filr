@@ -1,9 +1,11 @@
 <script setup>
+    /** Icon imports */
     import { HomeIcon, ManageUsersIcon, FileIcon, LogOutIcon, AppLogo } from '../Icons/Icons';
+
+    /** Component imports */
     import NotificationDropdown from './NotificationDropdown.vue';
     import ThemeToggle from './ThemeToggle.vue'
     import { Link } from '@inertiajs/inertia-vue3';
-
     import LanguageDropdown from './LanguageDropdown.vue';
 </script>
 

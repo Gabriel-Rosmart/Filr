@@ -1,6 +1,11 @@
 <script setup>
+
+    /** Icon imports */
     import { FolderIcon } from '../Icons/Icons';
+
+    /** Component imports */
     import { Link } from '@inertiajs/inertia-vue3'
+    
     defineProps({
         pages: Array
     })

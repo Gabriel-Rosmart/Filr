@@ -1,5 +1,9 @@
 <script setup>
+
+    /** Icon imports */
     import { BellIcon } from '../Icons/Icons';
+
+    /** Component imports */
     import { Link } from '@inertiajs/inertia-vue3';
 </script>
 
@@ -12,7 +16,9 @@
             </div>
         </button>
         <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 whitespace-nowrap">
-            <li><Link href="/admin/permits">Nueva notificación</Link></li>
+            <li>
+                <Link href="/admin/permits">Nueva notificación</Link>
+            </li>
         </ul>
     </div>
 </template>

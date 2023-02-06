@@ -1,12 +1,13 @@
 <script setup>
 
-import { ref } from 'vue'
+    /** Function imports */
+    import { ref } from 'vue'
 
 const props = defineProps({
     user: Object
 })
 
-const storage = ref('/storage/')
+    const storage = ref(appconfig.STORAGE_URL)
 
 </script>
 
@@ -27,9 +28,6 @@ const storage = ref('/storage/')
                     {{ user.email }}
                 </span>
             </div>
-
         </div>
     </div>
-
-
 </template>

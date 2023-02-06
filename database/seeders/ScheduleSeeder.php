@@ -25,15 +25,19 @@ class ScheduleSeeder extends Seeder
             'sunday'
         ];
 
+        $data = [];
+
         for($i = 1; $i <= 100; $i++){
             foreach($days as $day){
-                DB::table('schedules')->insert([
+                $data[] = [
                     'date_range_id' => $i,
                     'day' => $day,
                     'starts_at' => date('H:m:s', rand(0, 43200)),
                     'ends_at' => date('H:m:s', rand(43300, 86399))
-                ]);
+                ];
             }
         }
+
+        DB::table('schedules')->insert($data);
     }
 }
