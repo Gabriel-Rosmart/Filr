@@ -22,12 +22,35 @@ class AdminController extends Controller
     public function listAllActiveUsersFiles()
     {   
 
+        /*
         $users = User::select('id', 'name')
         ->filter(request(['search', 'type']))
         ->where('active', DB::raw('true'))
         ->with('files', function($query){
             $query->where('date', DB::raw('CURDATE()'));
         })
+        ->withWhereHas('ranges', function($query){
+            $query->where(function($query){
+                $query->whereRaw("curdate() between `start_date` and `end_date`");
+            })
+            ->whereHas('schedule', function($query){
+                $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+            });
+        })
+        ->with('ranges.schedule', function($query){
+            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+        })
+        ->paginate(30)
+        ->withQueryString();
+        */
+
+        $users = User::select('id', 'name')
+        ->filter(request(['search', 'type']))
+        ->where('active', DB::raw('true'))
+        ->with(['files' => function($query){
+            $query->where('date', DB::raw('CURDATE()'));
+        },
+        'incidences'])
         ->withWhereHas('ranges', function($query){
             $query->where(function($query){
                 $query->whereRaw("curdate() between `start_date` and `end_date`");
