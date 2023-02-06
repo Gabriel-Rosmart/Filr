@@ -7,5 +7,8 @@ export default {
     "saturday": "sabado",
     "sunday": "domingo",
     "accepted": "aceptado",
-    "denied": "denegado"
+    "denied": "denegado",
+    "late": "tarde",
+    "early": "antes",
+    "absent": "ausente"
 }

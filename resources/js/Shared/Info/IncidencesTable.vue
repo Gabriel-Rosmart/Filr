@@ -1,7 +1,10 @@
 <script setup>
-defineProps({
-    incidences: Array
-})
+
+    import getIncidenceMessage from '@/Utilities/incidence';
+
+    defineProps({
+        incidences: Array
+    })
 </script>
 
 <template>
@@ -18,7 +21,7 @@ defineProps({
                 <tr v-for="incidence of incidences">
                     <td>{{ incidence.user.name }}</td>
                     <td>{{ incidence.date }}</td>
-                    <td>{{ incidence.subject }}</td>
+                    <td>{{ getIncidenceMessage(incidence.subject, incidence.minutes) }}</td>
                 </tr>
             </tbody>
         </table>
