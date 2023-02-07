@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return Inertia::render('User/Dashboard');
+        $user = Auth::user();
+        return Inertia::render('User/Dashboard', ['user' => $user]);
     }
     /**
      * Displays user-associated warnings
@@ -21,6 +24,8 @@ class UserController extends Controller
      */
     public function warnings()
     {
+
+
         return Inertia::render('User/Warnings');
     }
     /**

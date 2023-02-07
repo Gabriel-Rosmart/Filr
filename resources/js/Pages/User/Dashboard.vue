@@ -5,6 +5,9 @@ import UserPages from '@/Shared/Navigation/UserPages.vue';
 import UserInfo from '@/Shared/User/UserInfo.vue';
 import TimeTable from '@/Shared/Info/TimeTable.vue';
 
+const props = defineProps({
+    user: Object,
+})
 
 </script>
 
@@ -15,9 +18,9 @@ import TimeTable from '@/Shared/Info/TimeTable.vue';
         <div class="flex justify-center content-center">
             <div class="container">
                 <div class="flex-column">
-                    <UserInfo class="my-8" />
+                    <UserInfo class="my-8" :user="user" />
                     <UserPages :activePage="'Dashboard'" class=" mt-2 mb-8" />
-                    <TimeTable class="my-8" />
+                    <!-- <TimeTable class="my-8" /> -->
                 </div>
 
             </div>
