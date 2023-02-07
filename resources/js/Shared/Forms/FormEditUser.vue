@@ -1,11 +1,7 @@
 <script setup>
 import InputForm from "@/Components/InputForm.vue";
 import SelectForm from "@/Components/SelectForm.vue";
-import { Link } from "@inertiajs/inertia-vue3";
-/** Function imports */
-import { ref } from 'vue'
-
-/** Config imports */
+import { ref } from 'vue';
 import appconfig from '@/appconfig';
 
 const props = defineProps({
