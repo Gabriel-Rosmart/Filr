@@ -1,6 +1,6 @@
 <script setup>
     /** Icon imports */
-    import { HomeIcon, ManageUsersIcon, FileIcon, AppLogo } from '../Icons/Icons';
+    import { HomeIcon, ManageUsersIcon, FileIcon, ArchiveIcon, AppLogo } from '../Icons/Icons';
 
     /** Component imports */
     import NotificationDropdown from './NotificationDropdown.vue';
@@ -39,6 +39,12 @@
                         <Link href="/admin/permits">
                             <FileIcon/>
                             Permisos
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/admin/incidences">
+                            <ArchiveIcon/>
+                            Incidencias
                         </Link>
                     </li>
                 </ul>
