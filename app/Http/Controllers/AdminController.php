@@ -126,9 +126,12 @@ class AdminController extends Controller
             ->when(request()->input('subject') ?? false, function($query, $subject){
                 $query->where('subject', $subject);
             })
+            ->when(request()->input('date') ?? false, function($query, $date){
+                $query->where('date', $date);
+            })
             ->paginate(20)
             ->withQueryString(),
-            'filters' => request()->only('search', 'subject')
+            'filters' => request()->only('search', 'subject', 'date')
         ]);
     }
 

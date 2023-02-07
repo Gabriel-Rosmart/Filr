@@ -12,15 +12,18 @@
     const clearInput = () => {
         search.value = ''
         opt.value = ''
+        date.value = ''
     }
 
     let search = ref(props.filters.search ?? '')
     let opt = ref(props.filters.subject ?? '')
+    let date = ref(props.filters.date ?? '')
 
-    watch([search, opt], throttle(([sval, oval]) => {
+    watch([search, opt, date], throttle(([sval, oval, dval]) => {
         Inertia.get(props.url, {
             search: sval,
-            subject: oval
+            subject: oval,
+            date: dval
         },
         {
             preserveState: true,
@@ -38,5 +41,6 @@
         <option value="late">Llegan tarde</option>
         <option value="absent">No han venido</option>
     </select>
+    <input type="date" class="input input-bordered w-full max-w-xs ml-4" v-model="date">
     <button class="btn btn-ghost ml-4" @click="clearInput">Reset</button>
 </template>

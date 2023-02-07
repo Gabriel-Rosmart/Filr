@@ -18,7 +18,7 @@ class IncidenceFactory extends Factory
     {
         return [
             'user_id' => fake()->numberBetween(1, 100),
-            'date' => fake()->date(),
+            'date' => fake()->dateTimeBetween('-1 month', '-1 day')->format('Y-m-d'),
             'subject' => ['early', 'late', 'absent'][array_rand(['early', 'late', 'absent'])],
             'minutes' => fake()->numberBetween(1, 30)
         ];
