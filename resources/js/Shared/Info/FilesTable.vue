@@ -35,13 +35,8 @@
                     <td>{{ getAfternoonShift(user.files) }}</td>
                     <td>
                         <div class="flex justify-start flex-col">
-                            <!--
-                            <span class="ml-4" v-for="error in getUserTimeShiftMessages(user.files, user.ranges[0].schedule)">
-                                {{ error }}
-                            </span>
-                            -->
-                            <span v-for="incidence of user.incidences">
-                                {{ getIncidenceMessage(incidence.subject, incidence.minutes) }}
+                            <span v-for="incidence of user.incidences" 
+                                v-html="getIncidenceMessage(incidence.subject, incidence.minutes)">
                             </span>
                         </div>
                     </td>
