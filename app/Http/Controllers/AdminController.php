@@ -145,6 +145,7 @@ class AdminController extends Controller
             ->where('date_ranges.end_date', '>=', DB::raw('curdate()'))
             ->join('users', 'date_range_user.user_id', '=', 'users.id')
             ->where('users.id', $id)
+            ->orderBy('starts_at', 'asc')
             ->get();
 
             $user = User::
