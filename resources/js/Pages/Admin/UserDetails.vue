@@ -23,7 +23,7 @@ let currentComponentIndex = ref(0)
 
     <Head title="User Details" />
     <AdminLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], [user.name, '/admin/details']]" />
+        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], [user.name, '/admin/details?id=' + user.id]]" />
         <div class="flex justify-center content-center">
             <div class="flex flex-col mt-10 mx-20 w-full">
                 <div>
