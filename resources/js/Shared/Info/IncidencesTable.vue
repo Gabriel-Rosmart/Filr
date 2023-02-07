@@ -21,7 +21,7 @@
                 <tr v-for="incidence of incidences">
                     <td>{{ incidence.user.name }}</td>
                     <td>{{ incidence.date }}</td>
-                    <td>{{ getIncidenceMessage(incidence.subject, incidence.minutes) }}</td>
+                    <td v-html="getIncidenceMessage(incidence.subject, incidence.minutes)"></td>
                 </tr>
             </tbody>
         </table>
