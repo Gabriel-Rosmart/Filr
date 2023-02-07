@@ -57,6 +57,13 @@ class User extends Authenticatable
             $query->whereHas('role', function($query) use ($type){
                 $query->where('role_name', '=', $type);
             });
+        })
+        ->when($filters['incidence'] ?? false, function($query, $subject){
+            $query->whereHas('incidences', function($query) use ($subject){
+                $query->where(function($query) use ($subject){
+                    $query->where('subject', $subject)->where('date', DB::raw('CURDATE()'));
+                });
+            });
         });
     }
 

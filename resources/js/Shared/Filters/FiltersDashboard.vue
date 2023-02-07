@@ -13,15 +13,18 @@
     const clearInput = () => {
         search.value = ''
         opt.value = ''
+        incidence.value = ''
     }
 
     let search = ref(props.filters.search ?? '')
     let opt = ref(props.filters.type ?? '')
+    let incidence = ref(props.filters.incidence ?? '')
 
-    watch([search, opt], throttle(([sval, oval]) => {
+    watch([search, opt, incidence], throttle(([sval, oval, ival]) => {
         Inertia.get(props.url, {
             search: sval,
-            type: oval
+            type: oval,
+            incidence: ival
         },
         {
             preserveState: true,
@@ -39,7 +42,7 @@
         <option value="administrativo">Administrativo</option>
         <option value="limpieza">Limpieza</option>
     </select>
-    <select class="select select-bordered w-full max-w-xs ml-4">
+    <select class="select select-bordered w-full max-w-xs ml-4" v-model="incidence">
         <option disabled selected value="">Incidencia</option>
         <option value="">Todos</option>
         <option value="early">Salen antes</option>

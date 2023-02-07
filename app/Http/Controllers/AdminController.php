@@ -45,7 +45,7 @@ class AdminController extends Controller
         */
 
         $users = User::select('id', 'name')
-        ->filter(request(['search', 'type']))
+        ->filter(request(['search', 'type', 'incidence']))
         ->where('active', DB::raw('true'))
         ->with(['files' => function($query){
             $query->where('date', DB::raw('CURDATE()'));
@@ -69,7 +69,7 @@ class AdminController extends Controller
 
         return Inertia::render('Admin/Dashboard', [
             'users' => $users,
-            'filters' => request()->only('search', 'type')
+            'filters' => request()->only('search', 'type', 'incidence')
         ]);
     }
 
