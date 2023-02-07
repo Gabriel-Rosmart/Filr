@@ -2,6 +2,16 @@
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 import FormEditUser from '@/Shared/Forms/FormEditUser.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
+import { Head } from '@inertiajs/inertia-vue3';
+
+import { ref } from 'vue'
+
+const props = defineProps({
+    user: Object,
+    timetable: Object
+})
+
+let currentComponentIndex = ref(0)
 </script>
 
 <template>
@@ -9,7 +19,7 @@ import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
         <Breadcrumbs class="ml-5 mt-6"
             :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], ['Edit User', '/admin/edit']]" />
         <div class="flex items-center mt-8">
-            <FormEditUser/>
+            <FormEditUser :user="user" :timetable="timetable"/>
         </div>
     </AdminLayout>
 </template>
