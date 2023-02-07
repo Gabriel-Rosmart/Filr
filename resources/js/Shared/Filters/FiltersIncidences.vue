@@ -15,7 +15,7 @@
     }
 
     let search = ref(props.filters.search ?? '')
-    let opt = ref(props.filters.type ?? '')
+    let opt = ref(props.filters.subject ?? '')
 
     watch([search, opt], throttle(([sval, oval]) => {
         Inertia.get(props.url, {
