@@ -6,7 +6,7 @@ import UserInfo from '@/Shared/User/UserInfo.vue';
 
 import { Head } from '@inertiajs/inertia-vue3';
 
-import TestTable from '@/Shared/Info/TestTable.vue'
+import Further from '@/Shared/User/UserFurther.vue'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -14,7 +14,7 @@ const props = defineProps({
     timetable: Object
 })
 
-const tabs = [TimeTable, TestTable]
+const tabs = [TimeTable, Further]
 let currentComponentIndex = ref(0)
 
 </script>
