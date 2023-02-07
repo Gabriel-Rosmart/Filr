@@ -37,7 +37,7 @@ const shift = ['Morning', 'Afternoon'];
                         </div>
                         <InputForm tittle="ID" :value='user.id' />
                         <InputForm tittle="Email" typ="email" :value='user.email' />
-                        <SelectForm tittle="Role" :data='3' />
+                        <SelectForm tittle="Role" :data='3' :rol="user.role_id" />
                         <InputForm tittle="DNI" typ="text" :value='user.dni' />
                         <InputForm class="grid col-span-2" tittle="NAME" typ="text" :value='user.name' />
                     </div>
