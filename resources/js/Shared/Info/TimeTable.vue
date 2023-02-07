@@ -1,39 +1,22 @@
 <script setup>
+    import { ref } from 'vue'
 
     const props = defineProps({
         timetable: Object
     })
 
-    const week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    const week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+    var userWeek = [[], [], [], [], []];
 
-    console.log(props);
+    for (const day of week)
+        for (const shift of props.timetable)
+            if (shift.day == day)
+                userWeek[week.indexOf(day)].push(shift);
+    console.table(userWeek);
+    
 </script>
 
 <template>
-    <!-- <div>
-        <table class="table w-full">
-            <thead>
-                <tr class="hover">
-                    <th>Day</th>
-                    <th v-for="day of week">{{ day }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>In</th>
-                </tr>
-                <tr>
-                    <th>Out</th>
-                </tr>
-                <tr>
-                    <th>In</th>
-                </tr>
-                <tr>
-                    <th>Out</th>
-                </tr>
-            </tbody>
-        </table>
-    </div> -->
     <div>
         <table class="table w-full">
             <thead>
@@ -46,12 +29,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="day of timetable" class="hover">
-                    <th>{{ day.day }}</th>
-                    <td>{{ day.starts_at }}</td>
-                    <td>{{ day.ends_at }}</td>
-                    <td>{{ day.in2 }}</td>
-                    <td>{{ day.out2 }}</td>
+                <tr v-for="day of userWeek" class="hover">
+                    <th>{{ day[0].day }}</th>
+                    <td>{{ day[0].starts_at }}</td>
+                    <td>{{ day[0].ends_at }}</td>
+                    <td v-if="day[1] != undefined" >{{ day[1].starts_at }}</td>
+                    <td v-if="day[1] != undefined" >{{ day[1].ends_at }}</td>
                 </tr>
             </tbody>
         </table>
