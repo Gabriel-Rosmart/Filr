@@ -37,7 +37,7 @@ let currentComponentIndex = ref(0)
                         :class="{ 'tab-active': currentComponentIndex == 1 }">Datos Personales</span>
                 </div>
                 <div>
-                    <component :is="tabs[currentComponentIndex]" :timetable="timetable"/>
+                    <component :is="tabs[currentComponentIndex]" :timetable="timetable" :user="user"/>
                 </div>
             </div>
         </div>
