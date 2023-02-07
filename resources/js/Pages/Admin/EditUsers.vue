@@ -6,8 +6,7 @@ import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 
 <template>
     <AdminLayout>
-        <Breadcrumbs class="ml-5 mt-6"
-            :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], ['Edit User', '/admin/edit']]" />
+        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], ['Edit User', '/admin/edit']]"/>
         <div class="flex items-center mt-8">
             <FormEditUser/>
         </div>

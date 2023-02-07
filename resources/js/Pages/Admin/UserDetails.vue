@@ -3,6 +3,7 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import TimeTable from "@/Shared/Info/TimeTable.vue";
 import UserInfo from '@/Shared/User/UserInfo.vue';
+import EditUser from '@/Shared/Actions/EditUser.vue';
 
 import { Head } from '@inertiajs/inertia-vue3';
 
@@ -26,6 +27,9 @@ let currentComponentIndex = ref(0)
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], ['User Details', '/admin/details']]" />
         <div class="flex justify-center content-center">
             <div class="flex flex-col mt-10 mx-20 w-full">
+                <div class="mr-8 w-full flex justify-end">
+                <EditUser class="btn-outline btn-primary"/>
+            </div>
                 <div>
                     <UserInfo :user="user" />
                 </div>
