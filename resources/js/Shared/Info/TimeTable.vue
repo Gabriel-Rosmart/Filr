@@ -34,7 +34,9 @@
                     <td>{{ day[0].starts_at }}</td>
                     <td>{{ day[0].ends_at }}</td>
                     <td v-if="day[1] != undefined" >{{ day[1].starts_at }}</td>
+                    <td v-else></td>
                     <td v-if="day[1] != undefined" >{{ day[1].ends_at }}</td>
+                    <td v-else></td>
                 </tr>
             </tbody>
         </table>
