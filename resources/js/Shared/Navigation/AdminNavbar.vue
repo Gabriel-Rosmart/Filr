@@ -1,12 +1,13 @@
 <script setup>
     /** Icon imports */
-    import { HomeIcon, ManageUsersIcon, FileIcon, LogOutIcon, AppLogo } from '../Icons/Icons';
+    import { HomeIcon, ManageUsersIcon, FileIcon, AppLogo } from '../Icons/Icons';
 
     /** Component imports */
     import NotificationDropdown from './NotificationDropdown.vue';
     import ThemeToggle from './ThemeToggle.vue'
     import { Link } from '@inertiajs/inertia-vue3';
     import LanguageDropdown from './LanguageDropdown.vue';
+    import AvatarDropdown from '@/Shared/Navigation/AvatarDropdown.vue'
 </script>
 
 <template>
@@ -40,12 +41,6 @@
                             Permisos
                         </Link>
                     </li>
-                    <li>
-                        <Link as="button" href="/logout" method="post">
-                            <LogOutIcon/>
-                            Cerrar Sesión
-                        </Link>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -56,6 +51,7 @@
             <LanguageDropdown/>
             <ThemeToggle/>
             <NotificationDropdown/>
+            <AvatarDropdown/>
         </div>
     </div>
 </template>
