@@ -4,10 +4,36 @@
         timetable: Object
     })
 
+    const week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
     console.log(props);
 </script>
 
 <template>
+    <!-- <div>
+        <table class="table w-full">
+            <thead>
+                <tr class="hover">
+                    <th>Day</th>
+                    <th v-for="day of week">{{ day }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>In</th>
+                </tr>
+                <tr>
+                    <th>Out</th>
+                </tr>
+                <tr>
+                    <th>In</th>
+                </tr>
+                <tr>
+                    <th>Out</th>
+                </tr>
+            </tbody>
+        </table>
+    </div> -->
     <div>
         <table class="table w-full">
             <thead>
@@ -30,24 +56,4 @@
             </tbody>
         </table>
     </div>
-    <!--<div>
-        <table class="table w-full">
-            <thead>
-                <tr>
-                    <th>Day</th>
-                    <th>start</th>
-                    <th>end</th>
-                    <th>range id</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="day of timetable" class="hover">
-                    <th>{{ day.day }}</th>
-                    <td>{{ day.starts_at }}</td>
-                    <td>{{ day.ends_at }}</td>
-                    <td>{{ day.date_range_id }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>-->
 </template>
