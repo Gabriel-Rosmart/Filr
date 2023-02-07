@@ -13,6 +13,7 @@ class PermitUpdated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $user;
     protected $uuid;
     protected $status;
 
@@ -21,8 +22,9 @@ class PermitUpdated extends Mailable
      *
      * @return void
      */
-    public function __construct(string $uuid, string $status)
+    public function __construct(string $user, string $uuid, string $status)
     {
+        $this->user = $user;
         $this->uuid = $uuid;
         $this->status = $status;
     }
@@ -49,6 +51,7 @@ class PermitUpdated extends Mailable
         return new Content(
             view: 'email.permit',
             with: [
+                'name' => $this->user,
                 'uuid' => $this->uuid,
                 'status' => $this->status
             ]
