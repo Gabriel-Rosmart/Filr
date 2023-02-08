@@ -1,5 +1,9 @@
 <script setup>
 
+    /** Component imports */
+    import { Link } from '@inertiajs/inertia-vue3'
+
+    /** Function imports */
     import getIncidenceMessage from '@/Utilities/incidence';
     import format from '@/Utilities/datefm'
 
@@ -20,7 +24,7 @@
             </thead>
             <tbody>
                 <tr v-for="incidence of incidences">
-                    <td>{{ incidence.user.name }}</td>
+                    <td><Link class="dark:hover:text-cyan-400 hover:underline" :href="'/admin/details?id=' + incidence.user.id">{{ incidence.user.name }}</Link></td>
                     <td>{{ format(incidence.date) }}</td>
                     <td v-html="getIncidenceMessage(incidence.subject, incidence.minutes)"></td>
                 </tr>
