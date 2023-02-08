@@ -1,11 +1,10 @@
 <script setup>
-defineProps(['tittle','typ','value']);
+defineProps(['title','typ','value']);
 </script>
 
 <template>
     <div>
-        <label>{{ tittle }}</label>
-        <br />
-        <input :type="typ" :value="value" class="input input-bordered input-primary w-full" />
+        <label>{{ title }}</label>
+        <input :type="typ" :value="value" class="input input-bordered input-primary w-full mt-2" />
     </div>
 </template>
