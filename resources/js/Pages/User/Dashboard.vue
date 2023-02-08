@@ -8,6 +8,7 @@ import TimeTable from '@/Shared/Info/TimeTable.vue';
 const props = defineProps({
     user: Object,
     timetable: Object,
+    permits:Object,
 })
 
 </script>

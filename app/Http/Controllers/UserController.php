@@ -19,8 +19,16 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $timetable = DB::table('schedules as s')
+        /*
+        SELECT day, starts_at, ends_at 
+        FROM schedules AS s 
+        JOIN date_ranges AS ranges ON s.date_range_id = ranges.id
+        JOIN date_range_user AS u_ranges ON ranges.id = u_ranges.date_range_id
+        JOIN users AS u ON u_ranges.user_id = u.id
+        WHERE u.id = 5
+        */
 
+        $timetable = DB::table('schedules as s')
             ->select('day','starts_at','ends_at')
             ->join('date_ranges as ranges' , 's.date_range_id', '=', 'ranges.id')
             ->join('date_range_user as u_ranges', 'ranges.id', '=', 'u_ranges.id')
@@ -28,7 +36,23 @@ class UserController extends Controller
             ->where('u.id', $user->id)
             ->get();
 
-        return Inertia::render('User/Dashboard', ['user' => $user, 'timetable' => $timetable]);
+        /*
+        SELECT status, requested_at FROM permits AS p 
+        JOIN users AS u ON p.user_id = u.id 
+        WHERE u.name="Verónica Vila"
+        */
+        $permits = DB::table("permits AS p")
+        ->select('uuid','status', "requested_at")
+        ->join('users as u', 'p.user_id', '=', 'u.id')
+        ->where('u.id',$user->id)
+        ->get();
+
+
+        return Inertia::render('User/Dashboard', [
+            'user' => $user, 
+            'timetable' => $timetable,
+            'permits' => $permits,       
+        ]);
     }
     /**
      * Displays user-associated warnings
