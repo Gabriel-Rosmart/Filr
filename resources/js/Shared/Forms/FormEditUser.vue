@@ -5,8 +5,10 @@ import { ref } from 'vue';
 import appconfig from '@/appconfig';
 
 const props = defineProps({
-    user: Object
+    user: Object,
+    timetable: Object
 })
+console.table(props.timetable);
 
 const storage = ref(appconfig.STORAGE_URL)
 
@@ -44,18 +46,18 @@ const shift = ['Morning', 'Afternoon'];
                         </div>
                     </div>
                 </div>
-                <!--
+                
                 <div class="w-full mx-10 py-10 px-10">
                     <div class="grid grid-cols-2 gap-6">
-                        <InputForm tittle="START" typ="date" :value='users[0].start' />
-                        <InputForm tittle="END" typ="date" :value='users[0].end'/>
-                        <SelectForm tittle="Weekday" :data="weekend" />
-                        <SelectForm tittle="Shift" :data="shift" />
-                        <InputForm tittle="IN" typ="time" :value='users[0].startm' />
-                        <InputForm tittle="OUT" typ="time" :value='users[0].endm' />
+                        <InputForm tittle="START" typ="date" :value='timetable[0].start_date' />
+                        <InputForm tittle="END" typ="date" :value='timetable[0].end_date'/>
+                        <SelectForm tittle="Weekday" :data="7" :day="timetable"/>
+                        <SelectForm tittle="Shift" :data="2" :shift="timetable"/>
+                        <InputForm tittle="IN" typ="time" :value='timetable[0].starts_at' />
+                        <InputForm tittle="OUT" typ="time" :value='timetable[0].ends_at' />
                     </div>
                 </div>
-                -->
+                
 
             </div>
         </form>
