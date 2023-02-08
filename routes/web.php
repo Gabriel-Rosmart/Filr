@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PermitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('user');
 
 Route::get('/admin/register', function () {
-    return Inertia::render('Auth/MultiSteps');
+    return Inertia::render('Auth/MultiSteps', [
+        'users' => User::
+            select('name', 'id')
+            ->get()
+    ]);
 });
 
 Route::middleware('auth')->group(function () {
