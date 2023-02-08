@@ -8,7 +8,7 @@
 </script>
 
 <template>
-    <Link as="button" :href="'/admin/edit?id='+user" class="btn gap-2">
+    <Link as="button" :href="'/admin/edit?id=' + user" class="btn gap-2">
         <PlusIcon/>
         Edit User
     </Link>

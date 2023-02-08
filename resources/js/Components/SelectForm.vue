@@ -1,12 +1,12 @@
 <script setup>
-defineProps(['tittle','data', 'rol', 'day', 'shift']);
+defineProps(['title','data', 'rol', 'day', 'shift']);
 </script>
 
 <template>
     <div>
-        <label>{{ tittle }}</label>
+        <label>{{ title }}</label>
         <br/>
-        <select v-if="rol" class="select select-primary w-full max-w-xs">
+        <select v-if="rol" class="select select-primary w-full max-w-xs mt-2">
                 <option v-if="rol==1" value="1" selected>Profesor</option>
                 <option v-else value="1">Profesor</option>
                 <option v-if="rol==2" value="2" selected>Administrativo</option>
