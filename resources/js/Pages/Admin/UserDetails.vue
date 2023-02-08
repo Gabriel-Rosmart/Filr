@@ -28,7 +28,7 @@ let currentComponentIndex = ref(0)
         <div class="flex justify-center content-center">
             <div class="flex flex-col mt-10 mx-20 w-full">
                 <div class="mr-8 w-full flex justify-end">
-                <EditUser class="btn-outline btn-primary"/>
+                <EditUser class="btn-outline btn-primary" :user="user.id"/>
             </div>
                 <div>
                     <UserInfo :user="user" />
