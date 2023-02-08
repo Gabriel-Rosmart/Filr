@@ -45,10 +45,10 @@ class AdminController extends Controller
         */
 
         $users = User::select('id', 'name')
-        ->filter(request(['search', 'type']))
+        ->filter(request(['search', 'type', 'incidence']))
         ->where('active', DB::raw('true'))
         ->with(['files' => function($query){
-            $query->where('date', DB::raw('CURDATE()'));
+            $query->where('date', DB::raw('CURDATE()'))->orderBy('timestamp');
         },
         'incidences' => function($query){
             $query->where('date', DB::raw('CURDATE()'));
@@ -69,7 +69,7 @@ class AdminController extends Controller
 
         return Inertia::render('Admin/Dashboard', [
             'users' => $users,
-            'filters' => request()->only('search', 'type')
+            'filters' => request()->only('search', 'type', 'incidence')
         ]);
     }
 
@@ -126,9 +126,12 @@ class AdminController extends Controller
             ->when(request()->input('subject') ?? false, function($query, $subject){
                 $query->where('subject', $subject);
             })
+            ->when(request()->input('date') ?? false, function($query, $date){
+                $query->where('date', $date);
+            })
             ->paginate(20)
             ->withQueryString(),
-            'filters' => request()->only('search', 'subject')
+            'filters' => request()->only('search', 'subject', 'date')
         ]);
     }
 
@@ -140,14 +143,25 @@ class AdminController extends Controller
         {
             $timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id')
             ->join('date_range_user', 'date_range_user.date_range_id', '=', 'schedules.date_range_id')
+            ->join('date_ranges', 'date_range_user.date_range_id', '=', 'date_ranges.id')
+            ->where('date_ranges.start_date', '<=', DB::raw('curdate()'))
+            ->where('date_ranges.end_date', '>=', DB::raw('curdate()'))
             ->join('users', 'date_range_user.user_id', '=', 'users.id')
             ->where('users.id', $id)
+            ->orderBy('starts_at', 'asc')
             ->get();
+
+            $user = User::
+            select('name', 'email', 'dni', 'phone','active','profile_pic', 'id', 'role_id')
+            ->with(['role' => function($query){
+                $query->select('id', 'role_name');
+            }])
+            ->where('id', $id)
+            ->get()
+            ->first();
+            
             return Inertia::render('Admin/UserDetails', [
-                'user' => User::
-                select('name', 'email', 'active', 'profile_pic')
-                ->where('id', $id)
-                ->get(),
+                'user' => $user,
                 'timetable' => $timetable
             ]);
         }
@@ -156,11 +170,41 @@ class AdminController extends Controller
     }
 
     public function edit(){
-        return Inertia::render('Admin/EditUsers', [
-            $id = request()->input('id'),
-            'user' => User::
-            select('name', 'email', 'active', 'profile_pic')
+        //SELECT day, starts_at, ends_at, schedules.date_range_id FROM schedules INNER JOIN date_range_user ON schedules.date_range_id = date_range_user.date_range_id;
+        $id = request()->input('id');
+        if (!empty($id))
+        {
+            $timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id', 'start_date', 'end_date')
+            ->join('date_range_user', 'date_range_user.date_range_id', '=', 'schedules.date_range_id')
+            ->join('date_ranges', 'date_range_user.date_range_id', '=', 'date_ranges.id')
+            ->where('date_ranges.start_date', '<=', DB::raw('curdate()'))
+            ->where('date_ranges.end_date', '>=', DB::raw('curdate()'))
+            ->join('users', 'date_range_user.user_id', '=', 'users.id')
+            ->where('users.id', $id)
+            ->orderBy('day', 'asc')
+            ->get();
+
+            $user = User::
+            select('id', 'name', 'dni', 'role_id', 'email', 'active', 'profile_pic')
             ->where('id', $id)
+            ->get()
+            ->first();
+            
+            return Inertia::render('Admin/EditUsers', [
+                'user' => $user,
+                'timetable' => $timetable
+            ]);
+        }
+        else
+            return redirect('/admin');
+    }
+
+    public function getUserName()
+    {
+        return Inertia::render('Admin/Register', [
+            $id = request()->input('id'),
+            'users' => User::
+            select('name', 'id')
             ->get()
         ]);
     }

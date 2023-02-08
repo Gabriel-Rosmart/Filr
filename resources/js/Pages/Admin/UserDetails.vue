@@ -7,15 +7,15 @@ import EditUser from '@/Shared/Actions/EditUser.vue';
 
 import { Head } from '@inertiajs/inertia-vue3';
 
-import TestTable from '@/Shared/Info/TestTable.vue'
+import Further from '@/Shared/User/UserFurther.vue'
 import { ref } from 'vue'
 
 const props = defineProps({
-    user: Array,
+    user: Object,
     timetable: Object
 })
 
-const tabs = [TimeTable, TestTable]
+const tabs = [TimeTable, Further]
 let currentComponentIndex = ref(0)
 
 </script>
@@ -24,7 +24,7 @@ let currentComponentIndex = ref(0)
 
     <Head title="User Details" />
     <AdminLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], ['User Details', '/admin/details']]" />
+        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], [user.name, '/admin/details?id=' + user.id]]" />
         <div class="flex justify-center content-center">
             <div class="flex flex-col mt-10 mx-20 w-full">
                 <div class="mr-8 w-full flex justify-end">
@@ -41,7 +41,7 @@ let currentComponentIndex = ref(0)
                         :class="{ 'tab-active': currentComponentIndex == 1 }">Datos Personales</span>
                 </div>
                 <div>
-                    <component :is="tabs[currentComponentIndex]" :timetable="timetable"/>
+                    <component :is="tabs[currentComponentIndex]" :timetable="timetable" :user="user"/>
                 </div>
             </div>
         </div>

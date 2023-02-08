@@ -37,5 +37,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Incidence::factory(30)->create();
+        \App\Models\Incidence::factory(20)->create([
+            'date' => date('Y-m-d')
+        ]);
     }
 }

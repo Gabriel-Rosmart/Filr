@@ -9,6 +9,8 @@ import CheckIcon from './CheckIcon.vue'
 import XIcon from './XIcon.vue'
 import LogOutIcon from './LogOutIcon.vue'
 import FileIcon from './FileIcon.vue'
+import UserIcon from './UserIcon.vue'
+import ArchiveIcon from './ArchiveIcon.vue'
 import AppLogo from './AppLogo.vue'
 
 export {
@@ -23,5 +25,7 @@ export {
     XIcon,
     LogOutIcon,
     FileIcon,
+    UserIcon,
+    ArchiveIcon,
     AppLogo
 }

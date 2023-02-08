@@ -7,7 +7,7 @@ import { ref } from 'vue'
 import appconfig from '@/appconfig';
 
 const props = defineProps({
-    user: Array
+    user: Object
 })
 
 const storage = ref(appconfig.STORAGE_URL)
@@ -19,16 +19,16 @@ const storage = ref(appconfig.STORAGE_URL)
     <div class="flex justify-start">
         <div class="avatar">
             <div class="w-24 rounded-full">
-                <img :src="storage + user[0].profile_pic" />
+                <img :src="storage + user.profile_pic" />
             </div>
         </div>
         <div class="ml-5 mt-3">
             <div class="flex gap-4 items-end">
-                <span class="text-5xl">{{ user[0].name }}</span>
+                <span class="text-5xl">{{ user.name }}</span>
             </div>
             <div class="mt-2">
                 <span>
-                    {{ user[0].email }}
+                    {{ user.email }}
                 </span>
             </div>
 
