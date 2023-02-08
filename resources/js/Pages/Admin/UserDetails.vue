@@ -4,20 +4,22 @@ import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import TimeTable from "@/Shared/Info/TimeTable.vue";
 import UserInfo from '@/Shared/User/UserInfo.vue';
 import Incidents from '@/Shared/Info/IncidencesUserTable.vue';
+import Permits from '@/Shared/Info/PermitsAdminTable.vue';
 import EditUser from '@/Shared/Actions/EditUser.vue';
+import Further from '@/Shared/User/UserFurther.vue'
 
 import { Head } from '@inertiajs/inertia-vue3';
-
-import Further from '@/Shared/User/UserFurther.vue'
 import { ref } from 'vue'
+
 
 const props = defineProps({
     user: Object,
     timetable: Object,
-    incidences: Array
+    incidences: Array,
+    permits: Array
 })
 
-const tabs = [TimeTable, Further, Incidents]
+const tabs = [TimeTable, Further, Incidents, Permits]
 let currentComponentIndex = ref(0)
 
 </script>
@@ -43,9 +45,11 @@ let currentComponentIndex = ref(0)
                         :class="{ 'tab-active': currentComponentIndex == 1 }">Datos Personales</span>
                     <span class="tab tab-bordered" @click="currentComponentIndex = 2"
                         :class="{ 'tab-active': currentComponentIndex == 2 }">Incidentes</span>
+                    <span class="tab tab-bordered" @click="currentComponentIndex = 3"
+                        :class="{ 'tab-active': currentComponentIndex == 3 }">Permisos</span>
                 </div>
                 <div>
-                    <component :is="tabs[currentComponentIndex]" :timetable="timetable" :user="user" :incidences="incidences"/>
+                    <component :is="tabs[currentComponentIndex]" :timetable="timetable" :user="user" :incidences="incidences" :permits="permits"/>
                 </div>
             </div>
         </div>
