@@ -39,18 +39,10 @@ const shift = ['Morning', 'Afternoon'];
                         <InputForm tittle="DNI" typ="text" :value='user.dni' />
                         <InputForm class="grid col-span-2" tittle="NAME" typ="text" :value='user.name' />
                     </div>
-<<<<<<< HEAD
                     <div class=" h-40 py-10 justify-start">
                     <div>
                         <button class="btn btn-outline btn-success ">Save</button>
                         <button class="mx-10 btn btn-outline btn-error ">Cancel</button>
-=======
-                    <div class="w-90 h-40 mx-20 py-10 px-10">
-                        <div>
-                            <button class="btn btn-outline btn-success ">Save</button>
-                            <button class="mx-10 btn btn-outline btn-error ">Cancel</button>
-                        </div>
->>>>>>> develop
                     </div>
                 </div>
                 
@@ -64,7 +56,7 @@ const shift = ['Morning', 'Afternoon'];
                         <InputForm tittle="OUT" typ="time" :value='timetable[0].ends_at' />
                     </div>
                 </div>
-                
+                </div>
 
             </div>
         </form>
