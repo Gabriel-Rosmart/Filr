@@ -48,7 +48,7 @@ class AdminController extends Controller
         ->filter(request(['search', 'type', 'incidence']))
         ->where('active', DB::raw('true'))
         ->with(['files' => function($query){
-            $query->where('date', DB::raw('CURDATE()'));
+            $query->where('date', DB::raw('CURDATE()'))->orderBy('timestamp');
         },
         'incidences' => function($query){
             $query->where('date', DB::raw('CURDATE()'));
