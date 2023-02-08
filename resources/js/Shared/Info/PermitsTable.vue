@@ -3,9 +3,13 @@
     /** Icon imports */
     import { CheckIcon, XIcon } from "../Icons/Icons";
 
+    /** Component imports */
+    import { Link } from "@inertiajs/inertia-vue3";
+
     /** Function imports */
     import { Inertia } from "@inertiajs/inertia";
     import trans from "@/Utilities/trans";
+    import format from '@/Utilities/datefm'
 
     defineProps({
         permits: Array
@@ -44,10 +48,12 @@
                         {{ permit.uuid }}
                     </td>
                     <td>
-                        {{ permit.user.name }}
+                        <Link class="dark:hover:text-cyan-400 hover:underline" :href="'/admin/details?id=' + permit.user.id">
+                            {{ permit.user.name }}
+                        </Link>
                     </td>
                     <td>
-                        {{ permit.requested_at }}
+                        {{ format(permit.requested_at) }}
                     </td>
                     <th v-if="permit.status === 'pending'">
                         <div>
