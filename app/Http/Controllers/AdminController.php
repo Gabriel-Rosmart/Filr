@@ -162,7 +162,8 @@ class AdminController extends Controller
             
             return Inertia::render('Admin/UserDetails', [
                 'user' => $user,
-                'timetable' => $timetable
+                'timetable' => $timetable,
+                'incidences' => $user->incidences
             ]);
         }
         else

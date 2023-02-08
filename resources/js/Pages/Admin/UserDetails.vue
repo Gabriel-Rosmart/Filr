@@ -3,6 +3,7 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import TimeTable from "@/Shared/Info/TimeTable.vue";
 import UserInfo from '@/Shared/User/UserInfo.vue';
+import Incidents from '@/Shared/Info/IncidencesUserTable.vue';
 
 import { Head } from '@inertiajs/inertia-vue3';
 
@@ -11,10 +12,11 @@ import { ref } from 'vue'
 
 const props = defineProps({
     user: Object,
-    timetable: Object
+    timetable: Object,
+    incidences: Array
 })
 
-const tabs = [TimeTable, Further]
+const tabs = [TimeTable, Further, Incidents]
 let currentComponentIndex = ref(0)
 
 </script>
@@ -35,9 +37,11 @@ let currentComponentIndex = ref(0)
                         :class="{ 'tab-active': currentComponentIndex == 0 }">Horarios</span>
                     <span class="tab tab-bordered" @click="currentComponentIndex = 1"
                         :class="{ 'tab-active': currentComponentIndex == 1 }">Datos Personales</span>
+                    <span class="tab tab-bordered" @click="currentComponentIndex = 2"
+                        :class="{ 'tab-active': currentComponentIndex == 2 }">Incidentes</span>
                 </div>
                 <div>
-                    <component :is="tabs[currentComponentIndex]" :timetable="timetable" :user="user"/>
+                    <component :is="tabs[currentComponentIndex]" :timetable="timetable" :user="user" :incidences="incidences"/>
                 </div>
             </div>
         </div>
