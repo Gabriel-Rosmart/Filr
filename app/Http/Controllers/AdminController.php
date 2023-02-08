@@ -152,7 +152,10 @@ class AdminController extends Controller
             ->get();
 
             $user = User::
-            select('name', 'email', 'active', 'profile_pic', 'id')
+            select('name', 'email', 'dni', 'phone','active','profile_pic', 'id', 'role_id')
+            ->with(['role' => function($query){
+                $query->select('id', 'role_name');
+            }])
             ->where('id', $id)
             ->get()
             ->first();
