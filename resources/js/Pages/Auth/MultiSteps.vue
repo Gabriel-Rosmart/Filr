@@ -8,17 +8,22 @@
                     <h2 class="mb-12 text-center text-5xl font-extrabold">New User</h2>
                 </div>
                 <div class="flex flex-col items-center">
-                    <component v-bind:is="step[currentStep].component" />
+                    <component v-bind:is="step[currentStep]" :users="users" />
                 </div>
                 <div class="flex gap-2 justify-end mx-7">
                     <div class="mt-6">
-                        <button class="btn btn-outline btn-primary" v-if="currentStep !== 0" v-on:click="previous">Anterior</button>
+                        <button class="btn btn-outline btn-primary" v-if="currentStep !== 0"
+                            @click="currentStep--">Anterior</button>
                     </div>
                     <div class="mt-6">
-                        <button class="btn btn-outline btn-primary" v-if="currentStep < step.length - 1" v-on:click="next">Next</button>
+                        <button class="btn btn-outline btn-primary" v-if="currentStep < step.length - 1"
+                            @click="currentStep++">Next</button>
                     </div>
                     <div class="mt-6">
                         <button class="btn btn-primary" v-if="currentStep == step.length - 1">Send</button>
+                    </div>
+                    <div class="mt-6" v-show="isChecked">
+                        <button class="btn btn-primary">Send</button>
                     </div>
                 </div>
             </div>
@@ -26,44 +31,21 @@
     </AdminLayout>
 </template>
 
-<script>
+<script setup>
 import About from '@/Components/Steps/About.vue';
 import Information from '@/Components/Steps/Information.vue';
 import Profile from '@/Components/Steps/Profile.vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
+import { ref } from 'vue';
 
-export default {
-    name: "MultiSteps",
-    data() {
-        return {
-            currentStep: 0,
-            step: [
-                {
-                    component: Information
-                },
-                {
-                    component: About
-                },
-                {
-                    component: Profile
-                },
-            ]
-        };
-    },
-    methods: {
-        next() {
-            this.currentStep += 1;
-        },
-        previous() {
-            this.currentStep -= 1;
-        }
-    },
-    components: [
-        Information,
-        About,
-        Profile
-    ],
-    components: { AdminLayout, Breadcrumbs }
-}
+let currentStep = ref(0)
+let step = ref([Information, About, Profile])
+
+
+
+const props = defineProps({
+    users: Array
+})
+
 </script>
