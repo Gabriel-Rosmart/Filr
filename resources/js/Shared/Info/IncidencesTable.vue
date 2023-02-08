@@ -1,6 +1,7 @@
 <script setup>
 
     import getIncidenceMessage from '@/Utilities/incidence';
+    import format from '@/Utilities/datefm'
 
     defineProps({
         incidences: Array
@@ -20,7 +21,7 @@
             <tbody>
                 <tr v-for="incidence of incidences">
                     <td>{{ incidence.user.name }}</td>
-                    <td>{{ incidence.date }}</td>
+                    <td>{{ format(incidence.date) }}</td>
                     <td v-html="getIncidenceMessage(incidence.subject, incidence.minutes)"></td>
                 </tr>
             </tbody>

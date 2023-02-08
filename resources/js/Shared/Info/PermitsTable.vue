@@ -6,6 +6,7 @@
     /** Function imports */
     import { Inertia } from "@inertiajs/inertia";
     import trans from "@/Utilities/trans";
+    import format from '@/Utilities/datefm'
 
     defineProps({
         permits: Array
@@ -47,7 +48,7 @@
                         {{ permit.user.name }}
                     </td>
                     <td>
-                        {{ permit.requested_at }}
+                        {{ format(permit.requested_at) }}
                     </td>
                     <th v-if="permit.status === 'pending'">
                         <div>
