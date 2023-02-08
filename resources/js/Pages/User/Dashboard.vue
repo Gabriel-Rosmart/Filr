@@ -7,6 +7,7 @@ import TimeTable from '@/Shared/Info/TimeTable.vue';
 
 const props = defineProps({
     user: Object,
+    timetable: Object,
 })
 
 </script>
@@ -20,7 +21,7 @@ const props = defineProps({
                 <div class="flex-column">
                     <UserInfo class="my-8" :user="user" />
                     <UserPages :activePage="'Dashboard'" class=" mt-2 mb-8" />
-                    <!-- <TimeTable class="my-8" /> -->
+                    <TimeTable class="my-8" :timetable="timetable"/> 
                 </div>
 
             </div>
