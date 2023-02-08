@@ -211,15 +211,11 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import { ref } from 'vue';
 
-let currentStep = ref(0)
-let step = ref([Information, About, Profile])
-
-
 let isChecked = ref(false)
 let selectedOption = ref('')
 let options = ref([])
-
-console.log(props.users);
+let currentStep = ref(0)
+let step = ref([Information, About, Profile])
 
 const props = defineProps({
     users: Array
