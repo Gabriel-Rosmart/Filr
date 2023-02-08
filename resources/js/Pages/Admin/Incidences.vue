@@ -5,6 +5,7 @@
     import Pagination from '@/Shared/Filters/Pagination.vue';
     import FiltersIncidences from '@/Shared/Filters/FiltersIncidences.vue'
     import IncidencesTable from '@/Shared/Info/IncidencesTable.vue';
+    import { Head } from '@inertiajs/inertia-vue3'
 
     defineProps({
         incidences: Object,
@@ -14,6 +15,8 @@
 
 <template>
     <AdminLayout>
+
+        <Head title="Incidences"/>
 
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Incidences', '/admin/incidences']]"/>
 
