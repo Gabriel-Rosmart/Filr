@@ -7,6 +7,10 @@
     import getIncidenceMessage from '@/Utilities/incidence';
     import format from '@/Utilities/datefm'
 
+    import { useI18n } from 'vue-i18n'
+
+    const { t } = useI18n()
+
     defineProps({
         incidences: Array
     })
@@ -17,9 +21,9 @@
         <table class="table w-full">
             <thead>
                 <tr>
-                    <th>Empleado</th>
-                    <th>Fecha</th>
-                    <th>Motivo</th>
+                    <th>{{ t('table.employee') }}</th>
+                    <th>{{ t('table.date') }}</th>
+                    <th>{{ t('table.subject') }}</th>
                 </tr>
             </thead>
             <tbody>
