@@ -20,6 +20,10 @@
 
     const storage = ref(appconfig.STORAGE_URL)
 
+    const getUserStatus = (status) => {
+        return status ? 'active' : 'inactive'
+    }
+
 </script>
 
 <template>
@@ -57,7 +61,7 @@
                     <td>
                         <div class="indicator ">
                         <span class="indicator-item indicator-middle indicator-start badge h-2" :class="{'badge-info': user.active, 'badge-error': !user.active}"></span>
-                        <div class="ml-6">{{ user.active ? 'Activo' : 'De baja' }}</div>
+                        <div class="ml-6">{{ t(`admin.query.userstate.${getUserStatus(user.active)}`) }}</div>
                         </div>
                     </td>
                     <th>

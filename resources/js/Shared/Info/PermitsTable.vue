@@ -68,11 +68,11 @@
                     <th v-else>
                         <div v-if="permit.status === 'accepted'" class="flex">
                             <CheckIcon class="stroke-green-500"/>
-                            <span class="ml-6">{{ trans(permit.status, 'es') }}</span>
+                            <span class="ml-6">{{ t(`admin.permitstate.${permit.status}`) }}</span>
                         </div>
                         <div v-else class="flex">
                             <XIcon class="stroke-red-500"/>
-                            <span class="ml-6">{{ trans(permit.status, 'es') }}</span>
+                            <span class="ml-6">{{ t(`admin.permitstate.${permit.status}`) }}</span>
                         </div>
                     </th>
                 </tr>
