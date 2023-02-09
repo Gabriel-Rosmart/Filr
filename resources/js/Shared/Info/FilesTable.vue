@@ -1,7 +1,9 @@
 <script setup>
     import { Link } from "@inertiajs/inertia-vue3";
-    import getUserTimeShiftMessages from "@/Utilities/timediff";
     import getIncidenceMessage from '@/Utilities/incidence';
+    import { useI18n } from 'vue-i18n'
+
+    const { t } = useI18n()
 
     defineProps({
         users: Array,
@@ -32,9 +34,9 @@
         <table class="table w-full">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>In</th>
-                    <th>Out</th>
+                    <th>{{ t('table.name') }}</th>
+                    <th>{{ t('table.in') }}</th>
+                    <th>{{ t('table.out') }}</th>
                     <th></th>
                 </tr>
             </thead>

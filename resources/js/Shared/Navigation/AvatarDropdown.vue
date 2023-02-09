@@ -1,13 +1,18 @@
 <script setup>
 
-    /** Icons imports */
-    import { LogOutIcon,  UserIcon } from '../Icons/Icons';
+  /** Icons imports */
+  import { LogOutIcon,  UserIcon } from '../Icons/Icons';
 
-    /** Component imports */
-    import { Link } from '@inertiajs/inertia-vue3'
+  /** Component imports */
+  import { Link } from '@inertiajs/inertia-vue3'
 
-    /** Config import */
-    import appconfig from '@/appconfig'
+  /** Config import */
+  import appconfig from '@/appconfig'
+
+  /** Function imports */
+  import { useI18n } from 'vue-i18n'
+
+  const { t } = useI18n()
 </script>
 
 <template>
@@ -21,13 +26,13 @@
         <li>
           <Link>
             <UserIcon/>
-            Editar Perfil
+            {{ t('admin.navbar.avatar.profile') }}
           </Link>
         </li>
         <li>
             <Link as="button" href="/logout" method="post">
                 <LogOutIcon/>
-                Cerrar Sesión
+                {{ t('admin.navbar.avatar.logout') }}
             </Link>
         </li>
       </ul>
