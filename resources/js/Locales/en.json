@@ -19,7 +19,8 @@
                 "main": "Employee type"
             },
             "incidence": {
-                "main": "incidence",
+                "main": "Incidence",
+                "all": "All",
                 "early": "Is early",
                 "late": "Is late",
                 "absent": "Did not come"

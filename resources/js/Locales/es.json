@@ -18,8 +18,9 @@
             "employee": {
                 "main": "Tipo de empleado"
             },
-            "incidencia": {
-                "main": "incidencia",
+            "incidence": {
+                "main": "Incidencia",
+                "all": "Todos",
                 "early": "Sale antes",
                 "late": "Llega tarde",
                 "absent": "No vino"

@@ -16,10 +16,11 @@
         "query": {
             "search": "Buscar...",
             "employee": {
-                "main": "Employee type"
+                "main": "Tipo de empleado"
             },
-            "incidencia": {
-                "main": "incidencia",
+            "incidence": {
+                "main": "Incidencia",
+                "all": "Todos",
                 "early": "Sale antes",
                 "late": "Chega tarde",
                 "absent": "Non veu"
