@@ -11,6 +11,10 @@
     import trans from "@/Utilities/trans";
     import format from '@/Utilities/datefm'
 
+    import { useI18n } from 'vue-i18n'
+
+    const { t } = useI18n()
+
     defineProps({
         permits: Array
     })
@@ -37,8 +41,8 @@
             <thead>
                 <tr>
                     <th>PID</th>
-                    <th>Requested By</th>
-                    <th>Requested At</th>
+                    <th>{{ t('table.reqby') }}</th>
+                    <th>{{ t('table.reqat') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -57,8 +61,8 @@
                     </td>
                     <th v-if="permit.status === 'pending'">
                         <div>
-                            <button class="btn btn-outline btn-success" @click="accept(permit.uuid)">Aceptar</button>
-                            <button class="btn btn-outline btn-error ml-8" @click="deny(permit.uuid)">Denegar</button>
+                            <button class="btn btn-outline btn-success" @click="accept(permit.uuid)">{{ t('admin.buttons.accept') }}</button>
+                            <button class="btn btn-outline btn-error ml-8" @click="deny(permit.uuid)">{{ t('admin.buttons.deny') }}</button>
                         </div>
                     </th>
                     <th v-else>

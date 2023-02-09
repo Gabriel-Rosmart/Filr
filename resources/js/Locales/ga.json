@@ -33,6 +33,8 @@
             }
         },
         "permitstate": {
+            "main": "Estado",
+            "all": "Todos",
             "pending": "Pendente",
             "accepted": "Aceptado",
             "denied": "Denegado"
