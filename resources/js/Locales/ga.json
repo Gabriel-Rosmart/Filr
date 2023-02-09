@@ -1,10 +1,10 @@
 {
     "admin": {
         "navbar": {
-            "notification": "Nuevo mensaje",
+            "notification": "Novo mensaxe",
             "dropdown": {
                 "dashboard": "Dashboard",
-                "users": "Administrar usuarios",
+                "users": "Xestionar usuarios",
                 "permits": "Permisos",
                 "incidences": "Incidencias"
             },
@@ -16,36 +16,36 @@
         "query": {
             "search": "Buscar...",
             "employee": {
-                "main": "Tipo de empleado"
+                "main": "Employee type"
             },
             "incidencia": {
                 "main": "incidencia",
                 "early": "Sale antes",
-                "late": "Llega tarde",
-                "absent": "No vino"
+                "late": "Chega tarde",
+                "absent": "Non veu"
             },
             "userstate" : {
-                "all": "Cualquiera",
+                "all": "Calquera",
                 "active": "Activo",
-                "inactive": "De baja"
+                "inactive": "De baixa"
             }
         },
         "permitstate": {
-            "pending": "Pendiente",
+            "pending": "Pendente",
             "accepted": "Aceptado",
             "denied": "Denegado"
         },
         "buttons" : {
-            "adduser": "Añadir usuario",
+            "adduser": "Engadir usuario",
             "accept": "Aceptar",
             "deny": "Denegar"
         }
     },
     "table": {
-        "name": "Nombre",
+        "name": "Nome",
         "in": "Entrada",
         "out": "Salida",
-        "job": "Trabajo",
+        "job": "Traballo",
         "status": "Estado",
         "reqby": "Pedido por",
         "reqat": "Pedido en",

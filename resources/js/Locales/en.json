@@ -1,19 +1,56 @@
 {
-    "hello": "hello",
     "admin": {
         "navbar": {
             "notification": "New message",
             "dropdown": {
                 "dashboard": "Dashboard",
                 "users": "Manage users",
-                "settings": "Settings"
+                "permits": "Permits",
+                "incidences": "Incidences"
+            },
+            "avatar": {
+                "profile": "Edit profile",
+                "logout": "Log out"
             }
         },
         "query": {
             "search": "Search...",
             "employee": {
                 "main": "Employee type"
+            },
+            "incidence": {
+                "main": "incidence",
+                "early": "Is early",
+                "late": "Is late",
+                "absent": "Did not come"
+            },
+            "userstate" : {
+                "all": "All",
+                "active": "Active",
+                "inactive": "On leave"
             }
+        },
+        "permitstate": {
+            "pending": "Pending",
+            "accepted": "Accepted",
+            "denied": "Denied"
+        },
+        "buttons" : {
+            "adduser": "Add user",
+            "accept": "Accept",
+            "deny": "Deny"
         }
+    },
+    "table": {
+        "name": "Name",
+        "in": "In",
+        "out": "Out",
+        "job": "Job",
+        "status": "Status",
+        "reqby": "Requested by",
+        "reqat": "Requested at",
+        "employee": "Employee",
+        "date": "Date",
+        "subject": "Subject"
     }
 }
