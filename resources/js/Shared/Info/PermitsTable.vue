@@ -13,7 +13,7 @@
 
     import { useI18n } from 'vue-i18n'
 
-    const { t } = useI18n()
+    const { t, d } = useI18n()
 
     defineProps({
         permits: Array
@@ -57,7 +57,7 @@
                         </Link>
                     </td>
                     <td>
-                        {{ format(permit.requested_at) }}
+                        {{ d(permit.requested_at, 'short') }}
                     </td>
                     <th v-if="permit.status === 'pending'">
                         <div>
