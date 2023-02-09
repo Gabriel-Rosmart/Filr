@@ -12,6 +12,10 @@
         {
             'lang': 'Español',
             'code': 'es'
+        },
+        {
+            'lang': 'Galego',
+            'code': 'ga'
         }
     ]
     const changeLocale = (newLocale) => {
