@@ -26,6 +26,7 @@
                 "absent": "Non veu"
             },
             "userstate" : {
+                "main": "Estado",
                 "all": "Calquera",
                 "active": "Activo",
                 "inactive": "De baixa"

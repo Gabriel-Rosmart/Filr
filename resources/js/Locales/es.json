@@ -26,6 +26,7 @@
                 "absent": "No vino"
             },
             "userstate" : {
+                "main": "Estado",
                 "all": "Cualquiera",
                 "active": "Activo",
                 "inactive": "De baja"

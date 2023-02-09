@@ -26,6 +26,7 @@
                 "absent": "Did not come"
             },
             "userstate" : {
+                "main": "Status",
                 "all": "All",
                 "active": "Active",
                 "inactive": "On leave"

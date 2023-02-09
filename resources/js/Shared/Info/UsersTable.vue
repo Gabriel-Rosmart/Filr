@@ -9,6 +9,10 @@
     /** Config imports */
     import appconfig  from '@/appconfig'
 
+    import { useI18n } from 'vue-i18n'
+
+    const { t } = useI18n()
+
     const props = defineProps({
         users: Array,
         filters: Object
@@ -23,9 +27,9 @@
         <table class="table w-full">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Job</th>
-                    <th>Status</th>
+                    <th>{{ t('table.name') }}</th>
+                    <th>{{ t('table.job') }}</th>
+                    <th>{{ t('table.status') }}</th>
                     <th></th>
                 </tr>
             </thead>
