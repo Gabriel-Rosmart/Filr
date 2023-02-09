@@ -30,7 +30,7 @@
                 <tr v-for="incidence of incidences">
                     <td><Link class="dark:hover:text-cyan-400 hover:underline" :href="'/admin/details?id=' + incidence.user.id">{{ incidence.user.name }}</Link></td>
                     <td>{{ d(incidence.date, 'short') }}</td>
-                    <td v-html="getIncidenceMessage(incidence.subject, incidence.minutes)"></td>
+                    <td v-html="t(`table.${incidence.subject}`, { minutes: incidence.minutes})"></td>
                 </tr>
             </tbody>
         </table>

@@ -60,7 +60,7 @@
                     <td>
                         <div class="flex justify-start flex-col">
                             <span v-for="incidence of user.incidences" 
-                                v-html="getIncidenceMessage(incidence.subject, incidence.minutes)">
+                                v-html="t(`table.${incidence.subject}`, { minutes: incidence.minutes})">
                             </span>
                         </div>
                     </td>
