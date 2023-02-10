@@ -64,38 +64,6 @@ class User extends Authenticatable
                     $query->where('subject', $subject)->where('date', DB::raw('CURDATE()'));
                 });
             });
-        })
-        ->when($filters['date'] ?? false, function($query, $date){
-            $query->with('files', function($query) use ($date) {
-                $query->where('date', $date);
-            })
-            ->with('incidences', function($query) use ($date) {
-                $query->where('date', $date);
-            })
-            ->whereHas('ranges', function($query) use ($date){
-                $query->where(function($query) use ($date) {
-                    $query->whereRaw("'$date' between `start_date` and `end_date`");
-                })
-                ->whereHas('schedule', function($query) use ($date) {
-                    $query->whereRaw("dayname('$date') = `schedules`.`day`");
-                });
-            });
-        }, function($query){
-            $query->with(['files' => function($query){
-                $query->where('date', DB::raw('CURDATE()'))->orderBy('timestamp');
-            },
-            'incidences' => function($query){
-                $query->where('date', DB::raw('CURDATE()'));
-            }])
-            ->where('active', DB::raw('true'))
-            ->whereHas('ranges', function($query){
-                $query->where(function($query){
-                    $query->whereRaw("curdate() between `start_date` and `end_date`");
-                })
-                ->whereHas('schedule', function($query){
-                    $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
-                });
-            });
         });
     }
 
