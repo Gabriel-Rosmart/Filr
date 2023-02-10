@@ -35,6 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/user/warnings', [UserController::class, 'warnings']);
     Route::get('user/stats', [UserController::class, 'stats']);
+    Route::get('/avatar', function(){
+        return auth()->user()->profile_pic;
+    });
 });
 
 Route::get('/dashboard', function () {
