@@ -3,7 +3,7 @@
         "navbar": {
             "notification": "Novo mensaxe",
             "dropdown": {
-                "dashboard": "Dashboard",
+                "dashboard": "Panel de control",
                 "users": "Xestionar usuarios",
                 "permits": "Permisos",
                 "incidences": "Incidencias"
