@@ -22,54 +22,14 @@ class AdminController extends Controller
     public function listAllActiveUsersFiles()
     {   
 
-        /*
         $users = User::select('id', 'name')
-        ->filter(request(['search', 'type']))
-        ->where('active', DB::raw('true'))
-        ->with('files', function($query){
-            $query->where('date', DB::raw('CURDATE()'));
-        })
-        ->withWhereHas('ranges', function($query){
-            $query->where(function($query){
-                $query->whereRaw("curdate() between `start_date` and `end_date`");
-            })
-            ->whereHas('schedule', function($query){
-                $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
-            });
-        })
-        ->with('ranges.schedule', function($query){
-            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
-        })
-        ->paginate(30)
-        ->withQueryString();
-        */
-
-        $users = User::select('id', 'name')
-        ->filter(request(['search', 'type', 'incidence']))
-        ->where('active', DB::raw('true'))
-        ->with(['files' => function($query){
-            $query->where('date', DB::raw('CURDATE()'))->orderBy('timestamp');
-        },
-        'incidences' => function($query){
-            $query->where('date', DB::raw('CURDATE()'));
-        }])
-        ->withWhereHas('ranges', function($query){
-            $query->where(function($query){
-                $query->whereRaw("curdate() between `start_date` and `end_date`");
-            })
-            ->whereHas('schedule', function($query){
-                $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
-            });
-        })
-        ->with('ranges.schedule', function($query){
-            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
-        })
+        ->filter(request(['search', 'type', 'incidence', 'date']))
         ->paginate(30)
         ->withQueryString();
 
         return Inertia::render('Admin/Dashboard', [
             'users' => $users,
-            'filters' => request()->only('search', 'type', 'incidence')
+            'filters' => request()->only('search', 'type', 'incidence', 'date')
         ]);
     }
 

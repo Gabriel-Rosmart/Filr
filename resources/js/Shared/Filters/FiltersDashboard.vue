@@ -17,17 +17,20 @@
         search.value = ''
         opt.value = ''
         incidence.value = ''
+        date.value = ''
     }
 
     let search = ref(props.filters.search ?? '')
     let opt = ref(props.filters.type ?? '')
     let incidence = ref(props.filters.incidence ?? '')
+    let date = ref(props.filters.date ?? '')
 
-    watch([search, opt, incidence], throttle(([sval, oval, ival]) => {
+    watch([search, opt, incidence, date], throttle(([sval, oval, ival, dval]) => {
         Inertia.get(props.url, {
             search: sval,
             type: oval,
-            incidence: ival
+            incidence: ival,
+            date: dval
         },
         {
             preserveState: true,
@@ -52,5 +55,6 @@
         <option value="late">{{ t('admin.query.incidence.late') }}</option>
         <option value="absent">{{ t('admin.query.incidence.absent') }}</option>
     </select>
+    <input type="date" class="input input-bordered w-full max-w-xs ml-4" v-model="date">
     <button class="btn btn-ghost ml-4" @click="clearInput">Reset</button>
 </template>
