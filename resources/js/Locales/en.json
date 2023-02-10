@@ -59,5 +59,11 @@
         "late": "Employee is late by <span style='color: red'>{minutes}</span> minutes",
         "early": "Employee is early by <span style='color: red'>{minutes}</span> minutes",
         "absent": "<span style='color: red'>Did not come to work</span>"
+    },
+    "breadcrumbs": {
+        "dashboard": "Dashboard",
+        "manage": "Manage users",
+        "permits": "Permits",
+        "incidences": "Incidences"
     }
 }

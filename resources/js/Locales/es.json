@@ -59,5 +59,11 @@
         "late": "Llega <span style='color: red'>{minutes}</span> minutos tarde",
         "early": "Sale <span style='color: red'>{minutes}</span> minutos antes",
         "absent": "<span style='color: red'>No vino a trabajar</span>"
+    },
+    "breadcrumbs": {
+        "dashboard": "Panel de control",
+        "manage": "Administrar usuarios",
+        "permits": "Permisos",
+        "incidences": "Incidencias"
     }
 }

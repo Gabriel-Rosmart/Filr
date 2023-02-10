@@ -8,6 +8,9 @@
     import FiltersUsers from '@/Shared/Filters/FiltersUsers.vue';
     import Pagination from '@/Shared/Filters/Pagination.vue';
     import { Head } from '@inertiajs/inertia-vue3';
+    import { useI18n } from 'vue-i18n'
+
+    const { t } = useI18n()
 
     defineProps({
         users: Object,
@@ -19,7 +22,7 @@
     <Head title="Manage Users" />
 
     <AdminLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage']]"/>
+        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], [t('breadcrumbs.manage'), '/admin/manage']]"/>
 
         <div class="flex items-center mt-8">
             <FiltersUsers url="/admin/manage" :filters="filters"/>

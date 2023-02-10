@@ -6,6 +6,9 @@
     import FiltersIncidences from '@/Shared/Filters/FiltersIncidences.vue'
     import IncidencesTable from '@/Shared/Info/IncidencesTable.vue';
     import { Head } from '@inertiajs/inertia-vue3'
+    import { useI18n } from 'vue-i18n'
+
+    const { t } = useI18n()
 
     defineProps({
         incidences: Object,
@@ -18,7 +21,7 @@
 
         <Head title="Incidences"/>
 
-        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Incidences', '/admin/incidences']]"/>
+        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], [t('breadcrumbs.incidences'), '/admin/incidences']]"/>
 
         <div class="flex items-center mt-8">
             <FiltersIncidences url="/admin/incidences" :filters="filters"/>
