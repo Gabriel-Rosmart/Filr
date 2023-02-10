@@ -1,5 +1,7 @@
-export const lightTheme = "cmyk"
-export const darkTheme = "night"
+import appconfig from "@/appconfig"
+
+export const lightTheme = appconfig.themes.light
+export const darkTheme = appconfig.themes.dark
 
 export function getMediaPreference() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 

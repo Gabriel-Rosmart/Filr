@@ -1,23 +1,10 @@
 <script setup>
-    import LanguageIcon from '../Icons/LanguageIcon.vue';
+    import LanguageIcon from '../Icons/LanguageIcon.vue'
+    import appconfig from '@/appconfig'
     import { useI18n } from 'vue-i18n'
 
     let { locale } = useI18n()
 
-    const languages = [
-        {
-            'lang': 'English',
-            'code': 'en'
-        },
-        {
-            'lang': 'Español',
-            'code': 'es'
-        },
-        {
-            'lang': 'Galego',
-            'code': 'ga'
-        }
-    ]
     const changeLocale = (newLocale) => {
         locale.value = newLocale
         localStorage.setItem('locale', newLocale)
@@ -35,7 +22,7 @@
         </button>
         <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
             <li 
-                v-for="language in languages" 
+                v-for="language in appconfig.locales" 
                 class="cursor-pointer dark:hover:text-cyan-500 hover:font-bold"
                 @click="changeLocale(language.code)">
                 <a @click.prevent="">{{ language.lang }}</a>

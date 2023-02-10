@@ -10,7 +10,7 @@
             },
             "avatar": {
                 "profile": "Editar perfil",
-                "logout": "Cerrar sesión"
+                "logout": "Pechar sesión"
             }
         },
         "query": {
