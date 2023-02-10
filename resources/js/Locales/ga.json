@@ -57,7 +57,7 @@
         "date": "Fecha",
         "subject": "Motivo",
         "late": "Chega <span style='color: red'>{minutes}</span> minutos tarde",
-        "early": "Sae <span style='color: red'>{minutes}</span> antes",
+        "early": "Sae <span style='color: red'>{minutes}</span> minutos antes",
         "absent": "<span style='color: red'>No veu traballar</span>"
     }
 }
