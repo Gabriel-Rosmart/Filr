@@ -216,4 +216,9 @@ class AdminController extends Controller
         ]);
     }
 
+    public function registerNewUser()
+    {
+        return Inertia::render('Admin/RegisterUser');
+    }
+
 }

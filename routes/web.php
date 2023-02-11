@@ -27,6 +27,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/permits', [AdminController::class, 'listAllPermits']);
     Route::get('/admin/details', [AdminController::class, 'getUserDetails']);
     Route::get('/admin/incidences', [AdminController::class, 'listAllIncidences']);
+    Route::get('/admin/register', [AdminController::class, 'registerNewUser']);
     Route::get('/admin/edit', [AdminController::class, 'edit']);
     Route::post('/permits', PermitController::class);
 });
@@ -44,7 +45,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('User/Dashboard');
 })->middleware(['auth', 'verified'])->name('user');
 
-Route::get('/admin/register', function () {
+Route::get('/admin/test', function () {
     return Inertia::render('Auth/MultiSteps', [
         'users' => User::
             select('name', 'id')
