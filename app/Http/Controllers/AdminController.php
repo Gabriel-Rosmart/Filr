@@ -23,9 +23,16 @@ class AdminController extends Controller
     {   
 
         $users = User::select('id', 'name')
-        ->filter(request(['search', 'type', 'incidence']))
+        ->filter(request(['search', 'type']))
         ->when(request()->input('date') ?? false, function($query, $date){
-            $query->with('files', function($query) use ($date) {
+            $query->when(request()->input('incidence') ?? false, function($query, $subject) use($date) {
+                $query->whereHas('incidences', function($query) use ($subject, $date){
+                    $query->where(function($query) use ($subject, $date){
+                        $query->where('subject', $subject)->where('date', $date);
+                    });
+                });
+            })
+            ->with('files', function($query) use ($date) {
                 $query->where('date', $date);
             })
             ->with('incidences', function($query) use ($date) {
@@ -40,7 +47,14 @@ class AdminController extends Controller
                 });
             });
         }, function($query){
-            $query->with(['files' => function($query){
+            $query->when(request()->input('incidence') ?? false, function($query, $subject) {
+                $query->whereHas('incidences', function($query) use ($subject){
+                    $query->where(function($query) use ($subject){
+                        $query->where('subject', $subject)->where('date', DB::raw('CURDATE()'));
+                    });
+                });
+            })
+            ->with(['files' => function($query){
                 $query->where('date', DB::raw('CURDATE()'))->orderBy('timestamp');
             },
             'incidences' => function($query){
