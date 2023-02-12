@@ -221,4 +221,9 @@ class AdminController extends Controller
         return Inertia::render('Admin/RegisterUser');
     }
 
+    public function saveRegisteredUser()
+    {
+        dd(request()->all());
+    }
+
 }
