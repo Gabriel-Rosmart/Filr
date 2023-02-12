@@ -2,9 +2,11 @@
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue'
 import RegisterForm from '@/Shared/Actions/RegisterForm.vue';
+import { Head } from '@inertiajs/inertia-vue3';
 </script>
 
 <template>
+    <Head title="Register"/>
     <AdminLayout>
         <Breadcrumbs 
             class="ml-5 mt-6"
