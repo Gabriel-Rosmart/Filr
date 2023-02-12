@@ -65,5 +65,24 @@
         "manage": "Administrar usuarios",
         "permits": "Permisos",
         "incidences": "Incidencias"
+    },
+    "days": {
+        "monday": "lunes",
+        "tuesday": "martes",
+        "wednesday": "miercoles",
+        "thursday": "jueves",
+        "friday": "viernes",
+        "saturday": "sabado",
+        "sunday": "domingo"
+    },
+    "forms": {
+        "name": "Nombre",
+        "email": "Email",
+        "dni": "DNI",
+        "telephone": "Telefono",
+        "inmorning": "Entrada (mañana)",
+        "outmorning": "Salida (mañana)",
+        "innoon": "Entrada (tarde)",
+        "outnoon": "Salida (tarde)"
     }
 }
