@@ -42,7 +42,10 @@
         "buttons" : {
             "adduser": "Add user",
             "accept": "Accept",
-            "deny": "Deny"
+            "deny": "Deny",
+            "next": "Next",
+            "prev": "Previous",
+            "send": "Send"
         }
     },
     "table": {

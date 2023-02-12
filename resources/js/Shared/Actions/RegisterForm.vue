@@ -10,6 +10,9 @@
     /** Function imports */
     import { ref } from 'vue'
     import { range } from 'lodash'
+    import { useI18n } from 'vue-i18n'
+
+    const { t } = useI18n()
 
     let currentStep = ref(0)
 
@@ -49,17 +52,17 @@
             <div class="flex flex-col mt-2 p-4">
                 <div class="flex" v-show="currentStep == 0">
                     <div class="flex flex-col p-8">
-                        <FormLabel value="Name" />
+                        <FormLabel :value="t('forms.name')" />
                         <FormTextInput type="text" class="mt-1 block w-full mb-6"/>
 
-                        <FormLabel value="DNI" />
+                        <FormLabel :value="t('forms.dni')" />
                         <FormTextInput type="text" class="mt-1 block w-full"/>
                     </div>
                     <div class="flex flex-col p-8">
-                        <FormLabel value="Email" />
+                        <FormLabel :value="t('forms.email')" />
                         <FormTextInput type="email" class="mt-1 block w-full mb-6" v-model="form.email"/>
 
-                        <FormLabel value="Telephone" />
+                        <FormLabel :value="t('forms.telephone')" />
                         <FormTextInput type="telephone" class="mt-1 block w-full"/>
                     </div>
                 </div>
@@ -73,16 +76,16 @@
                     <table class="table w-full">
                         <thead>
                             <tr class="">
-                                <th>Weekday</th>
-                                <th>Date In (Morning)</th>
-                                <th>Date Out (Morning)</th>
-                                <th>Date In (Afternoon)</th>
-                                <th>Date Out (Afternoon)</th>
+                                <th></th>
+                                <th>{{ t('forms.inmorning') }}</th>
+                                <th>{{ t('forms.outmorning') }}</th>
+                                <th>{{ t('forms.innoon') }}</th>
+                                <th>{{ t('forms.outnoon') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="[day, _] of Object.entries(form.schedules)">
-                                <th>{{ day }}</th>
+                                <th>{{ t(`days.${day}`) }}</th>
                                 <td v-for="index in range(4)">                       
                                     <FormTime v-model="form.schedules[day][index]"/>
                                 </td>
@@ -96,17 +99,17 @@
                     <button class="btn btn-outline btn-primary mr-4"
                         @click="currentStep--"
                         v-show="currentStep > 0">
-                        Previous
+                        {{ t('admin.buttons.prev') }}
                     </button>
                     <button class="btn btn-outline btn-primary"
                         @click="currentStep++"
                         v-show="currentStep < 2">
-                        Next
+                        {{ t('admin.buttons.next') }}
                     </button>
                     <button class="btn btn-outline btn-primary"
                         @click="submit"
                         v-show="currentStep == 2">
-                        Send
+                        {{ t('admin.buttons.send') }}
                     </button>
                 </div>
             </div>

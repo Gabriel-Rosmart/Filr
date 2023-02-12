@@ -42,7 +42,10 @@
         "buttons" : {
             "adduser": "Engadir usuario",
             "accept": "Aceptar",
-            "deny": "Denegar"
+            "deny": "Denegar",
+            "next": "Seguinte",
+            "prev": "Anterior",
+            "send": "Enviar"
         }
     },
     "table": {
