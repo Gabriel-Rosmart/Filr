@@ -36,7 +36,7 @@
 
     const submit = () => {
         
-        form.post('/admin/save');
+        form.post('/admin/register');
         
     };
 
