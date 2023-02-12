@@ -3,6 +3,7 @@
     /** Component imports */
     import Steps from '@/Shared/Navigation/Steps.vue'
     import FormTextInput from '@/Shared/Forms/FormTextInput.vue'
+    import FormInputError from '@/Shared/Forms/FormInputError.vue'
     import FormLabel from '@/Shared/Forms/FormLabel.vue'
     import FormTime from '../Forms/FormTime.vue'
     import { useForm } from '@inertiajs/inertia-vue3'
@@ -45,25 +46,30 @@
 <template>
     <div class="flex justify-center mt-24">
         <form @submit.prevent="" class=" block h-80">
-            <div class="w-full flex justify-center">
+            <div class="w-full flex flex-col justify-center">
                 <Steps :index="currentStep" class="w-full"/>
+                <div class="flex flex-col justify-center">
+                    <span v-for="error in form.errors" class="block w-full text-center">
+                        <FormInputError :message="error"/>
+                    </span>
+                </div>
             </div>
             <!-- Step 1 of form -->
             <div class="flex flex-col mt-2 p-4">
                 <div class="flex" v-show="currentStep == 0">
                     <div class="flex flex-col p-8">
                         <FormLabel :value="t('forms.name')" />
-                        <FormTextInput type="text" class="mt-1 block w-full mb-6"/>
+                        <FormTextInput type="text" class="mt-1 block w-full mb-6" v-model="form.name"/>
 
                         <FormLabel :value="t('forms.dni')" />
-                        <FormTextInput type="text" class="mt-1 block w-full"/>
+                        <FormTextInput type="text" class="mt-1 block w-full" v-model="form.dni"/>
                     </div>
                     <div class="flex flex-col p-8">
                         <FormLabel :value="t('forms.email')" />
                         <FormTextInput type="email" class="mt-1 block w-full mb-6" v-model="form.email"/>
 
                         <FormLabel :value="t('forms.telephone')" />
-                        <FormTextInput type="telephone" class="mt-1 block w-full"/>
+                        <FormTextInput type="telephone" class="mt-1 block w-full" v-model="form.telephone"/>
                     </div>
                 </div>
                 <!-- Step 2 of form -->

@@ -7,7 +7,12 @@ use App\Models\User;
 use App\Models\Schedule;
 use Inertia\Inertia;
 use App\Models\Permit;
+use App\Rules\EvenArray;
+use App\Rules\IsTimeString;
+use App\Rules\IsValidDNI;
+use App\Rules\IsValidPhoneNumber;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use function PHPUnit\Framework\isEmpty;
@@ -222,8 +227,21 @@ class AdminController extends Controller
         return Inertia::render('Admin/RegisterUser');
     }
 
-    public function saveRegisteredUser()
+    public function saveRegisteredUser(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'alpha:ascii'],
+            'dni' => ['required', new IsValidDNI],
+            'email' => ['required', 'email', 'unique:users'],
+            'telephone' => [new IsValidPhoneNumber],
+            'dates.start' => ['nullable', 'date'],
+            'dates.end' => ['nullable', 'date'],
+            'schedules.monday' => [new EvenArray, new IsTimeString],
+            'schedules.tuesday' => [new EvenArray, new IsTimeString],
+            'schedules.wednesday' => [new EvenArray, new IsTimeString],
+            'schedules.thursday' => [new EvenArray, new IsTimeString],
+            'schedules.friday' => [new EvenArray, new IsTimeString],
+        ]);
         dd(request()->all());
     }
 
