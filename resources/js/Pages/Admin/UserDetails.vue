@@ -19,7 +19,7 @@ const props = defineProps({
     permits: Array
 })
 
-const tabs = [TimeTable, Further, Incidents, Permits]
+const tabs = [[TimeTable, props.timetable], [Further, props.user], [Incidents, props.incidences], [Permits, props.permits]]
 let currentComponentIndex = ref(0)
 
 </script>
@@ -49,7 +49,7 @@ let currentComponentIndex = ref(0)
                         :class="{ 'tab-active': currentComponentIndex == 3 }">Permisos</span>
                 </div>
                 <div>
-                    <component :is="tabs[currentComponentIndex]" :timetable="timetable" :user="user" :incidences="incidences" :permits="permits"/>
+                    <component :is="tabs[currentComponentIndex][0]" :="tabs[currentComponentIndex][1]"/>
                 </div>
             </div>
         </div>
