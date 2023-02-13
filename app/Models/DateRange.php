@@ -9,6 +9,12 @@ class DateRange extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'start_date',
+        'end_date'
+    ];
+
+
     public function schedules()
     {
         return $this->hasMany(Schedule::class);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DateRange;
 use App\Models\Incidence;
 use App\Models\User;
 use App\Models\Schedule;
@@ -230,24 +231,99 @@ class AdminController extends Controller
 
     public function saveRegisteredUser(Request $request)
     {
+        // * Validate request data
+
         $evenArray = new EvenArray();
         $isTimeString = new IsTimeString();
         $timeDoNotOverlap = new TimeDoNotOverlap();
 
-        $request->validate([
-            'name' => ['required', 'alpha:ascii'],
+        
+        $validated = $request->validate([
+            'name' => ['required'],
             'dni' => ['required', new IsValidDNI],
             'email' => ['required', 'email', 'unique:users'],
-            'telephone' => [new IsValidPhoneNumber],
-            'dates.start' => ['nullable', 'date'],
-            'dates.end' => ['nullable', 'date'],
+            'telephone' => ['required', new IsValidPhoneNumber],
+            'dates.start' => ['required', 'date'],
+            'dates.end' => ['required', 'date'],
             'schedules.monday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.tuesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
         ]);
-        dd(request()->all());
+
+        // * Generate random password
+
+        $fakepw = fake()->password();
+        $pwcryp = bcrypt($fakepw);
+
+        // * Create user and its relations
+
+        DB::transaction(function () use($validated, $pwcryp) {
+            $user = User::create([
+                'name' => $validated['name'],
+                'dni' => $validated['dni'],
+                'email' => $validated['email'],
+                'phone' => $validated['telephone'],
+                'role_id' => 1,
+                'password' => $pwcryp
+            ]);
+    
+            $date = DateRange::create([
+                'start_date' => $validated['dates']['start'],
+                'end_date' => $validated['dates']['end']
+            ]);
+
+            DB::table('date_range_user')->insert([
+                'user_id' => $user->id,
+                'date_range_id' => $date->id
+            ]);
+
+            foreach($validated['schedules'] as $day => $times){
+                if($this->notFullOfNulls($times)){
+                    $numberOfNotNulls = $this->numberOfNotNulls($times);
+                    if($numberOfNotNulls == 2) {
+                        Schedule::insert([
+                            'date_range_id' => $date->id,
+                            'day' => $day,
+                            'starts_at' => $times[0],
+                            'ends_at' => $times[1]
+                        ]);
+                    }
+                    if($numberOfNotNulls == 4) {
+                        Schedule::insert([
+                            'date_range_id' => $date->id,
+                            'day' => $day,
+                            'starts_at' => $times[0],
+                            'ends_at' => $times[1]
+                        ]);
+                        Schedule::insert([
+                            'date_range_id' => $date->id,
+                            'day' => $day,
+                            'starts_at' => $times[2],
+                            'ends_at' => $times[3]
+                        ]);
+                    }
+                }
+            }
+        });
+
+        return redirect('/admin/manage');
+    }
+
+    private function notFullOfNulls($array){
+        foreach($array as $elem){
+            if(!is_null($elem)) return true;
+        }
+        return false;
+    }
+
+    private function numberOfNotNulls($array){
+        $total = 0;
+        foreach($array as $elem){
+            if(!is_null($elem)) $total++;
+        }
+        return $total;
     }
 
 }
