@@ -90,7 +90,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="[day, _] of Object.entries(form.schedules)">
+                            <tr v-for="day of Object.keys(form.schedules)">
                                 <th>{{ t(`days.${day}`) }}</th>
                                 <td v-for="index in range(4)">                       
                                     <FormTime v-model="form.schedules[day][index]"/>

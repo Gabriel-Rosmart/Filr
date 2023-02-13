@@ -11,6 +11,7 @@ use App\Rules\EvenArray;
 use App\Rules\IsTimeString;
 use App\Rules\IsValidDNI;
 use App\Rules\IsValidPhoneNumber;
+use App\Rules\TimeDoNotOverlap;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -229,6 +230,10 @@ class AdminController extends Controller
 
     public function saveRegisteredUser(Request $request)
     {
+        $evenArray = new EvenArray();
+        $isTimeString = new IsTimeString();
+        $timeDoNotOverlap = new TimeDoNotOverlap();
+
         $request->validate([
             'name' => ['required', 'alpha:ascii'],
             'dni' => ['required', new IsValidDNI],
@@ -236,11 +241,11 @@ class AdminController extends Controller
             'telephone' => [new IsValidPhoneNumber],
             'dates.start' => ['nullable', 'date'],
             'dates.end' => ['nullable', 'date'],
-            'schedules.monday' => [new EvenArray, new IsTimeString],
-            'schedules.tuesday' => [new EvenArray, new IsTimeString],
-            'schedules.wednesday' => [new EvenArray, new IsTimeString],
-            'schedules.thursday' => [new EvenArray, new IsTimeString],
-            'schedules.friday' => [new EvenArray, new IsTimeString],
+            'schedules.monday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.tuesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
         ]);
         dd(request()->all());
     }
