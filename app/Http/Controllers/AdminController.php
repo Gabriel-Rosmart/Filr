@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
-use App\Models\DateRange;
-use App\Models\Incidence;
 use App\Models\User;
-use App\Models\Schedule;
 use Inertia\Inertia;
 use App\Models\Permit;
+use App\Helpers\Helper;
+use App\Mail\AccountCreated;
+use App\Models\Schedule;
 use App\Rules\EvenArray;
-use App\Rules\IsTimeString;
+use App\Models\DateRange;
+use App\Models\Incidence;
 use App\Rules\IsValidDNI;
-use App\Rules\IsValidPhoneNumber;
-use App\Rules\TimeDoNotOverlap;
-use Illuminate\Database\Eloquent\Model;
+use App\Rules\IsTimeString;
 use Illuminate\Http\Request;
+use App\Rules\TimeDoNotOverlap;
+use App\Rules\IsValidPhoneNumber;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 use function PHPUnit\Framework\isEmpty;
+use Illuminate\Database\Eloquent\Model;
 
 class AdminController extends Controller
 {
@@ -261,6 +263,10 @@ class AdminController extends Controller
         // * Create user and its relations
 
         Helper::saveUserCompleteRecord($validated, $pwcryp);
+
+        // * Send mail to user
+
+        Mail::to($validated['email'])->send(new AccountCreated($validated['name'], $fakepw));
 
         return redirect('/admin/manage');
     }
