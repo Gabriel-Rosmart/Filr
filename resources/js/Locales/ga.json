@@ -1,16 +1,16 @@
 {
     "admin": {
         "navbar": {
-            "notification": "Nuevo mensaje",
+            "notification": "Novo mensaxe",
             "dropdown": {
                 "dashboard": "Panel de control",
-                "users": "Administrar usuarios",
+                "users": "Xestionar usuarios",
                 "permits": "Permisos",
                 "incidences": "Incidencias"
             },
             "avatar": {
                 "profile": "Editar perfil",
-                "logout": "Cerrar sesión"
+                "logout": "Pechar sesión"
             }
         },
         "query": {
@@ -21,71 +21,71 @@
             "incidence": {
                 "main": "Incidencia",
                 "all": "Todos",
-                "early": "Sale antes",
-                "late": "Llega tarde",
-                "absent": "No vino"
+                "early": "Sae antes",
+                "late": "Chega tarde",
+                "absent": "Non veu"
             },
             "userstate" : {
                 "main": "Estado",
-                "all": "Cualquiera",
+                "all": "Calquera",
                 "active": "Activo",
-                "inactive": "De baja"
+                "inactive": "De baixa"
             }
         },
         "permitstate": {
             "main": "Estado",
             "all": "Todos",
-            "pending": "Pendiente",
+            "pending": "Pendente",
             "accepted": "Aceptado",
             "denied": "Denegado"
         },
         "buttons" : {
-            "adduser": "Añadir usuario",
+            "adduser": "Engadir usuario",
             "accept": "Aceptar",
             "deny": "Denegar",
-            "next": "Siguiente",
+            "next": "Seguinte",
             "prev": "Anterior",
             "send": "Enviar"
         }
     },
     "table": {
-        "name": "Nombre",
+        "name": "Nome",
         "in": "Entrada",
         "out": "Salida",
-        "job": "Trabajo",
+        "job": "Traballo",
         "status": "Estado",
         "reqby": "Pedido por",
         "reqat": "Pedido en",
         "employee": "Empleado",
         "date": "Fecha",
         "subject": "Motivo",
-        "late": "Llega <span style='color: red'>{minutes}</span> minutos tarde",
-        "early": "Sale <span style='color: red'>{minutes}</span> minutos antes",
-        "absent": "<span style='color: red'>No vino a trabajar</span>"
+        "late": "Chega <span style='color: red'>{minutes}</span> minutos tarde",
+        "early": "Sae <span style='color: red'>{minutes}</span> minutos antes",
+        "absent": "<span style='color: red'>No veu traballar</span>"
     },
     "breadcrumbs": {
         "dashboard": "Panel de control",
-        "manage": "Administrar usuarios",
+        "manage": "Xestionar usuarios",
         "permits": "Permisos",
         "incidences": "Incidencias"
     },
     "days": {
-        "monday": "lunes",
+        "monday": "luns",
         "tuesday": "martes",
-        "wednesday": "miercoles",
-        "thursday": "jueves",
-        "friday": "viernes",
+        "wednesday": "mercores",
+        "thursday": "xoves",
+        "friday": "venres",
         "saturday": "sabado",
         "sunday": "domingo"
     },
     "forms": {
-        "name": "Nombre",
+        "name": "Nome",
         "email": "Email",
         "dni": "DNI",
         "telephone": "Telefono",
-        "inmorning": "Entrada (mañana)",
-        "outmorning": "Salida (mañana)",
+        "inmorning": "Entrada (maña)",
+        "outmorning": "Saida (maña)",
         "innoon": "Entrada (tarde)",
-        "outnoon": "Salida (tarde)"
+        "outnoon": "Saida (tarde)"
     }
 }

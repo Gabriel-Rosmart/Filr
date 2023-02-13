@@ -9,12 +9,20 @@
     /** Config imports */
     import appconfig  from '@/appconfig'
 
+    import { useI18n } from 'vue-i18n'
+
+    const { t } = useI18n()
+
     const props = defineProps({
         users: Array,
         filters: Object
     })
 
     const storage = ref(appconfig.STORAGE_URL)
+
+    const getUserStatus = (status) => {
+        return status ? 'active' : 'inactive'
+    }
 
 </script>
 
@@ -23,9 +31,9 @@
         <table class="table w-full">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Job</th>
-                    <th>Status</th>
+                    <th>{{ t('table.name') }}</th>
+                    <th>{{ t('table.job') }}</th>
+                    <th>{{ t('table.status') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -53,7 +61,7 @@
                     <td>
                         <div class="indicator ">
                         <span class="indicator-item indicator-middle indicator-start badge h-2" :class="{'badge-info': user.active, 'badge-error': !user.active}"></span>
-                        <div class="ml-6">{{ user.active ? 'Activo' : 'De baja' }}</div>
+                        <div class="ml-6">{{ t(`admin.query.userstate.${getUserStatus(user.active)}`) }}</div>
                         </div>
                     </td>
                     <th>

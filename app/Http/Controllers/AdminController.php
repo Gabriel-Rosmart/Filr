@@ -7,7 +7,12 @@ use App\Models\User;
 use App\Models\Schedule;
 use Inertia\Inertia;
 use App\Models\Permit;
+use App\Rules\EvenArray;
+use App\Rules\IsTimeString;
+use App\Rules\IsValidDNI;
+use App\Rules\IsValidPhoneNumber;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use function PHPUnit\Framework\isEmpty;
@@ -22,54 +27,60 @@ class AdminController extends Controller
     public function listAllActiveUsersFiles()
     {   
 
-        /*
         $users = User::select('id', 'name')
         ->filter(request(['search', 'type']))
-        ->where('active', DB::raw('true'))
-        ->with('files', function($query){
-            $query->where('date', DB::raw('CURDATE()'));
-        })
-        ->withWhereHas('ranges', function($query){
-            $query->where(function($query){
-                $query->whereRaw("curdate() between `start_date` and `end_date`");
+        ->when(request()->input('date') ?? false, function($query, $date){
+            $query->when(request()->input('incidence') ?? false, function($query, $subject) use($date) {
+                $query->whereHas('incidences', function($query) use ($subject, $date){
+                    $query->where(function($query) use ($subject, $date){
+                        $query->where('subject', $subject)->where('date', $date);
+                    });
+                });
             })
-            ->whereHas('schedule', function($query){
-                $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
-            });
-        })
-        ->with('ranges.schedule', function($query){
-            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
-        })
-        ->paginate(30)
-        ->withQueryString();
-        */
-
-        $users = User::select('id', 'name')
-        ->filter(request(['search', 'type', 'incidence']))
-        ->where('active', DB::raw('true'))
-        ->with(['files' => function($query){
-            $query->where('date', DB::raw('CURDATE()'))->orderBy('timestamp');
-        },
-        'incidences' => function($query){
-            $query->where('date', DB::raw('CURDATE()'));
-        }])
-        ->withWhereHas('ranges', function($query){
-            $query->where(function($query){
-                $query->whereRaw("curdate() between `start_date` and `end_date`");
+            ->with('files', function($query) use ($date) {
+                $query->where('date', $date);
             })
-            ->whereHas('schedule', function($query){
-                $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+            ->with('incidences', function($query) use ($date) {
+                $query->where('date', $date);
+            })
+            ->whereHas('ranges', function($query) use ($date){
+                $query->where(function($query) use ($date) {
+                    $query->whereRaw("'$date' between `start_date` and `end_date`");
+                })
+                ->whereHas('schedule', function($query) use ($date) {
+                    $query->whereRaw("dayname('$date') = `schedules`.`day`");
+                });
             });
-        })
-        ->with('ranges.schedule', function($query){
-            $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+        }, function($query){
+            $query->when(request()->input('incidence') ?? false, function($query, $subject) {
+                $query->whereHas('incidences', function($query) use ($subject){
+                    $query->where(function($query) use ($subject){
+                        $query->where('subject', $subject)->where('date', DB::raw('CURDATE()'));
+                    });
+                });
+            })
+            ->with(['files' => function($query){
+                $query->where('date', DB::raw('CURDATE()'))->orderBy('timestamp');
+            },
+            'incidences' => function($query){
+                $query->where('date', DB::raw('CURDATE()'));
+            }])
+            ->where('active', DB::raw('true'))
+            ->whereHas('ranges', function($query){
+                $query->where(function($query){
+                    $query->whereRaw("curdate() between `start_date` and `end_date`");
+                })
+                ->whereHas('schedule', function($query){
+                    $query->whereRaw("dayname(curdate()) = `schedules`.`day`");
+                });
+            });
         })
         ->paginate(30)
         ->withQueryString();
 
         return Inertia::render('Admin/Dashboard', [
             'users' => $users,
-            'filters' => request()->only('search', 'type', 'incidence')
+            'filters' => request()->only('search', 'type', 'incidence', 'date')
         ]);
     }
 
@@ -129,6 +140,7 @@ class AdminController extends Controller
             ->when(request()->input('date') ?? false, function($query, $date){
                 $query->where('date', $date);
             })
+            ->orderBy('date', 'desc')
             ->paginate(20)
             ->withQueryString(),
             'filters' => request()->only('search', 'subject', 'date')
@@ -209,6 +221,29 @@ class AdminController extends Controller
             select('name', 'id')
             ->get()
         ]);
+    }
+
+    public function registerNewUser()
+    {
+        return Inertia::render('Admin/RegisterUser');
+    }
+
+    public function saveRegisteredUser(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'alpha:ascii'],
+            'dni' => ['required', new IsValidDNI],
+            'email' => ['required', 'email', 'unique:users'],
+            'telephone' => [new IsValidPhoneNumber],
+            'dates.start' => ['nullable', 'date'],
+            'dates.end' => ['nullable', 'date'],
+            'schedules.monday' => [new EvenArray, new IsTimeString],
+            'schedules.tuesday' => [new EvenArray, new IsTimeString],
+            'schedules.wednesday' => [new EvenArray, new IsTimeString],
+            'schedules.thursday' => [new EvenArray, new IsTimeString],
+            'schedules.friday' => [new EvenArray, new IsTimeString],
+        ]);
+        dd(request()->all());
     }
 
 }

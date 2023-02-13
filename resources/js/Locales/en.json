@@ -1,19 +1,91 @@
 {
-    "hello": "hello",
     "admin": {
         "navbar": {
             "notification": "New message",
             "dropdown": {
                 "dashboard": "Dashboard",
                 "users": "Manage users",
-                "settings": "Settings"
+                "permits": "Permits",
+                "incidences": "Incidences"
+            },
+            "avatar": {
+                "profile": "Edit profile",
+                "logout": "Log out"
             }
         },
         "query": {
             "search": "Search...",
             "employee": {
                 "main": "Employee type"
+            },
+            "incidence": {
+                "main": "Incidence",
+                "all": "All",
+                "early": "Is early",
+                "late": "Is late",
+                "absent": "Did not come"
+            },
+            "userstate" : {
+                "main": "Status",
+                "all": "All",
+                "active": "Active",
+                "inactive": "On leave"
             }
+        },
+        "permitstate": {
+            "main": "Status",
+            "all": "All",
+            "pending": "Pending",
+            "accepted": "Accepted",
+            "denied": "Denied"
+        },
+        "buttons" : {
+            "adduser": "Add user",
+            "accept": "Accept",
+            "deny": "Deny",
+            "next": "Next",
+            "prev": "Previous",
+            "send": "Send"
         }
+    },
+    "table": {
+        "name": "Name",
+        "in": "In",
+        "out": "Out",
+        "job": "Job",
+        "status": "Status",
+        "reqby": "Requested by",
+        "reqat": "Requested at",
+        "employee": "Employee",
+        "date": "Date",
+        "subject": "Subject",
+        "late": "Employee is late by <span style='color: red'>{minutes}</span> minutes",
+        "early": "Employee is early by <span style='color: red'>{minutes}</span> minutes",
+        "absent": "<span style='color: red'>Did not come to work</span>"
+    },
+    "breadcrumbs": {
+        "dashboard": "Dashboard",
+        "manage": "Manage users",
+        "permits": "Permits",
+        "incidences": "Incidences"
+    },
+    "days": {
+        "monday": "monday",
+        "tuesday": "tuesday",
+        "wednesday": "wednesday",
+        "thursday": "thursday",
+        "friday": "friday",
+        "saturday": "saturday",
+        "sunday": "sunday"
+    },
+    "forms": {
+        "name": "Name",
+        "email": "Email",
+        "dni": "DNI",
+        "telephone": "Telephone",
+        "inmorning": "IN (morning)",
+        "outmorning": "OUT (morning)",
+        "innoon": "IN (afternoon)",
+        "outnoon": "OUT (afternoon)"
     }
 }

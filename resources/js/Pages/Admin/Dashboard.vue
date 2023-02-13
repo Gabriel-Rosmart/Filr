@@ -7,6 +7,9 @@
     import FilesTable from '@/Shared/Info/FilesTable.vue';
     import FiltersDashboard from '@/Shared/Filters/FiltersDashboard.vue';
     import { Head } from '@inertiajs/inertia-vue3';
+    import { useI18n } from 'vue-i18n'
+
+    const { t } = useI18n()
 
     const props = defineProps({
         users: Object,
@@ -18,7 +21,7 @@
 <template>
     <Head title="Dashboard" />
     <AdminLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Dashboard', '/admin']]"/>
+        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], [t('breadcrumbs.dashboard'), '/admin']]"/>
 
         <div class="flex items-center mt-8">
             <FiltersDashboard url="/admin" :filters="filters"/>

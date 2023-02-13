@@ -11,6 +11,10 @@
     import trans from "@/Utilities/trans";
     import format from '@/Utilities/datefm'
 
+    import { useI18n } from 'vue-i18n'
+
+    const { t, d } = useI18n()
+
     defineProps({
         permits: Array
     })
@@ -37,8 +41,8 @@
             <thead>
                 <tr>
                     <th>PID</th>
-                    <th>Requested By</th>
-                    <th>Requested At</th>
+                    <th>{{ t('table.reqby') }}</th>
+                    <th>{{ t('table.reqat') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -53,22 +57,22 @@
                         </Link>
                     </td>
                     <td>
-                        {{ format(permit.requested_at) }}
+                        {{ d(permit.requested_at, 'short') }}
                     </td>
                     <th v-if="permit.status === 'pending'">
                         <div>
-                            <button class="btn btn-outline btn-success" @click="accept(permit.uuid)">Aceptar</button>
-                            <button class="btn btn-outline btn-error ml-8" @click="deny(permit.uuid)">Denegar</button>
+                            <button class="btn btn-outline btn-success" @click="accept(permit.uuid)">{{ t('admin.buttons.accept') }}</button>
+                            <button class="btn btn-outline btn-error ml-8" @click="deny(permit.uuid)">{{ t('admin.buttons.deny') }}</button>
                         </div>
                     </th>
                     <th v-else>
                         <div v-if="permit.status === 'accepted'" class="flex">
                             <CheckIcon class="stroke-green-500"/>
-                            <span class="ml-6">{{ trans(permit.status, 'es') }}</span>
+                            <span class="ml-6">{{ t(`admin.permitstate.${permit.status}`) }}</span>
                         </div>
                         <div v-else class="flex">
                             <XIcon class="stroke-red-500"/>
-                            <span class="ml-6">{{ trans(permit.status, 'es') }}</span>
+                            <span class="ml-6">{{ t(`admin.permitstate.${permit.status}`) }}</span>
                         </div>
                     </th>
                 </tr>

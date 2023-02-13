@@ -26,16 +26,16 @@ let currentComponentIndex = ref(0)
 
 <template>
 
-    <Head title="User Details" />
     <AdminLayout>
+
+        <Head title="User Details" />
+
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], [user.name, '/admin/details?id=' + user.id]]" />
-        <div class="flex justify-center content-center">
+        <div class="flex justify-center content-center mt-4">
             <div class="flex flex-col mt-10 mx-20 w-full">
-                <div class="mr-8 w-full flex justify-end">
-                    <EditUser class="btn-outline btn-primary" :user="user.id"/>
-                </div>
-                <div>
+                <div class="flex items-end justify-between">
                     <UserInfo :user="user" />
+                    <EditUser class="btn-outline btn-primary" :user="user.id"/>
                 </div>
                 <div class="divider divider-vertical"></div>
                 <div class="tabs mb-8">

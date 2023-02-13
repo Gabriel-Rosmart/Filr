@@ -8,6 +8,9 @@
     import { Link } from '@inertiajs/inertia-vue3';
     import LanguageDropdown from './LanguageDropdown.vue';
     import AvatarDropdown from '@/Shared/Navigation/AvatarDropdown.vue'
+    import { useI18n } from 'vue-i18n'
+
+    const { t } = useI18n()
 </script>
 
 <template>
@@ -26,25 +29,25 @@
                     <li>
                         <Link href="/admin">
                             <HomeIcon/>
-                            Dashboard
+                            {{ t('admin.navbar.dropdown.dashboard') }}
                         </Link>
                     </li>
                     <li>
                         <Link href="/admin/manage">
                             <ManageUsersIcon/>
-                            Administrar Usuarios
+                            {{ t('admin.navbar.dropdown.users') }}
                         </Link>
                     </li>
                     <li>
                         <Link href="/admin/permits">
                             <FileIcon/>
-                            Permisos
+                            {{ t('admin.navbar.dropdown.permits') }}
                         </Link>
                     </li>
                     <li>
                         <Link href="/admin/incidences">
                             <ArchiveIcon/>
-                            Incidencias
+                            {{ t('admin.navbar.dropdown.incidences') }}
                         </Link>
                     </li>
                 </ul>

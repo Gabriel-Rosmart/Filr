@@ -27,21 +27,26 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/permits', [AdminController::class, 'listAllPermits']);
     Route::get('/admin/details', [AdminController::class, 'getUserDetails']);
     Route::get('/admin/incidences', [AdminController::class, 'listAllIncidences']);
+    Route::get('/admin/register', [AdminController::class, 'registerNewUser']);
     Route::get('/admin/edit', [AdminController::class, 'edit']);
     Route::post('/permits', PermitController::class);
+    Route::post('/admin/register', [AdminController::class, 'saveRegisteredUser']);
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/user/warnings', [UserController::class, 'warnings']);
     Route::get('user/stats', [UserController::class, 'stats']);
+    Route::get('/avatar', function(){
+        return auth()->user()->profile_pic;
+    });
 });
 
 Route::get('/dashboard', function () {
     return Inertia::render('User/Dashboard');
 })->middleware(['auth', 'verified'])->name('user');
 
-Route::get('/admin/register', function () {
+Route::get('/admin/test', function () {
     return Inertia::render('Auth/MultiSteps', [
         'users' => User::
             select('name', 'id')
