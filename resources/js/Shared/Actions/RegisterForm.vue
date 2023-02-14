@@ -28,6 +28,7 @@
         telephone: '',
         email: '',
         admin: false,
+        role: '',
         substitute: {
             is: false,
             name: ''
@@ -83,7 +84,7 @@
                     </div>
                 </div>
                 <div class="ml-8 mb-4 ">
-                    <select class="select select-bordered w-full">
+                    <select class="select select-bordered w-full" v-model="form.role">
                         <option value="" disabled selected>Rol</option>
                         <option>Profesor</option>
                     </select>
