@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Schedule;
 use App\Models\DateRange;
@@ -33,14 +34,16 @@ class Helper
     }
 }
 
-function saveFromScratch($validated, $fakepw)
-{
+function saveFromScratch($validated, $fakepw){
+
+    $role = Role::select('id', 'role_name')->where('role_name', $validated['role'])->get()->first();
+
     $user = User::create([
         'name' => $validated['name'],
         'dni' => $validated['dni'],
         'email' => $validated['email'],
         'phone' => $validated['telephone'],
-        'role_id' => 1,
+        'role_id' => $role->id,
         'admin' => $validated['admin'],
         'password' => $fakepw
     ]);
@@ -75,25 +78,26 @@ function saveFromScratch($validated, $fakepw)
     }
 }
 
-function saveFromUser($validated, $fakepw)
-{
+function saveFromUser($validated, $fakepw){
+    
+
+    $employee = User::select('id', 'role_id')->where('name', $validated['substitute']['name'])->get()->first();
+    $date_range = DB::table('date_range_user')->select('date_range_id')->where('user_id', $employee->id)->get()->last();
+    $date_ranges = DateRange::select('id', 'start_date', 'end_date')->where('id', $date_range->date_range_id)->get()->first();
+    $schedules = Schedule::select('day', 'starts_at', 'ends_at')->where('date_range_id', $date_ranges->id)->get();
+
+    //dd($schedules);
+
 
     $user = User::create([
         'name' => $validated['name'],
         'dni' => $validated['dni'],
         'email' => $validated['email'],
         'phone' => $validated['telephone'],
-        'role_id' => 1,
+        'role_id' => $employee->role_id,
         'admin' => $validated['admin'],
         'password' => $fakepw
     ]);
-
-    $employee = User::select('id')->where('name', $validated['substitute']['name'])->get()->first();
-    $date_range = DB::table('date_range_user')->select('date_range_id')->where('user_id', $employee->id)->get()->last();
-    $date_ranges = DateRange::select('id', 'start_date', 'end_date')->where('id', $date_range->date_range_id)->get()->first();
-    $schedules = Schedule::select('day', 'starts_at', 'ends_at')->where('date_range_id', $date_ranges->id)->get();
-
-    //dd($schedules);
 
     $date = DateRange::create([
         'start_date' => $date_ranges->start_date,
