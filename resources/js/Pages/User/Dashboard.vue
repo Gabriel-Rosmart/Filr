@@ -4,7 +4,7 @@ import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import UserPages from '@/Shared/Navigation/UserPages.vue';
 import UserInfo from '@/Shared/User/UserInfo.vue';
 import TimeTable from '@/Shared/Info/TimeTable.vue';
-import PermitsTable from '@/Shared/Info/PermitsTable.vue';
+import PermitsTable from '@/Shared/User/UserPermits.vue';
 import { ref } from 'vue';
 import { current } from 'daisyui/src/colors';
 
@@ -49,7 +49,8 @@ let currentComponentIndex = ref(0);
                         <!-- <PermitsTable class="my-8" :permits="permits"/> -->
                     </div>
 
-                    <component class="my-8" :is="tabs[currentComponentIndex]" :timetable="timetable" />
+                    <component class="my-8" :is="tabs[currentComponentIndex]" :timetable="timetable"
+                        :permits="permits" />
 
                     <!-- <TimeTable  :timetable="timetable" /> -->
                 </div>
