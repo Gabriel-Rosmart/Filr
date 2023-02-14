@@ -30,9 +30,12 @@
             </thead>
             <tbody>
                 <tr v-for="day of userWeek" class="hover">
-                    <th>{{ day[0].day }}</th>
-                    <td>{{ day[0].starts_at }}</td>
-                    <td>{{ day[0].ends_at }}</td>
+                    <th v-if="day[0] != undefined" >{{ day[0].day }}</th>
+                    <td v-else></td>
+                    <td v-if="day[0] != undefined" >{{ day[0].starts_at }}</td>
+                    <td v-else></td>
+                    <td v-if="day[0] != undefined" >{{ day[0].ends_at }}</td>
+                    <td v-else></td>
                     <td v-if="day[1] != undefined" >{{ day[1].starts_at }}</td>
                     <td v-else></td>
                     <td v-if="day[1] != undefined" >{{ day[1].ends_at }}</td>
