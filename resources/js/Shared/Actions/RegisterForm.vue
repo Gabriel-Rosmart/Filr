@@ -116,6 +116,29 @@ const submit = () => {
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
+=======
+                <div class="ml-8 mb-4" v-show="!form.substitute.is">
+                    <select class="select select-bordered w-full" v-model="form.role">
+                        <option value="" disabled selected>Rol</option>
+                        <option value="profesor">Profesor</option>
+                        <option value="administrativo">Administrativo</option>
+                        <option value="limpieza">Limpieza</option>
+                    </select>
+                </div>
+                <div class="flex items-center">
+                    <FormCheckbox name="remember" v-model:checked="form.admin" class="ml-8" />
+                    <span class="ml-2 label">Admin</span>
+                    <FormCheckbox name="remember" v-model:checked="form.substitute.is" class="ml-8" />
+                    <span class="ml-2 label">Sustituto</span>
+                </div>
+                <div v-show="form.substitute.is" class="ml-8 mt-4">
+                    <select class="select select-bordered w-full" v-model="form.substitute.name">
+                        <option value="" disabled selected>Teacher</option>
+                        <option v-for="user of users" :key="user.id">{{ user.name }}</option>
+                    </select>
+                </div>
+>>>>>>> 8750b3d0b35b64ee4afd9cffba8759cda332710f
                 <!-- Step 2 of form -->
                 <div class="flex mt-7 gap-6" v-show="currentStep == 1">
                     <input type="date" class="input input-bordered dark:input-primary" v-model="form.dates.start">
