@@ -2,6 +2,7 @@
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 import FormEditUser from '@/Shared/Forms/FormEditUser.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
+import { Head } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue'
 
 const props = defineProps({
