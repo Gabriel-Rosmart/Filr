@@ -180,7 +180,8 @@ class AdminController extends Controller
             return Inertia::render('Admin/UserDetails', [
                 'user' => $user,
                 'timetable' => $timetable,
-                'incidences' => $user->incidences
+                'incidences' => $user->incidences,
+                'permits' => $user->permits,
             ]);
         }
         else
@@ -229,7 +230,9 @@ class AdminController extends Controller
 
     public function registerNewUser()
     {
-        return Inertia::render('Admin/RegisterUser');
+        return Inertia::render('Admin/RegisterUser', [
+            'users' => User::select('id', 'name')->orderBy('name')->get()
+        ]);
     }
 
     public function saveRegisteredUser(Request $request)
