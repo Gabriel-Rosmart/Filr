@@ -6,6 +6,7 @@ import UserInfo from '@/Shared/User/UserInfo.vue';
 import TimeTable from '@/Shared/Info/TimeTable.vue';
 import PermitsTable from '@/Shared/User/UserPermits.vue';
 import { ref } from 'vue';
+import Incidents from '@/Shared/Info/IncidencesUserTable.vue';
 import { current } from 'daisyui/src/colors';
 
 const props = defineProps({
@@ -16,7 +17,7 @@ const props = defineProps({
 })
 
 //const propNames = [timetable, permits];
-const tabs = [TimeTable, PermitsTable];
+const tabs = [TimeTable, PermitsTable, Incidents];
 let currentComponentIndex = ref(0);
 
 </script>
@@ -50,8 +51,8 @@ let currentComponentIndex = ref(0);
                         <!-- <PermitsTable class="my-8" :permits="permits"/> -->
                     </div>
 
-                    <component class="my-8" :is="tabs[currentComponentIndex]" :timetable="timetable"
-                        :permits="permits" />
+                    <component :is="tabs[currentComponentIndex]" :timetable="timetable" :permits="permits"
+                        :incidences="incidents" />
 
                     <!-- <TimeTable  :timetable="timetable" /> -->
                 </div>
