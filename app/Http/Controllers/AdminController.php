@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\File;
 use Inertia\Inertia;
 use App\Models\Permit;
 use App\Helpers\Helper;
@@ -176,12 +177,17 @@ class AdminController extends Controller
             ->where('id', $id)
             ->get()
             ->first();
+
+            $files = File::where('user_id', $id)
+            ->paginate(8)
+            ->withQueryString();
             
             return Inertia::render('Admin/UserDetails', [
                 'user' => $user,
                 'timetable' => $timetable,
                 'incidences' => $user->incidences,
                 'permits' => $user->permits,
+                'files' => $files,
             ]);
         }
         else

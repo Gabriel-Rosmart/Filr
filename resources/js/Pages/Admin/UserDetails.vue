@@ -7,6 +7,7 @@ import Incidents from '@/Shared/Info/IncidencesUserTable.vue';
 import Permits from '@/Shared/Info/PermitsAdminTable.vue';
 import EditUser from '@/Shared/Actions/EditUser.vue';
 import Further from '@/Shared/User/UserFurther.vue'
+import Files from '@/Shared/User/UserFiles.vue'
 
 import { Head } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue'
@@ -16,10 +17,11 @@ const props = defineProps({
     user: Object,
     timetable: Object,
     incidences: Array,
-    permits: Array
+    permits: Array,
+    files:  Object
 })
 
-const tabs = [[TimeTable, props.timetable], [Further, props.user], [Incidents, props.incidences], [Permits, props.permits]]
+const tabs = [[Files, props.files], [TimeTable, props.timetable], [Further, props.user], [Incidents, props.incidences], [Permits, props.permits]]
 let currentComponentIndex = ref(0)
 
 </script>
@@ -40,16 +42,18 @@ let currentComponentIndex = ref(0)
                 <div class="divider divider-vertical"></div>
                 <div class="tabs mb-8">
                     <span class="tab tab-bordered" @click="currentComponentIndex = 0"
-                        :class="{ 'tab-active': currentComponentIndex == 0 }">Horarios</span>
+                        :class="{ 'tab-active': currentComponentIndex == 0 }">Fichajes</span>
                     <span class="tab tab-bordered" @click="currentComponentIndex = 1"
-                        :class="{ 'tab-active': currentComponentIndex == 1 }">Datos Personales</span>
+                        :class="{ 'tab-active': currentComponentIndex == 1 }">Horarios</span>
                     <span class="tab tab-bordered" @click="currentComponentIndex = 2"
-                        :class="{ 'tab-active': currentComponentIndex == 2 }">Incidentes</span>
+                        :class="{ 'tab-active': currentComponentIndex == 2 }">Datos Personales</span>
                     <span class="tab tab-bordered" @click="currentComponentIndex = 3"
-                        :class="{ 'tab-active': currentComponentIndex == 3 }">Permisos</span>
+                        :class="{ 'tab-active': currentComponentIndex == 3 }">Incidentes</span>
+                    <span class="tab tab-bordered" @click="currentComponentIndex = 4"
+                        :class="{ 'tab-active': currentComponentIndex == 4 }">Permisos</span>
                 </div>
                 <div>
-                    <component :is="tabs[currentComponentIndex][0]" :user="user" :timetable="timetable" :permits="permits" :incidences="incidences"/>
+                    <component :is="tabs[currentComponentIndex][0]" :user="user" :timetable="timetable" :permits="permits" :incidences="incidences" :files="files"/>
                 </div>
             </div>
         </div>
