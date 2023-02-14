@@ -27,13 +27,15 @@ class UserController extends Controller
         JOIN users AS u ON u_ranges.user_id = u.id
         WHERE u.id = 5
         */
-
         $timetable = DB::table('schedules as s')
-            ->select('day','starts_at','ends_at')
-            ->join('date_ranges as ranges' , 's.date_range_id', '=', 'ranges.id')
+            ->select('day', 'starts_at', 'ends_at')
+            ->join('date_ranges as ranges', 's.date_range_id', '=', 'ranges.id')
             ->join('date_range_user as u_ranges', 'ranges.id', '=', 'u_ranges.id')
             ->join('users as u', 'u_ranges.user_id', '=', 'u.id')
             ->where('u.id', $user->id)
+            ->where('ranges.start_date', '<=', DB::raw('curdate()'))
+            ->where('ranges.end_date', '>=', DB::raw('curdate()'))
+            //->orderBy('starts_at', 'asc')
             ->get();
 
         /*
@@ -42,16 +44,16 @@ class UserController extends Controller
         WHERE u.name="Verónica Vila"
         */
         $permits = DB::table("permits AS p")
-        ->select('uuid','status', "requested_at")
-        ->join('users as u', 'p.user_id', '=', 'u.id')
-        ->where('u.id',$user->id)
-        ->get();
+            ->select('uuid', 'status', "requested_at")
+            ->join('users as u', 'p.user_id', '=', 'u.id')
+            ->where('u.id', $user->id)
+            ->get();
 
 
         return Inertia::render('User/Dashboard', [
-            'user' => $user, 
+            'user' => $user,
             'timetable' => $timetable,
-            'permits' => $permits,       
+            'permits' => $user->permits,
         ]);
     }
     /**
