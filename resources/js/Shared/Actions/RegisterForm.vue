@@ -4,6 +4,7 @@
     import Steps from '@/Shared/Navigation/Steps.vue'
     import FormTextInput from '@/Shared/Forms/FormTextInput.vue'
     import FormInputError from '@/Shared/Forms/FormInputError.vue'
+    import FormCheckbox from '@/Shared/Forms/FormCheckbox.vue'
     import FormLabel from '@/Shared/Forms/FormLabel.vue'
     import FormTime from '../Forms/FormTime.vue'
     import { useForm } from '@inertiajs/inertia-vue3'
@@ -15,6 +16,10 @@
 
     const { t } = useI18n()
 
+    const props = defineProps({
+        users: Array
+    })
+
     let currentStep = ref(0)
 
     const form = useForm({
@@ -22,6 +27,11 @@
         dni: '',
         telephone: '',
         email: '',
+        admin: false,
+        substitute: {
+            is: false,
+            name: ''
+        },
         dates: {
             start: '',
             end: ''
@@ -72,6 +82,24 @@
                         <FormTextInput type="telephone" class="mt-1 block w-full" v-model="form.telephone"/>
                     </div>
                 </div>
+                <div class="ml-8 mb-4 ">
+                    <select class="select select-bordered w-full">
+                        <option value="" disabled selected>Rol</option>
+                        <option>Profesor</option>
+                    </select>
+                </div>
+                <div class="flex items-center">
+                    <FormCheckbox name="remember" v-model:checked="form.admin" class="ml-8" />
+                    <span class="ml-2 label">Admin</span>
+                    <FormCheckbox name="remember" v-model:checked="form.substitute.is" class="ml-8" />
+                    <span class="ml-2 label">Sustituto</span>
+                </div>
+                <div v-show="form.substitute.is" class="ml-8 mt-4">
+                    <select class="select select-bordered w-full" v-model="form.substitute.name">
+                        <option value="" disabled selected>Teacher</option>
+                        <option v-for="user of users" :key="user.id">{{ user.name }}</option>
+                    </select>
+                </div>
                 <!-- Step 2 of form -->
                 <div class="flex mt-2 p-4" v-show="currentStep == 1">
                     <input type="date" class="input input-bordered dark:input-primary w-full max-w-xs focus:border-none focus:ring-0" v-model="form.dates.start">
@@ -109,12 +137,12 @@
                     </button>
                     <button class="btn btn-outline btn-primary"
                         @click="currentStep++"
-                        v-show="currentStep < 2">
+                        v-show="currentStep < 2 && !form.substitute.is">
                         {{ t('admin.buttons.next') }}
                     </button>
                     <button class="btn btn-outline btn-primary"
                         @click="submit"
-                        v-show="currentStep == 2">
+                        v-show="currentStep == 2 || form.substitute.is">
                         {{ t('admin.buttons.send') }}
                     </button>
                 </div>

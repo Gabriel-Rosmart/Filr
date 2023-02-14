@@ -229,7 +229,9 @@ class AdminController extends Controller
 
     public function registerNewUser()
     {
-        return Inertia::render('Admin/RegisterUser');
+        return Inertia::render('Admin/RegisterUser', [
+            'users' => User::select('id', 'name')->orderBy('name')->get()
+        ]);
     }
 
     public function saveRegisteredUser(Request $request)
