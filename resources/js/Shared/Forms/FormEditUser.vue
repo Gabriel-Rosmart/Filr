@@ -55,30 +55,34 @@ const submit = () => {
                             <InputForm title="Name" typ="text" v-model="form.name" :value='user.name' />
                         </div>
                         <div>
-                            <table class="w-full">
-                                <tr v-for="day in weekend">
-                                    <td>{{ day.day }}</td>
-                                    <td>
-                                        <p class="px-10">Morning</p>
-                                    </td>
-                                    <td>
-                                        <InputForm typ="time" :value='day.starts_at' />
-                                    </td>
-                                    <td>
-                                        <InputForm typ="time" :value='day.ends_at' />
-                                    </td>
-                                    <td>
-                                        <p class="px-10">Afternoon</p>
-                                    </td>
-                                    <td>
-                                        <InputForm typ="time" :value='day.starts_at' />
-                                    </td>
-                                    <td>
-                                        <InputForm typ="time" :value='day.ends_at' />
-                                    </td>
-                                </tr>
+                            <table class="table w-full">
+                                <thead>
+                                    <tr class="">
+                                        <th></th>
+                                        <th>In (Morning)</th>
+                                        <th>Out (Morning)</th>
+                                        <th>In (Afternoon)</th>
+                                        <th>Out (Afternoon)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="day in weekend">
+                                        <th>{{ day.day }}</th>
+                                        <td>
+                                            <InputForm typ="time" :value='day.starts_at' />
+                                        </td>
+                                        <td>
+                                            <InputForm typ="time" :value='day.ends_at' />
+                                        </td>
+                                        <td>
+                                            <InputForm typ="time" :value='day.starts_at' />
+                                        </td>
+                                        <td>
+                                            <InputForm typ="time" :value='day.ends_at' />
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
-
                         </div>
                     </div>
                     <div class="flex justify-end mt-8">
