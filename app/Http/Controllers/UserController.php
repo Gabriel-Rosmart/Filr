@@ -54,6 +54,7 @@ class UserController extends Controller
             'user' => $user,
             'timetable' => $timetable,
             'permits' => $user->permits,
+            'incidents' => $user->incidences,
         ]);
     }
     /**

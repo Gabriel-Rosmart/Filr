@@ -12,6 +12,7 @@ const props = defineProps({
     user: Object,
     timetable: Object,
     permits: Object,
+    incidents: Object,
 })
 
 //const propNames = [timetable, permits];
