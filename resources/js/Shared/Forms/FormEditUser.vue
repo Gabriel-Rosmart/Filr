@@ -17,6 +17,7 @@ const storage = ref(appconfig.STORAGE_URL)
 const weekend = [props.timetable[0], props.timetable[1], props.timetable[2], props.timetable[3], props.timetable[4]];
 const shift = ['Morning', 'Afternoon'];
 
+//Not synced with v-model
 var form = useForm({
     id: props.user.id,
     name: props.user.name,
@@ -34,12 +35,12 @@ const submit = () => {
 
 
 <template>
-    <div class="px-10">
+    <div class="flex items-center mt-8">
         <form @submit.prevent="">
             <div class="grid grid-cols-3">
                 <div>
-                    <div class="w-full py-10 px-10 ">
-                        <div class="grid grid-cols-2 gap-6">
+                    <div class=" grid grid-cols-2 w-max py-10 px-10 ">
+                        <div class="grid grid-cols-2 w-max gap-6">
                             <div class="grid row-span-3 justify-center items-center">
                                 <div class="avatar">
                                     <div class="mask mask-squircle w-60 h-60">
@@ -47,12 +48,11 @@ const submit = () => {
                                     </div>
                                 </div>
                             </div>
-                            <InputForm title="Email" typ="email" :value='user.email' v-model="form.email" />
-                            <InputForm title="DNI" typ="text" v-model="form.dni" :value='user.dni'/>
-                            <InputForm title="Phone" typ="telephone" :value='user.phone' v-model="form.telephone" />
+                            <InputForm title="Email" typ="email" v-model="form.email" :value='user.email' />
+                            <InputForm title="DNI" typ="text" v-model="form.dni" :value='user.dni' />
+                            <InputForm title="Phone" typ="telephone" v-model="form.telephone" :value='user.phone' />
                             <SelectForm title="Role" :data='3' :rol="user.role_id" />
-                            <InputForm class="grid col-span-2" title="NAME" typ="text" :value='user.name'
-                                v-model="form.name" />
+                            <InputForm title="Name" typ="text" v-model="form.name" :value='user.name' />
                         </div>
                         <div>
                             <table class="w-full">
