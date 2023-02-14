@@ -31,6 +31,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/edit', [AdminController::class, 'edit']);
     Route::post('/permits', PermitController::class);
     Route::post('/admin/register', [AdminController::class, 'saveRegisteredUser']);
+    Route::post('/admin/edit', [AdminController::class, 'updateUser']);
 });
 
 Route::middleware('auth')->group(function () {

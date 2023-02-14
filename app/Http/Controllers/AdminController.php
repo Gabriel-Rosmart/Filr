@@ -279,4 +279,39 @@ class AdminController extends Controller
         return redirect('/admin/manage');
     }
 
+    public function updateUser(Request $request)
+    {
+        // * Validate request data
+
+        $evenArray = new EvenArray();
+        $isTimeString = new IsTimeString();
+        $timeDoNotOverlap = new TimeDoNotOverlap();
+
+        
+        $validated = $request->validate([
+            'name' => ['required'],
+            'dni' => ['required', new IsValidDNI],
+            'email' => ['required', 'email', 'unique:users'],
+            'telephone' => ['required', new IsValidPhoneNumber],
+            'dates.start' => ['required', 'date'],
+            'dates.end' => ['required', 'date'],
+            'schedules.monday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.tuesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+        ]);
+
+        // * Generate random password
+
+        $fakepw = fake()->password();
+        $pwcryp = bcrypt($fakepw);
+
+        // * Create user and its relations
+
+        Helper::saveUserCompleteRecord($validated, $pwcryp);
+
+        return redirect('/admin/manage');
+    }
+
 }
