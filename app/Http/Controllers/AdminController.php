@@ -204,7 +204,7 @@ class AdminController extends Controller
             ->get();
 
             $user = User::
-            select('id', 'name', 'dni', 'role_id', 'email', 'active', 'profile_pic')
+            select('id', 'name', 'dni', 'phone', 'role_id', 'email', 'active', 'profile_pic')
             ->where('id', $id)
             ->get()
             ->first();
@@ -297,14 +297,15 @@ class AdminController extends Controller
             'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
         ]);
 
-        // * Generate random password
-
-        $fakepw = fake()->password();
-        $pwcryp = bcrypt($fakepw);
+        $user = User::
+            select('id', 'name', 'dni', 'role_id', 'email', 'active', 'profile_pic')
+            ->where('id', $validated['id'])
+            ->get()
+            ->first();
 
         // * Create user and its relations
 
-        Helper::saveUserCompleteRecord($validated, $pwcryp);
+        Helper::updateUserCompleteRecord($validated, $user);
 
         return redirect('/admin/manage');
     }
