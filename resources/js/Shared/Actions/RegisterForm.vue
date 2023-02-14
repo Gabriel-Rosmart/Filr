@@ -86,7 +86,9 @@
                 <div class="ml-8 mb-4" v-show="!form.substitute.is">
                     <select class="select select-bordered w-full" v-model="form.role">
                         <option value="" disabled selected>Rol</option>
-                        <option>Profesor</option>
+                        <option value="profesor">Profesor</option>
+                        <option value="administrativo">Administrativo</option>
+                        <option value="limpieza">Limpieza</option>
                     </select>
                 </div>
                 <div class="flex items-center">
