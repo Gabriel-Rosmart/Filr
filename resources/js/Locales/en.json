@@ -46,6 +46,26 @@
             "next": "Next",
             "prev": "Previous",
             "send": "Send"
+        },
+        "details" :
+        {
+            "files": "Files",
+            "timetable": "Timetable",
+            "incidences": "Incidences",
+            "permits": "Permits",
+            "personal": "Personal data",
+            "noIncidence": "No incidences found",
+            "noPermit": "No permits found",
+            "user": {
+                "email": "Email",
+                "dni": "DNI",
+                "telephone": "Telephone",
+                "position" : "Position",
+                "posType" : {
+                    "admin": "Administrator",
+                    "employee": "Employee"
+                }
+            }
         }
     },
     "table": {

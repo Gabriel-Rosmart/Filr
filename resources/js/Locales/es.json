@@ -46,6 +46,22 @@
             "next": "Siguiente",
             "prev": "Anterior",
             "send": "Enviar"
+        },
+        "details" :
+        {
+            "files": "Fichajes",
+            "timetable": "Horario",
+            "incidences": "Incidencias",
+            "permits": "Permisos",
+            "personal": "Datos Personales",
+            "noIncidence": "No se encontraron incidencias",
+            "noPermit": "No permits found",
+            "user": {
+                "email": "Correo Electrónico",
+                "dni": "DNI",
+                "telephone": "Teléfono",
+                "position" : "Puesto"
+            }
         }
     },
     "table": {

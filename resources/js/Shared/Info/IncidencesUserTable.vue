@@ -1,6 +1,9 @@
 <script setup>
 
 import getIncidenceMessage from '@/Utilities/incidence';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 defineProps({
     incidences: Array
@@ -11,8 +14,8 @@ defineProps({
         <table class="table w-full">
             <thead>
                 <tr>
-                    <th>Fecha</th>
-                    <th>Motivo</th>
+                    <th>{{ t('table.date') }}</th>
+                    <th>{{ t('table.subject') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,7 +34,7 @@ defineProps({
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span>No incidences found</span>
+                <span>{{ t('admin.details.noIncidence') }}</span>
             </div>
         </div>
     </div>
