@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/user/warnings', [UserController::class, 'warnings']);
     Route::get('user/stats', [UserController::class, 'stats']);
-    Route::get('/avatar', function(){
+    Route::get('/avatar', function () {
         return auth()->user()->profile_pic;
     });
 });
@@ -49,8 +49,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/admin/test', function () {
     return Inertia::render('Auth/MultiSteps', [
-        'users' => User::
-            select('name', 'id')
+        'users' => User::select('name', 'id')
             ->get()
     ]);
 });

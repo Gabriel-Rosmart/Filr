@@ -308,8 +308,6 @@ class AdminController extends Controller
             ->get()
             ->first();
 
-        // * Create user and its relations
-
         Helper::updateUserCompleteRecord($validated, $user);
 
         return redirect('/admin/manage');
