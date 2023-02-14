@@ -60,7 +60,12 @@
                 "email": "Enderezo electrónico",
                 "dni": "DNI",
                 "telephone": "Teléfono",
-                "position" : "Posto"
+                "position" : "Posto",
+                "posType" : {
+                    "Profesor": "Mestre",
+                    "Administrativo": "Administrativo",
+                    "Limpieza": "Limpeza"
+                }
             }
         }
     },

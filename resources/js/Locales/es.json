@@ -60,7 +60,12 @@
                 "email": "Correo Electrónico",
                 "dni": "DNI",
                 "telephone": "Teléfono",
-                "position" : "Puesto"
+                "position" : "Puesto",
+                "posType" : {
+                    "Profesor": "Profesor",
+                    "Administrativo": "Administrativo",
+                    "Limpieza": "Limpieza"
+                }
             }
         }
     },

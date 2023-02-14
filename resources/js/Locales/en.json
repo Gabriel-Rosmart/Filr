@@ -62,8 +62,9 @@
                 "telephone": "Telephone",
                 "position" : "Position",
                 "posType" : {
-                    "admin": "Administrator",
-                    "employee": "Employee"
+                    "Profesor": "Teacher",
+                    "Administrativo": "Administrative",
+                    "Limpieza": "Cleaning Service"
                 }
             }
         }
