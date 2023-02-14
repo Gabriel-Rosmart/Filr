@@ -43,11 +43,11 @@ class UserController extends Controller
         JOIN users AS u ON p.user_id = u.id 
         WHERE u.name="Verónica Vila"
         */
-        $permits = DB::table("permits AS p")
-            ->select('uuid', 'status', "requested_at")
-            ->join('users as u', 'p.user_id', '=', 'u.id')
-            ->where('u.id', $user->id)
-            ->get();
+        // $permits = DB::table("permits AS p")
+        //     ->select('uuid', 'status', "requested_at")
+        //     ->join('users as u', 'p.user_id', '=', 'u.id')
+        //     ->where('u.id', $user->id)
+        //     ->get();
 
 
         return Inertia::render('User/Dashboard', [
