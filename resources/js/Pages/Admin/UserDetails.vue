@@ -49,7 +49,7 @@ let currentComponentIndex = ref(0)
                         :class="{ 'tab-active': currentComponentIndex == 3 }">Permisos</span>
                 </div>
                 <div>
-                    <component :is="tabs[currentComponentIndex][0]" :="tabs[currentComponentIndex][1]"/>
+                    <component :is="tabs[currentComponentIndex][0]" :user="user" :timetable="timetable" :permits="permits" :incidences="incidences"/>
                 </div>
             </div>
         </div>
