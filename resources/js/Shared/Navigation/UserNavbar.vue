@@ -3,7 +3,7 @@ import { HomeIcon, CalendarIcon, SettingsIcon, AppLogo, LogOutIcon } from '../Ic
 import NotificationDropdown from './NotificationDropdown.vue';
 import ThemeToggle from './ThemeToggle.vue'
 import { Link } from '@inertiajs/inertia-vue3';
-
+import AvatarDropdown from '@/Shared/Navigation/AvatarDropdown.vue'
 import LanguageDropdown from './LanguageDropdown.vue';
 </script>
 
@@ -56,6 +56,7 @@ import LanguageDropdown from './LanguageDropdown.vue';
             <LanguageDropdown />
             <ThemeToggle />
             <NotificationDropdown />
+            <AvatarDropdown />
         </div>
     </div>
 </template>
