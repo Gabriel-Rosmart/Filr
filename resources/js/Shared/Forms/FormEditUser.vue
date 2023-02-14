@@ -17,15 +17,17 @@ const storage = ref(appconfig.STORAGE_URL)
 const weekend = [props.timetable[0], props.timetable[1], props.timetable[2], props.timetable[3], props.timetable[4]];
 const shift = ['Morning', 'Afternoon'];
 
-const form = useForm({
-        name: '',
-        dni: '',
-        telephone: '',
-        email: ''
-    });
+var form = useForm({
+    id: props.user.id,
+    name: props.user.name,
+    dni: props.user.dni,
+    telephone: props.user.phone,
+    email: props.user.email,
+});
 
 const submit = () => {
-    form.post('/admin/edit', props.user.id);
+    form.post('/admin/edit');
+    console.log(form);
 };
 
 </script>
@@ -45,11 +47,12 @@ const submit = () => {
                                     </div>
                                 </div>
                             </div>
-                            <InputForm title="Email" typ="email" :value='user.email' v-model="form.email"/>
-                            <InputForm title="DNI" typ="text" :value='user.dni' v-model="form.dni"/>
-                            <InputForm title="Phone" typ="telephone" :value='user.phone' v-model="form.telephone"/>
+                            <InputForm title="Email" typ="email" :value='user.email' v-model="form.email" />
+                            <InputForm title="DNI" typ="text" v-model="form.dni" :value='user.dni'/>
+                            <InputForm title="Phone" typ="telephone" :value='user.phone' v-model="form.telephone" />
                             <SelectForm title="Role" :data='3' :rol="user.role_id" />
-                            <InputForm class="grid col-span-2" title="NAME" typ="text" :value='user.name' v-model="form.name"/>
+                            <InputForm class="grid col-span-2" title="NAME" typ="text" :value='user.name'
+                                v-model="form.name" />
                         </div>
                         <div>
                             <table class="w-full">

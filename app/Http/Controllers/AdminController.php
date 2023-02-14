@@ -281,25 +281,13 @@ class AdminController extends Controller
 
     public function updateUser(Request $request)
     {
-        // * Validate request data
-
-        $evenArray = new EvenArray();
-        $isTimeString = new IsTimeString();
-        $timeDoNotOverlap = new TimeDoNotOverlap();
-
         
         $validated = $request->validate([
+            'id' => ['required'],
             'name' => ['required'],
             'dni' => ['required', new IsValidDNI],
             'email' => ['required', 'email', 'unique:users'],
-            'telephone' => ['required', new IsValidPhoneNumber],
-            'dates.start' => ['required', 'date'],
-            'dates.end' => ['required', 'date'],
-            'schedules.monday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-            'schedules.tuesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-            'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-            'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-            'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'telephone' => ['required', new IsValidPhoneNumber]
         ]);
 
         $user = User::
@@ -310,7 +298,7 @@ class AdminController extends Controller
 
         Helper::updateUserCompleteRecord($validated, $user);
 
-        return redirect('/admin/manage');
+        return redirect('/admin/edit?id='.$validated['id']);
     }
 
 }

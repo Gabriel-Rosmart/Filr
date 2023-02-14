@@ -13,30 +13,28 @@ class Helper
     {
 
         $validated['schedules'] = weedOut($validated['schedules']);
-    
-        DB::transaction(function() use ($validated, $fakepw) {
-            if(!$validated['substitute']['is']) saveFromScratch($validated, $fakepw);
+
+        DB::transaction(function () use ($validated, $fakepw) {
+            if (!$validated['substitute']['is']) saveFromScratch($validated, $fakepw);
             else saveFromUser($validated, $fakepw);
         });
     }
+
     public static function updateUserCompleteRecord($validated, $user)
     {
-
-        $validated['schedules'] = weedOut($validated['schedules']);
-
         DB::transaction(function () use ($validated, $user) {
             $user->update([
                 'name' => $validated['name'],
                 'dni' => $validated['dni'],
                 'email' => $validated['email'],
                 'phone' => $validated['telephone'],
-                'role_id' => 1,
             ]);
         });
     }
 }
 
-function saveFromScratch($validated, $fakepw){
+function saveFromScratch($validated, $fakepw)
+{
     $user = User::create([
         'name' => $validated['name'],
         'dni' => $validated['dni'],
@@ -57,8 +55,8 @@ function saveFromScratch($validated, $fakepw){
         'date_range_id' => $date->id
     ]);
 
-    foreach($validated['schedules'] as $day => $times){
-        if(count($times) < 4 && count($times) > 0){
+    foreach ($validated['schedules'] as $day => $times) {
+        if (count($times) < 4 && count($times) > 0) {
             Schedule::insert([
                 'date_range_id' => $date->id,
                 'day' => $day,
@@ -66,7 +64,7 @@ function saveFromScratch($validated, $fakepw){
                 'ends_at' => $times[1]
             ]);
         }
-        if(count($times) == 4){
+        if (count($times) == 4) {
             Schedule::insert([
                 'date_range_id' => $date->id,
                 'day' => $day,
@@ -77,8 +75,9 @@ function saveFromScratch($validated, $fakepw){
     }
 }
 
-function saveFromUser($validated, $fakepw){
-    
+function saveFromUser($validated, $fakepw)
+{
+
     $user = User::create([
         'name' => $validated['name'],
         'dni' => $validated['dni'],
@@ -106,7 +105,7 @@ function saveFromUser($validated, $fakepw){
         'date_range_id' => $date->id
     ]);
 
-    foreach($schedules as $schedule){
+    foreach ($schedules as $schedule) {
         Schedule::insert([
             'date_range_id' => $date->id,
             'day' => $schedule->day,
@@ -114,7 +113,6 @@ function saveFromUser($validated, $fakepw){
             'ends_at' => $schedule->ends_at,
         ]);
     }
-    
 }
 
 
