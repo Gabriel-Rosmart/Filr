@@ -83,7 +83,7 @@
                         <FormTextInput type="telephone" class="mt-1 block w-full" v-model="form.telephone"/>
                     </div>
                 </div>
-                <div class="ml-8 mb-4 ">
+                <div class="ml-8 mb-4" v-show="!form.substitute.is">
                     <select class="select select-bordered w-full" v-model="form.role">
                         <option value="" disabled selected>Rol</option>
                         <option>Profesor</option>

@@ -293,8 +293,12 @@ class AdminController extends Controller
             'dni' => ['required', new IsValidDNI],
             'email' => ['required', 'email', 'unique:users'],
             'telephone' => ['required', new IsValidPhoneNumber],
-            'dates.start' => ['required', 'date'],
-            'dates.end' => ['required', 'date'],
+            'admin' => ['boolean'],
+            'role' => ['required', 'exclude_if:substitute.is,true'],
+            'substitute.is' => ['boolean'],
+            'substitute.name' => ['required', 'exclude_if:substitute.is,false'],
+            'dates.start' => ['required', 'date', 'exclude_if:substitute.is,true'],
+            'dates.end' => ['required', 'date', 'exclude_if:substitute.is,true'],
             'schedules.monday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.tuesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
@@ -310,6 +314,10 @@ class AdminController extends Controller
         // * Create user and its relations
 
         Helper::saveUserCompleteRecord($validated, $pwcryp);
+
+        // * Send mail to user
+
+        Mail::to($validated['email'])->send(new AccountCreated($validated['name'], $fakepw));
 
         return redirect('/admin/manage');
     }
