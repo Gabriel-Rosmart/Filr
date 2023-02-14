@@ -249,14 +249,19 @@ class AdminController extends Controller
             'dni' => ['required', new IsValidDNI],
             'email' => ['required', 'email', 'unique:users'],
             'telephone' => ['required', new IsValidPhoneNumber],
-            'dates.start' => ['required', 'date'],
-            'dates.end' => ['required', 'date'],
+            'admin' => ['boolean'],
+            'role' => ['nullable'],
+            'substitute.is' => ['boolean'],
+            'substitute.name' => ['nullable'],
+            'dates.start' => ['nullable', 'date'],
+            'dates.end' => ['nullable', 'date'],
             'schedules.monday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.tuesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
         ]);
+
 
         // * Generate random password
 
