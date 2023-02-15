@@ -26,10 +26,17 @@ var form = useForm({
     email: props.user.email,
 });
 
+var date = useForm({
+    starts_at: props.timetable.starts_at,
+    ends_at:props.timetable.ends_at
+
+});
+
 const submit = () => {
     form.post('/admin/edit');
     console.log(form);
 };
+
 
 </script>
 
@@ -37,7 +44,7 @@ const submit = () => {
 <template>
     <div class="flex items-center mt-8">
         <form @submit.prevent="">
-            <div class="grid grid-cols-3">
+            <div class="grid grid-cols-2 w-auto">
                 <div>
                     <div class=" grid grid-cols-2 w-max py-10 px-10 ">
                         <div class="grid grid-cols-2 w-max gap-6">
@@ -48,14 +55,20 @@ const submit = () => {
                                     </div>
                                 </div>
                             </div>
-                            <InputForm title="Email" typ="email" v-model="form.email" :value='user.email' />
-                            <InputForm title="DNI" typ="text" v-model="form.dni" :value='user.dni' />
-                            <InputForm title="Phone" typ="telephone" v-model="form.telephone" :value='user.phone' />
+                            <InputForm title="Email" type="email" v-model="form.email" :value='user.email' />
+                            <InputForm title="DNI" type="text" v-model="form.dni" :value='user.dni' />
+                            <InputForm title="Phone" type="telephone" v-model="form.telephone" :value='user.phone' />
                             <SelectForm title="Role" :data='3' :rol="user.role_id" />
-                            <InputForm title="Name" typ="text" v-model="form.name" :value='user.name' />
+                            <InputForm title="Name" type="text" v-model="form.name" :value='user.name' />
                         </div>
-                        <div>
-                            <table class="table w-full">
+                    </div>
+                    <div class="flex justify-end mt-8">
+                        <button class="btn btn-outline btn-error mr-4">Cancel</button>
+                        <button class="btn btn-outline btn-success" @click="submit">Save</button>
+                    </div>
+                </div>
+                <div class="pr-40">
+                    <table class="table w-full">
                                 <thead>
                                     <tr class="">
                                         <th></th>
@@ -69,26 +82,20 @@ const submit = () => {
                                     <tr v-for="day in weekend">
                                         <th>{{ day.day }}</th>
                                         <td>
-                                            <InputForm typ="time" :value='day.starts_at' />
+                                            <InputForm type="time" :value='day.starts_at' />
                                         </td>
                                         <td>
-                                            <InputForm typ="time" :value='day.ends_at' />
+                                            <InputForm type="time" :value='day.ends_at' />
                                         </td>
                                         <td>
-                                            <InputForm typ="time" :value='day.starts_at' />
+                                            <InputForm type="time" :value='day.starts_at' />
                                         </td>
                                         <td>
-                                            <InputForm typ="time" :value='day.ends_at' />
+                                            <InputForm type="time" :value='day.ends_at' />
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                    <div class="flex justify-end mt-8">
-                        <button class="btn btn-outline btn-error mr-4">Cancel</button>
-                        <button class="btn btn-outline btn-success" @click="submit">Save</button>
-                    </div>
                 </div>
             </div>
         </form>
