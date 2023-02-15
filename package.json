@@ -22,6 +22,8 @@
     },
     "dependencies": {
         "daisyui": "^2.46.1",
-        "vue-i18n": "^9.2.2"
+        "dayjs": "^1.11.7",
+        "vue-i18n": "^9.2.2",
+        "vue-tailwind-datepicker": "^1.2.12"
     }
 }

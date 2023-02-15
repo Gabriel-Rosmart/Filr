@@ -109,5 +109,6 @@
         "outmorning": "OUT (morning)",
         "innoon": "IN (afternoon)",
         "outnoon": "OUT (afternoon)"
-    }
+    },
+    "dateformat": "MM-DD-YYYY"
 }

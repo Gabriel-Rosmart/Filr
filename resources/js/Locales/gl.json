@@ -110,5 +110,6 @@
         "outmorning": "Saída (mañá)",
         "innoon": "Entrada (tarde)",
         "outnoon": "Saída (tarde)"
-    }
+    },
+    "dateformat": "DD-MM-YYYY"
 }

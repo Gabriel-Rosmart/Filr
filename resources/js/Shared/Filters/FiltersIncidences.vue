@@ -6,7 +6,9 @@
 
     import { useI18n } from 'vue-i18n'
 
-    const { t } = useI18n()
+    import VueTailwindDatepicker from 'vue-tailwind-datepicker'
+
+    const { t, locale } = useI18n()
 
     const props = defineProps({
         url: String,
@@ -34,6 +36,11 @@
             remember: true
         })
     }, 300))
+
+    const formatter = ref({
+        date: 'YYYY-MM-DD',
+        month: 'MMM'
+    })
 </script>
 
 <template>
@@ -45,6 +52,16 @@
         <option value="late">{{ t('admin.query.incidence.late') }}</option>
         <option value="absent">{{ t('admin.query.incidence.absent') }}</option>
     </select>
-    <input type="date" class="input input-bordered w-full max-w-xs ml-4" v-model="date">
-    <button class="btn btn-ghost ml-4" @click="clearInput">Reset</button>
+    <!--
+    <input type="date" class="input input-bordered w-full max-w-xs ml-4" v-model="date">-->
+    <vue-tailwind-datepicker as-single :i18n="locale" :formatter="formatter" v-model="date" 
+    input-classes="input input-bordered w-full max-w-xs ml-4" id="datepicker" :placeholder="t('dateformat')" />
+    <button class="btn btn-ghost ml-8" @click="clearInput">Reset</button>
 </template>
+
+
+<style scoped>
+#datepicker {
+    max-width: 20rem;
+}
+</style>
