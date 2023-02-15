@@ -15,11 +15,23 @@
         filters: Object
     })
 
+    /** This forces the datepicker to update */
+
+    let updateKey = 0
+
+    const updateCurrentKey = () => {
+        updateKey += 1
+        if(updateKey > 2) updateKey = 0
+    }
+
+    /** */
+
     const clearInput = () => {
         search.value = ''
         opt.value = ''
         incidence.value = ''
         date.value = ''
+        updateCurrentKey()
     }
 
     let search = ref(props.filters.search ?? '')
@@ -62,10 +74,7 @@
         <option value="late">{{ t('admin.query.incidence.late') }}</option>
         <option value="absent">{{ t('admin.query.incidence.absent') }}</option>
     </select>
-    <!--
-    <input type="date" class="input input-bordered w-full max-w-xs ml-4" v-model="date">-->
-
-    <vue-tailwind-datepicker as-single :i18n="locale" :formatter="formatter" v-model="date" 
+    <vue-tailwind-datepicker as-single :i18n="locale" :formatter="formatter" v-model="date" :key="updateKey"
     input-classes="input input-bordered w-full max-w-xs ml-4" id="datepicker" :placeholder="t('dateformat')" />
     <button class="btn btn-ghost ml-8" @click="clearInput">Reset</button>
 </template>

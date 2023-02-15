@@ -44,7 +44,7 @@ function saveFromScratch($validated, $fakepw){
         'email' => $validated['email'],
         'phone' => $validated['telephone'],
         'role_id' => $role->id,
-        'admin' => $validated['admin'],
+        'is_admin' => $validated['admin'],
         'password' => $fakepw
     ]);
 
@@ -86,8 +86,6 @@ function saveFromUser($validated, $fakepw){
     $date_ranges = DateRange::select('id', 'start_date', 'end_date')->where('id', $date_range->date_range_id)->get()->first();
     $schedules = Schedule::select('day', 'starts_at', 'ends_at')->where('date_range_id', $date_ranges->id)->get();
 
-    //dd($schedules);
-
 
     $user = User::create([
         'name' => $validated['name'],
@@ -95,7 +93,7 @@ function saveFromUser($validated, $fakepw){
         'email' => $validated['email'],
         'phone' => $validated['telephone'],
         'role_id' => $employee->role_id,
-        'admin' => $validated['admin'],
+        'is_admin' => $validated['admin'],
         'password' => $fakepw
     ]);
 
