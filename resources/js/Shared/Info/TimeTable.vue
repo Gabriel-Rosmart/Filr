@@ -1,5 +1,8 @@
 <script setup>
     import { ref } from 'vue'
+    import { useI18n } from 'vue-i18n';
+
+    const { t } = useI18n();
 
     const props = defineProps({
         timetable: Object
@@ -21,16 +24,16 @@
         <table class="table w-full">
             <thead>
                 <tr>
-                    <th>Day</th>
-                    <th>In</th>
-                    <th>Out</th>
-                    <th>In</th>
-                    <th>Out</th>
+                    <th>{{ t('days.day') }}</th>
+                    <th>{{ t('table.in') }}</th>
+                    <th>{{ t('table.out') }}</th>
+                    <th>{{ t('table.in') }}</th>
+                    <th>{{ t('table.out') }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="day of userWeek" class="hover">
-                    <th v-if="day[0] != undefined" >{{ day[0].day }}</th>
+                    <th v-if="day[0] != undefined" >{{ t('days.' + day[0].day) }}</th>
                     <td v-else></td>
                     <td v-if="day[0] != undefined" >{{ day[0].starts_at }}</td>
                     <td v-else></td>
