@@ -1,7 +1,7 @@
 {
     "admin": {
         "navbar": {
-            "notification": "Novo mensaxe",
+            "notification": "Nova mensaxe",
             "dropdown": {
                 "dashboard": "Panel de control",
                 "users": "Xestionar usuarios",
@@ -16,7 +16,7 @@
         "query": {
             "search": "Buscar...",
             "employee": {
-                "main": "Tipo de empleado"
+                "main": "Tipo de empregado"
             },
             "incidence": {
                 "main": "Incidencia",
@@ -55,7 +55,7 @@
             "permits": "Permisos",
             "personal": "Datos Persoais",
             "noIncidence": "Non se acharon incidencias",
-            "noPermit": "No permits found",
+            "noPermit": "Non se acharon permisos",
             "user": {
                 "email": "Enderezo electrónico",
                 "dni": "DNI",
@@ -72,12 +72,12 @@
     "table": {
         "name": "Nome",
         "in": "Entrada",
-        "out": "Salida",
+        "out": "Saída",
         "job": "Traballo",
         "status": "Estado",
         "reqby": "Pedido por",
         "reqat": "Pedido en",
-        "employee": "Empleado",
+        "employee": "Empregado",
         "date": "Data",
         "subject": "Motivo",
         "late": "Chega <span style='color: red'>{minutes}</span> minutos tarde",
@@ -93,10 +93,10 @@
     "days": {
         "monday": "luns",
         "tuesday": "martes",
-        "wednesday": "mercores",
+        "wednesday": "mércores",
         "thursday": "xoves",
         "friday": "venres",
-        "saturday": "sabado",
+        "saturday": "sábado",
         "sunday": "domingo"
     },
     "forms": {
@@ -104,9 +104,9 @@
         "email": "Email",
         "dni": "DNI",
         "telephone": "Telefono",
-        "inmorning": "Entrada (maña)",
-        "outmorning": "Saida (maña)",
+        "inmorning": "Entrada (mañá)",
+        "outmorning": "Saída (mañá)",
         "innoon": "Entrada (tarde)",
-        "outnoon": "Saida (tarde)"
+        "outnoon": "Saída (tarde)"
     }
 }
