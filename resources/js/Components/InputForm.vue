@@ -1,10 +1,20 @@
 <script setup>
-defineProps(['title','typ','value']);
+ import { onMounted, ref } from 'vue';
+defineProps(['title','typ','value','modelValue']);
+
+const input = ref(null);
+
+defineEmits(['update:modelValue']);
 </script>
 
 <template>
     <div>
         <label>{{ title }}</label>
-        <input :type="typ" :value="value" class="input input-bordered input-primary w-full mt-2" />
+        <input
+        class="input input-bordered input-primary w-full mt-2"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+        ref="input"
+    />
     </div>
 </template>

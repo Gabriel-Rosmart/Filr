@@ -292,7 +292,7 @@ class AdminController extends Controller
             'id' => ['required'],
             'name' => ['required'],
             'dni' => ['required', new IsValidDNI],
-            'email' => ['required', 'email', 'unique:users'],
+            'email' => ['required', 'email'],
             'telephone' => ['required', new IsValidPhoneNumber]
         ]);
 
