@@ -46,6 +46,27 @@
             "next": "Seguinte",
             "prev": "Anterior",
             "send": "Enviar"
+        },
+        "details" :
+        {
+            "files": "Fichaxes",
+            "timetable": "Horarios",
+            "incidences": "Incidencias",
+            "permits": "Permisos",
+            "personal": "Datos Persoais",
+            "noIncidence": "Non se acharon incidencias",
+            "noPermit": "No permits found",
+            "user": {
+                "email": "Enderezo electrónico",
+                "dni": "DNI",
+                "telephone": "Teléfono",
+                "position" : "Posto",
+                "posType" : {
+                    "Profesor": "Mestre",
+                    "Administrativo": "Administrativo",
+                    "Limpieza": "Limpeza"
+                }
+            }
         }
     },
     "table": {
@@ -57,11 +78,11 @@
         "reqby": "Pedido por",
         "reqat": "Pedido en",
         "employee": "Empleado",
-        "date": "Fecha",
+        "date": "Data",
         "subject": "Motivo",
         "late": "Chega <span style='color: red'>{minutes}</span> minutos tarde",
         "early": "Sae <span style='color: red'>{minutes}</span> minutos antes",
-        "absent": "<span style='color: red'>No veu traballar</span>"
+        "absent": "<span style='color: red'>Non veu traballar</span>"
     },
     "breadcrumbs": {
         "dashboard": "Panel de control",
