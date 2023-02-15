@@ -40,6 +40,7 @@
             "denied": "Denied"
         },
         "buttons" : {
+            "edit": "Edit user",
             "adduser": "Add user",
             "accept": "Accept",
             "deny": "Deny",

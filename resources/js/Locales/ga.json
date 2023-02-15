@@ -40,6 +40,7 @@
             "denied": "Denegado"
         },
         "buttons" : {
+            "edit": "Modificar usuario", 
             "adduser": "Engadir usuario",
             "accept": "Aceptar",
             "deny": "Denegar",
@@ -91,6 +92,7 @@
         "incidences": "Incidencias"
     },
     "days": {
+        "day": "Día",
         "monday": "luns",
         "tuesday": "martes",
         "wednesday": "mércores",
