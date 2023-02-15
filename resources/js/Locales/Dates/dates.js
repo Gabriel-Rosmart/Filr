@@ -17,7 +17,7 @@ const dateFormats = {
             weekday: 'short', hour: 'numeric', minute: 'numeric'
         }
     },
-    ga: {
+    gl: {
         short : {
             year: 'numeric', month: 'numeric', day: 'numeric'
         },

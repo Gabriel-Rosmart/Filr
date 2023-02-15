@@ -11,7 +11,7 @@ const appconfig = {
         },
         {
             'lang': 'Galego',
-            'code': 'ga'
+            'code': 'gl'
         }
     ],
     themes: {
