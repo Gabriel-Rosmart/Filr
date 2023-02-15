@@ -210,7 +210,7 @@ class AdminController extends Controller
             ->get();
 
             $user = User::
-            select('id', 'name', 'dni', 'role_id', 'email', 'active', 'profile_pic')
+            select('id', 'name', 'dni', 'phone', 'role_id', 'email', 'active', 'profile_pic')
             ->where('id', $id)
             ->get()
             ->first();
@@ -287,45 +287,24 @@ class AdminController extends Controller
 
     public function updateUser(Request $request)
     {
-        // * Validate request data
-
-        $evenArray = new EvenArray();
-        $isTimeString = new IsTimeString();
-        $timeDoNotOverlap = new TimeDoNotOverlap();
-
         
         $validated = $request->validate([
+            'id' => ['required'],
             'name' => ['required'],
             'dni' => ['required', new IsValidDNI],
-            'email' => ['required', 'email', 'unique:users'],
-            'telephone' => ['required', new IsValidPhoneNumber],
-            'admin' => ['boolean'],
-            'role' => ['required', 'exclude_if:substitute.is,true'],
-            'substitute.is' => ['boolean'],
-            'substitute.name' => ['required', 'exclude_if:substitute.is,false'],
-            'dates.start' => ['required', 'date', 'exclude_if:substitute.is,true'],
-            'dates.end' => ['required', 'date', 'exclude_if:substitute.is,true'],
-            'schedules.monday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-            'schedules.tuesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-            'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-            'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-            'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'email' => ['required', 'email'],
+            'telephone' => ['required', new IsValidPhoneNumber]
         ]);
 
-        // * Generate random password
+        $user = User::
+            select('id', 'name', 'dni', 'role_id', 'email', 'active', 'profile_pic')
+            ->where('id', $validated['id'])
+            ->get()
+            ->first();
 
-        $fakepw = fake()->password();
-        $pwcryp = bcrypt($fakepw);
+        Helper::updateUserCompleteRecord($validated, $user);
 
-        // * Create user and its relations
-
-        Helper::saveUserCompleteRecord($validated, $pwcryp);
-
-        // * Send mail to user
-
-        Mail::to($validated['email'])->send(new AccountCreated($validated['name'], $fakepw));
-
-        return redirect('/admin/manage');
+        return redirect('/admin/edit?id='.$validated['id']);
     }
 
 }

@@ -10,26 +10,44 @@ const props = defineProps({
     timetable: Object
 })
 console.table(props.timetable);
+console.table(props.user);
 
 const storage = ref(appconfig.STORAGE_URL)
 
 const weekend = [props.timetable[0], props.timetable[1], props.timetable[2], props.timetable[3], props.timetable[4]];
 const shift = ['Morning', 'Afternoon'];
 
+//Not synced with v-model
+var form = useForm({
+    id: props.user.id,
+    name: props.user.name,
+    dni: props.user.dni,
+    telephone: props.user.phone,
+    email: props.user.email,
+});
+
+var date = useForm({
+    starts_at: props.timetable.starts_at,
+    ends_at:props.timetable.ends_at
+
+});
+
 const submit = () => {
     form.post('/admin/edit');
+    console.log(form);
 };
+
 
 </script>
 
 
 <template>
-    <div class="px-10">
+    <div class="flex items-center mt-8">
         <form @submit.prevent="">
-            <div class="grid grid-cols-3">
+            <div class="grid grid-cols-2 w-auto">
                 <div>
-                    <div class="w-full py-10 px-10 ">
-                        <div class="grid grid-cols-2 gap-6">
+                    <div class=" grid grid-cols-2 w-max py-10 px-10 ">
+                        <div class="grid grid-cols-2 w-max gap-6">
                             <div class="grid row-span-3 justify-center items-center">
                                 <div class="avatar">
                                     <div class="mask mask-squircle w-60 h-60">
@@ -37,42 +55,47 @@ const submit = () => {
                                     </div>
                                 </div>
                             </div>
-                            <InputForm title="Email" typ="email" :value='user.email' />
-                            <InputForm title="DNI" typ="text" :value='user.dni' />
+                            <InputForm title="Email" type="email" v-model="form.email" :value='user.email' />
+                            <InputForm title="DNI" type="text" v-model="form.dni" :value='user.dni' />
+                            <InputForm title="Phone" type="telephone" v-model="form.telephone" :value='user.phone' />
                             <SelectForm title="Role" :data='3' :rol="user.role_id" />
-                            <InputForm class="grid col-span-2" title="NAME" typ="text" :value='user.name' />
-                        </div>
-                        <div>
-                            <table class="w-full">
-                                <tr v-for="day in weekend">
-                                    <td>{{ day.day }}</td>
-                                    <td>
-                                        <p class="px-10">Morning</p>
-                                    </td>
-                                    <td>
-                                        <InputForm typ="time" :value='day.starts_at' />
-                                    </td>
-                                    <td>
-                                        <InputForm typ="time" :value='day.ends_at' />
-                                    </td>
-                                    <td>
-                                        <p class="px-10">Afternoon</p>
-                                    </td>
-                                    <td>
-                                        <InputForm typ="time" :value='day.starts_at' />
-                                    </td>
-                                    <td>
-                                        <InputForm typ="time" :value='day.ends_at' />
-                                    </td>
-                                </tr>
-                            </table>
-
+                            <InputForm title="Name" type="text" v-model="form.name" :value='user.name' />
                         </div>
                     </div>
                     <div class="flex justify-end mt-8">
                         <button class="btn btn-outline btn-error mr-4">Cancel</button>
                         <button class="btn btn-outline btn-success" @click="submit">Save</button>
                     </div>
+                </div>
+                <div class="pr-40">
+                    <table class="table w-full">
+                                <thead>
+                                    <tr class="">
+                                        <th></th>
+                                        <th>In (Morning)</th>
+                                        <th>Out (Morning)</th>
+                                        <th>In (Afternoon)</th>
+                                        <th>Out (Afternoon)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="day in weekend">
+                                        <th>{{ day.day }}</th>
+                                        <td>
+                                            <InputForm type="time" :value='day.starts_at' />
+                                        </td>
+                                        <td>
+                                            <InputForm type="time" :value='day.ends_at' />
+                                        </td>
+                                        <td>
+                                            <InputForm type="time" :value='day.starts_at' />
+                                        </td>
+                                        <td>
+                                            <InputForm type="time" :value='day.ends_at' />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                 </div>
             </div>
         </form>
