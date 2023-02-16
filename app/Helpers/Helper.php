@@ -44,6 +44,7 @@ function saveFromScratch($validated, $fakepw){
         'email' => $validated['email'],
         'phone' => $validated['telephone'],
         'role_id' => $role->id,
+        'active' => determineIfUserShouldBeActive($validated['dates']['start'], $validated['dates']['end']),
         'is_admin' => $validated['admin'],
         'password' => $fakepw
     ]);
@@ -95,6 +96,7 @@ function saveFromUser($validated, $fakepw){
         'email' => $validated['email'],
         'phone' => $validated['telephone'],
         'role_id' => $employee->role_id,
+        'active' => determineIfUserShouldBeActive($date_ranges->start_date, $date_ranges->end_date),
         'is_admin' => $validated['admin'],
         'password' => $fakepw
     ]);
@@ -128,4 +130,8 @@ function weedOut(array $array)
     }
 
     return $array;
+}
+
+function determineIfUserShouldBeActive($startDate, $endDate) {
+    return \Carbon\Carbon::now()->between($startDate, $endDate);
 }

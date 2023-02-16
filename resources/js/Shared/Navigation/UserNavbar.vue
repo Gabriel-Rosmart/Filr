@@ -5,6 +5,10 @@ import ThemeToggle from './ThemeToggle.vue'
 import { Link } from '@inertiajs/inertia-vue3';
 import AvatarDropdown from '@/Shared/Navigation/AvatarDropdown.vue'
 import LanguageDropdown from './LanguageDropdown.vue';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n();
+
 </script>
 
 <template>
@@ -23,7 +27,7 @@ import LanguageDropdown from './LanguageDropdown.vue';
                     <li>
                         <Link>
                         <HomeIcon />
-                        Profile
+                        {{ t('admin.navbar.dropdown.dashboard') }}
                         </Link>
                     </li>
                     <li>
