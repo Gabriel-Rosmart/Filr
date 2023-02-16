@@ -55,8 +55,9 @@
             "incidences": "Incidencias",
             "permits": "Permisos",
             "personal": "Datos Persoais",
-            "noIncidence": "Non se acharon incidencias",
-            "noPermit": "Non se acharon permisos",
+            "noIncidence": "Non foron achadas incidencias",
+            "noPermit": "Non foron achados permisos",
+            "noFiles":"Non foron achados fichajes",
             "user": {
                 "email": "Enderezo electrónico",
                 "dni": "DNI",
