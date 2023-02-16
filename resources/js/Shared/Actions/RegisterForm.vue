@@ -14,6 +14,8 @@ import { ref } from 'vue'
 import { range } from 'lodash'
 import { useI18n } from 'vue-i18n'
 
+import format from '@/Utilities/timefm'
+
 const { t } = useI18n()
 
 const props = defineProps({
@@ -21,6 +23,16 @@ const props = defineProps({
 })
 
 let currentStep = ref(0)
+
+const reformatTimeIfNeeded = () => {
+    for(let schedule of Object.keys(form.schedules)){
+        
+        for(let i = 0; i < 4; i++){
+            if(form.schedules[schedule][i] != null)
+            form.schedules[schedule][i] = format(form.schedules[schedule][i])
+        }
+    }
+}
 
 const form = useForm({
     name: '',
@@ -48,6 +60,7 @@ const form = useForm({
 
 const submit = () => {
 
+    reformatTimeIfNeeded()
     form.post('/admin/register');
 
 };
