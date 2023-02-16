@@ -59,7 +59,9 @@ function saveFromScratch($validated, $fakepw){
     ]);
 
     foreach ($validated['schedules'] as $day => $times) {
-        if (count($times) < 4 && count($times) > 0) {
+
+        
+        if (count($times) <= 4 && count($times) > 0) {
             Schedule::insert([
                 'date_range_id' => $date->id,
                 'day' => $day,
