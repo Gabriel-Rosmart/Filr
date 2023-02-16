@@ -14,7 +14,7 @@ const i18n = createI18n({
     },
     datetimeFormats: dateFormats,
     fallbackLocale : 'en',
-    locale: localStorage.getItem("locale") ?? 'en',
+    locale: localStorage.getItem("locale") ?? 'gl',
 })
 
 export default i18n
