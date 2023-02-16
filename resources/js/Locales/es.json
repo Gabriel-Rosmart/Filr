@@ -56,7 +56,8 @@
             "permits": "Permisos",
             "personal": "Datos Personales",
             "noIncidence": "No se encontraron incidencias",
-            "noPermit": "No permits found",
+            "noPermit": "No se encontraron permisos",
+            "noFiles":"No se encontraron fichajes",
             "user": {
                 "email": "Correo Electrónico",
                 "dni": "DNI",

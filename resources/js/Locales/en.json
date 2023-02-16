@@ -57,6 +57,7 @@
             "personal": "Personal data",
             "noIncidence": "No incidences found",
             "noPermit": "No permits found",
+            "noFiles":"No files found",
             "user": {
                 "email": "Email",
                 "dni": "DNI",
