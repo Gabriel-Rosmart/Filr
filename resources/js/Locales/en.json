@@ -58,6 +58,7 @@
             "noIncidence": "No incidences found",
             "noPermit": "No permits found",
             "noFiles":"No files found",
+            "noTimetable":"No timetable found",
             "user": {
                 "email": "Email",
                 "dni": "DNI",
