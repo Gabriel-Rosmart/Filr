@@ -1,4 +1,5 @@
 <script setup>
+import UserTimes from "@/Components/UserTimes.vue";
 import InputForm from "@/Components/InputForm.vue";
 import SelectForm from "@/Components/SelectForm.vue";
 import { ref } from 'vue';
@@ -10,7 +11,6 @@ const props = defineProps({
     timetable: Object
 })
 console.table(props.timetable);
-console.table(props.user);
 
 const storage = ref(appconfig.STORAGE_URL)
 
@@ -45,6 +45,8 @@ const submit = () => {
     <div class="flex items-center w-full mt-8">
         <form @submit.prevent="" class="w-full pr-10">
             <div class="grid grid-cols-2 w-auto">
+                <userdata :name="user.name" :telephone="user.phone" :email="user.email" :dni="user.dni" :form="form"/>
+                <!---
                 <div class=" grid justify-items-center py-10 pl-10 ">
                     <div class="grid grid-cols-2 w-max gap-6">
                         <div class="grid row-span-3 justify-center items-center">
@@ -60,7 +62,9 @@ const submit = () => {
                         <SelectForm title="Role" :data='3' :rol="user.role_id" />
                         <InputForm title="Name" type="text" v-model="form.name" :value='user.name' />
                     </div>
-                </div>
+                </div>-->
+                <UserTimes :weekend="weekend" :shift="shift" />
+                <!--
                 <div class="flex justify-center">
                     <table class="table w-max">
                         <thead>
@@ -90,7 +94,7 @@ const submit = () => {
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div>-->
                 <div class="flex justify-center mt-8">
                     <button class="btn btn-outline btn-error mr-4">Cancel</button>
                     <button class="btn btn-outline btn-success" @click="submit">Save</button>
