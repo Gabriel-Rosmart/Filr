@@ -58,6 +58,7 @@
             "noIncidence": "Non foron achadas incidencias",
             "noPermit": "Non foron achados permisos",
             "noFiles":"Non foron achados fichajes",
+            "noTimetable":"Non ten horarios asociados",
             "user": {
                 "email": "Enderezo electrónico",
                 "dni": "DNI",
