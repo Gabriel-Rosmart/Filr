@@ -46,7 +46,9 @@
             "deny": "Denegar",
             "next": "Seguinte",
             "prev": "Anterior",
-            "send": "Enviar"
+            "send": "Enviar",
+            "save": "Gardar",
+            "cancel": "Cancelar"
         },
         "details" :
         {
@@ -91,7 +93,8 @@
         "dashboard": "Panel de control",
         "manage": "Xestionar usuarios",
         "permits": "Permisos",
-        "incidences": "Incidencias"
+        "incidences": "Incidencias",
+        "edit": "Editar"
     },
     "days": {
         "day": "Día",

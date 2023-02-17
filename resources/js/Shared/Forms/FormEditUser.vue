@@ -3,6 +3,10 @@ import UserData from "@/Components/UserData.vue";
 import UserTimes from "@/Components/UserTimes.vue";
 import { useForm } from '@inertiajs/inertia-vue3'
 
+import {useI18n } from 'vue-i18n';
+
+const { t } = useI18n()
+
 const props = defineProps({
     user: Object,
     timetable: Object
@@ -90,8 +94,8 @@ const submit = () => {
                     </table>
                 </div>-->
                 <div class="flex justify-center mt-8">
-                    <button class="btn btn-outline btn-error mr-4">Cancel</button>
-                    <button class="btn btn-outline btn-success" @click="submit">Save</button>
+                    <button class="btn btn-outline btn-error mr-4">{{ t('admin.buttons.cancel') }}</button>
+                    <button class="btn btn-outline btn-success" @click="submit">{{ t('admin.buttons.save') }}</button>
                 </div>
             </div>
         </form>
