@@ -25,6 +25,10 @@ const form = useForm({
         <div class="flex justify-center content-center">
             <form @submit.prevent="" class="w-full pr-10">
                 <UserData :user="user" :form="form" />
+                <div class="flex justify-center mt-8">
+                    <button class="btn btn-outline btn-error mr-4">Cancel</button>
+                    <button class="btn btn-outline btn-success" @click="submit">Save</button>
+                </div>
             </form>
         </div>
 
