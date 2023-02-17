@@ -20,7 +20,7 @@
         </div>
         <div class="stat">
             <div class="stat-title">{{ t('admin.details.user.position') }}</div>
-            <div class="stat-value">{{ t('admin.details.user.posType.' + user.role.role_name) }}</div>
+            <div class="stat-value">{{ t('employees.' + user.role.role_name) }}</div>
         </div>
         <div class="stat">
             <div class="stat-title">{{ t('admin.details.user.email') }}</div>
