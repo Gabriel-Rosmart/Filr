@@ -112,5 +112,11 @@
         "innoon": "IN (afternoon)",
         "outnoon": "OUT (afternoon)"
     },
-    "dateformat": "MM-DD-YYYY"
+    "dateformat": "MM-DD-YYYY",
+    "employees" : {
+        "all": "All",
+        "teacher": "Teacher",
+        "administrative": "Administrative",
+        "cleaning": "Cleaning Staff"
+    }
 }

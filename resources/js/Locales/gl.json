@@ -113,5 +113,11 @@
         "innoon": "Entrada (tarde)",
         "outnoon": "Saída (tarde)"
     },
-    "dateformat": "DD-MM-YYYY"
+    "dateformat": "DD-MM-YYYY",
+    "employees" : {
+        "all": "Todos",
+        "teacher": "Mestre",
+        "administrative": "Administrativo",
+        "cleaning": "Persoal de limpieza"
+    }
 }
