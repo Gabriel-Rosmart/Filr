@@ -13,7 +13,8 @@
 
     const props = defineProps({
         users: Object,
-        filters: Object
+        filters: Object,
+        roles: Array,
     })
 
 </script>
@@ -24,7 +25,7 @@
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], [t('breadcrumbs.dashboard'), '/admin']]"/>
 
         <div class="flex items-center mt-8">
-            <FiltersDashboard url="/admin" :filters="filters"/>
+            <FiltersDashboard url="/admin" :filters="filters" :roles="roles"/>
             <Pagination class="ml-24" :links="users.links"/>
         </div>
 

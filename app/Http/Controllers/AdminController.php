@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\File;
+use App\Models\Role;
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Permit;
 use App\Helpers\Helper;
-use App\Mail\AccountCreated;
 use App\Models\Schedule;
 use App\Rules\EvenArray;
 use App\Models\DateRange;
 use App\Models\Incidence;
 use App\Rules\IsValidDNI;
 use App\Rules\IsTimeString;
+use App\Mail\AccountCreated;
 use Illuminate\Http\Request;
 use App\Rules\TimeDoNotOverlap;
 use App\Rules\IsValidPhoneNumber;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 
+use Illuminate\Support\Facades\Mail;
 use function PHPUnit\Framework\isEmpty;
 use Illuminate\Database\Eloquent\Model;
 
@@ -86,7 +87,8 @@ class AdminController extends Controller
 
         return Inertia::render('Admin/Dashboard', [
             'users' => $users,
-            'filters' => request()->only('search', 'type', 'incidence', 'date')
+            'filters' => request()->only('search', 'type', 'incidence', 'date'),
+            'roles' => Role::all()
         ]);
     }
 
@@ -107,7 +109,8 @@ class AdminController extends Controller
             }])
             ->paginate(15)
             ->withQueryString(),
-            'filters' => request()->only('search', 'type', 'active')
+            'filters' => request()->only('search', 'type', 'active'),
+            'roles' => Role::all()
         ]);
     }
 
