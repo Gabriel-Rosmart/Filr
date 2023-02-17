@@ -11,7 +11,8 @@
 
     const props = defineProps({
         url: String,
-        filters: Object
+        filters: Object,
+        roles: Array,
     })
 
     let search = ref(props.filters.search ?? '')
@@ -42,10 +43,8 @@
     <input type="text" :placeholder="t('admin.query.search')" class="input input-bordered w-full max-w-xs mx-4" v-model="search" />
     <select class="select select-bordered w-full max-w-xs" v-model="option">
         <option disabled selected value="">{{ t('admin.query.employee.main') }}</option>
-        <option value="">Todos</option>
-        <option value="profesor">Profesor</option>
-        <option value="administrativo">Administrativo</option>
-        <option value="limpieza">Limpieza</option>
+        <option value="">{{ t('employees.all') }}</option>
+        <option v-for="role in roles" :value="role.role_name">{{ t(`employees.${role.role_name}`) }}</option>
     </select>
     <select class="select select-bordered w-full max-w-xs ml-4" v-model="active">
         <option disabled selected value="">{{ t('admin.query.userstate.main') }}</option>

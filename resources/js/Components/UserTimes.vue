@@ -1,8 +1,12 @@
 <script setup>
 import InputForm from "@/Components/InputForm.vue";
+import {useI18n } from 'vue-i18n';
+
+const { t } = useI18n()
 const props = defineProps({
     weekend: Array,
 })
+
 </script>
 
 <template>
@@ -11,10 +15,10 @@ const props = defineProps({
             <thead>
                 <tr class="">
                     <th></th>
-                    <th>In (Morning)</th>
-                    <th>Out (Morning)</th>
-                    <th>In (Afternoon)</th>
-                    <th>Out (Afternoon)</th>
+                    <th>{{ t('forms.inmorning') }}</th>
+                    <th>{{ t('forms.outmorning') }}</th>
+                    <th>{{ t('forms.innoon')}}</th>
+                    <th>{{ t('forms.outnoon') }}</th>
                 </tr>
             </thead>
             <tbody>

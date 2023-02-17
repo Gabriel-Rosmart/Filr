@@ -56,7 +56,7 @@
                         </div>
                     </td>
                     <td>
-                        {{ user.role.role_name }}
+                        {{ t(`employees.${user.role.role_name}`) }}
                     </td>
                     <td>
                         <div class="indicator ">

@@ -46,7 +46,9 @@
             "deny": "Deny",
             "next": "Next",
             "prev": "Previous",
-            "send": "Send"
+            "send": "Send",
+            "save": "Save",
+            "cancel": "Cancel"
         },
         "details" :
         {
@@ -92,9 +94,16 @@
         "manage": "Manage users",
         "permits": "Permits",
         "incidences": "Incidences",
+        "edit": "Edit",
         "admin": "Admin"
+<<<<<<< HEAD
+        "admin": "Admin"
+=======
+        "edit": "Edit"
+>>>>>>> c8075adcf9f2c518e70e1c5bd6b5a1f1c65e2fd9
     },
     "days": {
+        "day": "day",
         "monday": "monday",
         "tuesday": "tuesday",
         "wednesday": "wednesday",
@@ -118,5 +127,11 @@
         "administrative": "Administrative",
         "cleaning": "Cleaning service"
     },
-    "dateformat": "MM-DD-YYYY"
+    "dateformat": "MM-DD-YYYY",
+    "employees" : {
+        "all": "All",
+        "teacher": "Teacher",
+        "administrative": "Administrative",
+        "cleaning": "Cleaning Staff"
+    }
 }

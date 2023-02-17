@@ -46,7 +46,9 @@
             "deny": "Denegar",
             "next": "Siguiente",
             "prev": "Anterior",
-            "send": "Enviar"
+            "send": "Enviar",
+            "save": "Guardar",
+            "cancel": "Cancelar"
         },
         "details" :
         {
@@ -92,12 +94,19 @@
         "manage": "Administrar usuarios",
         "permits": "Permisos",
         "incidences": "Incidencias",
+        "edit": "Editar",
         "admin": "Administrador"
+<<<<<<< HEAD
+        "admin": "Administrador"
+=======
+        "edit": "Editar"
+>>>>>>> c8075adcf9f2c518e70e1c5bd6b5a1f1c65e2fd9
     },
     "days": {
+        "day": "día",
         "monday": "lunes",
         "tuesday": "martes",
-        "wednesday": "miercoles",
+        "wednesday": "miércoles",
         "thursday": "jueves",
         "friday": "viernes",
         "saturday": "sabado",
@@ -118,5 +127,11 @@
         "administrative": "Administrativo",
         "cleaning": "Servicio de limpieza"
     },
-    "dateformat": "DD-MM-YYYY"
+    "dateformat": "DD-MM-YYYY",
+    "employees" : {
+        "all": "Todos",
+        "teacher": "Profesor",
+        "administrative": "Administrativo",
+        "cleaning": "Personal de limpieza"
+    }
 }

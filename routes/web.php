@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PermitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\Permit;
 use App\Models\User;
 
 /*
@@ -32,6 +33,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/permits', PermitController::class);
     Route::post('/admin/register', [AdminController::class, 'saveRegisteredUser']);
     Route::post('/admin/edit', [AdminController::class, 'updateUser']);
+    Route::get('/permits/pending', function(){
+        return Permit::where('status', 'pending')->count();
+    });
 });
 
 Route::middleware('auth')->group(function () {
