@@ -25,11 +25,11 @@ const props = defineProps({
 let currentStep = ref(0)
 
 const reformatTimeIfNeeded = () => {
-    for(let schedule of Object.keys(form.schedules)){
-        
-        for(let i = 0; i < 4; i++){
-            if(form.schedules[schedule][i] != null)
-            form.schedules[schedule][i] = format(form.schedules[schedule][i])
+    for (let schedule of Object.keys(form.schedules)) {
+
+        for (let i = 0; i < 4; i++) {
+            if (form.schedules[schedule][i] != null)
+                form.schedules[schedule][i] = format(form.schedules[schedule][i])
         }
     }
 }
@@ -68,7 +68,9 @@ const submit = () => {
 </script>
 
 <template>
-    <h2 class="mb-12 text-center text-5xl font-extrabold mt-10">New User</h2>
+    <h2 class="mb-12 text-center text-5xl font-extrabold mt-10">
+        <FormLabel :value="t('forms.newuser')" />
+    </h2>
     <div class="flex justify-center mt-24">
         <Steps :index="currentStep" />
     </div>
@@ -105,24 +107,40 @@ const submit = () => {
                             <div class="mb-4" v-show="form.substitute.is">
                                 <select class="select select-bordered w-full" disabled>
                                     <option value="" disabled selected>Rol</option>
-                                    <option value="profesor">Profesor</option>
-                                    <option value="administrativo">Administrativo</option>
-                                    <option value="limpieza">Limpieza</option>
+                                    <option value="profesor">
+                                        <FormLabel :value="t('forms.teacher')" />
+                                    </option>
+                                    <option value="administrativo">
+                                        <FormLabel :value="t('forms.administrative')" />
+                                    </option>
+                                    <option value="limpieza">
+                                        <FormLabel :value="t('forms.cleaning')" />
+                                    </option>
                                 </select>
                             </div>
                             <div class="mb-4" v-show="!form.substitute.is">
                                 <select class="select select-bordered w-full" v-model="form.role">
                                     <option value="" disabled selected>Rol</option>
-                                    <option value="profesor">Profesor</option>
-                                    <option value="administrativo">Administrativo</option>
-                                    <option value="limpieza">Limpieza</option>
+                                    <option value="profesor">
+                                        <FormLabel :value="t('forms.teacher')" />
+                                    </option>
+                                    <option value="administrativo">
+                                        <FormLabel :value="t('forms.administrative')" />
+                                    </option>
+                                    <option value="limpieza">
+                                        <FormLabel :value="t('forms.cleaning')" />
+                                    </option>
                                 </select>
                             </div>
                             <div class="flex items-center">
                                 <FormCheckbox name="remember" v-model:checked="form.admin" class="" />
-                                <span class="ml-2 label">Admin</span>
+                                <span class="ml-2 label">
+                                    <FormLabel :value="t('breadcrumbs.admin')" />
+                                </span>
                                 <FormCheckbox name="remember" v-model:checked="form.substitute.is" class="ml-8" />
-                                <span class="ml-2 label">Sustituto</span>
+                                <span class="ml-2 label">
+                                    <FormLabel :value="t('forms.substitute')" />
+                                </span>
                             </div>
                             <div v-show="form.substitute.is" class="mt-4">
                                 <select class="select select-bordered w-full" v-model="form.substitute.name">
@@ -161,20 +179,19 @@ const submit = () => {
                     </table>
                 </div>
 
-                <!-- Buttons -->
-                <div class="flex justify-end mt-6">
-                    <button class="btn btn-outline btn-primary mr-4" @click="currentStep--" v-show="currentStep > 0">
-                        {{ t('admin.buttons.prev') }}
-                    </button>
-                    <button class="btn btn-outline btn-primary" @click="currentStep++"
-                        v-show="currentStep < 2 && !form.substitute.is">
-                        {{ t('admin.buttons.next') }}
-                    </button>
-                    <button class="btn btn-primary" @click="submit" v-show="currentStep == 2 || form.substitute.is">
-                        {{ t('admin.buttons.send') }}
-                    </button>
-                </div>
+            <!-- Buttons -->
+            <div class="flex justify-end mt-6">
+                <button class="btn btn-outline btn-primary mr-4" @click="currentStep--" v-show="currentStep > 0">
+                    {{ t('admin.buttons.prev') }}
+                </button>
+                <button class="btn btn-outline btn-primary" @click="currentStep++"
+                    v-show="currentStep < 2 && !form.substitute.is">
+                    {{ t('admin.buttons.next') }}
+                </button>
+                <button class="btn btn-primary" @click="submit" v-show="currentStep == 2 || form.substitute.is">
+                    {{ t('admin.buttons.send') }}
+                </button>
             </div>
-        </form>
-    </div>
-</template>
+        </div>
+    </form>
+</div></template>

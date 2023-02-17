@@ -91,7 +91,8 @@
         "dashboard": "Dashboard",
         "manage": "Manage users",
         "permits": "Permits",
-        "incidences": "Incidences"
+        "incidences": "Incidences",
+        "admin": "Admin"
     },
     "days": {
         "monday": "monday",
@@ -110,7 +111,12 @@
         "inmorning": "IN (morning)",
         "outmorning": "OUT (morning)",
         "innoon": "IN (afternoon)",
-        "outnoon": "OUT (afternoon)"
+        "outnoon": "OUT (afternoon)",
+        "newuser": "New User",
+        "substitute": "Substitute",
+        "teacher": "Teacher",
+        "administrative": "Administrative",
+        "cleaning": "Cleaning service"
     },
     "dateformat": "MM-DD-YYYY"
 }

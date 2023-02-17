@@ -91,7 +91,8 @@
         "dashboard": "Panel de control",
         "manage": "Administrar usuarios",
         "permits": "Permisos",
-        "incidences": "Incidencias"
+        "incidences": "Incidencias",
+        "admin": "Administrador"
     },
     "days": {
         "monday": "lunes",
@@ -110,7 +111,12 @@
         "inmorning": "Entrada (mañana)",
         "outmorning": "Salida (mañana)",
         "innoon": "Entrada (tarde)",
-        "outnoon": "Salida (tarde)"
+        "outnoon": "Salida (tarde)",
+        "newuser": "Nuevo Usuario",
+        "substitute": "Sustituto",
+        "teacher": "Profesor",
+        "administrative": "Administrativo",
+        "cleaning": "Servicio de limpieza"
     },
     "dateformat": "DD-MM-YYYY"
 }
