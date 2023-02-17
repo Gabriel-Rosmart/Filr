@@ -1,9 +1,6 @@
 <script setup>
+import UserData from "@/Components/UserData.vue";
 import UserTimes from "@/Components/UserTimes.vue";
-import InputForm from "@/Components/InputForm.vue";
-import SelectForm from "@/Components/SelectForm.vue";
-import { ref } from 'vue';
-import appconfig from '@/appconfig';
 import { useForm } from '@inertiajs/inertia-vue3'
 
 const props = defineProps({
@@ -12,12 +9,9 @@ const props = defineProps({
 })
 console.table(props.timetable);
 
-const storage = ref(appconfig.STORAGE_URL)
-
 const weekend = [props.timetable[0], props.timetable[1], props.timetable[2], props.timetable[3], props.timetable[4]];
 const shift = ['Morning', 'Afternoon'];
 
-//Not synced with v-model
 var form = useForm({
     id: props.user.id,
     name: props.user.name,
@@ -45,7 +39,7 @@ const submit = () => {
     <div class="flex items-center w-full mt-8">
         <form @submit.prevent="" class="w-full pr-10">
             <div class="grid grid-cols-2 w-auto">
-                <userdata :name="user.name" :telephone="user.phone" :email="user.email" :dni="user.dni" :form="form"/>
+                <UserData :user="user" :form="form"/>
                 <!---
                 <div class=" grid justify-items-center py-10 pl-10 ">
                     <div class="grid grid-cols-2 w-max gap-6">
