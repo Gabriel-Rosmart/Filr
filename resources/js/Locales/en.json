@@ -96,11 +96,6 @@
         "incidences": "Incidences",
         "edit": "Edit",
         "admin": "Admin"
-<<<<<<< HEAD
-        "admin": "Admin"
-=======
-        "edit": "Edit"
->>>>>>> c8075adcf9f2c518e70e1c5bd6b5a1f1c65e2fd9
     },
     "days": {
         "day": "day",
