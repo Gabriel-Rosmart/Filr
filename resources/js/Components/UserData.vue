@@ -3,6 +3,7 @@ import InputForm from "@/Components/InputForm.vue";
 import SelectForm from "@/Components/SelectForm.vue";
 const props = defineProps({
     user: Object,
+    form: Object
 })
 
 console.table(props.user);
