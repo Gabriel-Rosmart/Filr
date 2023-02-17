@@ -1,12 +1,17 @@
 <script setup>
+import appconfig from "@/appconfig";
 import InputForm from "@/Components/InputForm.vue";
 import SelectForm from "@/Components/SelectForm.vue";
+import { ref } from "vue";
+
 const props = defineProps({
     user: Object,
     form: Object
 })
 
 console.table(props.user);
+
+const storage = ref(appconfig.STORAGE_URL);
 
 </script>
 
@@ -23,7 +28,7 @@ console.table(props.user);
             <InputForm title="Email" type="email" v-model="form.email" :value='user.email' />
             <InputForm title="DNI" type="text" v-model="form.dni" :value='user.dni' />
             <InputForm title="Phone" type="telephone" v-model="form.telephone" :value='user.phone' />
-            <SelectForm title="Role" :data='3' :rol="user.role_id" />
+            <SelectForm title="Role" :data='3' :rol="user.role_id" :disabled="user.is_admin" />
             <InputForm title="Name" type="text" v-model="form.name" :value='user.name' />
         </div>
     </div>
