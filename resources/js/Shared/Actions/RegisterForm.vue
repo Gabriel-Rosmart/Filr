@@ -8,6 +8,7 @@ import FormCheckbox from '@/Shared/Forms/FormCheckbox.vue'
 import FormLabel from '@/Shared/Forms/FormLabel.vue'
 import FormTime from '../Forms/FormTime.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
+import VueTailwindDatepicker from 'vue-tailwind-datepicker'
 
 /** Function imports */
 import { ref } from 'vue'
@@ -64,6 +65,11 @@ const submit = () => {
     form.post('/admin/register');
 
 };
+
+const formatter = ref({
+    date: 'YYYY-MM-DD',
+    month: 'MMMM'
+})
 
 </script>
 
@@ -153,8 +159,12 @@ const submit = () => {
                 </div>
                 <!-- Step 2 of form -->
                 <div class="flex mt-7 gap-6" v-show="currentStep == 1">
-                    <input type="date" class="input input-bordered dark:input-primary" v-model="form.dates.start">
-                    <input type="date" class="input input-bordered dark:input-primary" v-model="form.dates.end">
+                    <vue-tailwind-datepicker as-single :i18n="locale" :formatter="formatter" v-model="form.dates.start"
+                        input-classes="input input-bordered w-full max-w-xs" id="datepicker" class=""
+                        :placeholder="t('dateformat')" />
+                    <vue-tailwind-datepicker as-single :i18n="locale" :formatter="formatter" v-model="form.dates.end"
+                        input-classes="input input-bordered w-full max-w-xs" id="datepicker" class=""
+                        :placeholder="t('dateformat')" />
                 </div>
                 <!-- Step 3 of form -->
                 <div class="overflow-x-auto" v-show="currentStep == 2">
@@ -179,19 +189,19 @@ const submit = () => {
                     </table>
                 </div>
 
-            <!-- Buttons -->
-            <div class="flex justify-end mt-6">
-                <button class="btn btn-outline btn-primary mr-4" @click="currentStep--" v-show="currentStep > 0">
-                    {{ t('admin.buttons.prev') }}
-                </button>
-                <button class="btn btn-outline btn-primary" @click="currentStep++"
-                    v-show="currentStep < 2 && !form.substitute.is">
-                    {{ t('admin.buttons.next') }}
-                </button>
-                <button class="btn btn-primary" @click="submit" v-show="currentStep == 2 || form.substitute.is">
-                    {{ t('admin.buttons.send') }}
-                </button>
+                <!-- Buttons -->
+                <div class="flex justify-end mt-6">
+                    <button class="btn btn-outline btn-primary mr-4" @click="currentStep--" v-show="currentStep > 0">
+                        {{ t('admin.buttons.prev') }}
+                    </button>
+                    <button class="btn btn-outline btn-primary" @click="currentStep++"
+                        v-show="currentStep < 2 && !form.substitute.is">
+                        {{ t('admin.buttons.next') }}
+                    </button>
+                    <button class="btn btn-primary" @click="submit" v-show="currentStep == 2 || form.substitute.is">
+                        {{ t('admin.buttons.send') }}
+                    </button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
 </div></template>

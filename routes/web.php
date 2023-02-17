@@ -47,12 +47,6 @@ Route::get('/dashboard', function () {
     return Inertia::render('User/Dashboard');
 })->middleware(['auth', 'verified'])->name('user');
 
-Route::get('/admin/test', function () {
-    return Inertia::render('Auth/MultiSteps', [
-        'users' => User::select('name', 'id')
-            ->get()
-    ]);
-});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
