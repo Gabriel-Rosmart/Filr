@@ -42,7 +42,7 @@ const deny = (pid) => {
                 <tr>
                     <th>PID</th>
                     <th>{{ t('table.reqby') }}</th>
-                    <th>{{ t('table.reqat') }}</th>
+                    <th>{{ t('table.status') }}</th>
                     <th></th>
                 </tr>
             </thead>

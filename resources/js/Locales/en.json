@@ -94,6 +94,7 @@
         "incidences": "Incidences"
     },
     "days": {
+        "day": "day",
         "monday": "monday",
         "tuesday": "tuesday",
         "wednesday": "wednesday",

@@ -3,7 +3,7 @@
 import getIncidenceMessage from '@/Utilities/incidence';
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n()
+const { t, d } = useI18n()
 
 defineProps({
     incidences: Array
@@ -20,8 +20,8 @@ defineProps({
             </thead>
             <tbody>
                 <tr v-for="incidence of incidences">
-                    <td>{{ incidence.date }}</td>
-                    <td v-html="getIncidenceMessage(incidence.subject, incidence.minutes)"></td>
+                    <td>{{ d(incidence.date, 'short') }}</td>
+                    <td v-html="t(`table.${incidence.subject}`, { minutes: incidence.minutes})"></td>
                 </tr>
             </tbody>
         </table>
