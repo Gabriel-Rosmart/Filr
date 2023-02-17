@@ -42,7 +42,7 @@
             </thead>
             <tbody>
                 <tr v-for="user of users" class="hover">
-                    <th><Link class="dark:hover:text-cyan-400 hover:underline" :href="'/admin/details?id=' + user.id">{{ user.name }}</Link></th>
+                    <td><Link class="dark:hover:text-cyan-400 hover:underline" :href="'/admin/details?id=' + user.id">{{ user.name }}</Link></td>
                     <td>
                         <div class="flex flex-col">
                             <span v-for="file of getMorningShift(user.files)" class="mb-2">
