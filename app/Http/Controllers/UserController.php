@@ -78,6 +78,8 @@ class UserController extends Controller
 
     public function edit()
     {
-        return Inertia::render('User/Edit');
+        return Inertia::render('User/Edit', [
+            'user' => Auth::user(),
+        ]);
     }
 }

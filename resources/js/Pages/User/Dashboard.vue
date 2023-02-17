@@ -60,7 +60,7 @@ let currentComponentIndex = ref(0);
                     :incidences="incidents" />
 
                 <!-- <TimeTable  :timetable="timetable" /> -->
-
+                <a href="/user/edit">editar</a>
 
             </div>
         </div>
