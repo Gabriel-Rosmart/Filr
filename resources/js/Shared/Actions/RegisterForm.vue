@@ -110,32 +110,12 @@ const formatter = ref({
                             </div>
                         </div>
                         <div class="flex flex-col mt-6">
-                            <div class="mb-4" v-show="form.substitute.is">
-                                <select class="select select-bordered w-full" disabled>
+                            <div class="mb-4">
+                                <select class="select select-bordered w-full" v-model="form.role" :disabled="form.substitute.is">
                                     <option value="" disabled selected>Rol</option>
-                                    <option value="profesor">
-                                        <FormLabel :value="t('forms.teacher')" />
-                                    </option>
-                                    <option value="administrativo">
-                                        <FormLabel :value="t('forms.administrative')" />
-                                    </option>
-                                    <option value="limpieza">
-                                        <FormLabel :value="t('forms.cleaning')" />
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="mb-4" v-show="!form.substitute.is">
-                                <select class="select select-bordered w-full" v-model="form.role">
-                                    <option value="" disabled selected>Rol</option>
-                                    <option value="profesor">
-                                        <FormLabel :value="t('forms.teacher')" />
-                                    </option>
-                                    <option value="administrativo">
-                                        <FormLabel :value="t('forms.administrative')" />
-                                    </option>
-                                    <option value="limpieza">
-                                        <FormLabel :value="t('forms.cleaning')" />
-                                    </option>
+                                    <option value="profesor">{{ t('forms.teacher') }}</option>
+                                    <option value="administrativo">{{ t('forms.administrative') }}</option>
+                                    <option value="limpieza">{{ t('forms.cleaning') }}</option>
                                 </select>
                             </div>
                             <div class="flex items-center">
@@ -204,4 +184,5 @@ const formatter = ref({
                 </div>
             </div>
         </form>
-</div></template>
+    </div>
+</template>
