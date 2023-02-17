@@ -20,7 +20,7 @@ const storage = ref(appconfig.STORAGE_URL);
         <div class="grid grid-cols-2 w-max gap-6">
             <div class="grid row-span-3 justify-center items-center">
                 <div class="avatar">
-                    <div class="mask mask-squircle w-60 h-60">
+                    <div class="mask mask-squircle w-80 h-80">
                         <img class="hover:opacity-70" :src="storage + user.profile_pic" alt="Profile pic" />
                     </div>
                 </div>
@@ -28,8 +28,12 @@ const storage = ref(appconfig.STORAGE_URL);
             <InputForm title="Name" type="text" v-model="form.name" :value='user.name' />
             <InputForm title="DNI" type="text" v-model="form.dni" :value='user.dni' />
             <InputForm title="Email" type="email" v-model="form.email" :value='user.email' />
-            <SelectForm title="Role" :data='3' :rol="user.role_id" :disabled="user.is_admin" />
+            <InputForm title="Profile pic" type="file" v-model="form.pic" />
             <InputForm title="Phone" type="telephone" v-model="form.telephone" :value='user.phone' />
+            <SelectForm title="Role" :data='3' :rol="user.role_id" :disabled="user.is_admin" />
+            <InputForm title="New password" type="password" v-model="form.pass" />
+            <div></div>
+            <InputForm title="Repeat password" type="password" v-model="form.repeatPass" />
         </div>
     </div>
 </template>
