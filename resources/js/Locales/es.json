@@ -97,9 +97,10 @@
         "edit": "Editar"
     },
     "days": {
+        "day": "día",
         "monday": "lunes",
         "tuesday": "martes",
-        "wednesday": "miercoles",
+        "wednesday": "miércoles",
         "thursday": "jueves",
         "friday": "viernes",
         "saturday": "sabado",

@@ -1,7 +1,7 @@
 <script setup>
     import { useI18n } from 'vue-i18n';
 
-    const { t } = useI18n()
+    const { t, d } = useI18n()
 
     const props = defineProps({
         files: Array
@@ -22,7 +22,7 @@
             </thead>
             <tbody>
                 <tr v-for="file of files" class="hover">
-                    <td> {{ file.date }} </td>
+                    <td> {{ d(file.date, 'short') }} </td>
                     <td> {{ file.timestamp }} </td>
                 </tr>
             </tbody>
