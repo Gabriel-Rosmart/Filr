@@ -46,7 +46,9 @@
             "deny": "Denegar",
             "next": "Siguiente",
             "prev": "Anterior",
-            "send": "Enviar"
+            "send": "Enviar",
+            "save": "Guardar",
+            "cancel": "Cancelar"
         },
         "details" :
         {
@@ -91,12 +93,14 @@
         "dashboard": "Panel de control",
         "manage": "Administrar usuarios",
         "permits": "Permisos",
-        "incidences": "Incidencias"
+        "incidences": "Incidencias",
+        "edit": "Editar"
     },
     "days": {
+        "day": "día",
         "monday": "lunes",
         "tuesday": "martes",
-        "wednesday": "miercoles",
+        "wednesday": "miércoles",
         "thursday": "jueves",
         "friday": "viernes",
         "saturday": "sabado",

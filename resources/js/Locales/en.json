@@ -46,7 +46,9 @@
             "deny": "Deny",
             "next": "Next",
             "prev": "Previous",
-            "send": "Send"
+            "send": "Send",
+            "save": "Save",
+            "cancel": "Cancel"
         },
         "details" :
         {
@@ -91,9 +93,11 @@
         "dashboard": "Dashboard",
         "manage": "Manage users",
         "permits": "Permits",
-        "incidences": "Incidences"
+        "incidences": "Incidences",
+        "edit": "Edit"
     },
     "days": {
+        "day": "day",
         "monday": "monday",
         "tuesday": "tuesday",
         "wednesday": "wednesday",
