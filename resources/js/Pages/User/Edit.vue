@@ -14,6 +14,9 @@ const form = useForm({
     dni: props.user.dni,
     telephone: props.user.phone,
     email: props.user.email,
+    pass: '',
+    repeatPass: '',
+    pic: ''
 })
 
 </script>

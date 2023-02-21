@@ -31,9 +31,9 @@ const storage = ref(appconfig.STORAGE_URL);
             <InputForm title="Profile pic" type="file" v-model="form.pic" />
             <InputForm title="Phone" type="telephone" v-model="form.telephone" :value='user.phone' />
             <SelectForm title="Role" :data='3' :rol="user.role_id" :disabled="user.is_admin" />
-            <InputForm title="New password" type="password" v-model="form.pass" />
+            <InputForm v-if="user.is_admin == 0" title="New password" type="password" v-model="form.pass" />
             <div></div>
-            <InputForm title="Repeat password" type="password" v-model="form.repeatPass" />
+            <InputForm v-if="user.is_admin == 0" title="Repeat password" type="password" v-model="form.repeatPass" />
         </div>
     </div>
 </template>
