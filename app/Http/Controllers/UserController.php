@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Rules\IsValidDNI;
 use App\Rules\IsValidPhoneNumber;
+use App\Rules\IsValidPic;
 
 class UserController extends Controller
 {
@@ -91,21 +92,23 @@ class UserController extends Controller
     public function update(Request $request)
     {
 
-
-        
-        dd($request);
-        
-
         $validated = $request->validate([
             'id' => ['required'],
             'name' => ['required'],
             'dni' => ['required', new IsValidDNI],
             'email' => ['required', 'email'],
             'telephone' => ['required', new IsValidPhoneNumber],
-            'pic' => ['image']
+            'pic' => ['nullable', 'image', new IsValidPic]
         ]);
+        //dd($validated);
+        DB::transaction(function () use ($validated) {
+            DB::table('users')
+                ->where('id',  $validated['id'])
+                ->update([
+                    'name' => $validated['name'],
+                ]);
+        });
 
-        
 
         return redirect('/user/edit');
     }
