@@ -7,16 +7,18 @@ import { ref } from 'vue'
 
 const props = defineProps({
     user: Object,
-    timetable: Object
+    timetable: Object,
+    isAdmin: Number
 })
 
 </script>
 
 <template>
     <AdminLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], ['Edit User', '/admin/edit']]"/>
+        <Breadcrumbs class="ml-5 mt-6"
+            :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], ['Edit User', '/admin/edit']]" />
         <div class="flex items-center mt-8">
-            <FormEditUser :user="user" :timetable="timetable"/>
+            <FormEditUser :user="user" :timetable="timetable" :isAdmin="isAdmin" />
         </div>
     </AdminLayout>
 </template>

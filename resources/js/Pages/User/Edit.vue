@@ -6,6 +6,7 @@ import { useForm } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
     user: Object,
+    isAdmin: Number
 })
 
 const form = useForm({
@@ -27,7 +28,7 @@ const form = useForm({
 
         <div class="flex justify-center content-center">
             <form @submit.prevent="" class="w-full pr-10">
-                <UserData :user="user" :form="form" />
+                <UserData :user="user" :form="form" :isAdmin="isAdmin" />
                 <div class="flex justify-center mt-8">
                     <button class="btn btn-outline btn-error mr-4">Cancel</button>
                     <button class="btn btn-outline btn-success" @click="submit">Save</button>
