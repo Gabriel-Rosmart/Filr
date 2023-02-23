@@ -80,6 +80,7 @@ class UserController extends Controller
     {
         return Inertia::render('User/Edit', [
             'user' => Auth::user(),
+            'isAdmin' => Auth::user()->is_admin
         ]);
     }
 }
