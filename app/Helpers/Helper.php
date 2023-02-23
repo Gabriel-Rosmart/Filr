@@ -16,8 +16,10 @@ class Helper
         $validated['schedules'] = weedOut($validated['schedules']);
 
         DB::transaction(function () use ($validated, $fakepw) {
-            if (!$validated['substitute']['is']) saveFromScratch($validated, $fakepw);
-            else saveFromUser($validated, $fakepw);
+            if (!$validated['substitute']['is'])
+                saveFromScratch($validated, $fakepw);
+            else
+                saveFromUser($validated, $fakepw);
         });
     }
 
@@ -34,7 +36,8 @@ class Helper
     }
 }
 
-function saveFromScratch($validated, $fakepw){
+function saveFromScratch($validated, $fakepw)
+{
 
     $role = Role::select('id', 'role_name')->where('role_name', $validated['role'])->get()->first();
 
@@ -61,7 +64,7 @@ function saveFromScratch($validated, $fakepw){
 
     foreach ($validated['schedules'] as $day => $times) {
 
-        
+
         if (count($times) <= 4 && count($times) > 0) {
             Schedule::insert([
                 'date_range_id' => $date->id,
@@ -81,8 +84,9 @@ function saveFromScratch($validated, $fakepw){
     }
 }
 
-function saveFromUser($validated, $fakepw){
-    
+function saveFromUser($validated, $fakepw)
+{
+
 
     $employee = User::select('id', 'role_id')->where('name', $validated['substitute']['name'])->get()->first();
     $date_range = DB::table('date_range_user')->select('date_range_id')->where('user_id', $employee->id)->get()->last();
@@ -126,12 +130,13 @@ function weedOut(array $array)
 {
 
     foreach ($array as $day => $_) {
-        $array[$day] = array_filter($array[$day], fn ($element) => !is_null($element));
+        $array[$day] = array_filter($array[$day], fn($element) => !is_null($element));
     }
 
     return $array;
 }
 
-function determineIfUserShouldBeActive($startDate, $endDate) {
+function determineIfUserShouldBeActive($startDate, $endDate)
+{
     return \Carbon\Carbon::now()->between($startDate, $endDate);
 }
