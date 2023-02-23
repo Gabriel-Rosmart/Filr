@@ -14,6 +14,12 @@ console.table(props.user);
 
 const storage = ref(appconfig.STORAGE_URL);
 
+function onFileChange(e) {
+    let file = e.target.files;
+    console.log(file);
+    props.form.pic = file;
+}
+
 </script>
 
 <template>
@@ -30,8 +36,9 @@ const storage = ref(appconfig.STORAGE_URL);
             <InputForm title="DNI" type="text" v-model="form.dni" :value='user.dni' />
             <InputForm title="Email" type="email" v-model="form.email" :value='user.email' />
             <div class="flex flex-col gap-2">
-                <label for="">Profile pic</label>
-                <input type="file" class="file-input file-input-bordered w-full max-w-xs" />
+                <label for="pic">Profile pic</label>
+                <input type="file" name='pic' v-on:change="onFileChange"
+                    class="file-input file-input-bordered w-full max-w-xs" />
             </div>
             <InputForm title="Phone" type="telephone" v-model="form.telephone" :value='user.phone' />
             <SelectForm v-if="isAdmin == 1" title="Role" :data='3' :rol="user.role_id" />

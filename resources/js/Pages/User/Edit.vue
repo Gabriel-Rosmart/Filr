@@ -20,6 +20,10 @@ const form = useForm({
     pic: ''
 })
 
+const submit = ()=>{
+    form.post('/user/edit');
+}
+
 </script>
 
 <template>
@@ -27,7 +31,7 @@ const form = useForm({
         <Breadcrumbs class="ml-5 mt-6" :pages="[['User', '/user'], ['Edit profile', '/user/edit']]" />
 
         <div class="flex justify-center content-center">
-            <form @submit.prevent="" class="w-full pr-10">
+            <form @submit.prevent="" class="w-full pr-10" enctype="multipart/form-data">
                 <UserData :user="user" :form="form" :isAdmin="isAdmin" />
                 <div class="flex justify-center mt-8">
                     <button class="btn btn-outline btn-error mr-4">Cancel</button>

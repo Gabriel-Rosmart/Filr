@@ -37,6 +37,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/user/edit', [UserController::class, 'edit']);
+    Route::post('/user/edit', [UserController::class, 'update']);
     Route::get('/user/warnings', [UserController::class, 'warnings']);
     Route::get('user/stats', [UserController::class, 'stats']);
     Route::get('/avatar', function () {

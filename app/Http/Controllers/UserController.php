@@ -8,6 +8,8 @@ use Inertia\Inertia;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Rules\IsValidDNI;
+use App\Rules\IsValidPhoneNumber;
 
 class UserController extends Controller
 {
@@ -82,5 +84,29 @@ class UserController extends Controller
             'user' => Auth::user(),
             'isAdmin' => Auth::user()->is_admin
         ]);
+    }
+    /**
+     * Update user data via form in /user/edit
+     */
+    public function update(Request $request)
+    {
+
+
+        
+        dd($request);
+        
+
+        $validated = $request->validate([
+            'id' => ['required'],
+            'name' => ['required'],
+            'dni' => ['required', new IsValidDNI],
+            'email' => ['required', 'email'],
+            'telephone' => ['required', new IsValidPhoneNumber],
+            'pic' => ['image']
+        ]);
+
+        
+
+        return redirect('/user/edit');
     }
 }
