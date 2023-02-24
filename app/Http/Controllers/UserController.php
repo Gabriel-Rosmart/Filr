@@ -92,15 +92,28 @@ class UserController extends Controller
     public function update(Request $request)
     {
 
+        //dd($request->pic);
         $validated = $request->validate([
             'id' => ['required'],
             'name' => ['required'],
             'dni' => ['required', new IsValidDNI],
             'email' => ['required', 'email'],
             'telephone' => ['required', new IsValidPhoneNumber],
-            'pic' => ['nullable', 'image', new IsValidPic]
+            'pic' => ['nullable', new IsValidPic],
+            'pass' => ['nullable'],
+            'repeatPass' => ['nullable']
         ]);
-        //dd($validated);
+
+        // $uploadPic = '';
+        //dd($validated['pic']);
+
+        if ($validated['pic'] != null) {
+        } else {
+            $uploadPic = Auth::user()->profile_pic;
+        }
+        $path = $request->file('pic')[0]->storeAs('/public', "pepe." . $request->file('pic')[0]->extension());
+        //dd($path);
+
         DB::transaction(function () use ($validated) {
             DB::table('users')
                 ->where('id',  $validated['id'])
@@ -108,7 +121,7 @@ class UserController extends Controller
                     'name' => $validated['name'],
                     'dni' => $validated['dni'],
                     'email' => $validated['email'],
-                    'phone' => $validated['telephone']
+                    'phone' => $validated['telephone'],
                 ]);
         });
 
