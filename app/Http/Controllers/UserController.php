@@ -104,17 +104,18 @@ class UserController extends Controller
             'repeatPass' => ['nullable']
         ]);
 
-        // $uploadPic = '';
+        $uploadPic = '';
         //dd($validated['pic']);
 
         if ($validated['pic'] != null) {
+            $uploadPic = $request->file('pic')[0]->storePublicly('public');
+            $uploadPic = explode('/', $uploadPic)[1];
         } else {
             $uploadPic = Auth::user()->profile_pic;
         }
-        $path = $request->file('pic')[0]->storeAs('/public', "pepe." . $request->file('pic')[0]->extension());
-        //dd($path);
+        //dd($uploadPic);
 
-        DB::transaction(function () use ($validated) {
+        DB::transaction(function () use ($validated, $uploadPic) {
             DB::table('users')
                 ->where('id',  $validated['id'])
                 ->update([
@@ -122,10 +123,11 @@ class UserController extends Controller
                     'dni' => $validated['dni'],
                     'email' => $validated['email'],
                     'phone' => $validated['telephone'],
+                    'profile_pic' => $uploadPic
                 ]);
         });
 
 
-        return redirect('/user/edit');
+        return redirect()->back();
     }
 }
