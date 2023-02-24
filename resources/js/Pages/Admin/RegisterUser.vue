@@ -3,6 +3,9 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue'
 import RegisterForm from '@/Shared/Actions/RegisterForm.vue';
 import { Head } from '@inertiajs/inertia-vue3';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const props = defineProps({
         users: Array,
@@ -15,7 +18,7 @@ const props = defineProps({
     <AdminLayout>
         <Breadcrumbs 
             class="ml-5 mt-6"
-            :pages="[['Admin', '/admin'], ['Manage Users', '/admin/manage'], ['Register', '/admin/manage/register']]" 
+            :pages="[[ t('breadcrumbs.admin'), '/admin'], [t('breadcrumbs.manage'), '/admin/manage'], [t('breadcrumbs.register'), '/admin/manage/register']]" 
         />
         <RegisterForm :users="users" :roles="roles" />
     </AdminLayout>

@@ -95,7 +95,8 @@
         "permits": "Permits",
         "incidences": "Incidences",
         "edit": "Edit",
-        "admin": "Admin"
+        "admin": "Admin",
+        "register": "Register"
     },
     "days": {
         "day": "day",
