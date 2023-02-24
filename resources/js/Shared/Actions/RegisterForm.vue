@@ -20,7 +20,8 @@ import format from '@/Utilities/timefm'
 const { t } = useI18n()
 
 const props = defineProps({
-    users: Array
+    users: Array,
+    roles: Array
 })
 
 let currentStep = ref(0)
