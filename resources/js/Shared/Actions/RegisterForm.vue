@@ -114,7 +114,7 @@ const formatter = ref({
                             <div class="mb-4">
                                 <select class="select select-bordered w-full" v-model="form.role" :disabled="form.substitute.is">
                                     <option value="" disabled selected>Rol</option>
-                                    <option v-for="rol of roles" :key="rol.id">{{ rol.role_name }}</option>
+                                    <option v-for="rol of roles" :key="rol.id" :value="rol.role_name">{{ t(`employees.${rol.role_name}`) }}</option>
                                 </select>
                             </div>
                             <div class="flex items-center">
