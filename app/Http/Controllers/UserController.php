@@ -106,6 +106,9 @@ class UserController extends Controller
                 ->where('id',  $validated['id'])
                 ->update([
                     'name' => $validated['name'],
+                    'dni' => $validated['dni'],
+                    'email' => $validated['email'],
+                    'phone' => $validated['telephone']
                 ]);
         });
 

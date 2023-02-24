@@ -2,6 +2,7 @@
 import appconfig from "@/appconfig";
 import InputForm from "@/Components/InputForm.vue";
 import SelectForm from "@/Components/SelectForm.vue";
+import FormInputError from "@/Shared/Forms/FormInputError.vue";
 import { ref } from "vue";
 
 const props = defineProps({
@@ -32,15 +33,29 @@ function onFileChange(e) {
                     </div>
                 </div>
             </div>
-            <InputForm title="Name" type="text" v-model="form.name" :value='user.name' />
-            <InputForm title="DNI" type="text" v-model="form.dni" :value='user.dni' />
-            <InputForm title="Email" type="email" v-model="form.email" :value='user.email' />
+            <div>
+                <InputForm title="Name" type="text" v-model="form.name" :value='user.name' />
+                <FormInputError class="mt-2" :message="form.errors.name" />
+            </div>
+            <div>
+                <InputForm title="DNI" type="text" v-model="form.dni" :value='user.dni' />
+                <FormInputError class="mt-2" :message="form.errors.dni" />
+            </div>
+            <div>
+                <InputForm title="Email" type="email" v-model="form.email" :value='user.email' />
+                <FormInputError class="mt-2" :message="form.errors.email" />
+            </div>
             <div class="flex flex-col gap-2">
                 <label for="pic">Profile pic</label>
                 <input type="file" name='pic' v-on:change="onFileChange"
                     class="file-input file-input-bordered w-full max-w-xs" />
+                <FormInputError class="mt-2" :message="form.errors.pic" />
+
             </div>
-            <InputForm title="Phone" type="telephone" v-model="form.telephone" :value='user.phone' />
+            <div>
+                <InputForm title="Phone" type="telephone" v-model="form.telephone" :value='user.phone' />
+                <FormInputError class="mt-2" :message="form.errors.telephone" />
+            </div>
             <SelectForm v-if="isAdmin == 1" title="Role" :data='3' :rol="user.role_id" />
             <InputForm v-if="isAdmin == 0" title="New password" type="password" v-model="form.pass" />
             <!-- <div></div> -->
