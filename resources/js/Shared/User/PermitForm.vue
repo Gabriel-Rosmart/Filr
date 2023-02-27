@@ -21,7 +21,14 @@ const form = useForm({
             <div class="grid grid-flow-row">
                 <h2 class="text-xl">{{ t('permits.data') }}</h2>
                 <div class="border-2 rounded-lg p-2">
-                    
+                    <div class="flex flex-row w-3/12">
+                        <FormLabel for="single" value="Un día"
+                                class="hover:bg-gray-200 rounded-lg p-3 w-full" />
+                        <FormRadioButton name="selection" id="single" class="mx-5 my-3" />
+                        <FormLabel for="multi" value="Varios días"
+                                class="hover:bg-gray-200 rounded-lg p-3 w-full" />
+                        <FormRadioButton name="selection" id="multi" class="mx-5 my-3" />
+                    </div>
                 </div>
                 <h2 class="text-xl">{{ t('permits.type') }}</h2>
                 <div class="border-2 rounded-lg p-2">
