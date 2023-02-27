@@ -25,7 +25,7 @@
                 "late": "Is late",
                 "absent": "Did not come"
             },
-            "userstate" : {
+            "userstate": {
                 "main": "Status",
                 "all": "All",
                 "active": "Active",
@@ -39,7 +39,7 @@
             "accepted": "Accepted",
             "denied": "Denied"
         },
-        "buttons" : {
+        "buttons": {
             "edit": "Edit user",
             "adduser": "Add user",
             "accept": "Accept",
@@ -50,8 +50,7 @@
             "save": "Save",
             "cancel": "Cancel"
         },
-        "details" :
-        {
+        "details": {
             "noCorrespondences": "No matches founds",
             "files": "Files",
             "timetable": "Timetable",
@@ -60,14 +59,14 @@
             "personal": "Personal data",
             "noIncidence": "No incidences found",
             "noPermit": "No permits found",
-            "noFiles":"No files found",
-            "noTimetable":"No timetable found",
+            "noFiles": "No files found",
+            "noTimetable": "No timetable found",
             "user": {
                 "email": "Email",
                 "dni": "DNI",
                 "telephone": "Telephone",
-                "position" : "Position",
-                "posType" : {
+                "position": "Position",
+                "posType": {
                     "Profesor": "Teacher",
                     "Administrativo": "Administrative",
                     "Limpieza": "Cleaning Service"
@@ -95,9 +94,10 @@
         "manage": "Manage users",
         "permits": "Permits",
         "incidences": "Incidences",
-        "edit": "Edit",
+        "edit": "Edit profile",
         "admin": "Admin",
-        "register": "Register"
+        "register": "Register",
+        "user": "User"
     },
     "days": {
         "day": "day",
@@ -122,10 +122,15 @@
         "substitute": "Substitute",
         "teacher": "Teacher",
         "administrative": "Administrative",
-        "cleaning": "Cleaning service"
+        "cleaning": "Cleaning service",
+        "password": "New password",
+        "passwordConfirm": "Repeat new password",
+        "pic": "Profile picture",
+        "save": "Save",
+        "cancel": "Cancel"
     },
     "dateformat": "MM-DD-YYYY",
-    "employees" : {
+    "employees": {
         "all": "All",
         "teacher": "Teacher",
         "administrative": "Administrative",
