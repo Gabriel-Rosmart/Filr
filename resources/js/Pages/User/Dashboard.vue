@@ -1,5 +1,6 @@
 <script setup>
 import UserLayout from '@/Layouts/UserLayout.vue';
+import AdminLayout from '@/Layouts/AdminLayout.vue'
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import UserPages from '@/Shared/Navigation/UserPages.vue';
 import UserInfo from '@/Shared/User/UserInfo.vue';
@@ -21,8 +22,8 @@ const fileIn = (id) => {
     axios.post('/token', {
         token: id
     })
-    .then(function (response) { console.log(response.data); })
-    .catch(function (error) { console.log(error); });
+        .then(function (response) { console.log(response.data); })
+        .catch(function (error) { console.log(error); });
 }
 
 const { t } = useI18n();
@@ -34,15 +35,18 @@ let currentComponentIndex = ref(0);
 </script>
 
 <template>
-    <UserLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.dashboard'), '/user']]" />
-
+    <component :is="user.is_admin == 0 ? UserLayout : AdminLayout">
+        <Breadcrumbs v-if="user.is_admin == 0" class="ml-5 mt-6"
+            :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.dashboard'), '/user']]" />
+        <Breadcrumbs v-else-if="user.is_admin == 1" class="ml-5 mt-6"
+            :pages="[['Admin', '/admin'], [t('breadcrumbs.dashboard'), '/user']]" />
         <div class="flex justify-center content-center mt-4">
             <div class="flex flex-col mt-10 mx-20 w-full">
                 <div class="flex items-end justify-between">
                     <UserInfo class="my-8" :user="user" />
                     <div class="flex justify-end w-1/3">
-                        <button class="btn btn-outline btn-primary w-full max-w-xs my-12 mr-2" @click="fileIn(user.id)">Fichar</button>
+                        <button class="btn btn-outline btn-primary w-full max-w-xs my-12 mr-2"
+                            @click="fileIn(user.id)">Fichar</button>
                     </div>
                 </div>
                 <div class="divider divider-vertical"></div>
@@ -76,5 +80,5 @@ let currentComponentIndex = ref(0);
             </div>
         </div>
 
-    </UserLayout>
+    </component>
 </template>

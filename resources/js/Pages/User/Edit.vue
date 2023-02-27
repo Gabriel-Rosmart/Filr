@@ -35,7 +35,7 @@ const submit = () => {
         <Breadcrumbs v-if="isAdmin == 0" class="ml-5 mt-6"
             :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.edit'), '/user/edit']]" />
         <Breadcrumbs v-else-if="isAdmin == 1" class="ml-5 mt-6"
-            :pages="[['Admin', '/admin'], ['Edit profile', '/user/edit']]" />
+            :pages="[['Admin', '/admin'], [t('breadcrumbs.dashboard'), '/user/edit']]" />
         <div class="flex justify-center content-center">
             <form @submit.prevent="" class="w-full pr-10" enctype="multipart/form-data">
                 <UserData :user="user" :form="form" :isAdmin="0" />
