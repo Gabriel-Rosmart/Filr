@@ -33,6 +33,7 @@ let currentComponentIndex = ref(0);
             <div class="flex flex-col mt-10 mx-20 w-full">
                 <div class="flex items-end justify-between">
                     <UserInfo class="my-8" :user="user" />
+                    <button class="btn btn-info h-full w-32">Fichar</button>
                 </div>
                 <div class="divider divider-vertical"></div>
 
