@@ -8,6 +8,9 @@ use Inertia\Inertia;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Rules\IsValidDNI;
+use App\Rules\IsValidPhoneNumber;
+use App\Rules\IsValidPic;
 
 class UserController extends Controller
 {
@@ -74,5 +77,64 @@ class UserController extends Controller
     public function stats()
     {
         return Inertia::render('User/Stats');
+    }
+
+    public function edit()
+    {
+        return Inertia::render('User/Edit', [
+            'user' => Auth::user(),
+            'isAdmin' => Auth::user()->is_admin
+        ]);
+    }
+    /**
+     * Update user data via form in /user/edit
+     */
+    public function update(Request $request)
+    {
+
+        //dd($request->pic);
+        $validated = $request->validate([
+            'id' => ['required'],
+            'name' => ['required'],
+            'dni' => ['required', new IsValidDNI],
+            'email' => ['required', 'email'],
+            'telephone' => ['required', new IsValidPhoneNumber],
+            'pic' => ['nullable', new IsValidPic],
+            'password' => ['nullable', 'confirmed'],
+        ]);
+
+        //dd($validated);
+        $uploadPic = '';
+
+        if ($validated['pic'] != null) {
+            $uploadPic = $request->file('pic')[0]->storePublicly('public');
+            $uploadPic = explode('/', $uploadPic)[1];
+        } else {
+            $uploadPic = Auth::user()->profile_pic;
+        }
+
+
+        if ($validated['password'] != null) {
+            $uploadPass = bcrypt($validated['password']);
+        } else {
+            $uploadPass = Auth::user()->password;
+        }
+        //dd($uploadPass);
+
+        DB::transaction(function () use ($validated, $uploadPic, $uploadPass) {
+            DB::table('users')
+                ->where('id',  $validated['id'])
+                ->update([
+                    'name' => $validated['name'],
+                    'dni' => $validated['dni'],
+                    'email' => $validated['email'],
+                    'phone' => $validated['telephone'],
+                    'profile_pic' => $uploadPic,
+                    'password' => $uploadPass
+                ]);
+        });
+
+
+        return redirect()->back();
     }
 }
