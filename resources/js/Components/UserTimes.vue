@@ -66,7 +66,7 @@ console.log(week);
             </thead>
             <tbody>
                 <tr v-for="day in week">
-                    <th>{{ day.day }}</th>
+                    <th>{{ day[0].day }}</th>
                     <td>
                         <InputForm v-if="day[0]" type="time" :value='day[0].starts_at' />
                         <InputForm v-else type="time" />
