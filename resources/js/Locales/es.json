@@ -52,6 +52,7 @@
         },
         "details" :
         {
+            "noCorrespondences": "No se encontraron coincidencias",
             "files": "Fichajes",
             "timetable": "Horario",
             "incidences": "Incidencias",
