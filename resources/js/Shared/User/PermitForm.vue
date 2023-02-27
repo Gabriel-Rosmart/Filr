@@ -19,9 +19,12 @@ const form = useForm({
     <div class="flex items-center mt-8">
         <form @submit.prevent="" class="w-full pr-10">
             <div class="grid grid-flow-row">
-                <h2 class="text-xl">Tipo de Permiso</h2>
+                <h2 class="text-xl">{{ t('permits.data') }}</h2>
                 <div class="border-2 rounded-lg p-2">
-                    <h4 class="text-lg mb-5">Permisos</h4>
+                </div>
+                <h2 class="text-xl">{{ t('permits.type') }}</h2>
+                <div class="border-2 rounded-lg p-2">
+                    <h4 class="text-lg mb-5">{{ t('permits.permits') }}</h4>
                     <div class="grid grid-cols-2 w-auto">
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="death" :value="t('permits.death')"
@@ -65,7 +68,7 @@ const form = useForm({
                                 class="mx-5 my-3" />
                         </div>
                     </div>
-                    <h4 class="text-lg mb-5">Ausencias imprevistas</h4>
+                    <h4 class="text-lg mb-5">{{ t('permits.unexpections') }}</h4>
                     <div class="grid grid-cols-2 w-auto">
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="unexpection" :value="t('permits.unexpection')"
@@ -75,7 +78,7 @@ const form = useForm({
                         </div>
                     </div>
                 </div>
-                <h2 class="text-xl mt-5">Documentación que se achega</h2>
+                <h2 class="text-xl mt-5">{{ t('permits.doc') }}</h2>
                 <div class="border-2 rounded-lg p-2">
                     <div class="grid grid-cols-2 w-auto">
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
@@ -85,9 +88,9 @@ const form = useForm({
                                 class="mx-5 my-3" />
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
-                            <FormLabel for="census" :value="t('permits.census')"
+                            <FormLabel for="censusdoc" :value="t('permits.censusdoc')"
                                 class="hover:bg-gray-200 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="census"
+                            <FormRadioButton name="document" v-model:checked="falso" id="censusdoc"
                                 class="mx-5 my-3" />
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">

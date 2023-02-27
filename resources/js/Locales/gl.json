@@ -132,6 +132,11 @@
         "cleaning": "Persoal de limpieza"
     },
     "permits" : {
+        "data":"Datos do permiso",
+        "type":"Tipo de permiso",
+        "permits":"Permisos",
+        "unexpections":"Ausencias imprevistas",
+        "doc":"Documentación achegada",
         "death": "Falecemento, accidente ou enfermidade grave, hospitalización ou intervención quirúrxica dun familiar (art.3)",
         "move": "Traslado de domicilio (art.4)",
         "exam": "Concorrer a exames finais, probas definitivas de aptitude ou probas selectivas no ámbito do emprego público (art.6)",
