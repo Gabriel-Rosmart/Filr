@@ -7,8 +7,8 @@ import TimeTable from '@/Shared/Info/TimeTable.vue';
 import PermitsTable from '@/Shared/User/UserPermits.vue';
 import { ref } from 'vue';
 import Incidents from '@/Shared/Info/IncidencesUserTable.vue';
-import { current } from 'daisyui/src/colors';
 import { useI18n } from 'vue-i18n';
+import axios from 'axios';
 
 const props = defineProps({
     user: Object,
@@ -16,6 +16,14 @@ const props = defineProps({
     permits: Object,
     incidents: Object,
 })
+
+const fileIn = (id) => {
+    axios.post('/token', {
+        token: id
+    })
+    .then(function (response) { console.log(response.data); })
+    .catch(function (error) { console.log(error); });
+}
 
 const { t } = useI18n();
 
@@ -33,7 +41,9 @@ let currentComponentIndex = ref(0);
             <div class="flex flex-col mt-10 mx-20 w-full">
                 <div class="flex items-end justify-between">
                     <UserInfo class="my-8" :user="user" />
-                    <button class="btn btn-info h-full w-32">Fichar</button>
+                    <div class="flex justify-end w-1/3">
+                        <button class="btn btn-outline btn-primary w-full max-w-xs my-12 mr-2" @click="fileIn(user.id)">Fichar</button>
+                    </div>
                 </div>
                 <div class="divider divider-vertical"></div>
 

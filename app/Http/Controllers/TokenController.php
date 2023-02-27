@@ -4,13 +4,27 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TokenController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $user_id = request()->input('timestamp');
+        $user_id = request()->input('token');
+
+        // * Get date and hour
         $now = Carbon::now();
-        return redirect()->back();
+        $now->setTimezone("GMT+1");
+        $date = $now->format("Y-m-d");
+        $time = $now->format("H:i:s");
+
+        // * Insert record on database
+        DB::table('files')->insert([
+            'user_id' => $user_id,
+            'date' => $date,
+            'timestamp' => $time
+        ]);
+
+        return "Clock in succesfuly";
     }
 }
