@@ -1,15 +1,21 @@
 <script setup>
 import FormLabel from '@/Shared/Forms/FormLabel.vue'
-import FormCheckbox from '@/Shared/Forms/FormCheckbox.vue';
 import FormRadioButton from "@/Shared/Forms/FormRadiobutton.vue";
 import FormFileInput from "@/Shared/Forms/FormFileInput.vue";
+import FormOneDate from "@/Shared/Forms/FormOneDate.vue";
+import FormMultiDate from "@/Shared/Forms/FormMultiDate.vue";
+import FormTextInput from "@/Shared/Forms/FormTextInput.vue";
 
+import { ref } from 'vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { useI18n } from 'vue-i18n';
 
 
 
 const { t } = useI18n();
+
+let currentComponentIndex = ref(0);
+const dates = [FormOneDate, FormMultiDate];
 
 const form = useForm({
     falso: false
@@ -23,11 +29,23 @@ const form = useForm({
                 <div class="border-2 rounded-lg p-2">
                     <div class="flex flex-row w-3/12">
                         <FormLabel for="single" value="Un día"
-                                class="hover:bg-gray-200 rounded-lg p-3 w-full" />
-                        <FormRadioButton name="selection" id="single" class="mx-5 my-3" />
+                                class="hover:bg-gray-200 rounded-lg p-3 w-full"
+                                @click="currentComponentIndex = 0"
+                                />
+                        <FormRadioButton name="selection" id="single" class="mx-5 my-3"
+                        @click="currentComponentIndex = 0"
+                        checked="true"/>
                         <FormLabel for="multi" value="Varios días"
-                                class="hover:bg-gray-200 rounded-lg p-3 w-full" />
-                        <FormRadioButton name="selection" id="multi" class="mx-5 my-3" />
+                                class="hover:bg-gray-200 rounded-lg p-3 w-full"
+                                @click="currentComponentIndex = 1"/>
+                        <FormRadioButton name="selection" id="multi" class="mx-5 my-3"
+                        @click="currentComponentIndex = 1"/>
+                    </div>
+                    <div>
+                        <component :is="dates[currentComponentIndex]" />
+                    </div>
+                    <div>
+                        <FormTextInput name="affected" id="effected" label="Grupos afectados" />
                     </div>
                 </div>
                 <h2 class="text-xl">{{ t('permits.type') }}</h2>
@@ -214,6 +232,9 @@ const form = useForm({
                                 class="hover:bg-gray-200 rounded-lg p-3 w-full" />
                             <FormRadioButton name="document" v-model:checked="falso" id="other"
                                 class="mx-5 my-3" />
+                        </div>
+                        <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
+                            <FormFileInput id="file" name="file" class="w-full" />
                         </div>
                     </div>
                 </div>
