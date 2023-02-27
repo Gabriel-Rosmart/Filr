@@ -75,4 +75,9 @@ class UserController extends Controller
     {
         return Inertia::render('User/Stats');
     }
+
+    public function permitRequest()
+    {
+        return Inertia::render('User/PermitRequest');
+    }
 }

@@ -96,7 +96,8 @@
         "incidences": "Incidencias",
         "edit": "Editar",
         "admin": "Administrador",
-        "register": "Registrar"
+        "register": "Registrar",
+        "user": "Usuario"
     },
     "days": {
         "day": "día",
