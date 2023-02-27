@@ -10,7 +10,7 @@
 
 <template>
     <UserLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.dashboard'), '/user']]" />
+        <Breadcrumbs class="ml-5 mt-6" :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.permitRequest'), '/user/permitreq']]" />
         <PermitForm class="flex items-center m-8"/>
     </UserLayout>
 </template>

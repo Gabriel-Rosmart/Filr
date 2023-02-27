@@ -21,6 +21,7 @@ const form = useForm({
             <div class="grid grid-flow-row">
                 <h2 class="text-xl">{{ t('permits.data') }}</h2>
                 <div class="border-2 rounded-lg p-2">
+                    
                 </div>
                 <h2 class="text-xl">{{ t('permits.type') }}</h2>
                 <div class="border-2 rounded-lg p-2">

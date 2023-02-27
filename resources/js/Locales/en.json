@@ -93,6 +93,7 @@
         "dashboard": "Dashboard",
         "manage": "Manage users",
         "permits": "Permits",
+        "permitRequest": "Request permit",
         "incidences": "Incidences",
         "edit": "Edit",
         "admin": "Admin",
