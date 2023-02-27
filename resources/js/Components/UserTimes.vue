@@ -50,6 +50,10 @@ props.weekend.forEach(element => {
 
 var week = [monday, tuesday, wednesday, thursday, friday];
 console.log(week);
+
+function removeSeconds(time) {
+    return time.slice(0, -3);
+}
 </script>
 
 <template>
@@ -66,24 +70,25 @@ console.log(week);
             </thead>
             <tbody>
                 <tr v-for="day in week">
-                    <th>{{t ('days.' + day[0].day) }}</th>
+                    <th>{{ t('days.' + day[0].day) }}</th>
                     <td>
-                        <InputForm v-if="day[0]" type="time" :value='day[0].starts_at' />
+                        <InputForm v-if="day[0]" type="time" :value='removeSeconds(day[0].starts_at)' />
                         <InputForm v-else type="time" />
                     </td>
                     <td>
-                        <InputForm v-if="day[0]" type="time" :value='day[0].ends_at' />
+                        <InputForm v-if="day[0]" type="time" :value='removeSeconds(day[0].ends_at)' />
                         <InputForm v-else type="time" />
                     </td>
                     <td>
-                        <InputForm v-if="day[1]" type="time" :value='day[1].starts_at' />
+                        <InputForm v-if="day[1]" type="time" :value='removeSeconds(day[1].starts_at)' />
                         <InputForm v-else type="time" />
                     </td>
                     <td>
-                        <InputForm v-if="day[1]" type="time" :value='day[1].ends_at' />
+                        <InputForm v-if="day[1]" type="time" :value='removeSeconds(day[1].ends_at)' />
                         <InputForm v-else type="time" />
                     </td>
                 </tr>
-        </tbody>
-    </table>
-</div></template>
+            </tbody>
+        </table>
+    </div>
+</template>
