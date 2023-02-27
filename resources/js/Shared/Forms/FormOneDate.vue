@@ -1,5 +1,6 @@
 <script setup>
     import FormTime from '@/Shared/Forms/FormTime.vue';
+    import FormLabel from '@/Shared/Forms/FormLabel.vue';
 </script>
 <template>
     <div class="flex flex-row gap-5">
