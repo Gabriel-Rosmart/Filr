@@ -15,35 +15,35 @@ props.weekend.forEach(element => {
         if (monday == undefined) {
             monday = [element];
         } else {
-            monday = [monday, element];
+            monday = [monday[0], element];
         }
     }
     if (element.day == 'tuesday') {
         if (tuesday == undefined) {
             tuesday = [element];
         } else {
-            tuesday = [tuesday, element];
+            tuesday = [tuesday[0], element];
         }
     }
     if (element.day == 'wednesday') {
         if (wednesday == undefined) {
             wednesday = [element];
         } else {
-            wednesday = [wednesday, element];
+            wednesday = [wednesday[0], element];
         }
     }
     if (element.day == 'thursday') {
         if (thursday == undefined) {
             thursday = [element];
         } else {
-            thursday = [thursday, element];
+            thursday = [thursday[0], element];
         }
     }
     if (element.day == 'friday') {
         if (friday == undefined) {
             friday = [element];
         } else {
-            friday = [friday, element];
+            friday = [friday[0], element];
         }
     }
 });
