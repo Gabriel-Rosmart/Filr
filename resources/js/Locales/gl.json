@@ -106,7 +106,7 @@
         "name": "Nome",
         "email": "Email",
         "dni": "DNI",
-        "telephone": "Telefono",
+        "telephone": "Teléfono",
         "inmorning": "Entrada (mañá)",
         "outmorning": "Saída (mañá)",
         "innoon": "Entrada (tarde)",
