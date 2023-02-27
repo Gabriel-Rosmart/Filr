@@ -52,6 +52,7 @@
         },
         "details" :
         {
+            "noCorrespondences": "No matches founds",
             "files": "Files",
             "timetable": "Timetable",
             "incidences": "Incidences",
