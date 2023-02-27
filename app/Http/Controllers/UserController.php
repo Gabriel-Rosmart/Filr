@@ -100,12 +100,11 @@ class UserController extends Controller
             'email' => ['required', 'email'],
             'telephone' => ['required', new IsValidPhoneNumber],
             'pic' => ['nullable', new IsValidPic],
-            'pass' => ['nullable'],
-            'repeatPass' => ['nullable']
+            'password' => ['nullable', 'confirmed'],
         ]);
 
+        //dd($validated);
         $uploadPic = '';
-        //dd($validated['pic']);
 
         if ($validated['pic'] != null) {
             $uploadPic = $request->file('pic')[0]->storePublicly('public');
@@ -113,9 +112,16 @@ class UserController extends Controller
         } else {
             $uploadPic = Auth::user()->profile_pic;
         }
-        //dd($uploadPic);
 
-        DB::transaction(function () use ($validated, $uploadPic) {
+
+        if ($validated['password'] != null) {
+            $uploadPass = $validated['password'];
+        } else {
+            $uploadPass = Auth::user()->password;
+        }
+        //dd($uploadPass);
+
+        DB::transaction(function () use ($validated, $uploadPic, $uploadPass) {
             DB::table('users')
                 ->where('id',  $validated['id'])
                 ->update([
@@ -123,7 +129,8 @@ class UserController extends Controller
                     'dni' => $validated['dni'],
                     'email' => $validated['email'],
                     'phone' => $validated['telephone'],
-                    'profile_pic' => $uploadPic
+                    'profile_pic' => $uploadPic,
+                    'password' => $uploadPass
                 ]);
         });
 

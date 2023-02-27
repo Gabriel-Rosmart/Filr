@@ -57,9 +57,15 @@ function onFileChange(e) {
                 <FormInputError class="mt-2" :message="form.errors.telephone" />
             </div>
             <SelectForm v-if="isAdmin == 1" title="Role" :data='3' :rol="user.role_id" />
-            <InputForm v-if="isAdmin == 0" title="New password" type="password" v-model="form.pass" />
-            <!-- <div></div> -->
-            <InputForm v-if="isAdmin == 0" title="Repeat password" type="password" v-model="form.repeatPass" />
+            <div>
+                <InputForm v-if="isAdmin == 0" title="New password" type="password" v-model="form.password" />
+                <FormInputError class="mt-2" :message="form.errors.password" />
+
+            </div>
+            <div>
+                <InputForm v-if="isAdmin == 0" title="Repeat password" type="password"
+                    v-model="form.password_confirmation" />
+            </div>
         </div>
     </div>
 </template>

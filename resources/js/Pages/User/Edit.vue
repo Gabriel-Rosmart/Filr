@@ -15,12 +15,12 @@ const form = useForm({
     dni: props.user.dni,
     telephone: props.user.phone,
     email: props.user.email,
-    pass: '',
-    repeatPass: '',
+    password: '',
+    password_confirmation: '',
     pic: ''
 })
 
-const submit = ()=>{
+const submit = () => {
     form.post('/user/edit');
 }
 
