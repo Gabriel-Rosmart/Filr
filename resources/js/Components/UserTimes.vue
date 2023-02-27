@@ -52,7 +52,10 @@ var week = [monday, tuesday, wednesday, thursday, friday];
 console.log(week);
 
 function removeSeconds(time) {
-    return time.slice(0, -3);
+    if (time.length == 8)
+        return time.slice(0, -3);
+    else
+        return time;
 }
 </script>
 
