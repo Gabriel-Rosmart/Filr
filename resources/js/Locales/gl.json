@@ -130,5 +130,17 @@
         "teacher": "Mestre",
         "administrative": "Administrativo",
         "cleaning": "Persoal de limpieza"
+    },
+    "permits" : {
+        "death": "Falecemento, accidente ou enfermidade grave, hospitalización ou intervención quirúrxica dun familiar (art.3)",
+        "move": "Traslado de domicilio (art.4)",
+        "exam": "Concorrer a exames finais, probas definitivas de aptitude ou probas selectivas no ámbito do emprego público (art.6)",
+        "prenat": "Realización de exames prenatais e técnicas de preparación ao parto ou asistencia ás preceptivas sesións de información e preparación e para a realización dos preceptivos informes psicolóxicos e sociais previos á declaración de ideonidade (art.9)",
+        "fecAs": "Para realizar tratamentos de fecundación asistida (art.10)",
+        "marriage": "Por matrimonio de familiares de ate segundo grao de consanguinidade e primerio de afinidade (art.12)",
+        "duties": "Deberes inescusables de caracter público ou persoal, deberes relacionados coa conciliación da vida familiar e laboral, e máis de asistencia a consultas e revisións médicas (art.14)",
+        "particularBussines": "Asuntos particulares (art.15)",
+        "unexpection": "Imprevistos (art.33)",
+        "famBook": "Fotocopia cotexada do libro de familia"
     }
 }
