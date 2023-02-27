@@ -60,11 +60,12 @@ function onFileChange(e) {
             <div>
                 <InputForm v-if="isAdmin == 0" title="New password" type="password" v-model="form.password" />
                 <FormInputError class="mt-2" :message="form.errors.password" />
-
             </div>
             <div>
                 <InputForm v-if="isAdmin == 0" title="Repeat password" type="password"
                     v-model="form.password_confirmation" />
+                <FormInputError class="mt-2" :message="form.errors.password_confirmation" />
+
             </div>
         </div>
     </div>

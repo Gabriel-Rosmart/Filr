@@ -115,7 +115,7 @@ class UserController extends Controller
 
 
         if ($validated['password'] != null) {
-            $uploadPass = $validated['password'];
+            $uploadPass = bcrypt($validated['password']);
         } else {
             $uploadPass = Auth::user()->password;
         }
