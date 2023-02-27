@@ -61,7 +61,7 @@ const submit = () => {
                         <InputForm title="Name" type="text" v-model="form.name" :value='user.name' />
                     </div>
                 </div>-->
-                <UserTimes :weekend="weekend" :shift="shift" />
+                <UserTimes :weekend="timetable" :shift="shift" />
                 <!--
                 <div class="flex justify-center">
                     <table class="table w-max">
