@@ -25,7 +25,7 @@
                 "late": "Llega tarde",
                 "absent": "No vino"
             },
-            "userstate" : {
+            "userstate": {
                 "main": "Estado",
                 "all": "Cualquiera",
                 "active": "Activo",
@@ -39,7 +39,7 @@
             "accepted": "Aceptado",
             "denied": "Denegado"
         },
-        "buttons" : {
+        "buttons": {
             "edit": "Editar usuario",
             "adduser": "Añadir usuario",
             "accept": "Aceptar",
@@ -48,8 +48,7 @@
             "prev": "Anterior",
             "send": "Enviar"
         },
-        "details" :
-        {
+        "details": {
             "files": "Fichajes",
             "timetable": "Horario",
             "incidences": "Incidencias",
@@ -57,14 +56,14 @@
             "personal": "Datos Personales",
             "noIncidence": "No se encontraron incidencias",
             "noPermit": "No se encontraron permisos",
-            "noFiles":"No se encontraron fichajes",
-            "noTimetable":"No tiene horarios asociados",
+            "noFiles": "No se encontraron fichajes",
+            "noTimetable": "No tiene horarios asociados",
             "user": {
                 "email": "Correo Electrónico",
                 "dni": "DNI",
                 "telephone": "Teléfono",
-                "position" : "Puesto",
-                "posType" : {
+                "position": "Puesto",
+                "posType": {
                     "Profesor": "Profesor",
                     "Administrativo": "Administrativo",
                     "Limpieza": "Limpieza"
@@ -106,11 +105,16 @@
         "name": "Nombre",
         "email": "Email",
         "dni": "DNI",
-        "telephone": "Telefono",
+        "telephone": "Teléfono",
         "inmorning": "Entrada (mañana)",
         "outmorning": "Salida (mañana)",
         "innoon": "Entrada (tarde)",
-        "outnoon": "Salida (tarde)"
+        "outnoon": "Salida (tarde)",
+        "password": "Nueva contraseña",
+        "passwordConfirm": "Repita nueva contraseña",
+        "pic": "Foto de perfil",
+        "save": "Guardar",
+        "cancel": "Cancelar"
     },
     "dateformat": "DD-MM-YYYY"
 }

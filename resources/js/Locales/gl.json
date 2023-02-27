@@ -25,7 +25,7 @@
                 "late": "Chega tarde",
                 "absent": "Non veu"
             },
-            "userstate" : {
+            "userstate": {
                 "main": "Estado",
                 "all": "Calquera",
                 "active": "Activo",
@@ -39,8 +39,8 @@
             "accepted": "Aceptado",
             "denied": "Denegado"
         },
-        "buttons" : {
-            "edit": "Modificar usuario", 
+        "buttons": {
+            "edit": "Modificar usuario",
             "adduser": "Engadir usuario",
             "accept": "Aceptar",
             "deny": "Denegar",
@@ -48,8 +48,7 @@
             "prev": "Anterior",
             "send": "Enviar"
         },
-        "details" :
-        {
+        "details": {
             "files": "Fichaxes",
             "timetable": "Horarios",
             "incidences": "Incidencias",
@@ -57,14 +56,14 @@
             "personal": "Datos Persoais",
             "noIncidence": "Non foron achadas incidencias",
             "noPermit": "Non foron achados permisos",
-            "noFiles":"Non foron achados fichajes",
-            "noTimetable":"Non ten horarios asociados",
+            "noFiles": "Non foron achados fichajes",
+            "noTimetable": "Non ten horarios asociados",
             "user": {
                 "email": "Enderezo electrónico",
                 "dni": "DNI",
                 "telephone": "Teléfono",
-                "position" : "Posto",
-                "posType" : {
+                "position": "Posto",
+                "posType": {
                     "Profesor": "Mestre",
                     "Administrativo": "Administrativo",
                     "Limpieza": "Limpeza"
@@ -111,7 +110,12 @@
         "inmorning": "Entrada (mañá)",
         "outmorning": "Saída (mañá)",
         "innoon": "Entrada (tarde)",
-        "outnoon": "Saída (tarde)"
+        "outnoon": "Saída (tarde)",
+        "password": "Novo contrasinal",
+        "passwordConfirm": "Repita novo contrasinal",
+        "pic": "Foto de perfil",
+        "save": "Gardar",
+        "cancel": "Cancelar"
     },
     "dateformat": "DD-MM-YYYY"
 }

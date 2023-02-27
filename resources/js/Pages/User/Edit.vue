@@ -4,6 +4,9 @@ import AdminLayout from '@/Layouts/AdminLayout.vue'
 import UserData from '@/Components/UserData.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n();
 
 const props = defineProps({
     user: Object,
@@ -36,8 +39,8 @@ const submit = () => {
             <form @submit.prevent="" class="w-full pr-10" enctype="multipart/form-data">
                 <UserData :user="user" :form="form" :isAdmin="0" />
                 <div class="flex justify-center mt-8">
-                    <button class="btn btn-outline btn-error mr-4">Cancel</button>
-                    <button class="btn btn-outline btn-success" @click="submit">Save</button>
+                    <button class="btn btn-outline btn-error mr-4">{{ t('forms.cancel') }}</button>
+                    <button class="btn btn-outline btn-success" @click="submit">{{ t('forms.save') }}</button>
                 </div>
             </form>
         </div>

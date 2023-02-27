@@ -25,7 +25,7 @@
                 "late": "Is late",
                 "absent": "Did not come"
             },
-            "userstate" : {
+            "userstate": {
                 "main": "Status",
                 "all": "All",
                 "active": "Active",
@@ -39,7 +39,7 @@
             "accepted": "Accepted",
             "denied": "Denied"
         },
-        "buttons" : {
+        "buttons": {
             "edit": "Edit user",
             "adduser": "Add user",
             "accept": "Accept",
@@ -48,8 +48,7 @@
             "prev": "Previous",
             "send": "Send"
         },
-        "details" :
-        {
+        "details": {
             "files": "Files",
             "timetable": "Timetable",
             "incidences": "Incidences",
@@ -57,14 +56,14 @@
             "personal": "Personal data",
             "noIncidence": "No incidences found",
             "noPermit": "No permits found",
-            "noFiles":"No files found",
-            "noTimetable":"No timetable found",
+            "noFiles": "No files found",
+            "noTimetable": "No timetable found",
             "user": {
                 "email": "Email",
                 "dni": "DNI",
                 "telephone": "Telephone",
-                "position" : "Position",
-                "posType" : {
+                "position": "Position",
+                "posType": {
                     "Profesor": "Teacher",
                     "Administrativo": "Administrative",
                     "Limpieza": "Cleaning Service"
@@ -110,7 +109,12 @@
         "inmorning": "IN (morning)",
         "outmorning": "OUT (morning)",
         "innoon": "IN (afternoon)",
-        "outnoon": "OUT (afternoon)"
+        "outnoon": "OUT (afternoon)",
+        "password": "New password",
+        "passwordConfirm": "Repeat new password",
+        "pic": "Profile picture",
+        "save": "Save",
+        "cancel": "Cancel"
     },
     "dateformat": "MM-DD-YYYY"
 }
