@@ -12,6 +12,7 @@ import FileIcon from './FileIcon.vue'
 import UserIcon from './UserIcon.vue'
 import ArchiveIcon from './ArchiveIcon.vue'
 import ClockIcon from './ClockIcon.vue'
+import UserCircleIcon from './UserCircleIcon.vue'
 import AppLogo from './AppLogo.vue'
 
 export {
@@ -29,5 +30,6 @@ export {
     UserIcon,
     ArchiveIcon,
     ClockIcon,
+    UserCircleIcon,
     AppLogo
 }

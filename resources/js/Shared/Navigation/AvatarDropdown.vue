@@ -1,7 +1,7 @@
 <script setup>
 
 /** Icons imports */
-import { LogOutIcon, UserIcon } from '../Icons/Icons';
+import { LogOutIcon, UserIcon, UserCircleIcon } from '../Icons/Icons';
 
 /** Component imports */
 import { Link } from '@inertiajs/inertia-vue3'
@@ -40,6 +40,12 @@ onBeforeMount(() => {
         <Link href="/user/edit">
         <UserIcon />
         {{ t('admin.navbar.avatar.profile') }}
+        </Link>
+      </li>
+      <li>
+        <Link href="/user">
+          <UserCircleIcon/>
+          {{ t('admin.navbar.avatar.show') }}
         </Link>
       </li>
       <li>
