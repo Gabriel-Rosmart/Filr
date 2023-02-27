@@ -132,7 +132,41 @@
         "administrative": "Administrativo",
         "cleaning": "Personal de limpieza"
     },
-    "permits" : {
-        "death": "Muerte"
+    "permits": {
+        "data": "Datos del permiso",
+        "type": "Tipo de permiso",
+        "permits": "Permisos",
+        "unexpections": "Ausencias imprevistas",
+        "doc": "Documentación adjunta",
+        "death": "Fallecimiento, accidente o enfermedad grave, hospitalización o intervención quirúrgica de un familiar (art.3)",
+        "move": "Translado de domicilio (art.4)",
+        "exam": "Concurrir a exámenes finales. pruebas definitivas de aptitud o pruebas selectivas en el ámbito del empleo público (art.6)",
+        "prenat": "Realización de exámenes prenatales y técnicas de preparación al parto o asistencia a las preceptivas sesiones de información y preparación para la realización de los preceptivos informes psicológicos y sociales previos a la declaración de idoneidad (art.9)",
+        "fecAs": "Para realizar tratamientos de fecundación asistida (art.10)",
+        "marriage": "Por matrimonio de familiares de hasta segundo grado de consanguinidad y primero de afinidad (art.12)",
+        "duties": "Deberes inescusables de caracter público o personal, deberes relacionados con la conciliación de la vida familiar y laboral, y más de asistencia a consultas y revisiones médicas (art.14)",
+        "particularBussines": "Asuntos particulares (art.15)",
+        "unexpection": "Imprevistos (art.33)",
+        "famBook": "Fotocopia cotejada del libro de familia.",
+        "censusdoc": "Certificado de empadronamiento.",
+        "deathdoc": "Certificado de defunción.",
+        "marriagedoc": "Fotocopia cotejada de la inscripción en el Registro Oficial de Parejas de Hecho.",
+        "hospdoc": "Documento de hospitalización o la intervención cirurgica grave según el motivo que genera la solicitud del permiso.",
+        "birthdoc": "Fotocopia cotejada de la partida de nacimiento o de la resolución administrativa o judicial de adopción o acogida.",
+        "convdoc": "Certificado de convivencia o informe del trabajador social en que acredite las persoas que conforman la unidad familiar.",
+        "examdoc": "Documento acreditativo de la asistencia a la prueba de aptitud, examen final o prueba de acceso o ingreso a la función pública en que figure el lugar, la fecha y el centro de realización.",
+        "prenatdoc": "Documento justificativo de la necesidad de realización de exámenes prenatales y técnicas de preparación al parto dentro de la jornada laboral.",
+        "idondoc": "Documento justificativo de la necesidad de asistencia a las preceptivas sesiones de información y preparación y para la realización de los preceptivos informes psicológicos y sociales previos a la declaración de idoneidad dentro de la jornada laboral.",
+        "fecasdoc": "Documento justificativo de la necesidad de realización de tratamientos de fecundación asistida dentro de la jornada laboral.",
+        "revmeddoc": "Documento justificativo de la necesidad de realización de revisiones médicas dentro de la jornada laboral.",
+        "alonedoc": "Documento acreditativo de las limitaciones que les impiden ir solos o de que no pueden valerse por si mismos (acompañamientos a las revisiones médicas).",
+        "citationdoc": "Original o copia cotejada de la citación o convocatoria del órgano judicial, administrativo, órgano de gobierno o comisión dependiente de ellos ou calquier otro órgano oficial.",
+        "electiondoc": "Documento acreditativo de tener la condición de elegible en el proceso electoral o de formar parte de una mesa electoral.",
+        "reuniondoc": "Original o copia cotejada de la convocatoria o/y asistencia a reunión de las comisiones de pruebas de acceso a la universidade, de la Consellería de Educación y O.U o de sus jefaturas territoriales o del órgano de selección o provisión, con nombramiento de la autoridad competente.",
+        "EUdoc": "Original o copia cotejada de la realización de visitas dentro de los programas europeos.",
+        "responsabilitydoc": "Documento que acredite la responsabilidad civil, penal, social o administrativa de la persona interesada y que suponga el cumplimiento de una obligación.",
+        "donationdoc":"Documento que acredite la donación de sangre, médula o plaquetas.",
+        "athletedoc":"Documento que acredite la asistencia de los deportistas de alto nivel a las competiciones de carácter internacional, así como las concentracións preparatorias de estas.",
+        "other":"Otros: "
     }
 }
