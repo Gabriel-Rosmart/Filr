@@ -9,6 +9,6 @@
 
 <template>
     <UserLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="[[t('breadcrumbs.user'), '/user'], ['Dashboard', '/user']]" />
+        <Breadcrumbs class="ml-5 mt-6" :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.dashboard'), '/user']]" />
     </UserLayout>
 </template>
