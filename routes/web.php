@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PermitController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TokenController;
 use App\Http\Controllers\UserController;
 use App\Models\Permit;
 use App\Models\User;
@@ -46,6 +47,8 @@ Route::middleware('auth')->group(function () {
         return auth()->user()->profile_pic;
     });
 });
+
+Route::post('/token', TokenController::class);
 
 Route::get('/dashboard', function () {
     return Inertia::render('User/Dashboard');
