@@ -18,7 +18,7 @@ const props = defineProps({
     <AdminLayout>
         <Breadcrumbs 
             class="ml-5 mt-6"
-            :pages="[[ t('breadcrumbs.admin'), '/admin'], [t('breadcrumbs.manage'), '/admin/manage'], [t('breadcrumbs.register'), '/admin/manage/register']]" 
+            :pages="[[ 'Admin', '/admin'], [t('breadcrumbs.manage'), '/admin/manage'], [t('breadcrumbs.register'), '/admin/manage/register']]" 
         />
         <RegisterForm :users="users" :roles="roles" />
     </AdminLayout>
