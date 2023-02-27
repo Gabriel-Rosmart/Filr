@@ -27,7 +27,7 @@ let currentComponentIndex = ref(0);
 
 <template>
     <UserLayout>
-        <Breadcrumbs class="ml-5 mt-6" :pages="[['User', '/user'], ['Dashboard', '/user']]" />
+        <Breadcrumbs class="ml-5 mt-6" :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.dashboard'), '/user']]" />
 
         <div class="flex justify-center content-center mt-4">
             <div class="flex flex-col mt-10 mx-20 w-full">

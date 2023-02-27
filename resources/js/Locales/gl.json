@@ -94,9 +94,10 @@
         "manage": "Xestionar usuarios",
         "permits": "Permisos",
         "incidences": "Incidencias",
-        "edit": "Editar",
+        "edit": "Editar perfil",
         "admin": "Administrador",
-        "register": "Rexistrar"
+        "register": "Rexistrar",
+        "user": "Usuario"
     },
     "days": {
         "day": "Día",

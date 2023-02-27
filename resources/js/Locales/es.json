@@ -94,9 +94,10 @@
         "manage": "Administrar usuarios",
         "permits": "Permisos",
         "incidences": "Incidencias",
-        "edit": "Editar",
+        "edit": "Editar perfil",
         "admin": "Administrador",
-        "register": "Registrar"
+        "register": "Registrar",
+        "user": "Usuario"
     },
     "days": {
         "day": "día",
