@@ -10,6 +10,7 @@ import { ref } from 'vue';
 import Incidents from '@/Shared/Info/IncidencesUserTable.vue';
 import { useI18n } from 'vue-i18n';
 import axios from 'axios';
+import { Head } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
     user: Object,
@@ -35,6 +36,7 @@ let currentComponentIndex = ref(0);
 </script>
 
 <template>
+    <Head title="Inicio" />
     <component :is="user.is_admin == 0 ? UserLayout : AdminLayout">
         <Breadcrumbs v-if="user.is_admin == 0" class="ml-5 mt-6"
             :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.dashboard'), '/user']]" />

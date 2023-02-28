@@ -5,6 +5,7 @@ import UserData from '@/Components/UserData.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { useI18n } from 'vue-i18n'
+import { Head } from '@inertiajs/inertia-vue3';
 
 const { t } = useI18n();
 
@@ -31,6 +32,7 @@ const submit = () => {
 </script>
 
 <template>
+    <Head title="Edit profile" />
     <component :is="isAdmin == 0 ? UserLayout : AdminLayout">
         <Breadcrumbs v-if="isAdmin == 0" class="ml-5 mt-6"
             :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.edit'), '/user/edit']]" />
