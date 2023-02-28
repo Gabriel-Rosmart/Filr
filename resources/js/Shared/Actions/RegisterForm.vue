@@ -9,6 +9,7 @@ import FormLabel from '@/Shared/Forms/FormLabel.vue'
 import FormTime from '../Forms/FormTime.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
 import VueTailwindDatepicker from 'vue-tailwind-datepicker'
+import { Link } from '@inertiajs/inertia-vue3';
 
 /** Function imports */
 import { ref } from 'vue'
@@ -112,9 +113,11 @@ const formatter = ref({
                         </div>
                         <div class="flex flex-col mt-6">
                             <div class="mb-4">
-                                <select class="select select-bordered w-full" v-model="form.role" :disabled="form.substitute.is">
+                                <select class="select select-bordered w-full" v-model="form.role"
+                                    :disabled="form.substitute.is">
                                     <option value="" disabled selected>Rol</option>
-                                    <option v-for="rol of roles" :key="rol.id" :value="rol.role_name">{{ t(`employees.${rol.role_name}`) }}</option>
+                                    <option v-for="rol of roles" :key="rol.id" :value="rol.role_name">{{
+                                        t(`employees.${rol.role_name}`) }}</option>
                                 </select>
                             </div>
                             <div class="flex items-center">
@@ -129,7 +132,8 @@ const formatter = ref({
                             </div>
                             <div v-show="form.substitute.is" class="mt-4">
                                 <select class="select select-bordered w-full" v-model="form.substitute.name">
-                                    <option value="" disabled selected>Teacher</option>
+                                    <option value="" disabled selected> {{ t('admin.details.user.posType.Profesor') }}
+                                    </option>
                                     <option v-for="user of users" :key="user.id">{{ user.name }}</option>
                                 </select>
                             </div>
@@ -170,6 +174,10 @@ const formatter = ref({
 
                 <!-- Buttons -->
                 <div class="flex justify-end mt-6">
+                    <Link as="button" :href="'/admin/manage'" class="btn btn-error mr-4">
+                    <SettingsIcon />
+                    {{ t('admin.buttons.cancel') }}
+                    </Link>
                     <button class="btn btn-outline btn-primary mr-4" @click="currentStep--" v-show="currentStep > 0">
                         {{ t('admin.buttons.prev') }}
                     </button>
@@ -183,5 +191,4 @@ const formatter = ref({
                 </div>
             </div>
         </form>
-    </div>
-</template>
+</div></template>
