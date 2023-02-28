@@ -22,14 +22,6 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        /*
-        SELECT day, starts_at, ends_at 
-        FROM schedules AS s 
-        JOIN date_ranges AS ranges ON s.date_range_id = ranges.id
-        JOIN date_range_user AS u_ranges ON ranges.id = u_ranges.date_range_id
-        JOIN users AS u ON u_ranges.user_id = u.id
-        WHERE u.id = 5
-        */
         $timetable = DB::table('schedules as s')
             ->select('day', 'starts_at', 'ends_at')
             ->join('date_ranges as ranges', 's.date_range_id', '=', 'ranges.id')
@@ -41,18 +33,6 @@ class UserController extends Controller
             //->orderBy('starts_at', 'asc')
             ->get();
 
-        /*
-        SELECT status, requested_at FROM permits AS p 
-        JOIN users AS u ON p.user_id = u.id 
-        WHERE u.name="Verónica Vila"
-        */
-        // $permits = DB::table("permits AS p")
-        //     ->select('uuid', 'status', "requested_at")
-        //     ->join('users as u', 'p.user_id', '=', 'u.id')
-        //     ->where('u.id', $user->id)
-        //     ->get();
-
-
         return Inertia::render('User/Dashboard', [
             'user' => $user,
             'timetable' => $timetable,
@@ -60,7 +40,10 @@ class UserController extends Controller
             'incidents' => $user->incidences,
         ]);
     }
-
+    /**
+     * Render edit profile page
+     * @return \Illuminate\Http\Response
+     */
     public function edit()
     {
         return Inertia::render('User/Edit', [
@@ -68,13 +51,13 @@ class UserController extends Controller
             'isAdmin' => Auth::user()->is_admin
         ]);
     }
+
     /**
      * Update user data via form in /user/edit
      */
     public function update(Request $request)
     {
 
-        //dd($request->pic);
         $validated = $request->validate([
             'id' => ['required'],
             'name' => ['required'],
