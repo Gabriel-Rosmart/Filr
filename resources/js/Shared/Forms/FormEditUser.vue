@@ -1,8 +1,9 @@
 <script setup>
+/** Component imports */
 import UserData from "@/Components/UserData.vue";
 import UserTimes from "@/Components/UserTimes.vue";
 import { useForm } from '@inertiajs/inertia-vue3'
-
+import { Link } from '@inertiajs/inertia-vue3';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n()
@@ -46,7 +47,9 @@ const submit = () => {
                 <UserData :user="user" :form="form" :isAdmin="isAdmin" />
                 <UserTimes :weekend="timetable" :form="form" />
                 <div class="flex justify-center mt-8">
-                    <button class="btn btn-outline btn-error mr-4">{{ t('admin.buttons.cancel') }}</button>
+                    <Link as="button" :href="'/admin/details?id='+props.user.id" class="btn btn-outline btn-error mr-4">
+                    {{ t('admin.buttons.cancel') }}
+                    </Link>
                     <button class="btn btn-outline btn-success" @click="submit">{{ t('admin.buttons.save') }}</button>
                 </div>
             </div>
