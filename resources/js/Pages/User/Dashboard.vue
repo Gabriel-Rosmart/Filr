@@ -68,16 +68,9 @@ let currentComponentIndex = ref(0);
                         {{ t('admin.details.incidences') }}
                     </span>
                 </div>
-                <!-- <UserPages :activePage="'Dashboard'" class=" mt-2 mb-8" /> -->
-
-                <!-- <PermitsTable class="my-8" :permits="permits"/> -->
-
 
                 <component :is="tabs[currentComponentIndex]" :timetable="timetable" :permits="permits"
                     :incidences="incidents" />
-
-                <!-- <TimeTable  :timetable="timetable" /> -->
-
 
             </div>
         </div>
