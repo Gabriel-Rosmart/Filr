@@ -60,24 +60,6 @@ class UserController extends Controller
             'incidents' => $user->incidences,
         ]);
     }
-    /**
-     * Displays user-associated warnings
-     * @return \Illuminate\Http\Response
-     */
-    public function warnings()
-    {
-
-
-        return Inertia::render('User/Warnings');
-    }
-    /**
-     * Displays permits and incidents associated to the user 
-     * @return \Illuminate\Http\Response
-     */
-    public function stats()
-    {
-        return Inertia::render('User/Stats');
-    }
 
     public function edit()
     {
@@ -103,7 +85,6 @@ class UserController extends Controller
             'password' => ['nullable', 'confirmed'],
         ]);
 
-        //dd($validated);
         $uploadPic = '';
 
         if ($validated['pic'] != null) {
@@ -119,7 +100,6 @@ class UserController extends Controller
         } else {
             $uploadPass = Auth::user()->password;
         }
-        //dd($uploadPass);
 
         DB::transaction(function () use ($validated, $uploadPic, $uploadPass) {
             DB::table('users')

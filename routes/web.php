@@ -34,7 +34,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/permits', PermitController::class);
     Route::post('/admin/register', [AdminController::class, 'saveRegisteredUser']);
     Route::post('/admin/edit', [AdminController::class, 'updateUser']);
-    Route::get('/permits/pending', function(){
+    Route::get('/permits/pending', function () {
         return Permit::where('status', 'pending')->count();
     });
 });
@@ -43,8 +43,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/user/edit', [UserController::class, 'edit']);
     Route::post('/user/edit', [UserController::class, 'update']);
-    Route::get('/user/warnings', [UserController::class, 'warnings']);
-    Route::get('user/stats', [UserController::class, 'stats']);
     Route::get('/avatar', function () {
         return auth()->user()->profile_pic;
     });
