@@ -290,17 +290,18 @@ class AdminController extends Controller
 
     public function updateUser(Request $request)
     {
-
         $validated = $request->validate([
             'id' => ['required'],
             'name' => ['required'],
             'dni' => ['required', new IsValidDNI],
             'email' => ['required', 'email'],
-            'telephone' => ['required', new IsValidPhoneNumber]
+            'telephone' => ['required', new IsValidPhoneNumber],
+            'schedules' => ['nullable'],
         ]);
 
-        $user = User::select('id', 'name', 'dni', 'role_id', 'email', 'active', 'profile_pic')
-            ->where('id', $validated['id'])
+        $user = User::select('users.id', 'name', 'dni', 'role_id', 'email', 'active', 'profile_pic', 'date_range_id', 'phone')
+            ->where('users.id', $validated['id'])
+            ->join('date_range_user', 'date_range_user.user_id', '=', 'users.id')
             ->get()
             ->first();
 
