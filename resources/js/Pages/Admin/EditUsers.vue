@@ -19,7 +19,7 @@ const props = defineProps({
 <template>
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6"
-            :pages="[['Admin', '/admin'], [t('breadcrumbs.manage'), '/admin/manage'], [t('breadcrumbs.edit'), '/admin/edit']]" />
+            :pages="[['Admin', '/admin'], [t('breadcrumbs.manage'), '/admin/manage'],[props.user.name, '/admin/details?id=' + props.user.id],[t('breadcrumbs.edit'), '/admin/edit']]" />
         <div class="flex items-center mt-8">
             <FormEditUser :user="user" :timetable="timetable" :isAdmin="isAdmin" />
         </div>
