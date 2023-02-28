@@ -14,8 +14,6 @@ const props = defineProps({
 })
 console.table(props.timetable);
 
-const shift = ['Morning', 'Afternoon'];
-
 var form = useForm({
     id: props.user.id,
     name: props.user.name,
@@ -24,14 +22,18 @@ var form = useForm({
     email: props.user.email,
 });
 
-var date = useForm({
-    starts_at: props.timetable.starts_at,
-    ends_at: props.timetable.ends_at
-
+var schedule = useForm({
+    monday: [null, null, null, null],
+    tuesday: [null, null, null, null],
+    wednesday: [null, null, null, null],
+    thursday: [null, null, null, null],
+    friday: [null, null, null, null]
 });
 
 const submit = () => {
     form.post('/admin/edit');
+    //schedule.post('/admin/edit');
+    console.log(schedule);
     console.log(form);
 };
 
@@ -41,10 +43,10 @@ const submit = () => {
 
 <template>
     <div class="flex items-center w-full mt-8">
-    <form @submit.prevent="" class="w-full pr-10">
-        <div class="grid grid-cols-2 w-auto">
-            <UserData :user="user" :form="form" :isAdmin="isAdmin" />
-                <UserTimes :weekend="timetable" :shift="shift" />
+        <form @submit.prevent="" class="w-full pr-10">
+            <div class="grid grid-cols-2 w-auto">
+                <UserData :user="user" :form="form" :isAdmin="isAdmin" />
+                <UserTimes :weekend="timetable" :form="schedule" />
                 <div class="flex justify-center mt-8">
                     <button class="btn btn-outline btn-error mr-4">{{ t('admin.buttons.cancel') }}</button>
                     <button class="btn btn-outline btn-success" @click="submit">{{ t('admin.buttons.save') }}</button>

@@ -14,6 +14,7 @@ const props = defineProps({
 })
 
 console.table(props.user);
+console.log(props.form);
 
 const storage = ref(appconfig.STORAGE_URL);
 

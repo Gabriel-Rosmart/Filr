@@ -15,7 +15,7 @@ defineEmits(['update:modelValue']);
             @input="$emit('update:modelValue', $event.target.value)" ref="input" />
         <div v-else-if="type == 'time'" class="flex items-center input input-bordered dark:input-primary w-full max-w-xs focus:border-none focus:ring-0">
             <ClockIcon />
-            <input class="bg-transparent border-none w-full max-w-xs focus:border-none focus:ring-0" type=text :value="value" placeholder="--:--" />
+            <input class="bg-transparent border-none w-full max-w-xs focus:border-none focus:ring-0" type=text :value="modelValue" placeholder="--:--" @input="$emit('update:modelValue', $event.target.value)" ref="input"/>
         </div>
         <input v-else :type="type" class="input input-bordered input-primary w-full mt-2" :value="value" />
     </div>
