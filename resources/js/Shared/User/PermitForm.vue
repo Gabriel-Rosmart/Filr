@@ -27,6 +27,7 @@ const form = useForm({
     affected : null,
     file : null,
     type : null,
+    doctype : null,
 
 });
 
@@ -142,108 +143,128 @@ function submit()
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="famBook" :value="t('permits.famBook')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="famBook" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="famBook" class="mx-5 my-3" 
+                                value="famBook"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="censusdoc" :value="t('permits.censusdoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="censusdoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="censusdoc" class="mx-5 my-3" 
+                                value="censusdoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="deathdoc" :value="t('permits.deathdoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="deathdoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="deathdoc" class="mx-5 my-3" 
+                                value="deathdoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="marriagedoc" :value="t('permits.marriagedoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="marriagedoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="marriagedoc" class="mx-5 my-3" 
+                                value="marriagedoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="hospdoc" :value="t('permits.hospdoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="hospdoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="hospdoc" class="mx-5 my-3" 
+                                value="hospdoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="birthdoc" :value="t('permits.birthdoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="birthdoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="birthdoc" class="mx-5 my-3" 
+                                value="birthdoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="convdoc" :value="t('permits.convdoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="convdoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="convdoc" class="mx-5 my-3" 
+                                value="convdoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="examdoc" :value="t('permits.examdoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="examdoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="examdoc" class="mx-5 my-3" 
+                                value="examdoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="prenatdoc" :value="t('permits.prenatdoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="prenatdoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="prenatdoc" class="mx-5 my-3" 
+                                value="prenatdoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="idondoc" :value="t('permits.idondoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="idondoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="idondoc" class="mx-5 my-3" 
+                                value="idondoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="fecasdoc" :value="t('permits.fecasdoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="fecasdoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="fecasdoc" class="mx-5 my-3" 
+                                value="fecasdoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="revmeddoc" :value="t('permits.revmeddoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="revmeddoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="revmeddoc" class="mx-5 my-3" 
+                                value="revmeddoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="alonedoc" :value="t('permits.alonedoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="alonedoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="alonedoc" class="mx-5 my-3" 
+                                value="alonedoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="citationdoc" :value="t('permits.citationdoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="citationdoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="citationdoc" class="mx-5 my-3" 
+                                value="citationdoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="electiondoc" :value="t('permits.electiondoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="electiondoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="electiondoc" class="mx-5 my-3" 
+                                value="electiondoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="reuniondoc" :value="t('permits.reuniondoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="reuniondoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="reuniondoc" class="mx-5 my-3" 
+                                value="reuniondoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="EUdoc" :value="t('permits.EUdoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="EUdoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="EUdoc" class="mx-5 my-3" 
+                                value="EUdoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="responsabilitydoc" :value="t('permits.responsabilitydoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="responsabilitydoc"
-                                class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="responsabilitydoc" class="mx-5 my-3" 
+                                value="responsabilitydoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="donationdoc" :value="t('permits.donationdoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="donationdoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="donationdoc" class="mx-5 my-3" 
+                                value="donationdoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="athletedoc" :value="t('permits.athletedoc')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="athletedoc" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="athletedoc" class="mx-5 my-3" 
+                                value="athletedoc"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="other" :value="t('permits.other')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="document" v-model:checked="falso" id="other" class="mx-5 my-3" />
+                            <FormRadioButton name="document" v-model="form.doctype" id="other" class="mx-5 my-3" 
+                                value="other"/>
                         </div>
                     </div>
                     <div class="flex flex-row mb-4 text-justify justify-center">
