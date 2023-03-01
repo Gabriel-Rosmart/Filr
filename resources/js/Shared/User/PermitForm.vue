@@ -42,7 +42,10 @@ const form = useForm({
                             <component :is="dates[currentComponentIndex]" />
                         </div>
                     </div>
-                    <div>
+                    <div class="flex flex-row mt-3">
+                        <FormLabel for="hours" value="Horas totales" class="hover:bg-gray-200 rounded-lg p-3" />
+                        <FormTextInput name="hours" id="hours" label="hours" />
+                        <FormLabel for="affected" value="Grupos afectados" class="hover:bg-gray-200 rounded-lg p-3" />
                         <FormTextInput name="affected" id="affected" label="Grupos afectados" />
                     </div>
                 </div>
@@ -214,6 +217,9 @@ const form = useForm({
                             <FormFileInput id="file" name="file" class="w-full" />
                         </div>
                     </div>
+                </div>
+                <div>
+                    
                 </div>
             </div>
         </form>
