@@ -13,8 +13,8 @@ const { t } = useI18n();
 
 <template>
     <div class="navbar bg-base-100 border-b-2 border-brown-50 dark:border-gray-800">
-        <div class="navbar-start">
-            <div class="dropdown">
+    <div class="navbar-start">
+        <!-- <div class="dropdown">
                 <label tabindex="0" class="btn btn-ghost btn-circle">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -37,19 +37,19 @@ const { t } = useI18n();
                         </Link>
                     </li>
                     <li>
-                        <Link>
-                        <SettingsIcon />
-                        Settings
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/logout" method="post">
-                        <LogOutIcon />
-                        Cerrar Sesión
-                        </Link>
-                    </li>
-                </ul>
-            </div>
+                            <Link>
+                                    <SettingsIcon />
+                                    Settings
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/logout" method="post">
+                                    <LogOutIcon />
+                                    Cerrar Sesión
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div> -->
         </div>
         <div class="navbar-center">
             <a class="btn btn-ghost normal-case text-xl">
@@ -59,7 +59,7 @@ const { t } = useI18n();
         <div class="navbar-end">
             <LanguageDropdown />
             <ThemeToggle />
-            <NotificationDropdown />
+            <!-- <NotificationDropdown /> -->
             <AvatarDropdown />
         </div>
     </div>
