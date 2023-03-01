@@ -18,15 +18,23 @@ let currentComponentIndex = ref(0);
 const dates = [null, FormOneDate, FormMultiDate];
 
 const form = useForm({
-    nDays : '',
-    day : '',
-    dayOut : '',
-    hStart : '',
-    hEnd : '',
-    nHours : '',
-    affected : '',
+    nDays : null,
+    day : null,
+    dayOut : null,
+    hStart : null,
+    hEnd : null,
+    nHours : null,
+    affected : null,
+    file : null,
+    type : null,
 
 });
+
+function upFile(e)
+{
+    console.log(e.target.files[0]);
+    form.file = e.target.files[0];
+}
 
 function submit()
 {
@@ -72,43 +80,50 @@ function submit()
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="death" :value="t('permits.death')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="permitType" v-model:checked="falso" id="death" class="mx-5 my-3" />
+                            <FormRadioButton name="permitType" v-model="form.type" id="death" class="mx-5 my-3"
+                                value="death"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="move" :value="t('permits.move')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="permitType" v-model:checked="falso" id="move" class="mx-5 my-3" />
+                            <FormRadioButton name="permitType" v-model="form.type" id="move" class="mx-5 my-3"
+                                value="move"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="exam" :value="t('permits.exam')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="permitType" v-model:checked="falso" id="exam" class="mx-5 my-3" />
+                            <FormRadioButton name="permitType" v-model="form.type" id="exam" class="mx-5 my-3"
+                                value="exam"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="prenat" :value="t('permits.prenat')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="permitType" v-model:checked="falso" id="prenat" class="mx-5 my-3" />
+                            <FormRadioButton name="permitType" v-model="form.type" id="prenat" class="mx-5 my-3"
+                                value="prenat"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="fecAs" :value="t('permits.fecAs')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="permitType" v-model:checked="falso" id="fecAs" class="mx-5 my-3" />
+                            <FormRadioButton name="permitType" v-model="form.type" id="fecAs" class="mx-5 my-3"
+                                value="fecAs"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="marriage" :value="t('permits.marriage')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="permitType" v-model:checked="falso" id="marriage" class="mx-5 my-3" />
+                            <FormRadioButton name="permitType" v-model="form.type" id="marriage" class="mx-5 my-3"
+                                value="marriage"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="duties" :value="t('permits.duties')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="permitType" v-model:checked="falso" id="duties" class="mx-5 my-3" />
+                            <FormRadioButton name="permitType" v-model="form.type" id="duties" class="mx-5 my-3"
+                                value="duties"/>
                         </div>
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="particularBussines" :value="t('permits.particularBussines')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="permitType" v-model:checked="falso" id="particularBussines"
-                                class="mx-5 my-3" />
+                            <FormRadioButton name="permitType" v-model="form.type" id="particularBussin"
+                                class="mx-5 my-3" value="particular"/>
                         </div>
                     </div>
                     <h4 class="text-lg mb-5">{{ t('permits.unexpections') }}</h4>
@@ -116,7 +131,8 @@ function submit()
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="unexpection" :value="t('permits.unexpection')"
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
-                            <FormRadioButton name="permitType" v-model:checked="falso" id="unexpection" class="mx-5 my-3" />
+                            <FormRadioButton name="permitType" v-model="form.type" id="unexpection" class="mx-5 my-3"
+                                value="unexpection"/>
                         </div>
                     </div>
                 </div>
@@ -231,7 +247,8 @@ function submit()
                         </div>
                     </div>
                     <div class="flex flex-row mb-4 text-justify justify-center">
-                        <FormFileInput id="file" name="file"/>
+                        <FormFileInput id="file" name="file"
+                            v-on:change="upFile" />
                     </div>
                 </div>
                 <div class="flex justify-center mt-8 w-full">
