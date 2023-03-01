@@ -180,6 +180,7 @@
         "responsabilitydoc": "Document accrediting the civil, criminal, social or administrative liability of the person concerned and involving the fulfilment of an obligation.",
         "donationdoc":"Document certifying the donation of blood, marrow or platelets.",
         "athletedoc":"Document accrediting the attendance of top-level athletes at international competitions, as well as preparatory training camps.",
-        "other":"Others: "
+        "other":"Others: ",
+        "send":"Send"
     }
 }
