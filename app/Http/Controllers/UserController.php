@@ -108,6 +108,36 @@ class UserController extends Controller
     
     public function permitSend(Request $request)
     {
-        dd($request);
+        if ($request->validate([
+            'nDays' => ['required'],
+        ]))
+        {
+            if ($request->nDays == 'm')
+            {
+                $validated = $request->validate([
+                    'day' => ['required'],
+                    'nHours' => ['required'],
+                    'file' => ['required'],
+                    'type' => ['required'],
+                    'doctype' => ['required'],
+                    
+                    'dayOut' => ['required'],
+                ]);
+            }
+            else
+            {
+                $validated = $request->validate([
+                    'day' => ['required'],
+                    'nHours' => ['required'],
+                    'file' => ['required'],
+                    'type' => ['required'],
+                    'doctype' => ['required'],
+    
+                    'hStart' => ['required'],
+                    'hEnd' => ['required']
+                ]);
+            }
+        }
+        dd($validated);
     }
 }

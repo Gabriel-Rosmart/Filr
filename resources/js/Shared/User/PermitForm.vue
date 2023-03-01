@@ -5,6 +5,7 @@ import FormFileInput from "@/Shared/Forms/FormFileInput.vue";
 import FormOneDate from "@/Shared/Forms/FormOneDate.vue";
 import FormMultiDate from "@/Shared/Forms/FormMultiDate.vue";
 import FormTextInput from "@/Shared/Forms/FormTextInput.vue";
+import FormInputError from '@/Shared/Forms/FormInputError.vue';
 
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/inertia-vue3';
@@ -51,19 +52,20 @@ function submit()
                     <div class="flex flex-row w-full">
                         <div class="flex flex-row w-3/12">
                             <FormLabel for="single" :value="t('permits.labels.oneday')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full"
-                                @click="currentComponentIndex = 1" />
+                            @click="currentComponentIndex = 1" />
                             <FormRadioButton name="selection" id="single" class="mx-5 my-3"
-                                @click="currentComponentIndex = 1" 
-                                v-model="form.nDays" value="o"/>
+                            @click="currentComponentIndex = 1" 
+                            v-model="form.nDays" value="o"/>
                             <FormLabel for="multi" :value="t('permits.labels.mulday')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full"
-                                @click="currentComponentIndex = 2" />
+                            @click="currentComponentIndex = 2" />
                             <FormRadioButton name="selection" id="multi" class="mx-5 my-3"
-                                @click="currentComponentIndex = 2" 
-                                v-model="form.nDays" value="m"/>
+                            @click="currentComponentIndex = 2" 
+                            v-model="form.nDays" value="m"/>
                         </div>
-                        <div class="mr-14">
+                        <div class="">
                             <component :is="dates[currentComponentIndex]" :form="form"/>
                         </div>
+                        <FormInputError class="my-4" :message="form.errors.nDays" />
                     </div>
                     <div class="flex flex-row mt-3">
                         <FormLabel for="hours" :value="t('permits.labels.hours')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 mx-2" />
