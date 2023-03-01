@@ -31,8 +31,27 @@ class Helper
                 'dni' => $validated['dni'],
                 'email' => $validated['email'],
                 'phone' => $validated['telephone'],
+
             ]);
         });
+        DB::table('schedules')->where('date_range_id', $user->date_range_id)->delete();
+        foreach ($validated['schedules'] as $key => $value) {
+            DB::table('schedules')->insert([
+                'id' => null,
+                'date_range_id' => $user->date_range_id,
+                'day' => $key,
+                'starts_at' => $value[0],
+                'ends_at' => $value[1]
+            ]);
+            DB::table('schedules')->insert([
+                'id' => null,
+                'date_range_id' => $user->date_range_id,
+                'day' => $key,
+                'starts_at' => $value[2],
+                'ends_at' => $value[3]
+            ]);
+        }
+        
     }
 }
 

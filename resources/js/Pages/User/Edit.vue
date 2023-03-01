@@ -1,8 +1,12 @@
 <script setup>
+
+/* Components */
 import UserLayout from '@/Layouts/UserLayout.vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 import UserData from '@/Components/UserData.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
+
+/* VUE Parameters */
 import { Link } from '@inertiajs/inertia-vue3';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { useI18n } from 'vue-i18n'

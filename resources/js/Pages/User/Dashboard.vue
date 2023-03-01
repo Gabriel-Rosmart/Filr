@@ -1,13 +1,16 @@
 <script setup>
+
+/* Components */
 import UserLayout from '@/Layouts/UserLayout.vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
-import UserPages from '@/Shared/Navigation/UserPages.vue';
 import UserInfo from '@/Shared/User/UserInfo.vue';
 import TimeTable from '@/Shared/Info/TimeTable.vue';
 import PermitsTable from '@/Shared/User/UserPermits.vue';
-import { ref } from 'vue';
 import Incidents from '@/Shared/Info/IncidencesUserTable.vue';
+
+/* VUE parameters */
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import axios from 'axios';
 import { Head } from '@inertiajs/inertia-vue3';

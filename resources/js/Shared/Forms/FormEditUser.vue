@@ -1,8 +1,9 @@
 <script setup>
+/** Component imports */
 import UserData from "@/Components/UserData.vue";
 import UserTimes from "@/Components/UserTimes.vue";
 import { useForm } from '@inertiajs/inertia-vue3'
-
+import { Link } from '@inertiajs/inertia-vue3';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n()
@@ -20,20 +21,18 @@ var form = useForm({
     dni: props.user.dni,
     telephone: props.user.phone,
     email: props.user.email,
+    schedules: {
+        monday: [null, null, null, null],
+        tuesday: [null, null, null, null],
+        wednesday: [null, null, null, null],
+        thursday: [null, null, null, null],
+        friday: [null, null, null, null]
+    }
 });
 
-var schedule = useForm({
-    monday: [null, null, null, null],
-    tuesday: [null, null, null, null],
-    wednesday: [null, null, null, null],
-    thursday: [null, null, null, null],
-    friday: [null, null, null, null]
-});
 
 const submit = () => {
     form.post('/admin/edit');
-    //schedule.post('/admin/edit');
-    console.log(schedule);
     console.log(form);
 };
 
@@ -46,9 +45,11 @@ const submit = () => {
         <form @submit.prevent="" class="w-full pr-10">
             <div class="grid grid-cols-2 w-auto">
                 <UserData :user="user" :form="form" :isAdmin="isAdmin" />
-                <UserTimes :weekend="timetable" :form="schedule" />
+                <UserTimes :weekend="timetable" :form="form" />
                 <div class="flex justify-center mt-8">
-                    <button class="btn btn-outline btn-error mr-4">{{ t('admin.buttons.cancel') }}</button>
+                    <Link as="button" :href="'/admin/details?id='+props.user.id" class="btn btn-outline btn-error mr-4">
+                    {{ t('admin.buttons.cancel') }}
+                    </Link>
                     <button class="btn btn-outline btn-success" @click="submit">{{ t('admin.buttons.save') }}</button>
                 </div>
             </div>

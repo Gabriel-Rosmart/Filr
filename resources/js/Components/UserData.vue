@@ -1,8 +1,11 @@
 <script setup>
-import appconfig from "@/appconfig";
+/* Components */
 import InputForm from "@/Components/InputForm.vue";
 import SelectForm from "@/Components/SelectForm.vue";
 import FormInputError from "@/Shared/Forms/FormInputError.vue";
+
+/* VUE Parameters */
+import appconfig from "@/appconfig";
 import { ref } from "vue";
 import { useI18n } from 'vue-i18n'
 

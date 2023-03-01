@@ -7,7 +7,7 @@ const props = defineProps({
     weekend: Array,
     form: Object
 })
-
+console.log(props.form.schedules);
 function removeSeconds(time) {
     if (time != null) {
         if (time.length == 8)
@@ -24,56 +24,56 @@ props.weekend.forEach(element => {
     if (element.day == 'monday') {
         if (monday == undefined) {
             monday = [element];
-            props.form.monday[0] = removeSeconds(element.starts_at);
-            props.form.monday[1] = removeSeconds(element.ends_at);
+            props.form.schedules.monday[0] = removeSeconds(element.starts_at);
+            props.form.schedules.monday[1] = removeSeconds(element.ends_at);
         } else {
             monday = [monday[0], element];
-            props.form.monday[2] = removeSeconds(element.starts_at);
-            props.form.monday[3] = removeSeconds(element.ends_at);
+            props.form.schedules.monday[2] = removeSeconds(element.starts_at);
+            props.form.schedules.monday[3] = removeSeconds(element.ends_at);
         }
     }
     if (element.day == 'tuesday') {
         if (tuesday == undefined) {
             tuesday = [element];
-            props.form.tuesday[0] = removeSeconds(element.starts_at);
-            props.form.tuesday[1] = removeSeconds(element.ends_at);
+            props.form.schedules.tuesday[0] = removeSeconds(element.starts_at);
+            props.form.schedules.tuesday[1] = removeSeconds(element.ends_at);
         } else {
             tuesday = [tuesday[0], element];
-            props.form.tuesday[2] = removeSeconds(element.starts_at);
-            props.form.tuesday[3] = removeSeconds(element.ends_at);
+            props.form.schedules.tuesday[2] = removeSeconds(element.starts_at);
+            props.form.schedules.tuesday[3] = removeSeconds(element.ends_at);
         }
     }
     if (element.day == 'wednesday') {
         if (wednesday == undefined) {
             wednesday = [element];
-            props.form.wednesday[0] = removeSeconds(element.starts_at);
-            props.form.wednesday[1] = removeSeconds(element.ends_at);
+            props.form.schedules.wednesday[0] = removeSeconds(element.starts_at);
+            props.form.schedules.wednesday[1] = removeSeconds(element.ends_at);
         } else {
             wednesday = [wednesday[0], element];
-            props.form.wednesday[2] = removeSeconds(element.starts_at);
-            props.form.wednesday[3] = removeSeconds(element.ends_at);
+            props.form.schedules.wednesday[2] = removeSeconds(element.starts_at);
+            props.form.schedules.wednesday[3] = removeSeconds(element.ends_at);
         }
     }
     if (element.day == 'thursday') {
         if (thursday == undefined) {
             thursday = [element];
-            props.form.thursday[0] = removeSeconds(element.starts_at);
-            props.form.thursday[1] = removeSeconds(element.ends_at);
+            props.form.schedules.thursday[0] = removeSeconds(element.starts_at);
+            props.form.schedules.thursday[1] = removeSeconds(element.ends_at);
         } else {
             thursday = [thursday[0], element];
-            props.form.thursday[2] = removeSeconds(element.starts_at);
-            props.form.thursday[3] = removeSeconds(element.ends_at);
+            props.form.schedules.thursday[2] = removeSeconds(element.starts_at);
+            props.form.schedules.thursday[3] = removeSeconds(element.ends_at);
         }
     }
     if (element.day == 'friday') {
         if (friday == undefined) {
             friday = [element];
-            props.form.friday[0] = removeSeconds(element.starts_at);
-            props.form.friday[1] = removeSeconds(element.ends_at);
+            props.form.schedules.friday[0] = removeSeconds(element.starts_at);
+            props.form.schedules.friday[1] = removeSeconds(element.ends_at);
         } else {
             friday = [friday[0], element];
-            props.form.friday[2] = removeSeconds(element.starts_at);
-            props.form.friday[3] = removeSeconds(element.ends_at);
+            props.form.schedules.friday[2] = removeSeconds(element.starts_at);
+            props.form.schedules.friday[3] = removeSeconds(element.ends_at);
         }
     }
 });
@@ -101,19 +101,19 @@ console.log(week);
                 <tr v-for="day in week">
                     <th>{{ t('days.' + day[0].day) }}</th>
                     <td>
-                        <InputForm v-if="day[0]" type="time" v-model="form[day[0].day][0]"/>
+                        <InputForm v-if="day[0]" type="time" v-model="form.schedules[day[0].day][0]"/>
                         <InputForm v-else type="time" />
                     </td>
                     <td>
-                        <InputForm v-if="day[0]" type="time" v-model="form[day[0].day][1]"/>
+                        <InputForm v-if="day[0]" type="time" v-model="form.schedules[day[0].day][1]"/>
                         <InputForm v-else type="time" />
                     </td>
                     <td>
-                        <InputForm v-if="day[1]" type="time" v-model="form[day[0].day][2]"/>
+                        <InputForm v-if="day[1]" type="time" v-model="form.schedules[day[0].day][2]"/>
                         <InputForm v-else type="time" />
                     </td>
                     <td>
-                        <InputForm v-if="day[1]" type="time" v-model="form[day[0].day][3]"/>
+                        <InputForm v-if="day[1]" type="time" v-model="form.schedules[day[0].day][3]"/>
                         <InputForm v-else type="time" />
                     </td>
                 </tr>
