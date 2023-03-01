@@ -138,6 +138,7 @@ class UserController extends Controller
                 ]);
             }
         }
-        dd($validated);
+        //dd($validated);
+        return redirect()->back();
     }
 }

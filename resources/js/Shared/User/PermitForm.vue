@@ -80,7 +80,7 @@ function submit()
                         <FormInputError class="my-4" :message="form.errors.affected" />
                     </div>
                 </div>
-                <h2 class="text-xl mt-5">{{ t('permits.type') }}</h2>
+                <div class="flex flex-row"><h2 class="text-xl mt-5">{{ t('permits.type') }}</h2><FormInputError class=" mx-5 mt-6" :message="form.errors.type"/></div>
                 <div class="border-2 dark:border-slate-700 rounded-lg p-2">
                     <h4 class="text-lg mb-5">{{ t('permits.permits') }}</h4>
                     <div class="grid grid-cols-2 w-auto">
@@ -143,7 +143,7 @@ function submit()
                         </div>
                     </div>
                 </div>
-                <h2 class="text-xl mt-5">{{ t('permits.doc') }}</h2>
+                <div class="flex flex-row"><h2 class="text-xl mt-5">{{ t('permits.doc') }}</h2><FormInputError class=" mx-5 mt-6" :message="form.errors.doctype"/></div>
                 <div class="flex flex-col border-2 dark:border-slate-700 rounded-lg p-2 justify-center">
                     <div class="grid grid-cols-2 w-auto">
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
@@ -276,6 +276,9 @@ function submit()
                     <div class="flex flex-row mb-4 text-justify justify-center">
                         <FormFileInput id="file" name="file"
                             v-on:change="upFile" />
+                    </div>
+                    <div class="flex flex-row mb-4 text-justify justify-center">
+                        <FormInputError :message="form.errors.file" />
                     </div>
                 </div>
                 <div class="flex justify-center mt-8 w-full">
