@@ -23,7 +23,7 @@ const form = useForm({
 </script>
 <template>
     <div class="flex justify-center items-center mt-8">
-        <form @submit.prevent="" class="w-10/12 pr-10">
+        <form @submit.prevent="" class="w-11/12 pr-10">
             <div class="grid grid-flow-row">
                 <h2 class="text-xl mt-5">{{ t('permits.data') }}</h2>
                 <div class="border-2 dark:border-slate-700 rounded-lg p-2">
@@ -105,7 +105,7 @@ const form = useForm({
                     </div>
                 </div>
                 <h2 class="text-xl mt-5">{{ t('permits.doc') }}</h2>
-                <div class="border-2 dark:border-slate-700 rounded-lg p-2">
+                <div class="flex flex-col border-2 dark:border-slate-700 rounded-lg p-2 justify-center">
                     <div class="grid grid-cols-2 w-auto">
                         <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
                             <FormLabel for="famBook" :value="t('permits.famBook')"
@@ -213,12 +213,12 @@ const form = useForm({
                                 class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full" />
                             <FormRadioButton name="document" v-model:checked="falso" id="other" class="mx-5 my-3" />
                         </div>
-                        <div class="flex flex-row gap-5 mb-4 ml-10 text-justify justify-between">
-                            <FormFileInput id="file" name="file" class="w-full" />
-                        </div>
+                    </div>
+                    <div class="flex flex-row mb-4 text-justify justify-center">
+                        <FormFileInput id="file" name="file"/>
                     </div>
                 </div>
-                <div class="flex justify-center mt-8">
+                <div class="flex justify-center mt-8 w-full">
                     <button class="btn btn-outline btn-primary w-6/12" @click="submit">{{ t('permits.send') }}</button>
                 </div>
             </div>
