@@ -11,7 +11,8 @@
             "avatar": {
                 "profile": "Edit profile",
                 "logout": "Log out",
-                "show": "Show profile"
+                "show": "Show profile",
+                "permit":"Permit request"
             }
         },
         "query": {
