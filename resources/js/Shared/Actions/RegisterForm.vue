@@ -132,7 +132,7 @@ const formatter = ref({
                             </div>
                             <div v-show="form.substitute.is" class="mt-4">
                                 <select class="select select-bordered w-full" v-model="form.substitute.name">
-                                    <option value="" disabled selected> {{ t('admin.details.user.posType.Profesor') }}
+                                    <option value="" disabled selected> {{ t('table.employee') }}
                                     </option>
                                     <option v-for="user of users" :key="user.id">{{ user.name }}</option>
                                 </select>
