@@ -18,7 +18,14 @@ let currentComponentIndex = ref(0);
 const dates = [null, FormOneDate, FormMultiDate];
 
 const form = useForm({
-    falso: false
+    nDays : '',
+    day : '',
+    dayOut : '',
+    hStart : '',
+    hEnd : '',
+    nHours : '',
+    affected : '',
+
 });
 
 function submit()
@@ -37,21 +44,25 @@ function submit()
                             <FormLabel for="single" :value="t('permits.labels.oneday')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full"
                                 @click="currentComponentIndex = 1" />
                             <FormRadioButton name="selection" id="single" class="mx-5 my-3"
-                                @click="currentComponentIndex = 1" checked="true" />
+                                @click="currentComponentIndex = 1" 
+                                v-model="form.nDays" value="o"/>
                             <FormLabel for="multi" :value="t('permits.labels.mulday')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full"
                                 @click="currentComponentIndex = 2" />
                             <FormRadioButton name="selection" id="multi" class="mx-5 my-3"
-                                @click="currentComponentIndex = 2" />
+                                @click="currentComponentIndex = 2" 
+                                v-model="form.nDays" value="m"/>
                         </div>
                         <div class="mr-14">
-                            <component :is="dates[currentComponentIndex]" />
+                            <component :is="dates[currentComponentIndex]" :form="form"/>
                         </div>
                     </div>
                     <div class="flex flex-row mt-3">
                         <FormLabel for="hours" :value="t('permits.labels.hours')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 mx-2" />
-                        <FormTextInput name="hours" id="hours" label="hours" class="mx-2"/>
+                        <FormTextInput name="hours" id="hours" label="hours" class="mx-2"
+                            v-model="form.nHours"/>
                         <FormLabel for="affected" :value="t('permits.labels.affected')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 mx-2" />
-                        <FormTextInput name="affected" id="affected" label="Grupos afectados" class="mx-2"/>
+                        <FormTextInput name="affected" id="affected" label="Grupos afectados" class="mx-2"
+                            v-model="form.affected"/>
                     </div>
                 </div>
                 <h2 class="text-xl mt-5">{{ t('permits.type') }}</h2>
