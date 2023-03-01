@@ -105,4 +105,9 @@ class UserController extends Controller
     {
         return Inertia::render('User/PermitRequest');
     }
+    
+    public function permitSend(Request $request)
+    {
+        dd($request);
+    }
 }

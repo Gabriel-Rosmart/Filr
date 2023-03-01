@@ -140,6 +140,12 @@
         "cleaning": "Cleaning Staff"
     },
     "permits": {
+        "labels": {
+            "oneday" : "One day",
+            "mulday" : "Multiple days",
+            "hours" : "Total hours",
+            "affected" : "Affected groups"
+        },
         "data": "Permit data",
         "type": "Permit type",
         "permits": "Permits",

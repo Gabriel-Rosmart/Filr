@@ -140,6 +140,12 @@
         "cleaning": "Persoal de limpieza"
     },
     "permits": {
+        "labels": {
+            "oneday" : "Un día",
+            "mulday" : "Varios días",
+            "hours" : "Horas totais",
+            "affected" : "Grupos afectados"
+        },
         "data": "Datos do permiso",
         "type": "Tipo de permiso",
         "permits": "Permisos",

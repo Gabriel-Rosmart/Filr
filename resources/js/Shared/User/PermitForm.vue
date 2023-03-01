@@ -20,6 +20,11 @@ const dates = [null, FormOneDate, FormMultiDate];
 const form = useForm({
     falso: false
 });
+
+function submit()
+{
+    form.post('/user/permitreq')
+}
 </script>
 <template>
     <div class="flex justify-center items-center mt-8">
@@ -29,11 +34,11 @@ const form = useForm({
                 <div class="border-2 dark:border-slate-700 rounded-lg p-2">
                     <div class="flex flex-row w-full">
                         <div class="flex flex-row w-3/12">
-                            <FormLabel for="single" value="Un día" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full"
+                            <FormLabel for="single" :value="t('permits.labels.oneday')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full"
                                 @click="currentComponentIndex = 1" />
                             <FormRadioButton name="selection" id="single" class="mx-5 my-3"
                                 @click="currentComponentIndex = 1" checked="true" />
-                            <FormLabel for="multi" value="Varios días" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full"
+                            <FormLabel for="multi" :value="t('permits.labels.mulday')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 w-full"
                                 @click="currentComponentIndex = 2" />
                             <FormRadioButton name="selection" id="multi" class="mx-5 my-3"
                                 @click="currentComponentIndex = 2" />
@@ -43,10 +48,10 @@ const form = useForm({
                         </div>
                     </div>
                     <div class="flex flex-row mt-3">
-                        <FormLabel for="hours" value="Horas totales" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3" />
-                        <FormTextInput name="hours" id="hours" label="hours" />
-                        <FormLabel for="affected" value="Grupos afectados" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3" />
-                        <FormTextInput name="affected" id="affected" label="Grupos afectados" />
+                        <FormLabel for="hours" :value="t('permits.labels.hours')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 mx-2" />
+                        <FormTextInput name="hours" id="hours" label="hours" class="mx-2"/>
+                        <FormLabel for="affected" :value="t('permits.labels.affected')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 mx-2" />
+                        <FormTextInput name="affected" id="affected" label="Grupos afectados" class="mx-2"/>
                     </div>
                 </div>
                 <h2 class="text-xl mt-5">{{ t('permits.type') }}</h2>
