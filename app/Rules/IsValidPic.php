@@ -24,9 +24,9 @@ class IsValidPic implements InvokableRule
             $fail('Unexpected error');
         } else if (count($value) != 1) {
             $fail('Unexpected number of files');
-        } else if ($value[0]->extension() != 'png' & $value[0]->extension() != 'jpg' & $value[0]->extension() != 'jpeg') {
-            $fail('File must be type png, jpg or jpeg');
-        } else if ($value[0]->getSize() > 2000000) {
+        } else if ($value[0]->extension() != 'png' & $value[0]->extension() != 'jpg' & $value[0]->extension() != 'jpeg' & $value[0]->extension() != 'gif') {
+            $fail('File must be type gif, png, jpg or jpeg');
+        } else if ($value[0]->getSize() > 20000000) {
             $fail('File is too big');
         }
     }
