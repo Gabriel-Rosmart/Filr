@@ -110,35 +110,41 @@ class UserController extends Controller
     {
         if ($request->validate([
             'nDays' => ['required'],
+            'day' => ['required'],
+            'nHours' => ['required'],
+            'file' => ['required'],
+            'type' => ['required'],
+            'doctype' => ['required'],
         ]))
         {
             if ($request->nDays == 'm')
             {
                 $validated = $request->validate([
-                    'day' => ['required'],
-                    'nHours' => ['required'],
-                    'file' => ['required'],
-                    'type' => ['required'],
-                    'doctype' => ['required'],
-                    
                     'dayOut' => ['required'],
                 ]);
             }
             else
             {
                 $validated = $request->validate([
-                    'day' => ['required'],
-                    'nHours' => ['required'],
-                    'file' => ['required'],
-                    'type' => ['required'],
-                    'doctype' => ['required'],
-    
                     'hStart' => ['required'],
                     'hEnd' => ['required']
                 ]);
             }
+
+
         }
-        //dd($validated);
+
+        DB::transaction(function () use ($request, $validated) {
+            $permit = DB::table('permits')->insertGetId([
+                'uuid' => fake()->uuid(),
+                'user_id' => Auth::user()->id,
+                'status' => 'pending',
+                'requested_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        });
+
         return redirect()->back();
     }
 }
