@@ -225,15 +225,6 @@ class AdminController extends Controller
             return redirect('/admin');
     }
 
-    public function getUserName()
-    {
-        return Inertia::render('Admin/Register', [
-            $id = request()->input('id'),
-            'users' => User::select('name', 'id')
-                ->get()
-        ]);
-    }
-
     public function registerNewUser()
     {
         return Inertia::render('Admin/RegisterUser', [
