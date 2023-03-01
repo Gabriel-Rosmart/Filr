@@ -75,6 +75,10 @@ function submit()
                         <FormTextInput name="affected" id="affected" label="Grupos afectados" class="mx-2"
                             v-model="form.affected"/>
                     </div>
+                    <div class="flex flex-row ml-5 mb-3 h-8">
+                        <FormInputError class="my-4" :message="form.errors.nHours" />
+                        <FormInputError class="my-4" :message="form.errors.affected" />
+                    </div>
                 </div>
                 <h2 class="text-xl mt-5">{{ t('permits.type') }}</h2>
                 <div class="border-2 dark:border-slate-700 rounded-lg p-2">
