@@ -100,4 +100,9 @@ class UserController extends Controller
 
         return redirect()->back();
     }
+
+    public function permitRequest()
+    {
+        return Inertia::render('User/PermitRequest');
+    }
 }

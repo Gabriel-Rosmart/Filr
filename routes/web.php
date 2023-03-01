@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/user/edit', [UserController::class, 'edit']);
     Route::post('/user/edit', [UserController::class, 'update']);
+    Route::get('user/permitreq', [UserController::class, 'permitRequest']);
     Route::get('/avatar', function () {
         return auth()->user()->profile_pic;
     });
