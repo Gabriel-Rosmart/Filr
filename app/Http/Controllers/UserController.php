@@ -103,7 +103,7 @@ class UserController extends Controller
 
     public function permitRequest()
     {
-        return Inertia::render('User/PermitRequest');
+        return Inertia::render('User/PermitRequest', ['isAdmin' => Auth::user()->is_admin]);
     }
     
     public function permitSend(Request $request)
