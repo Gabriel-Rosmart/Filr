@@ -166,6 +166,7 @@
         "responsabilitydoc": "Documento que acredite a responsabilidade civil, penal, social ou administrativa da persoa interesada e que supoña o cumprimento dunha obriga.",
         "donationdoc":"Documento que acredite a doazón de sangue, médula ou plaquetas.",
         "athletedoc":"Documento que acredite a asistencia dos deportistas de alto nivel ás competicións de carácter internacional, así como as concentracións preparatorias destas.",
-        "other":"Outros: "
+        "other":"Outros: ",
+        "send":"Solicitar"
     }
 }
