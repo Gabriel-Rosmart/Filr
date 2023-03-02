@@ -53,7 +53,8 @@ class PermitUpdated extends Mailable
             with: [
                 'name' => $this->user,
                 'uuid' => $this->uuid,
-                'status' => trans('mail.' . $this->status)
+                'status' => trans('mail.' . $this->status),
+                'route' => $_SERVER['HTTP_HOST'],
             ]
         );
     }
