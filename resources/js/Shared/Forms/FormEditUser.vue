@@ -30,8 +30,41 @@ var form = useForm({
     }
 });
 
+function validate(object) {
+    var regex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    for (var i = 0; i < 4; i++) {
+        console.log(object['monday'][i]);
+        if (object['monday'][i] != null) {
+            if (!regex.test(object['monday'][i])) {
+                object['monday'][i] = null;
+            }
+        }
+        if (object['tuesday'][i] != null) {
+            if (!regex.test(object['tuesday'][i])) {
+                object['tuesday'][i] = null;
+            }
+        }
+        if (object['wednesday'][i] != null) {
+            if (!regex.test(object['wednesday'][i])) {
+                object['wednesday'][i] = null;
+            }
+        }
+        if (object['thursday'][i] != null) {
+            if (!regex.test(object['thursday'][i])) {
+                object['thursday'][i] = null;
+            }
+        }
+        if (object['friday'][i] != null) {
+            if (!regex.test(object['friday'][i])) {
+                object['friday'][i] = null;
+            }
+        }
+    }
+}
+
 
 const submit = () => {
+    validate(form.schedules);
     form.post('/admin/edit');
     console.log(form);
 };
