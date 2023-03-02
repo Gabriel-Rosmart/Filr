@@ -33,7 +33,6 @@ var form = useForm({
 function validate(object) {
     var regex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
     for (var i = 0; i < 4; i++) {
-        console.log(object['monday'][i]);
         if (object['monday'][i] != null) {
             if (!regex.test(object['monday'][i])) {
                 object['monday'][i] = null;
