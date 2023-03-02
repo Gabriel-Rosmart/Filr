@@ -148,6 +148,8 @@ class UserController extends Controller
         $file = $request->file('file');
         $file->storeAs('permitDocs', $uuid . '.' . $file->getClientOriginalExtension());
 
+        //dd($_SERVER);
+
         Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user()->name, $request->day, $uuid, $file->getClientOriginalExtension()));
         Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
         
