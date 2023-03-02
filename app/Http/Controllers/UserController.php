@@ -108,7 +108,7 @@ class UserController extends Controller
     
     public function permitSend(Request $request)
     {
-        if ($request->validate([
+        if ($validated = $request->validate([
             'nDays' => ['required'],
             'day' => ['required'],
             'nHours' => ['required'],
@@ -118,25 +118,22 @@ class UserController extends Controller
         ]))
         {
             if ($request->nDays == 'm')
-            {
-                $validated = $request->validate([
+                $valiDATEd = $request->validate([
                     'dayOut' => ['required'],
                 ]);
-            }
             else
-            {
-                $validated = $request->validate([
+                $valiDATEd = $request->validate([
                     'hStart' => ['required'],
                     'hEnd' => ['required']
                 ]);
-            }
 
 
         }
 
-        DB::transaction(function () use ($request, $validated) {
-            $permit = DB::table('permits')->insertGetId([
-                'uuid' => fake()->uuid(),
+        $uuid = fake()->uuid();
+        DB::transaction(function () use ($uuid) {
+            DB::table('permits')->insertGetId([
+                'uuid' => $uuid,
                 'user_id' => Auth::user()->id,
                 'status' => 'pending',
                 'requested_at' => now(),
@@ -145,6 +142,8 @@ class UserController extends Controller
             ]);
         });
 
+        Mail::to($validated['email'])->send(new PermitRequest($uuid);
+        
         return redirect()->back();
     }
 }
