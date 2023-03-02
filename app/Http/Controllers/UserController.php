@@ -151,6 +151,6 @@ class UserController extends Controller
         Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user()->name, $request->day, $uuid, $file->getClientOriginalExtension()));
         Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
         
-        return redirect()->back();
+        return redirect('/user');
     }
 }
