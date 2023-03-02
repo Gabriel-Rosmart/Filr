@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\permitReqAdmin;
+use App\Mail\permitReqUser;
 use App\Rules\IsValidDNI;
 use App\Rules\IsValidPhoneNumber;
 use App\Rules\IsValidPic;
@@ -145,6 +146,7 @@ class UserController extends Controller
         });
 
         Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user()->name, $request->day, $uuid));
+        Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
         
         return redirect()->back();
     }

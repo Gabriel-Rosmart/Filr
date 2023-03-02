@@ -13,14 +13,18 @@ class permitReqUser extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $perm_date;
+    protected $uuid;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(string $perm_date, string $uuid)
     {
-        //
+        $this->perm_date = $perm_date;
+        $this->uuid = $uuid;
     }
 
     /**
@@ -31,7 +35,7 @@ class permitReqUser extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Permit Req User',
+            subject: 'Nuevo Permiso Solicitado',
         );
     }
 
@@ -43,7 +47,11 @@ class permitReqUser extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'email.permitreqUser',
+            with: [
+                'perm_date' => $this->perm_date,
+                'uuid' => $this->uuid,
+            ],
         );
     }
 
