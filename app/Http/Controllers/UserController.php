@@ -8,6 +8,8 @@ use Inertia\Inertia;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\permitReqAdmin;
 use App\Rules\IsValidDNI;
 use App\Rules\IsValidPhoneNumber;
 use App\Rules\IsValidPic;
@@ -112,7 +114,7 @@ class UserController extends Controller
             'nDays' => ['required'],
             'day' => ['required'],
             'nHours' => ['required'],
-            'file' => ['required'],
+            'file' => ['required', 'file', 'mimes:pdf,jpeg,png,jpg'],
             'type' => ['required'],
             'doctype' => ['required'],
         ]))
@@ -142,7 +144,7 @@ class UserController extends Controller
             ]);
         });
 
-        Mail::to($validated['email'])->send(new PermitRequest($uuid);
+        Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user()->name, $request->day, $uuid));
         
         return redirect()->back();
     }
