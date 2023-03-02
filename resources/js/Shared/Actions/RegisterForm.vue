@@ -1,6 +1,6 @@
 <script setup>
 
-/** Component imports */
+/** COMPONENT IMPORTS */
 import Steps from '@/Shared/Navigation/Steps.vue'
 import FormTextInput from '@/Shared/Forms/FormTextInput.vue'
 import FormInputError from '@/Shared/Forms/FormInputError.vue'
@@ -11,7 +11,7 @@ import { useForm } from '@inertiajs/inertia-vue3'
 import VueTailwindDatepicker from 'vue-tailwind-datepicker'
 import { Link } from '@inertiajs/inertia-vue3';
 
-/** Function imports */
+/** FUNCTION IMPORTS */
 import { ref } from 'vue'
 import { range } from 'lodash'
 import { useI18n } from 'vue-i18n'
@@ -76,6 +76,7 @@ const formatter = ref({
 </script>
 
 <template>
+    <!-- TITLE -->
     <h2 class="mb-12 text-center text-5xl font-extrabold mt-10">
         <FormLabel :value="t('forms.newuser')" />
     </h2>
@@ -91,7 +92,7 @@ const formatter = ref({
                     </span>
                 </div>
             </div>
-            <!-- Step 1 of form -->
+            <!-- FIRST STEP // Personal Information about users -->
             <div class="flex flex-col mt-6">
                 <div>
                     <div class="flex flex-col" v-show="currentStep == 0">
@@ -140,7 +141,7 @@ const formatter = ref({
                         </div>
                     </div>
                 </div>
-                <!-- Step 2 of form -->
+                <!-- SECOND STEP // Date ranges, contracted time -->
                 <div class="flex mt-7 gap-6" v-show="currentStep == 1">
                     <vue-tailwind-datepicker as-single :i18n="locale" :formatter="formatter" v-model="form.dates.start"
                         input-classes="input input-bordered w-full max-w-xs" id="datepicker" class=""
@@ -149,7 +150,7 @@ const formatter = ref({
                         input-classes="input input-bordered w-full max-w-xs" id="datepicker" class=""
                         :placeholder="t('dateformat')" />
                 </div>
-                <!-- Step 3 of form -->
+                <!-- THIRD STEP // Schedules for the user -->
                 <div class="overflow-x-auto" v-show="currentStep == 2">
                     <table class="table w-full">
                         <thead>
@@ -172,7 +173,7 @@ const formatter = ref({
                     </table>
                 </div>
 
-                <!-- Buttons -->
+                <!-- GENERAL BUTTONS -->
                 <div class="flex justify-end mt-6">
                     <Link as="button" :href="'/admin/manage'" class="btn btn-error mr-4">
                     <SettingsIcon />
