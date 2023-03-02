@@ -38,7 +38,6 @@ class Helper
             foreach ($validated['schedules'] as $key => $value) {
                 if (isset($value[0]) && isset($value[1])) {
                     DB::table('schedules')->insert([
-                        'id' => null,
                         'date_range_id' => $user->date_range_id,
                         'day' => $key,
                         'starts_at' => $value[0],
@@ -47,7 +46,6 @@ class Helper
                 }
                 if (isset($value[2]) && isset($value[3])) {
                     DB::table('schedules')->insert([
-                        'id' => null,
                         'date_range_id' => $user->date_range_id,
                         'day' => $key,
                         'starts_at' => $value[2],
@@ -56,7 +54,6 @@ class Helper
                 }
                 if (!isset($value[0]) && !isset($value[1]) && !isset($value[2]) && !isset($value[3])){
                     DB::table('schedules')->insert([
-                        'id' => null,
                         'date_range_id' => $user->date_range_id,
                         'day' => $key,
                         'starts_at' => '00:00:01',
