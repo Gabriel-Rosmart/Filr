@@ -9,6 +9,9 @@ const props = defineProps({
 })
 console.log(props.form.schedules);
 function removeSeconds(time) {
+    if (time == '00:00:01'){
+        time = undefined;
+    }
     if (time != null) {
         if (time.length == 8)
             return time.slice(0, -3);

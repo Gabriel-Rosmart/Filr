@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Schedule;
 use App\Models\DateRange;
 use Illuminate\Support\Facades\DB;
+use Mockery\Undefined;
 
 class Helper
 {
@@ -25,33 +26,45 @@ class Helper
 
     public static function updateUserCompleteRecord($validated, $user)
     {
+        $validated['schedules'] = weedOut($validated['schedules']);
         DB::transaction(function () use ($validated, $user) {
             $user->update([
                 'name' => $validated['name'],
                 'dni' => $validated['dni'],
                 'email' => $validated['email'],
                 'phone' => $validated['telephone'],
-
             ]);
+            DB::table('schedules')->where('date_range_id', $user->date_range_id)->delete();
+            foreach ($validated['schedules'] as $key => $value) {
+                if (isset($value[0]) && isset($value[1])) {
+                    DB::table('schedules')->insert([
+                        'id' => null,
+                        'date_range_id' => $user->date_range_id,
+                        'day' => $key,
+                        'starts_at' => $value[0],
+                        'ends_at' => $value[1]
+                    ]);
+                }
+                if (isset($value[2]) && isset($value[3])) {
+                    DB::table('schedules')->insert([
+                        'id' => null,
+                        'date_range_id' => $user->date_range_id,
+                        'day' => $key,
+                        'starts_at' => $value[2],
+                        'ends_at' => $value[3]
+                    ]);
+                }
+                if (!isset($value[0]) && !isset($value[1]) && !isset($value[2]) && !isset($value[3])){
+                    DB::table('schedules')->insert([
+                        'id' => null,
+                        'date_range_id' => $user->date_range_id,
+                        'day' => $key,
+                        'starts_at' => '00:00:01',
+                        'ends_at' => '00:00:01'
+                    ]);
+                }
+            }
         });
-        DB::table('schedules')->where('date_range_id', $user->date_range_id)->delete();
-        foreach ($validated['schedules'] as $key => $value) {
-            DB::table('schedules')->insert([
-                'id' => null,
-                'date_range_id' => $user->date_range_id,
-                'day' => $key,
-                'starts_at' => $value[0],
-                'ends_at' => $value[1]
-            ]);
-            DB::table('schedules')->insert([
-                'id' => null,
-                'date_range_id' => $user->date_range_id,
-                'day' => $key,
-                'starts_at' => $value[2],
-                'ends_at' => $value[3]
-            ]);
-        }
-        
     }
 }
 
@@ -149,7 +162,7 @@ function weedOut(array $array)
 {
 
     foreach ($array as $day => $_) {
-        $array[$day] = array_filter($array[$day], fn($element) => !is_null($element));
+        $array[$day] = array_filter($array[$day], fn ($element) => !is_null($element));
     }
 
     return $array;
