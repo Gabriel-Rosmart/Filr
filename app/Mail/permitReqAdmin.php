@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class permitReqAdmin extends Mailable
 {
@@ -57,7 +58,9 @@ class permitReqAdmin extends Mailable
             with: [
                 'name' => $this->name,
                 'perm_date' => $this->perm_date,    
-                'uuid' => $this->uuid
+                'uuid' => $this->uuid,
+                'route' => $_SERVER['HTTP_HOST'],
+                'id' => Auth::user()->id,
             ]
         );
     }

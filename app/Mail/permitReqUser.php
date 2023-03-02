@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class permitReqUser extends Mailable
 {
@@ -51,6 +52,7 @@ class permitReqUser extends Mailable
             with: [
                 'perm_date' => $this->perm_date,
                 'uuid' => $this->uuid,
+                'route' => $_SERVER['HTTP_HOST'],
             ],
         );
     }
