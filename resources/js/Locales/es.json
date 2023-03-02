@@ -140,6 +140,12 @@
         "cleaning": "Personal de limpieza"
     },
     "permits": {
+        "labels": {
+            "oneday" : "Un día",
+            "mulday" : "Varios días",
+            "hours" : "Horas totales",
+            "affected" : "Grupos afectados"
+        },
         "data": "Datos del permiso",
         "type": "Tipo de permiso",
         "permits": "Permisos",
@@ -174,6 +180,7 @@
         "responsabilitydoc": "Documento que acredite la responsabilidad civil, penal, social o administrativa de la persona interesada y que suponga el cumplimiento de una obligación.",
         "donationdoc":"Documento que acredite la donación de sangre, médula o plaquetas.",
         "athletedoc":"Documento que acredite la asistencia de los deportistas de alto nivel a las competiciones de carácter internacional, así como las concentracións preparatorias de estas.",
-        "other":"Otros: "
+        "other":"Otros: ",
+        "send":"Solicitar"
     }
 }

@@ -8,6 +8,9 @@ use Inertia\Inertia;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\permitReqAdmin;
+use App\Mail\permitReqUser;
 use App\Rules\IsValidDNI;
 use App\Rules\IsValidPhoneNumber;
 use App\Rules\IsValidPic;
@@ -104,5 +107,50 @@ class UserController extends Controller
     public function permitRequest()
     {
         return Inertia::render('User/PermitRequest', ['isAdmin' => Auth::user()->is_admin]);
+    }
+    
+    public function permitSend(Request $request)
+    {
+        if ($validated = $request->validate([
+            'nDays' => ['required'],
+            'day' => ['required'],
+            'nHours' => ['required'],
+            'file' => ['required', 'file', 'mimes:pdf,jpeg,png,jpg'],
+            'type' => ['required'],
+            'doctype' => ['required'],
+        ]))
+        {
+            if ($request->nDays == 'm')
+                $valiDATEd = $request->validate([
+                    'dayOut' => ['required'],
+                ]);
+            else
+                $valiDATEd = $request->validate([
+                    'hStart' => ['required'],
+                    'hEnd' => ['required']
+                ]);
+
+
+        }
+
+        $uuid = fake()->uuid();
+        DB::transaction(function () use ($uuid) {
+            DB::table('permits')->insertGetId([
+                'uuid' => $uuid,
+                'user_id' => Auth::user()->id,
+                'status' => 'pending',
+                'requested_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        });
+
+        $file = $request->file('file');
+        $file->storeAs('permitDocs', $uuid . '.' . $file->getClientOriginalExtension());
+
+        Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user()->name, $request->day, $uuid));
+        Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
+        
+        return redirect()->back();
     }
 }
