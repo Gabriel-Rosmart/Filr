@@ -35,7 +35,7 @@ class permitReqUser extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Nuevo Permiso Solicitado',
+            subject: 'Solictud de permiso realizada',
         );
     }
 

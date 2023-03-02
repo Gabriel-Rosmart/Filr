@@ -18,17 +18,19 @@ class permitReqAdmin extends Mailable
     protected $perm_date;
     protected $uuid;
     protected $email;
+    protected $extension;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $name, string $perm_date, string $uuid)
+    public function __construct(string $name, string $perm_date, string $uuid,  string $extension)
     {
         $this->name = $name;
         $this->perm_date = $perm_date;
         $this->uuid = $uuid;
+        $this->extension = $extension;
     }
 
     /**
@@ -39,7 +41,7 @@ class permitReqAdmin extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Nuevo permiso solicitado',
+            subject: implode(['Nuevo Permiso Solicitado - ', $this->name]),
         );
     }
 
@@ -68,9 +70,8 @@ class permitReqAdmin extends Mailable
     public function attachments()
     {
         return [
-            Attachment::fromPath(storage_path('app/permitDocs/' . $this->uuid . '.pdf'))
-                ->as('justificante.pdf')
-                ->withMime('application/pdf'),
+            Attachment::fromPath(storage_path('app/permitDocs/' . $this->uuid . '.' . $this->extension))
+                ->as(str_replace(' ', '_', $this->name) . '_' . str_replace('-', '', $this->perm_date) . '.' . $this->extension)
         ];
     }
 }
