@@ -52,14 +52,6 @@ class Helper
                         'ends_at' => $value[3]
                     ]);
                 }
-                if (!isset($value[0]) && !isset($value[1]) && !isset($value[2]) && !isset($value[3])){
-                    DB::table('schedules')->insert([
-                        'date_range_id' => $user->date_range_id,
-                        'day' => $key,
-                        'starts_at' => '00:00:01',
-                        'ends_at' => '00:00:01'
-                    ]);
-                }
             }
         });
     }

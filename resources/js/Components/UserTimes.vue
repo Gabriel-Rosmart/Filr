@@ -10,16 +10,13 @@ const props = defineProps({
 console.log(props.form.schedules);
 console.log(props.weekend);
 function removeSeconds(time) {
-    if (time == '00:00:01'){
-        time = null;
-    }
     if (time != null) {
         if (time.length == 8)
             return time.slice(0, -3);
         else
             return time;
     }else {
-        return time;
+        return '00:00';
     }
 }
 
