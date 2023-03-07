@@ -13,7 +13,6 @@ const props = defineProps({
     timetable: Object,
     isAdmin: Number
 })
-console.table(props.timetable);
 
 var form = useForm({
     id: props.user.id,
@@ -65,7 +64,6 @@ function validate(object) {
 const submit = () => {
     validate(form.schedules);
     form.post('/admin/edit');
-    console.log(form);
 };
 
 
