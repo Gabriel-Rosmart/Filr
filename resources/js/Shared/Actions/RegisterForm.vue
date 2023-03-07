@@ -175,7 +175,7 @@ const formatter = ref({
 
                 <!-- GENERAL BUTTONS -->
                 <div class="flex justify-end mt-6">
-                    <Link as="button" :href="'/admin/manage'" class="btn btn-error mr-4">
+                    <Link as="button" :href="'/admin/manage'" class="btn btn-outline btn-error mr-4">
                     <SettingsIcon />
                     {{ t('admin.buttons.cancel') }}
                     </Link>
