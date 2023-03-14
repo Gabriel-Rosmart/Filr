@@ -172,6 +172,11 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * Gets the user's details
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getUserDetails()
     {
         //SELECT day, starts_at, ends_at, schedules.date_range_id FROM schedules INNER JOIN date_range_user ON schedules.date_range_id = date_range_user.date_range_id;
@@ -210,6 +215,11 @@ class AdminController extends Controller
             return redirect('/admin');
     }
 
+    /**
+     * Gets the user's data and schedule for Editusers
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function edit()
     {
         //SELECT day, starts_at, ends_at, schedules.date_range_id FROM schedules INNER JOIN date_range_user ON schedules.date_range_id = date_range_user.date_range_id;

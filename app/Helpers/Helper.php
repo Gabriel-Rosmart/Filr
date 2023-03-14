@@ -30,6 +30,11 @@ class Helper
         });
     }
 
+    /**
+     * Update User data
+     *
+     * @return void
+     */
     public static function updateUserCompleteRecord($validated, $user)
     {
         $validated['schedules'] = weedOut($validated['schedules']);
