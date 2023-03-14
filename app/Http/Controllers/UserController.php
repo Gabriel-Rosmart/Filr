@@ -18,8 +18,10 @@ use App\Rules\IsValidPic;
 class UserController extends Controller
 {
     /**
-     * Displays the main view for common users
-     * @return \Illuminate\Http\Response
+     * Displays the identified user information,
+     * timetables, incidences and permits are selected from the database
+     *
+     * @return  \Illuminate\Http\Response
      */
     public function index()
     {
@@ -44,8 +46,9 @@ class UserController extends Controller
         ]);
     }
     /**
-     * Render edit profile page
-     * @return \Illuminate\Http\Response
+     * Renders Form page to edit the user's personal data
+     *
+     * @return  \Illuminate\Http\Response
      */
     public function edit()
     {
@@ -56,7 +59,12 @@ class UserController extends Controller
     }
 
     /**
-     * Update user data via form in /user/edit
+     * Verifies the edit user form.
+     * if the verifying process is completed succesfully, uploads data to the datababase
+     *
+     * @param   \Illuminate\Http\Request  $request  Form data    
+     *
+     * @return  void    Reloads current page
      */
     public function update(Request $request)
     {
@@ -104,11 +112,25 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Render permit request page
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function permitRequest()
     {
         return Inertia::render('User/PermitRequest', ['isAdmin' => Auth::user()->is_admin]);
     }
     
+    /**
+     * Verifies permit request form.
+     * If the uploaded data satisfies the requirements, uploads data to database,
+     * stores attached documentation and sensd emails to the requesting user and admin
+     *
+     * @param   \Illuminate\Http\Request  $request  Form information
+     *
+     * @return  void             Redirects to user main page
+     */
     public function permitSend(Request $request)
     {
         if ($validated = $request->validate([
