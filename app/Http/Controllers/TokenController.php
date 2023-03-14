@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class TokenController extends Controller
 {
+    /**
+     * Handle a employee file in saving it
+     * to the database
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function __invoke(Request $request)
     {
         $user_id = request()->input('token');

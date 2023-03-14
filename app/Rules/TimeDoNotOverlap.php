@@ -7,7 +7,9 @@ use Illuminate\Contracts\Validation\InvokableRule;
 class TimeDoNotOverlap implements InvokableRule
 {
     /**
-     * Run the validation rule.
+     * Make sure that the provided array with times
+     * do not overlap between each other and they
+     * have a correct order
      *
      * @param  string  $attribute
      * @param  mixed  $value

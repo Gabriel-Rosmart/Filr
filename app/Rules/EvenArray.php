@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\InvokableRule;
 class EvenArray implements InvokableRule
 {
     /**
-     * Run the validation rule.
+     * Make sure the array has an even number of non null values
      *
      * @param  string  $attribute
      * @param  mixed  $value

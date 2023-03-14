@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\InvokableRule;
 class IsValidDNI implements InvokableRule
 {
     /**
-     * Run the validation rule.
+     * Make sure the provided string is a valid DNI
      *
      * @param  string  $attribute
      * @param  mixed  $value

@@ -27,7 +27,9 @@ use Illuminate\Database\Eloquent\Model;
 class AdminController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get all users along with their files
+     * This function apply a lot of filters so the query to the
+     * database is complex
      *
      * @return \Illuminate\Http\Response
      */
@@ -116,6 +118,12 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * Show a listing of all permits
+     * 
+     * @return \Illuminate\Http\Response
+     */
+
     public function listAllPermits()
     {
         return Inertia::render('Admin/ManagePermits', [
@@ -138,6 +146,12 @@ class AdminController extends Controller
             'filters' => request()->only('search', 'status')
         ]);
     }
+
+    /**
+     * List all incidences
+     * 
+     * @return \Illuminate\Http\Response
+     */
 
     public function listAllIncidences()
     {
@@ -221,6 +235,12 @@ class AdminController extends Controller
             return redirect('/admin');
     }
 
+    /**
+     *  Render the view for registering a user
+     * 
+     * @return \Illuminate\Http\Response
+     */
+
     public function registerNewUser()
     {
         return Inertia::render('Admin/RegisterUser', [
@@ -230,6 +250,13 @@ class AdminController extends Controller
                 ->get()
         ]);
     }
+
+    /**
+     * Process a user registration
+     * Send an email to the user after registration is complete
+     * 
+     * @return \Illuminate\Http\Response
+     */
 
     public function saveRegisteredUser(Request $request)
     {
@@ -274,6 +301,12 @@ class AdminController extends Controller
 
         return redirect('/admin/manage');
     }
+
+    /**
+     * Process a user update
+     * 
+     * @return \Illuminate\Http\Response
+     */
 
     public function updateUser(Request $request)
     {
