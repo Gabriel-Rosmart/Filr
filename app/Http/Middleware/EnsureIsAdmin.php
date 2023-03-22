@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class EnsureIsAdmin
 {
     /**
-     * Handle an incoming request.
+     * Make sure the user making the request is an admin,
+     * abort otherwise
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next

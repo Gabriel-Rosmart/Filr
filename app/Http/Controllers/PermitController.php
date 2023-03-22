@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Mail;
 class PermitController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Update the status of a permit and
+     * send an email to the corresponding 
+     * after updating it
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

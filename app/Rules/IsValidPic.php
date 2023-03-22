@@ -9,8 +9,10 @@ use Illuminate\Validation\Rules\File;
 class IsValidPic implements InvokableRule
 {
     /**
-     * Run the validation rule.
-     *
+     * Make sure that the image that the user is uploading satisfies the expected parameters:
+     * Just one file, must be jpg, png, jpeg or gif and size lower than 20MB.
+     * Abort the process if any of the previous requirements isn't fulfilled.
+     * 
      * @param  string  $attribute
      * @param  mixed  $value
      * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail

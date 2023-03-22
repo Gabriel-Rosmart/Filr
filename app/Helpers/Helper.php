@@ -11,6 +11,12 @@ use Mockery\Undefined;
 
 class Helper
 {
+    /**
+     * Process the registration of a user
+     * 
+     * @return void
+     */
+
     public static function saveUserCompleteRecord($validated, $fakepw)
     {
 
@@ -57,6 +63,11 @@ class Helper
     }
 }
 
+/**
+ * Save a user from scratch
+ * 
+ * @return void
+ */
 function saveFromScratch($validated, $fakepw)
 {
 
@@ -105,6 +116,12 @@ function saveFromScratch($validated, $fakepw)
     }
 }
 
+/**
+ * Save a user taking the values of another existing user
+ * 
+ * @return void
+ */
+
 function saveFromUser($validated, $fakepw)
 {
 
@@ -146,6 +163,11 @@ function saveFromUser($validated, $fakepw)
     }
 }
 
+/**
+ * Remove all null values of array
+ * 
+ * @return array
+ */
 
 function weedOut(array $array)
 {
@@ -157,6 +179,11 @@ function weedOut(array $array)
     return $array;
 }
 
+/**
+ * Determine if a user should be active based on the current data
+ * 
+ * @return bool
+ */
 function determineIfUserShouldBeActive($startDate, $endDate)
 {
     return \Carbon\Carbon::now()->between($startDate, $endDate);

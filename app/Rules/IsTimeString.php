@@ -7,7 +7,8 @@ use Illuminate\Contracts\Validation\InvokableRule;
 class IsTimeString implements InvokableRule
 {
     /**
-     * Run the validation rule.
+     * Make sure the provided array with strings are all 
+     * valid time signatures
      *
      * @param  string  $attribute
      * @param  mixed  $value
