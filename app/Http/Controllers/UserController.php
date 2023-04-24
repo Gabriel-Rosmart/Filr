@@ -15,6 +15,7 @@ use App\Rules\IsValidDNI;
 use App\Rules\IsValidPhoneNumber;
 use App\Rules\IsValidPic;
 use Dompdf\Dompdf;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -183,11 +184,22 @@ class UserController extends Controller
     public function pdfGenerate()
     {
         $user = Auth::user();
+        $time = date('Ymd-His');
+
         $dompdf = new Dompdf();
-        $dompdf->loadHtml('<h1>' . date('Y/m/d H:i:s') . '</h1>');
+        $dompdf->loadHtml(view('test', [
+            'uuid' => fake()->uuid(),
+            'name' => $user->name,
+            'dni' => $user->dni,
+            'date' => date('d/m/Y'),
+            'entry' => '08:00',
+            'exit' => '16:00',
+            'type' => 'test',
+            'documentation' => 'test',
+        ]));
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        Storage::put('public/permits/permiso_'. $user->id . '_' . date('Ymd-His') . '.pdf', $dompdf->output());
+        Storage::put('public/permits/'. $user->id .'/permiso_'. $user->id . '_' . $time . '.pdf', $dompdf->output());
 
         return redirect('/user');
     }
