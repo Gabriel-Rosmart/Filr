@@ -154,12 +154,12 @@ class UserController extends Controller
 
 
         }
-
         $uuid = fake()->uuid();
-        DB::transaction(function () use ($uuid) {
+        DB::transaction(function () use ($uuid, $validated) {
             DB::table('permits')->insertGetId([
                 'uuid' => $uuid,
                 'user_id' => Auth::user()->id,
+                'permitType'=> $validated['type'],
                 'status' => 'pending',
                 'requested_at' => now(),
                 'created_at' => now(),

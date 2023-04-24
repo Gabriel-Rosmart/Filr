@@ -24,7 +24,7 @@ defineProps({
             </thead>
             <tbody>
                 <tr v-for="permit of permits" class="hover">
-                    <td class="overflow-hidden">{{ t(`permits.${permit.permitType}`) }}</td>
+                    <td :title="t(`permits.${permit.permitType}`)" class="max-w-md text-ellipsis overflow-hidden">{{ t(`permits.${permit.permitType}`) }}</td>
                     <td>{{ permit.requested_at }}</td>
                     <td>
                         <div v-if="permit.status === 'accepted'" class="flex">
