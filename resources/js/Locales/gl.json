@@ -89,7 +89,8 @@
         "subject": "Motivo",
         "late": "Chega <span style='color: red'>{minutes}</span> minutos tarde",
         "early": "Sae <span style='color: red'>{minutes}</span> minutos antes",
-        "absent": "<span style='color: red'>Non veu traballar</span>"
+        "absent": "<span style='color: red'>Non veu traballar</span>",
+        "reqPermit": "Permiso solicitado"
     },
     "breadcrumbs": {
         "dashboard": "Panel de control",
