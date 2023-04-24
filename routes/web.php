@@ -48,6 +48,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/avatar', function () {
         return auth()->user()->profile_pic;
     });
+
+    Route::get('/user/pdftest', [UserController::class, 'pdfGenerate']);
 });
 
 Route::post('/token', TokenController::class);

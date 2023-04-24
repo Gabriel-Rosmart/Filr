@@ -14,6 +14,8 @@ use App\Mail\permitReqUser;
 use App\Rules\IsValidDNI;
 use App\Rules\IsValidPhoneNumber;
 use App\Rules\IsValidPic;
+use Dompdf\Dompdf;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -175,6 +177,18 @@ class UserController extends Controller
         Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user()->name, $request->day, $uuid, $file->getClientOriginalExtension()));
         Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
         
+        return redirect('/user');
+    }
+
+    public function pdfGenerate()
+    {
+        $user = Auth::user();
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml('<h1>' . date('Y/m/d H:i:s') . '</h1>');
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        Storage::put('public/permits/permiso_'. $user->id . '_' . date('Ymd-His') . '.pdf', $dompdf->output());
+
         return redirect('/user');
     }
 }
