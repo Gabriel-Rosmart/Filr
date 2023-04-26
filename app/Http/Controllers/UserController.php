@@ -14,6 +14,7 @@ use App\Mail\permitReqUser;
 use App\Rules\IsValidDNI;
 use App\Rules\IsValidPhoneNumber;
 use App\Rules\IsValidPic;
+use App\Models\File;
 
 class UserController extends Controller
 {
@@ -38,11 +39,18 @@ class UserController extends Controller
             //->orderBy('starts_at', 'asc')
             ->get();
 
+        $files = File::where('user_id',$user->id)
+            ->orderBy('date','desc')
+            ->orderBy('timestamp','desc')
+            ->paginate(8)
+            ->withQueryString();
+
         return Inertia::render('User/Dashboard', [
             'user' => $user,
             'timetable' => $timetable,
             'permits' => $user->permits,
             'incidents' => $user->incidences,
+            'files' => $files
         ]);
     }
     /**

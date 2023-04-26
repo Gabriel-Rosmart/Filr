@@ -8,6 +8,7 @@ import UserInfo from '@/Shared/User/UserInfo.vue';
 import TimeTable from '@/Shared/Info/TimeTable.vue';
 import PermitsTable from '@/Shared/User/UserPermits.vue';
 import Incidents from '@/Shared/Info/IncidencesUserTable.vue';
+import Files from '@/Shared/User/UserFiles.vue'
 
 /* VUE parameters */
 import { ref } from 'vue';
@@ -20,6 +21,7 @@ const props = defineProps({
     timetable: Object,
     permits: Object,
     incidents: Object,
+    files: Object
 })
 
 const fileIn = (id) => {
@@ -33,7 +35,7 @@ const fileIn = (id) => {
 const { t } = useI18n();
 
 //const propNames = [timetable, permits];
-const tabs = [TimeTable, PermitsTable, Incidents];
+const tabs = [TimeTable, Files, PermitsTable, Incidents];
 let currentComponentIndex = ref(0);
 
 </script>
@@ -64,16 +66,20 @@ let currentComponentIndex = ref(0);
                     </span>
                     <span class="tab tab-bordered" @click="currentComponentIndex = 1"
                         :class="{ 'tab-active': currentComponentIndex == 1 }">
-                        {{ t('admin.details.permits') }}
+                        {{ t('admin.details.files') }}
                     </span>
                     <span class="tab tab-bordered" @click="currentComponentIndex = 2"
                         :class="{ 'tab-active': currentComponentIndex == 2 }">
+                        {{ t('admin.details.permits') }}
+                    </span>
+                    <span class="tab tab-bordered" @click="currentComponentIndex = 3"
+                        :class="{ 'tab-active': currentComponentIndex == 3 }">
                         {{ t('admin.details.incidences') }}
                     </span>
                 </div>
 
                 <component :is="tabs[currentComponentIndex]" :timetable="timetable" :permits="permits"
-                    :incidences="incidents" />
+                    :incidences="incidents" :files="files"/>
 
             </div>
         </div>
