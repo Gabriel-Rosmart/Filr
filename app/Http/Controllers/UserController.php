@@ -199,7 +199,7 @@ class UserController extends Controller
         ]));
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        Storage::put('public/permits/'. $user->id .'/permiso_'. $user->id . '_' . $time . '.pdf', $dompdf->output());
+        Storage::put('permits/'. $user->id .'/permiso_'. $user->id . '_' . $time . '.pdf', $dompdf->output());
 
         return redirect('/user');
     }
