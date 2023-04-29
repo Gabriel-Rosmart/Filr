@@ -24,25 +24,25 @@ const { t } = useI18n();
                     <li>
                         <Link href="/user?component=0">
                         <CalendarIcon />
-                        Schedules
+                        {{t('admin.details.timetable')}}
                         </Link>
                     </li>
                     <li>
                         <Link href="/user?component=1">
                         <ClockIcon />
-                        Lista de fichajes
+                        {{t('admin.details.files')}}
                         </Link>
                     </li>
                     <li>
                         <Link href="/user?component=2">
                         <ArchiveIcon />
-                        Permisos
+                        {{t('admin.details.permits')}}
                         </Link>
                     </li>
                     <li>
                         <Link href="/user?component=3">
                         <WarningIcon/>
-                        Incidencias
+                        {{t('admin.details.incidences')}}
                         </Link>
                     </li>
                     <li>
