@@ -14,6 +14,7 @@ import ArchiveIcon from './ArchiveIcon.vue'
 import ClockIcon from './ClockIcon.vue'
 import UserCircleIcon from './UserCircleIcon.vue'
 import AppLogo from './AppLogo.vue'
+import WarningIcon from './WarningIcon.vue'
 
 export {
     ManageUsersIcon,
@@ -31,5 +32,6 @@ export {
     ArchiveIcon,
     ClockIcon,
     UserCircleIcon,
-    AppLogo
+    AppLogo,
+    WarningIcon
 }

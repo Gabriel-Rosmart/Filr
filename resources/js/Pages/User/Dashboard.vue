@@ -21,7 +21,8 @@ const props = defineProps({
     timetable: Object,
     permits: Object,
     incidents: Object,
-    files: Object
+    files: Object,
+    componentIndex : Number
 })
 
 const fileIn = (id) => {
@@ -36,7 +37,12 @@ const { t } = useI18n();
 
 //const propNames = [timetable, permits];
 const tabs = [TimeTable, Files, PermitsTable, Incidents];
-let currentComponentIndex = ref(0);
+
+let currentComponentIndex = ref(0)
+if (props.componentIndex != null) {
+    currentComponentIndex = ref(props.componentIndex);
+}
+
 
 </script>
 

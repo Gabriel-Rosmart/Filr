@@ -39,18 +39,26 @@ class UserController extends Controller
             //->orderBy('starts_at', 'asc')
             ->get();
 
-        $files = File::where('user_id',$user->id)
-            ->orderBy('date','desc')
-            ->orderBy('timestamp','desc')
+        $files = File::where('user_id', $user->id)
+            ->orderBy('date', 'desc')
+            ->orderBy('timestamp', 'desc')
             ->paginate(8)
             ->withQueryString();
 
+        if (isset($_GET['component'])) {
+            $component = (int)$_GET['component'];
+        } else {
+            $component = null;
+        }
+
+        //dd($component);
         return Inertia::render('User/Dashboard', [
             'user' => $user,
             'timetable' => $timetable,
             'permits' => $user->permits,
             'incidents' => $user->incidences,
-            'files' => $files
+            'files' => $files,
+            'componentIndex' => $component
         ]);
     }
     /**
@@ -129,7 +137,7 @@ class UserController extends Controller
     {
         return Inertia::render('User/PermitRequest', ['isAdmin' => Auth::user()->is_admin]);
     }
-    
+
     /**
      * Verifies permit request form.
      * If the uploaded data satisfies the requirements, uploads data to database,
@@ -148,8 +156,7 @@ class UserController extends Controller
             'file' => ['required', 'file', 'mimes:pdf,jpeg,png,jpg'],
             'type' => ['required'],
             'doctype' => ['required'],
-        ]))
-        {
+        ])) {
             if ($request->nDays == 'm')
                 $valiDATEd = $request->validate([
                     'dayOut' => ['required'],
@@ -159,15 +166,13 @@ class UserController extends Controller
                     'hStart' => ['required'],
                     'hEnd' => ['required']
                 ]);
-
-
         }
         $uuid = fake()->uuid();
         DB::transaction(function () use ($uuid, $validated) {
             DB::table('permits')->insertGetId([
                 'uuid' => $uuid,
                 'user_id' => Auth::user()->id,
-                'permitType'=> $validated['type'],
+                'permitType' => $validated['type'],
                 'status' => 'pending',
                 'requested_at' => now(),
                 'created_at' => now(),
@@ -182,7 +187,7 @@ class UserController extends Controller
 
         Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user()->name, $request->day, $uuid, $file->getClientOriginalExtension()));
         Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
-        
+
         return redirect('/user');
     }
 }
