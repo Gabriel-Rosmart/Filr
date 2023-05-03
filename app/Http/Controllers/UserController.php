@@ -175,32 +175,34 @@ class UserController extends Controller
 
         //dd($_SERVER);
 
-        Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user()->name, $request->day, $uuid, $file->getClientOriginalExtension()));
+        self::pdfGenerate($uuid);
+
+        Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid, $file->getClientOriginalExtension()));
         Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
         
         return redirect('/user');
     }
 
-    public function pdfGenerate()
+    public function pdfGenerate(string $uuid)
     {
         $user = Auth::user();
         $time = date('Ymd-His');
 
         $dompdf = new Dompdf();
         $dompdf->loadHtml(view('test', [
-            'uuid' => fake()->uuid(),
-            'name' => $user->name,
-            'dni' => $user->dni,
-            'date' => date('d/m/Y'),
+            'uuid'  => $uuid,
+            'name'  => $user->name,
+            'dni'   => $user->dni,
+            'date'  => date('d/m/Y'),
             'entry' => '08:00',
-            'exit' => '16:00',
-            'type' => 'test',
+            'exit'  => '16:00',
+            'type'  => 'test',
             'documentation' => 'test',
         ]));
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        Storage::put('permits/'. $user->id .'/permiso_'. $user->id . '_' . $time . '.pdf', $dompdf->output());
+        $fileName = 'permits/'. $user->id .'/permiso_'. $user->id . '_' . $time . '.pdf';
+        Storage::put($fileName, $dompdf->output());
 
-        return redirect('/user');
     }
 }

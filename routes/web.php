@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
         return auth()->user()->profile_pic;
     });
 
-    Route::get('/user/pdftest', [UserController::class, 'pdfGenerate']);
+    //Route::get('/user/pdftest', [UserController::class, 'pdfGenerate']); // PARA BORRAR
 });
 
 Route::post('/token', TokenController::class);
