@@ -152,6 +152,7 @@ class UserController extends Controller
      */
     public function permitSend(Request $request)
     {
+        //form validation
         if ($validated = $request->validate([
             'nDays' => ['required'],
             'day' => ['required'],
@@ -161,44 +162,61 @@ class UserController extends Controller
             'doctype' => ['required'],
         ])) {
             if ($request->nDays == 'm')
+            {
+
                 $valiDATEd = $request->validate([
                     'dayOut' => ['required'],
                 ]);
+                $dayOut = $valiDATEd['dayOut'];
+                $hStart = '00:00';
+                $hEnd = '00:00';
+            }
             else
                 $valiDATEd = $request->validate([
                     'hStart' => ['required'],
                     'hEnd' => ['required']
                 ]);
+                $dayOut = $validated['day'];
+                $hStart = $valiDATEd['hStart'];
+                $hEnd = $valiDATEd['hEnd'];
         }
+
+        //db insertion
         $uuid = fake()->uuid();
-        DB::transaction(function () use ($uuid, $validated) {
+        DB::transaction(function () use ($uuid, $validated, $dayOut, $hStart, $hEnd) {
             DB::table('permits')->insertGetId([
                 'uuid' => $uuid,
                 'user_id' => Auth::user()->id,
                 'permitType' => $validated['type'],
                 'status' => 'pending',
+                'start_date' => $validated['day'],
+                'end_date' => $dayOut,
+                'start_time' => $hStart,
+                'end_time' => $hEnd,
                 'requested_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         });
 
+        //file upload
         $file = $request->file('file');
         $file->storeAs('permitDocs', $uuid . '.' . $file->getClientOriginalExtension());
 
         //dd($_SERVER);
 
-        $fileName = self::pdfGenerate($uuid);
+        //pdf generation
+        $fileName = self::pdfGenerate($uuid, Auth::user());
 
+        //email sending
         Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid, $fileName, $file->getClientOriginalExtension()));
         Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
 
         return redirect('/user');
     }
 
-    public function pdfGenerate(string $uuid)
+    public function pdfGenerate(string $uuid, User $user)
     {
-        $user = Auth::user();
         $time = date('Ymd-His');
 
         $dompdf = new Dompdf();
