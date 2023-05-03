@@ -2,20 +2,25 @@
     import { useI18n } from 'vue-i18n';
     import FilesTable from '@/Shared/Info/FilesAdminTable.vue';
     import Pagination from '@/Shared/Filters/Pagination.vue';
+    import FilterFileDate from '../Filters/FilterFileDate.vue';
 
     const { t } = useI18n()
 
     const props = defineProps({
-        files: Array
+        files: Array,
+        filter: Object
     })
 </script>
 <template>
-    <div v-if="files.data.length > 0">
-        <div class="flex justify-left">
-            <Pagination class="ml-4" :links="files.links"/>
-        </div>
+    
+    
+    <div class="flex justify-left mb-6 gap-6">
+        <FilterFileDate url="/user?component=1" :filter = "filter"/>
+        <Pagination v-if="files.data.length > 0" :links="files.links"/>       
+    </div>
+    <div v-if="files.data.length > 0">    
         <div class="flex justify-center mb-10">
-            <FilesTable class="w-full mx-4 mt-8" :files="files.data"/>
+            <FilesTable class="w-full mx-4 mt-2" :files="files.data" />
         </div>
     </div>
     <div class="overflow-x-auto w-full" v-else>
