@@ -175,9 +175,9 @@ class UserController extends Controller
 
         //dd($_SERVER);
 
-        self::pdfGenerate($uuid);
+        $fileName = self::pdfGenerate($uuid);
 
-        Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid, $file->getClientOriginalExtension()));
+        Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid, $fileName, $file->getClientOriginalExtension()));
         Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
         
         return redirect('/user');
@@ -204,5 +204,6 @@ class UserController extends Controller
         $fileName = 'permits/'. $user->id .'/permiso_'. $user->id . '_' . $time . '.pdf';
         Storage::put($fileName, $dompdf->output());
 
+        return $fileName;
     }
 }

@@ -18,6 +18,7 @@ class permitReqAdmin extends Mailable
     protected $user;
     protected $perm_date;
     protected $uuid;
+    protected $fileName;
     protected $email;
     protected $extension;
 
@@ -26,11 +27,12 @@ class permitReqAdmin extends Mailable
      *
      * @return void
      */
-    public function __construct(object $user, string $perm_date, string $uuid,  string $extension)
+    public function __construct(object $user, string $perm_date, string $uuid,  string $fileName, string $extension)
     {
         $this->user = $user;
         $this->perm_date = $perm_date;
         $this->uuid = $uuid;
+        $this->fileName = $fileName;
         $this->extension = $extension;
     }
 
@@ -72,10 +74,11 @@ class permitReqAdmin extends Mailable
      */
     public function attachments()
     {
+        //dd($this);
         return [
             Attachment::fromPath(storage_path('app/permitDocs/' . $this->uuid . '.' . $this->extension))
                 ->as(str_replace(' ', '_', $this->user->name) . '_' . str_replace('-', '', $this->perm_date) . '-permit_justification.' . $this->extension),
-            Attachment::fromPath(storage_path('app/permits/'. $this->uuid . '.pdf'))
+            Attachment::fromPath(storage_path('app/'. $this->fileName))
                 ->as(str_replace(' ', '_', $this->user->name) . '_' . str_replace('-', '', $this->perm_date) . '-permit_request.pdf'),
         ];
     }
