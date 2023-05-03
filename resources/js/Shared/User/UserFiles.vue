@@ -8,14 +8,15 @@
 
     const props = defineProps({
         files: Array,
-        filter: Object
+        filter: Object,
+        url: String
     })
 </script>
 <template>
     
     
     <div class="flex justify-left mb-6 gap-6">
-        <FilterFileDate url="/user?component=1" :filter = "filter"/>
+        <FilterFileDate :url="url" :filter = "filter"/>
         <Pagination v-if="files.data.length > 0" :links="files.links"/>       
     </div>
     <div v-if="files.data.length > 0">    

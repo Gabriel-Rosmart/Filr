@@ -86,7 +86,7 @@ if (props.componentIndex != null) {
                 </div>
 
                 <component :is="tabs[currentComponentIndex]" :timetable="timetable" :permits="permits"
-                    :incidences="incidents" :files="files" :filter="filter"/>
+                    :incidences="incidents" :files="files" :filter="filter" url="/user?component=1"/>
 
             </div>
         </div>

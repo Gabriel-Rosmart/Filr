@@ -195,9 +195,19 @@ class AdminController extends Controller
                 ->get()
                 ->first();
 
-            $files = File::where('user_id', $id)
-                ->paginate(8)
-                ->withQueryString();
+                $files = File::Where('user_id',$id, function ($query) {
+                    $query->select('id')->filter(request(['search']));
+                })
+                    ->when(request()->input('date') ?? false, function($query, $date){
+                        $query->where('date', $date);
+                    })
+                    ->orderBy('date', 'desc')
+                    ->orderBy('timestamp', 'desc')
+                    ->paginate(8)
+                    ->withQueryString();
+                    
+                
+                $filter = request()->only('date');
 
             return Inertia::render('Admin/UserDetails', [
                 'user' => $user,
@@ -205,6 +215,7 @@ class AdminController extends Controller
                 'incidences' => $user->incidences,
                 'permits' => $user->permits,
                 'files' => $files,
+                'filter' => $filter
             ]);
         } else
             return redirect('/admin');
