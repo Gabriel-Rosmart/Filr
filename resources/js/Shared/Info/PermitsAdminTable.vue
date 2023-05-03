@@ -40,7 +40,7 @@ const deny = (pid) => {
         <table class="table w-full">
             <thead>
                 <tr>
-                    <th>PID</th>
+                    <th>{{ t('table.reqPermit') }}</th>
                     <th>{{ t('table.reqby') }}</th>
                     <th>{{ t('table.status') }}</th>
                     <th></th>
@@ -48,9 +48,7 @@ const deny = (pid) => {
             </thead>
             <tbody>
                 <tr v-for="permit of permits" class="hover">
-                    <td>
-                        {{ permit.uuid }}
-                    </td>
+                    <td :title="t(`permits.${permit.permitType}`)" class="max-w-md text-ellipsis overflow-hidden">{{ t(`permits.${permit.permitType}`) }}</td>
                     <td>
                         {{ d(permit.requested_at, 'short') }}
                     </td>
