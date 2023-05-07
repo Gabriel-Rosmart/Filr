@@ -156,7 +156,6 @@ class UserController extends Controller
         if ($validated = $request->validate([
             'nDays' => ['required'],
             'day' => ['required'],
-            'nHours' => ['required'],
             'file' => ['file', 'mimes:pdf,jpeg,png,jpg'],
             'type' => ['required'],
             'doctype' => ['required'],
@@ -232,7 +231,7 @@ class UserController extends Controller
         ]));
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        $fileName = 'permits/'. $user->id .'/permiso_'. $user->id . '_' . $time . '.pdf';
+        $fileName = 'permits/'. $user->id .'/permiso_'. $uuid . '.pdf';
         Storage::put($fileName, $dompdf->output());
 
         return $fileName;
