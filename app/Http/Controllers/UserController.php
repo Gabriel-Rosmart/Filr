@@ -115,7 +115,7 @@ class UserController extends Controller
             'nDays' => ['required'],
             'day' => ['required'],
             'nHours' => ['required'],
-            'file' => ['required', 'file', 'mimes:pdf,jpeg,png,jpg'],
+            'file' => ['file', 'mimes:pdf,jpeg,png,jpg'],
             'type' => ['required'],
             'doctype' => ['required'],
         ]))
