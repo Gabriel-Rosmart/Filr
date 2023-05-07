@@ -19,6 +19,7 @@ class PermitFactory extends Factory
         return [
             'uuid' => fake()->uuid(),
             'user_id' => fake()->numberBetween(1, 100),
+            'permitType' => ['death','move','exam','prenat','fecAs','marriage','duties','particularBussines','unexpection'][array_rand(['death','move','exam','prenat','fecAs','marriage','duties','particularBussines','unexpection'])],
             'requested_at' => fake()->date(),
             'status' => ['pending', 'accepted', 'denied'][array_rand(['pending', 'accepted', 'denied'])]
         ];

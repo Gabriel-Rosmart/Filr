@@ -13,7 +13,6 @@ const props = defineProps({
     timetable: Object,
     isAdmin: Number
 })
-console.table(props.timetable);
 
 var form = useForm({
     id: props.user.id,
@@ -33,7 +32,6 @@ var form = useForm({
 function validate(object) {
     var regex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
     for (var i = 0; i < 4; i++) {
-        console.log(object['monday'][i]);
         if (object['monday'][i] != null) {
             if (!regex.test(object['monday'][i])) {
                 object['monday'][i] = null;
@@ -66,7 +64,6 @@ function validate(object) {
 const submit = () => {
     validate(form.schedules);
     form.post('/admin/edit');
-    console.log(form);
 };
 
 

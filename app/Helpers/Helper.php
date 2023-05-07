@@ -11,6 +11,12 @@ use Mockery\Undefined;
 
 class Helper
 {
+    /**
+     * Process the registration of a user
+     * 
+     * @return void
+     */
+
     public static function saveUserCompleteRecord($validated, $fakepw)
     {
 
@@ -38,7 +44,6 @@ class Helper
             foreach ($validated['schedules'] as $key => $value) {
                 if (isset($value[0]) && isset($value[1])) {
                     DB::table('schedules')->insert([
-                        'id' => null,
                         'date_range_id' => $user->date_range_id,
                         'day' => $key,
                         'starts_at' => $value[0],
@@ -47,20 +52,10 @@ class Helper
                 }
                 if (isset($value[2]) && isset($value[3])) {
                     DB::table('schedules')->insert([
-                        'id' => null,
                         'date_range_id' => $user->date_range_id,
                         'day' => $key,
                         'starts_at' => $value[2],
                         'ends_at' => $value[3]
-                    ]);
-                }
-                if (!isset($value[0]) && !isset($value[1]) && !isset($value[2]) && !isset($value[3])){
-                    DB::table('schedules')->insert([
-                        'id' => null,
-                        'date_range_id' => $user->date_range_id,
-                        'day' => $key,
-                        'starts_at' => '00:00:01',
-                        'ends_at' => '00:00:01'
                     ]);
                 }
             }
@@ -68,6 +63,11 @@ class Helper
     }
 }
 
+/**
+ * Save a user from scratch
+ * 
+ * @return void
+ */
 function saveFromScratch($validated, $fakepw)
 {
 
@@ -116,6 +116,12 @@ function saveFromScratch($validated, $fakepw)
     }
 }
 
+/**
+ * Save a user taking the values of another existing user
+ * 
+ * @return void
+ */
+
 function saveFromUser($validated, $fakepw)
 {
 
@@ -157,6 +163,11 @@ function saveFromUser($validated, $fakepw)
     }
 }
 
+/**
+ * Remove all null values of array
+ * 
+ * @return array
+ */
 
 function weedOut(array $array)
 {
@@ -168,6 +179,11 @@ function weedOut(array $array)
     return $array;
 }
 
+/**
+ * Determine if a user should be active based on the current data
+ * 
+ * @return bool
+ */
 function determineIfUserShouldBeActive($startDate, $endDate)
 {
     return \Carbon\Carbon::now()->between($startDate, $endDate);

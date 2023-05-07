@@ -49,12 +49,6 @@ onBeforeMount(() => {
         </Link>
       </li>
       <li>
-        <Link href="/user/permitreq">
-          <FileIcon/>
-          {{ t('admin.navbar.avatar.permit') }}
-        </Link>
-      </li>
-      <li>
         <Link as="button" href="/logout" method="post">
         <LogOutIcon />
         {{ t('admin.navbar.avatar.logout') }}

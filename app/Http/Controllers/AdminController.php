@@ -27,7 +27,9 @@ use Illuminate\Database\Eloquent\Model;
 class AdminController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get all users along with their files
+     * This function apply a lot of filters so the query to the
+     * database is complex
      *
      * @return \Illuminate\Http\Response
      */
@@ -116,6 +118,12 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * Show a listing of all permits
+     * 
+     * @return \Illuminate\Http\Response
+     */
+
     public function listAllPermits()
     {
         return Inertia::render('Admin/ManagePermits', [
@@ -138,6 +146,12 @@ class AdminController extends Controller
             'filters' => request()->only('search', 'status')
         ]);
     }
+
+    /**
+     * List all incidences
+     * 
+     * @return \Illuminate\Http\Response
+     */
 
     public function listAllIncidences()
     {
@@ -201,13 +215,9 @@ class AdminController extends Controller
         //SELECT day, starts_at, ends_at, schedules.date_range_id FROM schedules INNER JOIN date_range_user ON schedules.date_range_id = date_range_user.date_range_id;
         $id = request()->input('id');
         if (!empty($id)) {
-            $timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id', 'start_date', 'end_date')
+            $timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id')
                 ->join('date_range_user', 'date_range_user.date_range_id', '=', 'schedules.date_range_id')
-                ->join('date_ranges', 'date_range_user.date_range_id', '=', 'date_ranges.id')
-                ->where('date_ranges.start_date', '<=', DB::raw('curdate()'))
-                ->where('date_ranges.end_date', '>=', DB::raw('curdate()'))
-                ->join('users', 'date_range_user.user_id', '=', 'users.id')
-                ->where('users.id', $id)
+                ->where('user_id', $id)
                 ->orderBy('day', 'asc')
                 ->get();
 
@@ -225,6 +235,12 @@ class AdminController extends Controller
             return redirect('/admin');
     }
 
+    /**
+     *  Render the view for registering a user
+     * 
+     * @return \Illuminate\Http\Response
+     */
+
     public function registerNewUser()
     {
         return Inertia::render('Admin/RegisterUser', [
@@ -234,6 +250,13 @@ class AdminController extends Controller
                 ->get()
         ]);
     }
+
+    /**
+     * Process a user registration
+     * Send an email to the user after registration is complete
+     * 
+     * @return \Illuminate\Http\Response
+     */
 
     public function saveRegisteredUser(Request $request)
     {
@@ -278,6 +301,12 @@ class AdminController extends Controller
 
         return redirect('/admin/manage');
     }
+
+    /**
+     * Process a user update
+     * 
+     * @return \Illuminate\Http\Response
+     */
 
     public function updateUser(Request $request)
     {

@@ -33,7 +33,8 @@ class ScheduleSeeder extends Seeder
                     'date_range_id' => $i,
                     'day' => $day,
                     'starts_at' => date('H:m:s', rand(0, 43200)),
-                    'ends_at' => date('H:m:s', rand(43300, 86399))
+                    'ends_at' => date('H:m:s', rand(43300, 86399)),
+                    'created_at' => now(),
                 ];
             }
         }

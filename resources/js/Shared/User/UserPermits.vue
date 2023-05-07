@@ -17,14 +17,14 @@ defineProps({
         <table class="table w-full">
             <thead>
                 <tr>
-                    <th>PID</th>
+                    <th>{{ t('table.reqPermit') }}</th>
                     <th>{{ t('table.reqat') }}</th>
                     <th>{{ t('table.status') }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="permit of permits" class="hover">
-                    <td>{{ permit.uuid }}</td>
+                    <td :title="t(`permits.${permit.permitType}`)" class="max-w-md text-ellipsis overflow-hidden">{{ t(`permits.${permit.permitType}`) }}</td>
                     <td>{{ permit.requested_at }}</td>
                     <td>
                         <div v-if="permit.status === 'accepted'" class="flex">

@@ -1,4 +1,4 @@
-<script setup>
+ <script setup>
 
     /** Function imports */
     import { ref, watch } from "vue"
