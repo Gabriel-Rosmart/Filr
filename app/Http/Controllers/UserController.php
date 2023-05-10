@@ -171,6 +171,7 @@ class UserController extends Controller
                 $hEnd = '00:00';
             }
             else
+            {
                 $valiDATEd = $request->validate([
                     'hStart' => ['required'],
                     'hEnd' => ['required']
@@ -178,6 +179,7 @@ class UserController extends Controller
                 $dayOut = $validated['day'];
                 $hStart = $valiDATEd['hStart'];
                 $hEnd = $valiDATEd['hEnd'];
+            }
         }
 
         //db insertion
