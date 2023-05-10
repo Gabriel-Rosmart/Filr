@@ -1,6 +1,6 @@
 <script setup>
     /** Icon imports */
-    import { HomeIcon, ManageUsersIcon, FileIcon, ArchiveIcon, AppLogo } from '../Icons/Icons';
+    import { HomeIcon, ManageUsersIcon, FileIcon, ArchiveIcon, AppLogo, FolderIcon } from '../Icons/Icons';
 
     /** Component imports */
     import NotificationDropdown from './NotificationDropdown.vue';
@@ -40,7 +40,7 @@
                     </li>
                     <li>
                         <Link href="/admin/permits">
-                            <FileIcon/>
+                            <FolderIcon/>
                             {{ t('admin.navbar.dropdown.permits') }}
                         </Link>
                     </li>
@@ -48,6 +48,12 @@
                         <Link href="/admin/incidences">
                             <ArchiveIcon/>
                             {{ t('admin.navbar.dropdown.incidences') }}
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/user/permitreq">
+                        <FileIcon />
+                        {{ t('admin.navbar.avatar.permit') }}
                         </Link>
                     </li>
                 </ul>
