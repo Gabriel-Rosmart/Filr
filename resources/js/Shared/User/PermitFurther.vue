@@ -1,5 +1,7 @@
 <script setup>
     import FormFileInput from "@/Shared/Forms/FormFileInput.vue";
+
+    import { Link } from "@inertiajs/inertia-vue3";
     
     import { useI18n } from 'vue-i18n';
     import { useForm } from '@inertiajs/inertia-vue3';
@@ -57,11 +59,15 @@
             </div>
             <div class="stat">
                 <div class="stat-title">Tipo de Justificante</div>
-                <div class="stat-value">{{ t('permits.' + permit.fileType) }}</div>
+                <div class="stat-value text-xl whitespace-normal">{{ t('permits.' + permit.fileType) }}</div>
             </div>
             <div class="stat">
                 <div class="stat-title">Justificante</div>
-                <div class="stat-value text-xl whitespace-normal">{{ permit.file ? permit.file : 'No se ha aportado un justificante' }}</div>
+                <div class="stat-value text-xl whitespace-normal">
+                    <Link :href="'/storage?just=true&id=' + permit.user_id + '&file=' + permit.file" target="_blank" class="dark:hover:text-cyan-400 hover:underline">
+                        {{ permit.file ? permit.file : 'No se ha aportado un justificante' }}
+                    </Link>
+                </div>
             </div>
             <div class="stat">
                 <div class="stat-title">Cambiar/Añadir Justificante</div>

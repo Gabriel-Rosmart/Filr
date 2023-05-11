@@ -182,7 +182,6 @@ class UserController extends Controller
         if ($validated = $request->validate([
             'nDays' => ['required'],
             'day' => ['required'],
-            'file' => ['file', 'mimes:pdf,jpeg,png,jpg'],
             'type' => ['required'],
             'doctype' => ['required'],
         ])) {
@@ -210,7 +209,15 @@ class UserController extends Controller
 
         //db insertion
         $uuid = fake()->uuid();
-        DB::transaction(function () use ($uuid, $validated, $dayOut, $hStart, $hEnd) {
+        $file = null;
+        $filename = "";
+        if ($request->file('file') != null)
+        {
+            $filename = 'justificante-' . $uuid . '.' .$request->file('file')->getClientOriginalExtension();
+            $file = $request->file('file');
+            $file->storeAs('justifacations/' . Auth::user()->id, $filename);
+        }
+        DB::transaction(function () use ($uuid, $validated, $dayOut, $hStart, $hEnd, $filename) {
             DB::table('permits')->insertGetId([
                 'uuid' => $uuid,
                 'user_id' => Auth::user()->id,
@@ -220,27 +227,34 @@ class UserController extends Controller
                 'end_date' => $dayOut,
                 'start_time' => $hStart,
                 'end_time' => $hEnd,
-                'fyleType' => $validated['doctype'],
+                'fileType' => $validated['doctype'],
                 'requested_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
+                'file' => $filename
             ]);
         });
-
-        //file upload
-        $file = $request->file('file');
-        $file->storeAs('permitDocs', $uuid . '.' . $file->getClientOriginalExtension());
-
         //dd($_SERVER);
 
         //pdf generation
         $fileName = self::pdfGenerate($uuid, Auth::user());
 
         //email sending
-        Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid, $fileName, $file->getClientOriginalExtension()));
-        Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
+        /* if ($file)
+            Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid, $fileName, $file->getClientOriginalExtension()));
+        else
+            Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid);
+        Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid)); */
 
         return redirect('/user');
+    }
+
+    public function storage()
+    {
+        if (request()->input('just'))
+            return Storage::download('justifications/'. request()->input('id') .'/justificante_'. request()->input('uuid') . '.pdf');
+        else
+            return Storage::download('permits/' . request()->input('id') . '/permiso_'. request()->input('uuid') . '.pdf');
     }
 
     public function pdfGenerate(string $uuid, User $user)

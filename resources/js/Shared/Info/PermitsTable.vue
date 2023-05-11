@@ -48,7 +48,11 @@
             </thead>
             <tbody>
                 <tr v-for="permit of permits" class="hover">
-                    <td :title="t(`permits.${permit.permitType}`)" class="max-w-md text-ellipsis overflow-hidden">{{ t(`permits.${permit.permitType}`) }}</td>
+                    <td :title="t(`permits.${permit.permitType}`)" class="max-w-md text-ellipsis overflow-hidden">
+                        <Link :href="'/user/permit?uuid=' + permit.uuid" class="dark:hover:text-cyan-400 hover:underline">
+                            {{ t(`permits.${permit.permitType}`) }}
+                        </Link>
+                    </td>
                     <td>
                         <Link class="dark:hover:text-cyan-400 hover:underline" :href="'/admin/details?id=' + permit.user.id">
                             {{ permit.user.name }}
