@@ -16,6 +16,6 @@ class IsValidDNI implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        if(preg_match("/^[0-9]{8}[a-zA-z]{1}$/", $value) == 0) $fail('The :attribute must be a valid DNI');
+        if(preg_match("/^[0-9]{8}[a-zA-z]{1}$/", $value) == 0) $fail(trans('rules.dni'));
     }
 }

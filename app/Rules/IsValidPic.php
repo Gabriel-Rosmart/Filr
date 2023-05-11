@@ -23,13 +23,13 @@ class IsValidPic implements InvokableRule
 
         //dd($value[0]->getSize());
         if (!is_array($value)) {
-            $fail('Unexpected error');
+            $fail(trans('rules.image_error'));
         } else if (count($value) != 1) {
-            $fail('Unexpected number of files');
+            $fail(trans('rules.image_error'));
         } else if ($value[0]->extension() != 'png' & $value[0]->extension() != 'jpg' & $value[0]->extension() != 'jpeg' & $value[0]->extension() != 'gif') {
-            $fail('File must be type gif, png, jpg or jpeg');
+            $fail(trans('rules.image_format'));
         } else if ($value[0]->getSize() > 20000000) {
-            $fail('File is too big');
+            $fail(trans('rules.image_size'));
         }
     }
 }

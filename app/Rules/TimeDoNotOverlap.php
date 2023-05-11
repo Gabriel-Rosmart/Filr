@@ -23,7 +23,7 @@ class TimeDoNotOverlap implements InvokableRule
             
             if(!is_null($value[$i]) && !is_null($value[$i - 1])){
                 if(strtotime($value[$i]) < strtotime($value[$i - 1]))
-                $fail('The :attribute does not have a correct order');
+                $fail(trans('rules.schedule_order'));
             }
             
         }
