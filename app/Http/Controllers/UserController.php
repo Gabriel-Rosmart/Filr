@@ -6,6 +6,7 @@ use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
+use App\Models\Permit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -139,6 +140,18 @@ class UserController extends Controller
     public function permitRequest()
     {
         return Inertia::render('User/PermitRequest', ['isAdmin' => Auth::user()->is_admin]);
+    }
+
+    public function permitDetails()
+    {
+        $uuid = request()->input('uuid');
+        $permit = Permit::where('uuid', $uuid)->first();
+
+        if ($permit == null) {
+            return redirect('/user');
+        }
+
+        return Inertia::render('User/PermitDetails', ['isAdmin' => Auth::user()->is_admin, 'permit' => $permit]);
     }
 
     /**
