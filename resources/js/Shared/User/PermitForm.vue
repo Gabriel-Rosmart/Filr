@@ -24,7 +24,6 @@ const form = useForm({
     dayOut : null,
     hStart : null,
     hEnd : null,
-    nHours : null,
     affected : null,
     file : null,
     type : null,
@@ -68,9 +67,6 @@ function submit()
                         <FormInputError class="my-4" :message="form.errors.nDays" />
                     </div>
                     <div class="flex flex-row mt-3">
-                        <FormLabel for="hours" :value="t('permits.labels.hours')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 mx-2" />
-                        <FormTextInput name="hours" id="hours" label="hours" class="mx-2"
-                            v-model="form.nHours"/>
                         <FormLabel for="affected" :value="t('permits.labels.affected')" class="hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg p-3 mx-2" />
                         <FormTextInput name="affected" id="affected" label="Grupos afectados" class="mx-2"
                             v-model="form.affected"/>
