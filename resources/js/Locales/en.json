@@ -137,6 +137,7 @@
     "employees": {
         "all": "All",
         "teacher": "Teacher",
+        "nonteacher": "Not a teacher",
         "administrative": "Administrative",
         "cleaning": "Cleaning Staff"
     },

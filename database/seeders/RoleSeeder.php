@@ -23,12 +23,8 @@ class RoleSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'role_name' => 'administrative'
+                'role_name' => 'nonteacher'
             ],
-            [
-                'id' => 3,
-                'role_name' => 'cleaning'
-            ]
         ];
 
         DB::table('roles')->insert($roles);
