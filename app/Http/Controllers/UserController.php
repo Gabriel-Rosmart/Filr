@@ -161,10 +161,10 @@ class UserController extends Controller
             'file' => ['required', 'file', 'mimes:pdf,jpeg,png,jpg'],
         ]);
 
-        // dd($validated['file']);
+        // dd($validated);
 
         $request->file('file')->storeAs('justifications/' . Auth::user()->id . '/', 'justificante-' . date('now') . '.' . $validated['file']->getClientOriginalExtension());
-        Permit::where('uuid', $validated['permit'])->update(['file' => 'justificante-' . date('now') . '.' . $validated['file']->getClientOriginalExtension()]);
+        DB::table('permits')->where('uuid', $validated['permit']['uuid'])->update(['file' => 'justificante-' . date('now') . '.' . $validated['file']->getClientOriginalExtension()]);
     }
 
     /**

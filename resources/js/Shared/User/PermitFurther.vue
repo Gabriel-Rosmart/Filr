@@ -22,10 +22,7 @@
     }
 
     const form = useForm({
-        permit: {
-            value: props.permit,
-            rules: ['required']
-        },
+        permit: props.permit,
         file: {
             value: null,
             rules: ['required']
