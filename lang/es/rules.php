@@ -8,5 +8,10 @@ return [
     'phone' => 'El número de teléfono no es correcto',
     'image_size' => 'Imágen muy grande',
     'image_format' => 'Imágen con formáto no válido',
-    'image_error' => 'Error con subida de imagen'
+    'image_error' => 'Error con subida de imagen',
+    'required' => 'Falta campo obligatorio',
+    'name_req' => 'El nombre es obligatorio',
+    'email_req' => 'El email es obligatorio',
+    'dni_req' => 'El dni es obligatorio',
+    'phone_req' => 'El teléfono es obligatorio'
 ];

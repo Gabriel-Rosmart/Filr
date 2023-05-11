@@ -294,7 +294,14 @@ class AdminController extends Controller
             'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-        ]);
+        ],
+        [
+            'name.required' => trans('rules.name_req'),
+            'dni.required' => trans('rules.dni_req'),
+            'email.required' => trans('rules.email_req'),
+            'telephone.required' => trans('rules.phone_req')
+        ]
+    );
 
 
         // * Generate random password

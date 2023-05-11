@@ -8,5 +8,10 @@ return [
     'phone' => 'Invalid phone number',
     'image_size' => 'Image too big',
     'image_format' => 'Image with invalid format',
-    'image_error' => 'Error uploading image'
+    'image_error' => 'Error uploading image',
+    'required' => 'Missing compulsory field',
+    'name_req' => 'Name if compulsory',
+    'email_req' => 'Email is compulsory',
+    'dni_req' => 'DNI is compulsory',
+    'phone_req' => 'Phone is compulsory'
 ];
