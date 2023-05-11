@@ -16,7 +16,7 @@
         <ul>
         <li v-for="page in pages">
             <Link :href=page[1]>
-                <FolderIcon/>
+                <!--<FolderIcon/>-->
                 {{ page[0] }}
             </Link>
         </li>
