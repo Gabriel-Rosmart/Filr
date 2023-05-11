@@ -15,9 +15,10 @@ class permitReqAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $name;
+    protected $user;
     protected $perm_date;
     protected $uuid;
+    protected $fileName;
     protected $email;
     protected $extension;
 
@@ -26,11 +27,12 @@ class permitReqAdmin extends Mailable
      *
      * @return void
      */
-    public function __construct(string $name, string $perm_date, string $uuid,  string $extension)
+    public function __construct(object $user, string $perm_date, string $uuid,  string $fileName, string $extension)
     {
-        $this->name = $name;
+        $this->user = $user;
         $this->perm_date = $perm_date;
         $this->uuid = $uuid;
+        $this->fileName = $fileName;
         $this->extension = $extension;
     }
 
@@ -42,7 +44,7 @@ class permitReqAdmin extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: implode(['Nuevo Permiso Solicitado - ', $this->name]),
+            subject: implode(['Nuevo Permiso Solicitado - ', $this->user->name]),
         );
     }
 
@@ -54,9 +56,9 @@ class permitReqAdmin extends Mailable
     public function content()
     {
         return new Content(
-            view: 'email.permitReqAdmin',
+            view: 'email.permitreqAdmin',
             with: [
-                'name' => $this->name,
+                'name' => $this->user->name,
                 'perm_date' => $this->perm_date,    
                 'uuid' => $this->uuid,
                 'route' => $_SERVER['HTTP_HOST'],
@@ -72,9 +74,12 @@ class permitReqAdmin extends Mailable
      */
     public function attachments()
     {
+        //dd($this);
         return [
             Attachment::fromPath(storage_path('app/permitDocs/' . $this->uuid . '.' . $this->extension))
-                ->as(str_replace(' ', '_', $this->name) . '_' . str_replace('-', '', $this->perm_date) . '.' . $this->extension)
+                ->as(str_replace(' ', '_', $this->user->name) . '_' . str_replace('-', '', $this->perm_date) . '-permit_justification.' . $this->extension),
+            Attachment::fromPath(storage_path('app/'. $this->fileName))
+                ->as(str_replace(' ', '_', $this->user->name) . '_' . str_replace('-', '', $this->perm_date) . '-permit_request.pdf'),
         ];
     }
 }

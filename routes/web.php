@@ -45,9 +45,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/edit', [UserController::class, 'update']);
     Route::get('user/permitreq', [UserController::class, 'permitRequest']);
     Route::post('user/permitreq', [UserController::class, 'permitSend']);
+    Route::get('user/permit', [UserController::class, 'permitDetails']);
+    Route::post('user/permit', [UserController::class, 'permitUpdate']);
+    Route::get('/storage', [UserController::class, 'storage']);
     Route::get('/avatar', function () {
         return auth()->user()->profile_pic;
     });
+
+    //Route::get('/user/pdftest', [UserController::class, 'pdfGenerate']); // PARA BORRAR
 });
 
 Route::post('/token', TokenController::class);

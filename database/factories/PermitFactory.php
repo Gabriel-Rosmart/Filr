@@ -21,6 +21,11 @@ class PermitFactory extends Factory
             'user_id' => fake()->numberBetween(1, 100),
             'permitType' => ['death','move','exam','prenat','fecAs','marriage','duties','particularBussines','unexpection'][array_rand(['death','move','exam','prenat','fecAs','marriage','duties','particularBussines','unexpection'])],
             'requested_at' => fake()->date(),
+            'start_date' => fake()->date(),
+            'end_date' => fake()->date(),
+            'start_time' => fake()->time(),
+            'end_time' => fake()->time(),
+            'fileType' => 'other',
             'status' => ['pending', 'accepted', 'denied'][array_rand(['pending', 'accepted', 'denied'])]
         ];
     }

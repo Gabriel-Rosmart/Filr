@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->date('date')->nullable(false);
             $table->time('timestamp')->nullable(false);
-            $table->string('day')->nullable(false)->default(DB::raw('DAYNAME(date)'));
+            //$table->string('day')->nullable(false)->default(DB::raw('DAYNAME(date)'));
         });
     }
 

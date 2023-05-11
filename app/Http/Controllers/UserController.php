@@ -6,6 +6,7 @@ use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
+use App\Models\Permit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -15,6 +16,9 @@ use App\Rules\IsValidDNI;
 use App\Rules\IsValidPhoneNumber;
 use App\Rules\IsValidPic;
 use App\Models\File;
+use Dompdf\Dompdf;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -154,6 +158,31 @@ class UserController extends Controller
         return Inertia::render('User/PermitRequest', ['isAdmin' => Auth::user()->is_admin]);
     }
 
+    public function permitDetails()
+    {
+        $uuid = request()->input('uuid');
+        $permit = Permit::where('uuid', $uuid)->first();
+
+        if ($permit == null) {
+            return redirect('/user');
+        }
+
+        return Inertia::render('User/PermitDetails', ['isAdmin' => Auth::user()->is_admin, 'permit' => $permit]);
+    }
+
+    public function permitUpdate(Request $request)
+    {
+        $validated = $request->validate([
+            'permit' => ['required'],
+            'file' => ['required', 'file', 'mimes:pdf,jpeg,png,jpg'],
+        ]);
+
+        // dd($validated);
+
+        $request->file('file')->storeAs('justifications/' . Auth::user()->id . '/', 'justificante-' . date('now') . '.' . $validated['file']->getClientOriginalExtension());
+        DB::table('permits')->where('uuid', $validated['permit']['uuid'])->update(['file' => 'justificante-' . date('now') . '.' . $validated['file']->getClientOriginalExtension()]);
+    }
+
     /**
      * Verifies permit request form.
      * If the uploaded data satisfies the requirements, uploads data to database,
@@ -165,45 +194,105 @@ class UserController extends Controller
      */
     public function permitSend(Request $request)
     {
+        //form validation
         if ($validated = $request->validate([
             'nDays' => ['required'],
             'day' => ['required'],
-            'nHours' => ['required'],
-            'file' => ['required', 'file', 'mimes:pdf,jpeg,png,jpg'],
             'type' => ['required'],
             'doctype' => ['required'],
         ])) {
             if ($request->nDays == 'm')
+            {
+
                 $valiDATEd = $request->validate([
                     'dayOut' => ['required'],
                 ]);
+                $dayOut = $valiDATEd['dayOut'];
+                $hStart = '00:00';
+                $hEnd = '00:00';
+            }
             else
+            {
                 $valiDATEd = $request->validate([
                     'hStart' => ['required'],
                     'hEnd' => ['required']
                 ]);
+                $dayOut = $validated['day'];
+                $hStart = $valiDATEd['hStart'];
+                $hEnd = $valiDATEd['hEnd'];
+            }
         }
+
+        //db insertion
         $uuid = fake()->uuid();
-        DB::transaction(function () use ($uuid, $validated) {
+        $file = null;
+        $filename = "";
+        if ($request->file('file') != null)
+        {
+            $filename = 'justificante-' . $uuid . '.' .$request->file('file')->getClientOriginalExtension();
+            $file = $request->file('file');
+            $file->storeAs('justifacations/' . Auth::user()->id, $filename);
+        }
+        DB::transaction(function () use ($uuid, $validated, $dayOut, $hStart, $hEnd, $filename) {
             DB::table('permits')->insertGetId([
                 'uuid' => $uuid,
                 'user_id' => Auth::user()->id,
                 'permitType' => $validated['type'],
                 'status' => 'pending',
+                'start_date' => $validated['day'],
+                'end_date' => $dayOut,
+                'start_time' => $hStart,
+                'end_time' => $hEnd,
+                'fileType' => $validated['doctype'],
                 'requested_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
+                'file' => $filename
             ]);
         });
-
-        $file = $request->file('file');
-        $file->storeAs('permitDocs', $uuid . '.' . $file->getClientOriginalExtension());
-
         //dd($_SERVER);
 
-        Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user()->name, $request->day, $uuid, $file->getClientOriginalExtension()));
-        Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
+        //pdf generation
+        $fileName = self::pdfGenerate($uuid, Auth::user());
+
+        //email sending
+        /* if ($file)
+            Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid, $fileName, $file->getClientOriginalExtension()));
+        else
+            Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid);
+        Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid)); */
 
         return redirect('/user');
+    }
+
+    public function storage()
+    {
+        if (request()->input('just'))
+            return Storage::download('justifications/'. request()->input('id') .'/justificante_'. request()->input('uuid') . '.pdf');
+        else
+            return Storage::download('permits/' . request()->input('id') . '/permiso_'. request()->input('uuid') . '.pdf');
+    }
+
+    public function pdfGenerate(string $uuid, User $user)
+    {
+        $time = date('Ymd-His');
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml(view('test', [
+            'uuid'  => $uuid,
+            'name'  => $user->name,
+            'dni'   => $user->dni,
+            'date'  => date('d/m/Y'),
+            'entry' => '08:00',
+            'exit'  => '16:00',
+            'type'  => 'test',
+            'documentation' => 'test',
+        ]));
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $fileName = 'permits/'. $user->id .'/permiso_'. $uuid . '.pdf';
+        Storage::put($fileName, $dompdf->output());
+
+        return $fileName;
     }
 }
