@@ -154,6 +154,19 @@ class UserController extends Controller
         return Inertia::render('User/PermitDetails', ['isAdmin' => Auth::user()->is_admin, 'permit' => $permit]);
     }
 
+    public function permitUpdate(Request $request)
+    {
+        $validated = $request->validate([
+            'permit' => ['required'],
+            'file' => ['required', 'file', 'mimes:pdf,jpeg,png,jpg'],
+        ]);
+
+        // dd($validated['file']);
+
+        $request->file('file')->storeAs('justifications/' . Auth::user()->id . '/', 'justificante-' . date('now') . '.' . $validated['file']->getClientOriginalExtension());
+        Permit::where('uuid', $validated['permit'])->update(['file' => 'justificante-' . date('now') . '.' . $validated['file']->getClientOriginalExtension()]);
+    }
+
     /**
      * Verifies permit request form.
      * If the uploaded data satisfies the requirements, uploads data to database,
