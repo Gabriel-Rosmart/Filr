@@ -25,6 +25,7 @@ class PermitFactory extends Factory
             'end_date' => fake()->date(),
             'start_time' => fake()->time(),
             'end_time' => fake()->time(),
+            'fileType' => 'other',
             'status' => ['pending', 'accepted', 'denied'][array_rand(['pending', 'accepted', 'denied'])]
         ];
     }

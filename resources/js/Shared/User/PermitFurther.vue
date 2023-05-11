@@ -56,6 +56,10 @@
                 <div class="stat-value text-xl whitespace-normal">{{ t('permits.' +  permit.permitType) }}</div>
             </div>
             <div class="stat">
+                <div class="stat-title">Tipo de Justificante</div>
+                <div class="stat-value">{{ t('permits.' + permit.fileType) }}</div>
+            </div>
+            <div class="stat">
                 <div class="stat-title">Justificante</div>
                 <div class="stat-value text-xl whitespace-normal">{{ permit.file ? permit.file : 'No se ha aportado un justificante' }}</div>
             </div>

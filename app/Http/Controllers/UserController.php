@@ -220,6 +220,7 @@ class UserController extends Controller
                 'end_date' => $dayOut,
                 'start_time' => $hStart,
                 'end_time' => $hEnd,
+                'fyleType' => $validated['doctype'],
                 'requested_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),

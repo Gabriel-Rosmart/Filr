@@ -24,6 +24,7 @@ return new class extends Migration
             $table->time('start_time')->nullable(false);
             $table->time('end_time')->nullable(false);
 
+            $table->string('fileType')->nullable(false);
             $table->string('file')->nullable(true);
 
             $table->date('requested_at')->nullable(false);
