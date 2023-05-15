@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::post('user/permitreq', [UserController::class, 'permitSend']);
     Route::get('user/permit', [UserController::class, 'permitDetails']);
     Route::post('user/permit', [UserController::class, 'permitUpdate']);
-    Route::get('user/permit/download', [UserController::class, 'justificationDownload']);
+    Route::get('user/permit/download/justification', [UserController::class, 'justificationDownload']);
     Route::get('/avatar', function () {
         return auth()->user()->profile_pic;
     });

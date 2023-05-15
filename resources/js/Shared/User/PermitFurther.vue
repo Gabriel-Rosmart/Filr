@@ -64,7 +64,7 @@
             <div class="stat">
                 <div class="stat-title">Justificante</div>
                 <div class="stat-value text-xl whitespace-normal">
-                    <a :href="'/user/permit/download?uuid=' + permit.uuid" target="_blank" class="dark:hover:text-cyan-400 hover:underline">
+                    <a :href="'/user/permit/download/justification?uuid=' + permit.uuid" target="_blank" class="dark:hover:text-cyan-400 hover:underline">
                         {{ permit.file ? permit.file : 'No se ha aportado un justificante' }}
                     </a>
                 </div>
