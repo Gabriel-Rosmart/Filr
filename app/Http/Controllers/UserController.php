@@ -283,6 +283,22 @@ class UserController extends Controller
         return Storage::download('justifications/' . $permit->user_id . '/' . $permit->file, $permit->file, ['Content-Type' => $type]);
     }
 
+    public function permitDownload(Request $request)
+    {
+        $uuid = $request->input('uuid');
+        $permit = Permit::where('uuid', $uuid)->first();
+
+        if ($permit == null) {
+            return redirect('/user');
+        }
+
+        if ($permit->file == null) {
+            return redirect('/user/permmit?uuid=' . $uuid);
+        }
+
+        return Storage::download('permits/' . $permit->user_id . '/permiso_' . $uuid. '.pdf');
+    }
+
     public function pdfGenerate(string $uuid, User $user)
     {
         $time = date('Ymd-His');
