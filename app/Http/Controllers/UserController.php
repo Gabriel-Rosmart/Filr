@@ -163,8 +163,8 @@ class UserController extends Controller
 
         // dd($validated);
 
-        $request->file('file')->storeAs('justifications/' . Auth::user()->id . '/', 'justificante-' . date('now') . '.' . $validated['file']->getClientOriginalExtension());
-        DB::table('permits')->where('uuid', $validated['permit']['uuid'])->update(['file' => 'justificante-' . date('now') . '.' . $validated['file']->getClientOriginalExtension()]);
+        $request->file('file')->storeAs('justifications/' . $validated['permit']['user_id'] . '/', 'justificante-' . $validated['permit']['uuid'] . '.' . $validated['file']->getClientOriginalExtension());
+        DB::table('permits')->where('uuid', $validated['permit']['uuid'])->update(['file' => 'justificante-' . $validated['permit']['uuid'] . '.' . $validated['file']->getClientOriginalExtension()]);
     }
 
     /**
