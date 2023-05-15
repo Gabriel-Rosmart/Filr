@@ -265,12 +265,22 @@ class UserController extends Controller
         return redirect('/user');
     }
 
-    public function storage()
-    {
-        if (request()->input('just'))
-            return Storage::download('justifications/'. request()->input('id') .'/justificante_'. request()->input('uuid') . '.pdf');
-        else
-            return Storage::download('permits/' . request()->input('id') . '/permiso_'. request()->input('uuid') . '.pdf');
+    public function justificationDownload(Request $request)
+    { 
+        $uuid = $request->input('uuid');
+        $permit = Permit::where('uuid', $uuid)->first();
+
+        if ($permit == null) {
+            return redirect('/user');
+        }
+
+        if ($permit->file == null) {
+            return redirect('/user/permmit?uuid=' . $uuid);
+        }
+
+        $type = Storage::mimeType('justifications/' . $permit->user_id . '/' . $permit->file);
+
+        return Storage::download('justifications/' . $permit->user_id . '/' . $permit->file, $permit->file, ['Content-Type' => $type]);
     }
 
     public function pdfGenerate(string $uuid, User $user)
