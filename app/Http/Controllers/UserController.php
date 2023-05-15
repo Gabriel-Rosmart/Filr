@@ -43,12 +43,27 @@ class UserController extends Controller
             //->orderBy('starts_at', 'asc')
             ->get();
 
-        $files = File::where('user_id', $user->id)
+        $files = File::Where('user_id',$user->id, function ($query) {
+            $query->select('id')->filter(request(['search']));
+        })
+            ->when(request()->input('date') ?? false, function($query, $date){
+                $query->where('date', $date);
+            })
             ->orderBy('date', 'desc')
             ->orderBy('timestamp', 'desc')
             ->paginate(8)
             ->withQueryString();
+            
+        
+        $filter = request()->only('date');
 
+/*
+        $files = File::where('user_id', $user->id)
+        ->orderBy('date', 'desc')
+            ->orderBy('timestamp', 'desc')
+            ->paginate(8)
+            ->withQueryString();
+*/
         if (isset($_GET['component'])) {
             $component = (int)$_GET['component'];
         } else {
@@ -62,7 +77,8 @@ class UserController extends Controller
             'permits' => $user->permits,
             'incidents' => $user->incidences,
             'files' => $files,
-            'componentIndex' => $component
+            'componentIndex' => $component,
+            'filter' => $filter
         ]);
     }
     /**

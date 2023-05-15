@@ -22,7 +22,8 @@ const props = defineProps({
     permits: Object,
     incidents: Object,
     files: Object,
-    componentIndex : Number
+    componentIndex: Number,
+    filter: Object
 })
 
 const fileIn = (id) => {
@@ -85,7 +86,7 @@ if (props.componentIndex != null) {
                 </div>
 
                 <component :is="tabs[currentComponentIndex]" :timetable="timetable" :permits="permits"
-                    :incidences="incidents" :files="files"/>
+                    :incidences="incidents" :files="files" :filter="filter" url="/user?component=1"/>
 
             </div>
         </div>

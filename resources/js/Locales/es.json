@@ -136,7 +136,8 @@
     "dateformat": "DD-MM-YYYY",
     "employees": {
         "all": "Todos",
-        "teacher": "Profesor",
+        "teacher": "Docente",
+        "nonteacher": "No docente",
         "administrative": "Administrativo",
         "cleaning": "Personal de limpieza"
     },

@@ -24,6 +24,6 @@ class EvenArray implements InvokableRule
         }
 
         if(!in_array($nonNullElements, $acceptedLengths)) 
-        $fail('The :attribute must have a fixed length of 0, 2 or 4');
+        $fail(trans('rules.schedule_length'));
     }
 }

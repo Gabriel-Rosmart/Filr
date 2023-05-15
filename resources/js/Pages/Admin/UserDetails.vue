@@ -20,11 +20,13 @@ const props = defineProps({
     timetable: Object,
     incidences: Array,
     permits: Array,
-    files:  Object
+    files:  Object,
+    filter: Object
 })
 
 const tabs = [[Files, props.files], [TimeTable, props.timetable], [Further, props.user], [Incidents, props.incidences], [Permits, props.permits]]
 let currentComponentIndex = ref(0)
+let url = '/admin/details?id='+ props.user.id
 
 </script>
 
@@ -55,7 +57,8 @@ let currentComponentIndex = ref(0)
                         :class="{ 'tab-active': currentComponentIndex == 4 }">{{ t('admin.details.permits') }}</span>
                 </div>
                 <div>
-                    <component :is="tabs[currentComponentIndex][0]" :user="user" :timetable="timetable" :permits="permits" :incidences="incidences" :files="files"/>
+                    <component :is="tabs[currentComponentIndex][0]" :user="user" :timetable="timetable" :permits="permits" 
+                        :incidences="incidences" :files="files" :filter="filter" :url="url"/>
                 </div>
             </div>
         </div>

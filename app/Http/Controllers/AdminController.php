@@ -195,9 +195,19 @@ class AdminController extends Controller
                 ->get()
                 ->first();
 
-            $files = File::where('user_id', $id)
-                ->paginate(8)
-                ->withQueryString();
+                $files = File::Where('user_id',$id, function ($query) {
+                    $query->select('id')->filter(request(['search']));
+                })
+                    ->when(request()->input('date') ?? false, function($query, $date){
+                        $query->where('date', $date);
+                    })
+                    ->orderBy('date', 'desc')
+                    ->orderBy('timestamp', 'desc')
+                    ->paginate(8)
+                    ->withQueryString();
+                    
+                
+                $filter = request()->only('date');
 
             return Inertia::render('Admin/UserDetails', [
                 'user' => $user,
@@ -205,6 +215,7 @@ class AdminController extends Controller
                 'incidences' => $user->incidences,
                 'permits' => $user->permits,
                 'files' => $files,
+                'filter' => $filter
             ]);
         } else
             return redirect('/admin');
@@ -283,7 +294,14 @@ class AdminController extends Controller
             'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-        ]);
+        ],
+        [
+            'name.required' => trans('rules.name_req'),
+            'dni.required' => trans('rules.dni_req'),
+            'email.required' => trans('rules.email_req'),
+            'telephone.required' => trans('rules.phone_req')
+        ]
+    );
 
 
         // * Generate random password

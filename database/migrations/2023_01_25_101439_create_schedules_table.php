@@ -30,7 +30,7 @@ return new class extends Migration
             $table->time('ends_at')->nullable(false);
             $table->date('created_at')->nullable(false);
             $table->date('deleted_at')->nullable(false)->default(now());
-        });
+        });/*
         DB::unprepared('
             DROP TRIGGER IF EXISTS schedules_delete_trigger;
             CREATE TRIGGER schedules_delete_trigger BEFORE DELETE ON schedules
@@ -43,7 +43,7 @@ return new class extends Migration
             DROP EVENT IF EXISTS schedules_log_delete_event;
             CREATE EVENT schedules_log_delete_event ON SCHEDULE EVERY 1 DAY
             DO DELETE FROM schedules_logs WHERE deleted_at < DATE_SUB(NOW(), INTERVAL 5 YEAR);'
-        );
+        );*/
     }
 
     /**
