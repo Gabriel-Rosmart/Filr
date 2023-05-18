@@ -131,7 +131,10 @@
         "passwordConfirm": "Repeat new password",
         "pic": "Profile picture",
         "save": "Save",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "required": "Required",
+        "invalidImage": "Invalid image",
+        "notValidPass": "Unmatching passwords"
     },
     "dateformat": "MM-DD-YYYY",
     "employees": {

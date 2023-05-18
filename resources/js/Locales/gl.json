@@ -131,7 +131,10 @@
         "passwordConfirm": "Repita novo contrasinal",
         "pic": "Foto de perfil",
         "save": "Gardar",
-        "cancel": "Cancelar"
+        "cancel": "Cancelar",
+        "required": "Obligatorio",
+        "invalidImage": "Imaxe non válida",
+        "notValidPass": "Os contrasinais non coinciden"
     },
     "dateformat": "DD-MM-YYYY",
     "employees": {

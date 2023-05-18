@@ -52,11 +52,12 @@ class UserController extends Controller
             ->orderBy('date', 'desc')
             ->orderBy('timestamp', 'desc')
             ->paginate(8)
-            ->withQueryString();
+            ->withPath('/user?component=1');
+            //->withQueryString();
             
         
         $filter = request()->only('date');
-
+        //dd($files);
 /*
         $files = File::where('user_id', $user->id)
         ->orderBy('date', 'desc')

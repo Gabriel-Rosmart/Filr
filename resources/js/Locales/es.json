@@ -131,7 +131,10 @@
         "passwordConfirm": "Repita nueva contraseña",
         "pic": "Foto de perfil",
         "save": "Guardar",
-        "cancel": "Cancelar"
+        "cancel": "Cancelar",
+        "required": "Obligatorio",
+        "invalidImage": "Imagen no válida",
+        "notValidPass": "Las contraseñas no coinciden"
     },
     "dateformat": "DD-MM-YYYY",
     "employees": {
