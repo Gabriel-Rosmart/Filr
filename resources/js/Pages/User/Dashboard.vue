@@ -25,7 +25,7 @@ const props = defineProps({
     componentIndex: Number,
     filter: Object
 })
-
+/*
 const fileIn = (id) => {
     axios.post('/token', {
         token: id
@@ -33,7 +33,7 @@ const fileIn = (id) => {
         .then(function (response) { console.log(response.data); })
         .catch(function (error) { console.log(error); });
 }
-
+*/
 const { t } = useI18n();
 
 //const propNames = [timetable, permits];
@@ -58,10 +58,10 @@ if (props.componentIndex != null) {
             <div class="flex flex-col mt-10 mx-20 w-full">
                 <div class="flex items-end justify-between">
                     <UserInfo class="my-8" :user="user" />
-                    <div class="flex justify-end w-1/3">
+                    <!--div class="flex justify-end w-1/3">
                         <button class="btn btn-outline btn-primary w-full max-w-xs my-12 mr-2"
                             @click="fileIn(user.id)">Fichar</button>
-                    </div>
+                    </div-->
                 </div>
                 <div class="divider divider-vertical"></div>
 

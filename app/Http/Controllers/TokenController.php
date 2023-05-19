@@ -62,24 +62,13 @@ class TokenController extends Controller
             return "Error Clocking in; date or time not valid";
        
         } catch (PDOException $ex){
-            Log::channel('daily')->critical(get_class($ex) . "; Error connecting to DB");
-            return "Error connecting to DB";
+            Log::channel('daily')->critical(get_class($ex) . "; " . $ex->getMessage());
+            return $ex->getMessage();
         
         } catch (ErrorException $ex){
             Log::channel('daily')->error(get_class($ex) . "; " . $ex->getMessage());
             return $ex->getMessage();
         }
-
-/*
-        
-
-        // * Get user name
-       
-
-        // * Insert record on database
-        */
-    
-        //
     }
     /**
      * Obtain a string formed by the requested date names and values
