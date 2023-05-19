@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Carbon\Exceptions\Exception as CarbonException;
 use Error;
 use ErrorException;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -46,17 +45,26 @@ class TokenController extends Controller
                 ->first();
             Log::channel('daily')->info('INFO; User with id ' . $request->id . ' found: ' . $user->name);
 
-
+            DB::table('files')->insert([
+                'user_id' => $request->id,
+                'date' => $date,
+                'timestamp' => $time
+            ]);
+            Log::channel('daily')->info('INFO; Clocked in succesfuly');
             return "User " . $user->name . " clocked in succesfuly at $time on $date";
+        
         } catch (\Error $err) {
             Log::channel('daily')->error(get_class($err) . "; " . $err->getMessage());
             return $err->getMessage();
+        
         } catch (CarbonException $ex){
             Log::channel('daily')->error(get_class($ex) . "; date or time not valid");
             return "Error Clocking in; date or time not valid";
+       
         } catch (PDOException $ex){
             Log::channel('daily')->critical(get_class($ex) . "; Error connecting to DB");
             return "Error connecting to DB";
+        
         } catch (ErrorException $ex){
             Log::channel('daily')->error(get_class($ex) . "; " . $ex->getMessage());
             return $ex->getMessage();
@@ -69,11 +77,7 @@ class TokenController extends Controller
        
 
         // * Insert record on database
-        /*DB::table('files')->insert([
-            'user_id' => $user_id,
-            'date' => $date,
-            'timestamp' => $time
-        ]);*/
+        */
     
         //
     }
