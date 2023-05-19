@@ -16,7 +16,9 @@ class TokenController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $user_id = request()->input('token');
+
+        dd($request);
+        /*$user_id = request()->input('token');
 
         // * Get date and hour
         $now = Carbon::now();
@@ -31,6 +33,6 @@ class TokenController extends Controller
             'timestamp' => $time
         ]);
 
-        return "Clock in succesfuly";
+        return "Clock in succesfuly";*/
     }
 }
