@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Carbon\Carbon;
+use Carbon\Exceptions\Exception as CarbonException;
 use Error;
+use ErrorException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use PDOException;
 
 class TokenController extends Controller
 {
@@ -20,27 +24,49 @@ class TokenController extends Controller
     public function __invoke(Request $request)
     {
         //$user_id = request()->input('token');
-        //*Create a log to show submitted data     
+        //* Create a log to show submitted data     
         Log::channel('daily')->info('INFO; Requested data = ' . $this->getSubmittedData($request->request));
         try {
-            //Check if requested data are the expected
+            //* Check if requested data are the expected
             $this->checkData($request);
-            Log::channel('daily')->info('INFO; Data OK');
+            Log::channel('daily')->info('INFO; Data format OK');
 
+            //* Get date and hour
+            $date = Carbon::parse($request->date)->format("Y-m-d");
+            $time = Carbon::parse($request->time)->format("H:i:s");
+            Log::channel('daily')->info("INFO; Date ($date) and Time ($time) OK");
+
+            //* Check database status
+            DB::connection()->getPdo();
+            Log::channel('daily')->info('INFO; Data Base connection OK');
+
+            //* Check if the user id exists. Get name if it does
+            $user = User::select('name')
+                ->where('id', $request->id)
+                ->first();
+            Log::channel('daily')->info('INFO; User with id ' . $request->id . ' found: ' . $user->name);
+
+
+            return "User " . $user->name . " clocked in succesfuly at $time on $date";
         } catch (\Error $err) {
             Log::channel('daily')->error(get_class($err) . "; " . $err->getMessage());
             return $err->getMessage();
+        } catch (CarbonException $ex){
+            Log::channel('daily')->error(get_class($ex) . "; date or time not valid");
+            return "Error Clocking in; date or time not valid";
+        } catch (PDOException $ex){
+            Log::channel('daily')->critical(get_class($ex) . "; Error connecting to DB");
+            return "Error connecting to DB";
+        } catch (ErrorException $ex){
+            Log::channel('daily')->error(get_class($ex) . "; " . $ex->getMessage());
+            return $ex->getMessage();
         }
 
 /*
-        // * Get date and hour
-        $date = Carbon::parse($request->date)->format("Y-m-d");
-        $time = Carbon::parse($request->time)->format("H:i:s");
+        
 
         // * Get user name
-        $user = User::select('name')
-            ->where('id', $request->id)
-            ->first();
+       
 
         // * Insert record on database
         /*DB::table('files')->insert([
@@ -49,7 +75,7 @@ class TokenController extends Controller
             'timestamp' => $time
         ]);*/
     
-        //return "User " . $user->name . " clocked in succesfuly at $time on $date";
+        //
     }
     /**
      * Obtain a string formed by the requested date names and values
@@ -74,4 +100,5 @@ class TokenController extends Controller
             throw new Error("Submited data is not valid || Expected id(Number) date(Y-m-d) time(H:i:s) || Received " . $this->getSubmittedData($data->request));           
         }
     }
+
 }
