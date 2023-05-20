@@ -33,7 +33,7 @@
             date: dval
         },
             {
-                preserveState: true,
+                preserveState: false,
                 remember: true
             })
     }, 300))

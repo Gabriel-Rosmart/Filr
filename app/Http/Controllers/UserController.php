@@ -50,7 +50,7 @@ class UserController extends Controller
                 $query->where('date', $date);
             })
             ->orderBy('date', 'desc')
-            ->orderBy('timestamp', 'desc')
+            ->orderBy('timestamp', 'asc')
             ->paginate(8)
             ->withPath('/user?component=1');
             //->withQueryString();

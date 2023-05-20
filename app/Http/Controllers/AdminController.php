@@ -202,8 +202,8 @@ class AdminController extends Controller
                         $query->where('date', $date);
                     })
                     ->orderBy('date', 'desc')
-                    ->orderBy('timestamp', 'desc')
-                    ->paginate(8)
+                    ->orderBy('timestamp', 'asc')
+                    ->paginate(20)
                     ->withQueryString();
                     
                 
