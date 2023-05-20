@@ -51,27 +51,17 @@ class UserController extends Controller
             })
             ->orderBy('date', 'desc')
             ->orderBy('timestamp', 'asc')
-            ->paginate(8)
+            ->paginate(20)
             ->withPath('/user?component=1');
-            //->withQueryString();
-            
-        
+                
         $filter = request()->only('date');
-        //dd($files);
-/*
-        $files = File::where('user_id', $user->id)
-        ->orderBy('date', 'desc')
-            ->orderBy('timestamp', 'desc')
-            ->paginate(8)
-            ->withQueryString();
-*/
+
         if (isset($_GET['component'])) {
             $component = (int)$_GET['component'];
         } else {
             $component = null;
         }
 
-        //dd($component);
         return Inertia::render('User/Dashboard', [
             'user' => $user,
             'timetable' => $timetable,
