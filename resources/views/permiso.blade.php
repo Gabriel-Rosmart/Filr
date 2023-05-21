@@ -88,6 +88,10 @@
                     </tr>
                 </table>
             </div>
+            <div class="row">
+                <p>Mediante este anexo solicitase o permiso para a falta ás súas actividades laborais e xustifica
+                a mesma polos motivos indicados mediante a documentación aportada.</p>
+            </div>
         </div>
     </body>
 </html>
