@@ -16,6 +16,7 @@ use App\Rules\IsValidDNI;
 use App\Rules\IsValidPhoneNumber;
 use App\Rules\IsValidPic;
 use App\Models\File;
+use App\Models\Role;
 use Dompdf\Dompdf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Storage;
@@ -254,7 +255,7 @@ class UserController extends Controller
         //dd($_SERVER);
 
         //pdf generation
-        $fileName = self::pdfGenerate($uuid, Auth::user());
+        $fileName = self::pdfGenerate($uuid, Auth::user(), $validated['day'] ,$dayOut, $hStart, $hEnd);
 
         //email sending
         Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid));
@@ -297,20 +298,24 @@ class UserController extends Controller
         return Storage::download('permits/' . $permit->user_id . '/permiso_' . $uuid. '.pdf');
     }
 
-    public function pdfGenerate(string $uuid, User $user)
+    public function pdfGenerate(string $uuid, User $user, string $day, string $dayOut, string $hStart, string $hEnd)
     {
         $time = date('Ymd-His');
 
         $dompdf = new Dompdf();
-        $dompdf->loadHtml(view('test', [
-            'uuid'  => $uuid,
-            'name'  => $user->name,
-            'dni'   => $user->dni,
-            'date'  => date('d/m/Y'),
-            'entry' => '08:00',
-            'exit'  => '16:00',
-            'type'  => 'test',
-            'documentation' => 'test',
+        $dompdf->loadHtml(view('permiso', [
+            'uuid'          => $uuid,
+            'name'          => $user->name,
+            'dni'           => $user->dni,
+            'phone'         => $user->phone,
+            'email'         => $user->email,
+            'body'          => Role::find($user->role_id)->role_name,
+            'date_st'       => $day,
+            'date_nd'       => $dayOut,
+            'entry'         => $hStart,
+            'exit'          => $hEnd,
+            'type'          => Permit::where('uuid', $uuid)->first()->permitType,
+            'documentation' => Permit::where('uuid', $uuid)->first()->fileType,
         ]));
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
