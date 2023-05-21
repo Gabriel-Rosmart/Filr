@@ -80,6 +80,7 @@
         "name": "Nome",
         "in": "Entrada",
         "out": "Saída",
+        "other": "Fichaxes adicionais",
         "job": "Traballo",
         "status": "Estado",
         "reqby": "Pedido por",

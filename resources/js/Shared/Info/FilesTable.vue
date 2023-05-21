@@ -47,7 +47,7 @@
                     <th>{{ t('table.name') }}</th>
                     <th>{{ t('table.in') }}</th>
                     <th>{{ t('table.out') }}</th>
-                    <th>otros fichajes</th>
+                    <th>{{ t('table.other') }}</th>
                     <th></th>
                 </tr>
             </thead>
