@@ -258,7 +258,7 @@ class UserController extends Controller
 
         //email sending
         Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid));
-        //Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
+        Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
 
         return redirect('/user?component=2');
     }

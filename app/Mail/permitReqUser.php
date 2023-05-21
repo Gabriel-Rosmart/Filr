@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,6 +65,15 @@ class permitReqUser extends Mailable
      */
     public function attachments()
     {
-        return [];
+        if (is_file(storage_path('app/permits/' . auth::user()->id . '/permiso_' . $this->uuid . '.pdf')))
+        {
+            return [
+                Attachment::fromPath(storage_path('app/permits/' . auth::user()->id . '/permiso_' . $this->uuid . '.pdf'))
+            ];
+        }
+        else
+        {
+            return [];
+        }
     }
 }
