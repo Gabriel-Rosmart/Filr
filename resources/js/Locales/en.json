@@ -16,6 +16,7 @@
             }
         },
         "query": {
+            "searchId" : "Search Id...",
             "search": "Search...",
             "employee": {
                 "main": "Employee type"
@@ -80,6 +81,7 @@
         "name": "Name",
         "in": "In",
         "out": "Out",
+        "other": "Additional files",
         "job": "Job",
         "status": "Status",
         "reqby": "Requested by",

@@ -16,6 +16,7 @@
             }
         },
         "query": {
+            "searchId" : "Buscar Id...",
             "search": "Buscar...",
             "employee": {
                 "main": "Tipo de empleado"
@@ -80,6 +81,7 @@
         "name": "Nombre",
         "in": "Entrada",
         "out": "Salida",
+        "other": "Fichajes adicionales",
         "job": "Trabajo",
         "status": "Estado",
         "reqby": "Pedido por",
