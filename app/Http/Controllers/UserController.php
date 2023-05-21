@@ -300,7 +300,7 @@ class UserController extends Controller
 
     public function pdfGenerate(string $uuid, User $user, string $day, string $dayOut, string $hStart, string $hEnd)
     {
-        $file = public_path('permits.json');
+        $file = storage_path('permits.json');
         $json = json_decode(file_get_contents($file), true);
 
         $dompdf = new Dompdf();
