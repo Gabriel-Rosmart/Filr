@@ -45,6 +45,16 @@
         return shifts
     }
 
+    const getAdditionalFiles = (otherFiles) => {
+        let files = []
+
+        for (let i = 4; i < otherFiles.timestamp.length; i++) {
+            files.push(otherFiles.timestamp[i])           
+        }
+
+        return files
+    }
+
     console.log(orderedDate);
    
 </script>
@@ -57,6 +67,7 @@
                     <th>{{ t('table.date') }}</th>
                     <th>{{ t('table.in') }}</th>
                     <th>{{ t('table.out') }}</th>
+                    <th>otros fichajes</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,10 +75,12 @@
                     <td> {{ d(file.date, 'short') }} </td>
                     <td>
                         <span v-for="(shift, i) in getMorningShift(file)" class="flex flex-col mb-2">{{ shift }}</span>                   
-                        <span v-if="i<1"></span>
                     </td>  
                     <td>
                         <span v-for="shift of getAfternoonShift(file)" class="flex flex-col mb-2">{{ shift }}</span>         
+                    </td> 
+                    <td>
+                        <span v-for="shift of getAdditionalFiles(file)" class="flex flex-col mb-2">{{ shift }}</span>         
                     </td>                                
                 </tr> 
             </tbody>
