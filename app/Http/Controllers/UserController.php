@@ -257,8 +257,13 @@ class UserController extends Controller
         //pdf generation
         $fileName = self::pdfGenerate($uuid, Auth::user(), $validated['day'] ,$dayOut, $hStart, $hEnd);
 
+        $admins = User::where('is_admin', true)->get();
+
+        foreach ($admins as $admin)
+            Mail::to($admin->email)->send(new permitReqAdmin(Auth::user(), $request->day, $uuid));
+
         //email sending
-        Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid));
+        //Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid));
         Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
 
         return redirect('/user?component=2');
