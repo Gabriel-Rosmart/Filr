@@ -300,7 +300,8 @@ class UserController extends Controller
 
     public function pdfGenerate(string $uuid, User $user, string $day, string $dayOut, string $hStart, string $hEnd)
     {
-        $time = date('Ymd-His');
+        $file = public_path('permits.json');
+        $json = json_decode(file_get_contents($file), true);
 
         $dompdf = new Dompdf();
         $dompdf->loadHtml(view('permiso', [
@@ -309,13 +310,13 @@ class UserController extends Controller
             'dni'           => $user->dni,
             'phone'         => $user->phone,
             'email'         => $user->email,
-            'body'          => Role::find($user->role_id)->role_name,
+            'body'          => $json[Role::find($user->role_id)->role_name],
             'date_st'       => $day,
             'date_nd'       => $dayOut,
             'entry'         => $hStart,
             'exit'          => $hEnd,
-            'type'          => Permit::where('uuid', $uuid)->first()->permitType,
-            'documentation' => Permit::where('uuid', $uuid)->first()->fileType,
+            'type'          => $json[Permit::where('uuid', $uuid)->first()->permitType],
+            'documentation' => $json[Permit::where('uuid', $uuid)->first()->fileType],
         ]));
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
