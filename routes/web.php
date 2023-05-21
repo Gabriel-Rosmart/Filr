@@ -55,6 +55,27 @@ Route::middleware(['auth', 'locale'])->group(function () {
     Route::get('/avatar', function () {
         return auth()->user()->profile_pic;
     });
+    //Prueba de PDF
+    Route::get('/pdf', function () {
+        $pdf =new Dompdf\Dompdf();
+        $pdf->loadHtml(view('permiso', [
+            'name' => 'Juan Perez',
+            'dni' => '12345678A',
+            'phone' => '986456789',
+            'email' => 'correo@example.org',
+            'body' => 'Docente',
+            'date_st' => '2021-05-05',
+            'date_nd' => '2021-05-06',
+            'entry' => '08:00',
+            'exit' => '14:00',
+            'type' => 'Mudanza',
+            'documentation' => 'Contrato Alquiler',
+
+        ]));
+        $pdf->setPaper('A4', 'portrait');
+        $pdf->render();
+        return $pdf->stream('permiso.pdf');
+    });
 });
 
 Route::post('/token', TokenController::class);
