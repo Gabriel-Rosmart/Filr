@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Permit;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -20,20 +21,17 @@ class permitReqAdmin extends Mailable
     protected $uuid;
     protected $fileName;
     protected $email;
-    protected $extension;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(object $user, string $perm_date, string $uuid,  string $fileName, string $extension)
+    public function __construct(object $user, string $perm_date, string $uuid)
     {
         $this->user = $user;
         $this->perm_date = $perm_date;
         $this->uuid = $uuid;
-        $this->fileName = $fileName;
-        $this->extension = $extension;
     }
 
     /**
@@ -74,12 +72,27 @@ class permitReqAdmin extends Mailable
      */
     public function attachments()
     {
-        //dd($this);
-        return [
-            Attachment::fromPath(storage_path('app/permitDocs/' . $this->uuid . '.' . $this->extension))
-                ->as(str_replace(' ', '_', $this->user->name) . '_' . str_replace('-', '', $this->perm_date) . '-permit_justification.' . $this->extension),
-            Attachment::fromPath(storage_path('app/'. $this->fileName))
-                ->as(str_replace(' ', '_', $this->user->name) . '_' . str_replace('-', '', $this->perm_date) . '-permit_request.pdf'),
-        ];
+
+        $justification = Permit::where('uuid', $this->uuid)->first()->file;
+        if ($justification != null
+            && is_file(storage_path('app/justifications/' . Auth::user()->id . '/' . $justification))
+            && is_file(storage_path('app/permits/' . auth::user()->id . '/permiso_' . $this->uuid . '.pdf')))
+        {
+            return [
+                Attachment::fromPath(storage_path('app/justifications/' . Auth::user()->id . '/' . Permit::where('uuid', $this->uuid)->first()->file)),
+                Attachment::fromPath(storage_path('app/permits/' . Auth::user()->id . '/permiso_' . $this->uuid . '.pdf'))
+            ];
+        }
+        else if (is_file(storage_path('app/permits/' . auth::user()->id . '/permiso_' . $this->uuid . '.pdf')))
+        {
+            return [
+                Attachment::fromPath(storage_path('app/permits/' . auth::user()->id . '/permiso_' . $this->uuid . '.pdf'))
+            ];
+        }
+        else
+        {
+            return [];
+        }
+
     }
 }

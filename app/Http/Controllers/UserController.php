@@ -232,7 +232,7 @@ class UserController extends Controller
         {
             $filename = 'justificante-' . $uuid . '.' .$request->file('file')->getClientOriginalExtension();
             $file = $request->file('file');
-            $file->storeAs('justifacations/' . Auth::user()->id, $filename);
+            $file->storeAs('justifications/' . Auth::user()->id, $filename);
         }
         DB::transaction(function () use ($uuid, $validated, $dayOut, $hStart, $hEnd, $filename) {
             DB::table('permits')->insertGetId([
@@ -257,13 +257,10 @@ class UserController extends Controller
         $fileName = self::pdfGenerate($uuid, Auth::user());
 
         //email sending
-        /* if ($file)
-            Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid, $fileName, $file->getClientOriginalExtension()));
-        else
-            Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid);
-        Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid)); */
+        Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid));
+        //Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
 
-        return redirect('/user');
+        return redirect('/user?component=2');
     }
 
     public function justificationDownload(Request $request)
