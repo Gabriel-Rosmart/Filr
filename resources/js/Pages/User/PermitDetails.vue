@@ -20,7 +20,7 @@
 
     <component :is="isAdmin == 0 ? UserLayout : AdminLayout">
         <Breadcrumbs v-if="isAdmin == 0" class="ml-5 mt-6"
-            :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.edit'), '/user/edit']]" />
+            :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.permitDetails'), '/user/permit?uuid=' + permit.uuid]]" />
         <Breadcrumbs v-else-if="isAdmin == 1" class="ml-5 mt-6"
             :pages="[['Admin', '/admin'], [t('breadcrumbs.dashboard'), '/admin']]" />
         <div class="flex justify-center content-center mt-4">

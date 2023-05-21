@@ -103,7 +103,8 @@
         "edit": "Editar perfil",
         "admin": "Administrador",
         "register": "Rexistrar",
-        "user": "Usuario"
+        "user": "Usuario",
+        "permitDetails": "Detalles do permiso"
     },
     "days": {
         "day": "Día",
@@ -153,6 +154,10 @@
             "hours" : "Horas totais",
             "affected" : "Grupos afectados"
         },
+        "startDate":"Data Inicio",
+        "endDate": "Data Fin",
+        "startHour": "Hora de Inicio",
+        "endHour": "Hora de Finalización",
         "data": "Datos do permiso",
         "type": "Tipo de permiso",
         "permits": "Permisos",
@@ -188,6 +193,12 @@
         "donationdoc":"Documento que acredite a doazón de sangue, médula ou plaquetas.",
         "athletedoc":"Documento que acredite a asistencia dos deportistas de alto nivel ás competicións de carácter internacional, así como as concentracións preparatorias destas.",
         "other":"Outros: ",
-        "send":"Solicitar"
+        "send":"Solicitar",
+        "justificationType": "Tipo de Xustificante",
+        "noJustif": "Non se ha achegou un xustificante",
+        "attachOrChange": "Cambiar/Engadir Xustificante",
+        "change": "Cambiar",
+        "attach": "Engadir",
+        "download": "Descargar Permiso"
     }
 }

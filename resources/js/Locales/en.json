@@ -103,7 +103,8 @@
         "edit": "Edit profile",
         "admin": "Admin",
         "register": "Register",
-        "user": "User"
+        "user": "User",
+        "permitDetails": "Permit details"
     },
     "days": {
         "day": "day",
@@ -153,6 +154,10 @@
             "hours" : "Total hours",
             "affected" : "Affected groups"
         },
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "startHour": "Start Hour",
+        "endHour": "End Hour",
         "data": "Permit data",
         "type": "Permit type",
         "permits": "Permits",
@@ -188,6 +193,12 @@
         "donationdoc":"Document certifying the donation of blood, marrow or platelets.",
         "athletedoc":"Document accrediting the attendance of top-level athletes at international competitions, as well as preparatory training camps.",
         "other":"Others: ",
-        "send":"Send"
+        "send":"Send",
+        "justificationType": "Justification Type",
+        "noJustif": "No justification attached",
+        "attachOrChange": "Change/Attach Justification",
+        "change": "Change",
+        "attach": "Attach",
+        "download": "Download Permit"
     }
 }
