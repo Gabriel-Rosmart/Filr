@@ -259,11 +259,10 @@ class UserController extends Controller
 
         $admins = User::where('is_admin', true)->get();
 
+
+        //email sending, sends email to all admins and to the requesting user
         foreach ($admins as $admin)
             Mail::to($admin->email)->send(new permitReqAdmin(Auth::user(), $request->day, $uuid));
-
-        //email sending
-        //Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user(), $request->day, $uuid));
         Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
 
         return redirect('/user?component=2');
