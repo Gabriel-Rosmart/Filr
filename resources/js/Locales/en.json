@@ -16,6 +16,7 @@
             }
         },
         "query": {
+            "searchId" : "Search Id...",
             "search": "Search...",
             "employee": {
                 "main": "Employee type"

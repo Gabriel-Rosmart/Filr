@@ -31,6 +31,9 @@
         <table class="table w-full">
             <thead>
                 <tr>
+                    <!-- TEMPORAL -->
+                    <th>id</th>
+                    <!---->
                     <th>{{ t('table.name') }}</th>
                     <th>{{ t('table.job') }}</th>
                     <th>{{ t('table.status') }}</th>
@@ -39,6 +42,9 @@
             </thead>
             <tbody>
                 <tr v-for="user of users" class="hover">
+                    <!-- TEMPORAL -->
+                    <td class="w-2">{{ user.id }}</td>
+                    <!---->
                     <td>
                         <div class="flex items-center space-x-3">
                             <div class="avatar">

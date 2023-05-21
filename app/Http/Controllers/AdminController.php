@@ -103,17 +103,19 @@ class AdminController extends Controller
      */
     public function listAllUsers()
     {
-
         return Inertia::render('Admin/ManageUsers', [
             'users' => User::query()
                 ->select('id', 'name', 'email', 'active', 'role_id', 'profile_pic')
                 ->filter(request(['search', 'active', 'type']))
+                ->when(request()->input('searchId') ?? false, function($query, $id){
+                    $query->where('id', $id);
+                })
                 ->with(['role' => function ($query) {
                     $query->select('id', 'role_name');
                 }])
                 ->paginate(15)
                 ->withQueryString(),
-            'filters' => request()->only('search', 'type', 'active'),
+            'filters' => request()->only('search', 'type', 'active', 'searchId'),
             'roles' => Role::all()
         ]);
     }
