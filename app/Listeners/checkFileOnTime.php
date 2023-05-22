@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\File;
 use App\Models\Incidence;
 use App\Models\User;
+use DateTime;
 
 class checkFileOnTime
 {
@@ -46,14 +47,16 @@ class checkFileOnTime
             ->get();
 
         //dd($timetable);
-        if (count($timetable) == 1)
+        if (count($timetable) > 0)
         {
             $start  = $timetable[0]->starts_at;
             $end    = $timetable[0]->ends_at;
 
-            $start = strtotime($start);
-            $end = strtotime($end);
-            $time = strtotime($file['timestamp']);
+            $start = new DateTime($start);
+            $end = new DateTime($end);
+            $time = new DateTime($file['timestamp']);
+
+            //dd(date('Y-m-d || h:i:s', $start), date('Y-m-d || h:i:s', $end), date('Y-m-d || h:i:s', $time));
 
             if (count($today_files) == 1)
             {
@@ -63,7 +66,7 @@ class checkFileOnTime
                         'user_id' => $file['user_id'],
                         'date' => date('Y-m-d'),
                         'subject' => 'late',
-                        'minutes' => ($time - $start) / 60
+                        'minutes' => date_diff($start, $time)->format('%i'),
                     ]);
                 }
                 
