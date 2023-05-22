@@ -166,10 +166,8 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'permit' => ['required'],
-            'file' => ['required', 'file', 'mimes:pdf,jpeg,png,jpg'],
+            'file' => ['required', 'file'],
         ]);
-
-        // dd($validated);
 
         $request->file('file')->storeAs('justifications/' . $validated['permit']['user_id'] . '/', 'justificante-' . $validated['permit']['uuid'] . '.' . $validated['file']->getClientOriginalExtension());
         DB::table('permits')->where('uuid', $validated['permit']['uuid'])->update(['file' => 'justificante-' . $validated['permit']['uuid'] . '.' . $validated['file']->getClientOriginalExtension()]);
@@ -268,12 +266,10 @@ class UserController extends Controller
         }
 
         if ($permit->file == null) {
-            return redirect('/user/permmit?uuid=' . $uuid);
+            return redirect('/user/permit?uuid=' . $uuid);
         }
 
-        $type = Storage::mimeType('justifications/' . $permit->user_id . '/' . $permit->file);
-
-        return Storage::download('justifications/' . $permit->user_id . '/' . $permit->file, $permit->file, ['Content-Type' => $type]);
+        return Storage::download('justifications/' . $permit->user_id . '/' . $permit->file);
     }
 
     public function permitDownload(Request $request)
@@ -283,10 +279,6 @@ class UserController extends Controller
 
         if ($permit == null) {
             return redirect('/user');
-        }
-
-        if ($permit->file == null) {
-            return redirect('/user/permmit?uuid=' . $uuid);
         }
 
         return Storage::download('permits/' . $permit->user_id . '/permiso_' . $uuid. '.pdf');
