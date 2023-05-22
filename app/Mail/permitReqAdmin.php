@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Permit;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -15,23 +16,22 @@ class permitReqAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $name;
+    protected $user;
     protected $perm_date;
     protected $uuid;
+    protected $fileName;
     protected $email;
-    protected $extension;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $name, string $perm_date, string $uuid,  string $extension)
+    public function __construct(object $user, string $perm_date, string $uuid)
     {
-        $this->name = $name;
+        $this->user = $user;
         $this->perm_date = $perm_date;
         $this->uuid = $uuid;
-        $this->extension = $extension;
     }
 
     /**
@@ -42,7 +42,7 @@ class permitReqAdmin extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: implode(['Nuevo Permiso Solicitado - ', $this->name]),
+            subject: implode(['Nuevo Permiso Solicitado - ', $this->user->name]),
         );
     }
 
@@ -54,9 +54,9 @@ class permitReqAdmin extends Mailable
     public function content()
     {
         return new Content(
-            view: 'email.permitReqAdmin',
+            view: 'email.permitreqAdmin',
             with: [
-                'name' => $this->name,
+                'name' => $this->user->name,
                 'perm_date' => $this->perm_date,    
                 'uuid' => $this->uuid,
                 'route' => $_SERVER['HTTP_HOST'],
@@ -72,9 +72,27 @@ class permitReqAdmin extends Mailable
      */
     public function attachments()
     {
-        return [
-            Attachment::fromPath(storage_path('app/permitDocs/' . $this->uuid . '.' . $this->extension))
-                ->as(str_replace(' ', '_', $this->name) . '_' . str_replace('-', '', $this->perm_date) . '.' . $this->extension)
-        ];
+
+        $justification = Permit::where('uuid', $this->uuid)->first()->file;
+        if ($justification != null
+            && is_file(storage_path('app/justifications/' . Auth::user()->id . '/' . $justification))
+            && is_file(storage_path('app/permits/' . auth::user()->id . '/permiso_' . $this->uuid . '.pdf')))
+        {
+            return [
+                Attachment::fromPath(storage_path('app/justifications/' . Auth::user()->id . '/' . Permit::where('uuid', $this->uuid)->first()->file)),
+                Attachment::fromPath(storage_path('app/permits/' . Auth::user()->id . '/permiso_' . $this->uuid . '.pdf'))
+            ];
+        }
+        else if (is_file(storage_path('app/permits/' . auth::user()->id . '/permiso_' . $this->uuid . '.pdf')))
+        {
+            return [
+                Attachment::fromPath(storage_path('app/permits/' . auth::user()->id . '/permiso_' . $this->uuid . '.pdf'))
+            ];
+        }
+        else
+        {
+            return [];
+        }
+
     }
 }

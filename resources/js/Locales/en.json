@@ -16,6 +16,7 @@
             }
         },
         "query": {
+            "searchId" : "Search Id...",
             "search": "Search...",
             "employee": {
                 "main": "Employee type"
@@ -80,6 +81,7 @@
         "name": "Name",
         "in": "In",
         "out": "Out",
+        "other": "Additional files",
         "job": "Job",
         "status": "Status",
         "reqby": "Requested by",
@@ -89,7 +91,8 @@
         "subject": "Subject",
         "late": "Employee is late by <span style='color: red'>{minutes}</span> minutes",
         "early": "Employee is early by <span style='color: red'>{minutes}</span> minutes",
-        "absent": "<span style='color: red'>Did not come to work</span>"
+        "absent": "<span style='color: red'>Did not come to work</span>",
+        "reqPermit": "Requested permit"
     },
     "breadcrumbs": {
         "dashboard": "Dashboard",
@@ -100,7 +103,8 @@
         "edit": "Edit profile",
         "admin": "Admin",
         "register": "Register",
-        "user": "User"
+        "user": "User",
+        "permitDetails": "Permit details"
     },
     "days": {
         "day": "day",
@@ -130,12 +134,16 @@
         "passwordConfirm": "Repeat new password",
         "pic": "Profile picture",
         "save": "Save",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "required": "Required",
+        "invalidImage": "Invalid image",
+        "notValidPass": "Unmatching passwords"
     },
     "dateformat": "MM-DD-YYYY",
     "employees": {
         "all": "All",
         "teacher": "Teacher",
+        "nonteacher": "Not a teacher",
         "administrative": "Administrative",
         "cleaning": "Cleaning Staff"
     },
@@ -146,6 +154,10 @@
             "hours" : "Total hours",
             "affected" : "Affected groups"
         },
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "startHour": "Start Hour",
+        "endHour": "End Hour",
         "data": "Permit data",
         "type": "Permit type",
         "permits": "Permits",
@@ -181,6 +193,12 @@
         "donationdoc":"Document certifying the donation of blood, marrow or platelets.",
         "athletedoc":"Document accrediting the attendance of top-level athletes at international competitions, as well as preparatory training camps.",
         "other":"Others: ",
-        "send":"Send"
+        "send":"Send",
+        "justificationType": "Justification Type",
+        "noJustif": "No justification attached",
+        "attachOrChange": "Change/Attach Justification",
+        "change": "Change",
+        "attach": "Attach",
+        "download": "Download Permit"
     }
 }

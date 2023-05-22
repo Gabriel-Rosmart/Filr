@@ -9,7 +9,7 @@
         locale.value = newLocale
         localStorage.setItem('locale', newLocale)
 
-        axios.post('/api/locale', { 'locale': newLocale })
+        axios.post('/locale', { 'locale': newLocale })
         .then(function (response) { console.log(response.data); })
         .catch(function (error) { console.log(error); });
     }

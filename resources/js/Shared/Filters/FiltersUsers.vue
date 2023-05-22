@@ -1,4 +1,4 @@
-<script setup>
+ <script setup>
 
     /** Function imports */
     import { ref, watch } from "vue"
@@ -18,18 +18,21 @@
     let search = ref(props.filters.search ?? '')
     let option = ref(props.filters.type ?? '')
     let active = ref(props.filters.active ?? '')
+    let searchId = ref(props.filters.searchId ?? '')
 
     const clearInput = () => {
         search.value = ''
         option.value = ''
         active.value = ''
+        searchId.value = ''
     }
 
-    watch([search, option, active], throttle(([sval, oval, aval]) => {
+    watch([search, option, active, searchId], throttle(([sval, oval, aval, idval]) => {
         Inertia.get(props.url, {
             search: sval,
             type: oval,
-            active: aval
+            active: aval,
+            searchId: idval
         },
         {
             preserveState: true,
@@ -40,7 +43,8 @@
 </script>
 
 <template>
-    <input type="text" :placeholder="t('admin.query.search')" class="input input-bordered w-full max-w-xs mx-4" v-model="search" />
+    <input type="number" :placeholder="t('admin.query.searchId')" class="input input-bordered w-32 mx-4" v-model="searchId"/>
+    <input type="text" :placeholder="t('admin.query.search')" class="input input-bordered w-full max-w-xs mr-4" v-model="search" />
     <select class="select select-bordered w-full max-w-xs" v-model="option">
         <option disabled selected value="">{{ t('admin.query.employee.main') }}</option>
         <option value="">{{ t('employees.all') }}</option>

@@ -1,5 +1,5 @@
 <script setup>
-
+import { Link } from "@inertiajs/inertia-vue3";
 import { CheckIcon, XIcon } from "../Icons/Icons";
 import infoIcon from "../Icons/infoIcon.vue";
 import { useI18n } from 'vue-i18n';
@@ -17,14 +17,18 @@ defineProps({
         <table class="table w-full">
             <thead>
                 <tr>
-                    <th>PID</th>
+                    <th>{{ t('table.reqPermit') }}</th>
                     <th>{{ t('table.reqat') }}</th>
                     <th>{{ t('table.status') }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="permit of permits" class="hover">
-                    <td>{{ permit.uuid }}</td>
+                    <td :title="t(`permits.${permit.permitType}`)" class="max-w-md text-ellipsis overflow-hidden">
+                        <Link :href="'/user/permit?uuid=' + permit.uuid" class="dark:hover:text-cyan-400 hover:underline">
+                            {{ t(`permits.${permit.permitType}`) }}
+                        </Link>
+                    </td>
                     <td>{{ permit.requested_at }}</td>
                     <td>
                         <div v-if="permit.status === 'accepted'" class="flex">

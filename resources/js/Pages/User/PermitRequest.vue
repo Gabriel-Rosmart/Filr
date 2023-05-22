@@ -19,7 +19,7 @@ const { t } = useI18n();
 
     <component :is="isAdmin == 0 ? UserLayout : AdminLayout">
         <Breadcrumbs v-if="isAdmin == 0" class="ml-5 mt-6"
-            :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.edit'), '/user/edit']]" />
+            :pages="[[t('breadcrumbs.user'), '/user'], [t('breadcrumbs.permitRequest'), '/user/permitreq']]" />
         <Breadcrumbs v-else-if="isAdmin == 1" class="ml-5 mt-6"
             :pages="[['Admin', '/admin'], [t('breadcrumbs.dashboard'), '/admin']]" />
         <PermitForm class="flex items-center m-8" />

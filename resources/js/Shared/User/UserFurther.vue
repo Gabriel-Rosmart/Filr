@@ -26,5 +26,9 @@
             <div class="stat-title">{{ t('admin.details.user.email') }}</div>
             <div class="stat-value">{{ user.email }}</div>
         </div>
+        <div class="stat">
+            <div class="stat-title">ID</div>
+            <div class="stat-value">{{ user.id }}</div>
+        </div>
     </div>
 </template>

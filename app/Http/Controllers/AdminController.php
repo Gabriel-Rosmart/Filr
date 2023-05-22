@@ -103,17 +103,19 @@ class AdminController extends Controller
      */
     public function listAllUsers()
     {
-
         return Inertia::render('Admin/ManageUsers', [
             'users' => User::query()
                 ->select('id', 'name', 'email', 'active', 'role_id', 'profile_pic')
                 ->filter(request(['search', 'active', 'type']))
+                ->when(request()->input('searchId') ?? false, function($query, $id){
+                    $query->where('id', $id);
+                })
                 ->with(['role' => function ($query) {
                     $query->select('id', 'role_name');
                 }])
                 ->paginate(15)
                 ->withQueryString(),
-            'filters' => request()->only('search', 'type', 'active'),
+            'filters' => request()->only('search', 'type', 'active', 'searchId'),
             'roles' => Role::all()
         ]);
     }
@@ -200,9 +202,19 @@ class AdminController extends Controller
                 ->get()
                 ->first();
 
-            $files = File::where('user_id', $id)
-                ->paginate(8)
-                ->withQueryString();
+                $files = File::Where('user_id',$id, function ($query) {
+                    $query->select('id')->filter(request(['search']));
+                })
+                    ->when(request()->input('date') ?? false, function($query, $date){
+                        $query->where('date', $date);
+                    })
+                    ->orderBy('date', 'desc')
+                    ->orderBy('timestamp', 'asc')
+                    ->paginate(20)
+                    ->withQueryString();
+                    
+                
+                $filter = request()->only('date');
 
             return Inertia::render('Admin/UserDetails', [
                 'user' => $user,
@@ -210,6 +222,7 @@ class AdminController extends Controller
                 'incidences' => $user->incidences,
                 'permits' => $user->permits,
                 'files' => $files,
+                'filter' => $filter
             ]);
         } else
             return redirect('/admin');
@@ -293,7 +306,14 @@ class AdminController extends Controller
             'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-        ]);
+        ],
+        [
+            'name.required' => trans('rules.name_req'),
+            'dni.required' => trans('rules.dni_req'),
+            'email.required' => trans('rules.email_req'),
+            'telephone.required' => trans('rules.phone_req')
+        ]
+    );
 
 
         // * Generate random password

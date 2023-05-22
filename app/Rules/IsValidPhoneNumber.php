@@ -16,6 +16,6 @@ class IsValidPhoneNumber implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        if(preg_match("/^[0-9]{9}$/", $value) == 0) $fail('The :attribute must be a valid phone number');
+        if(preg_match("/^[0-9]{9}$/", $value) == 0) $fail(trans('rules.phone'));
     }
 }

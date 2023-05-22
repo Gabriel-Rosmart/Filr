@@ -16,6 +16,7 @@
             }
         },
         "query": {
+            "searchId" : "Buscar Id...",
             "search": "Buscar...",
             "employee": {
                 "main": "Tipo de empregado"
@@ -80,6 +81,7 @@
         "name": "Nome",
         "in": "Entrada",
         "out": "Saída",
+        "other": "Fichaxes adicionais",
         "job": "Traballo",
         "status": "Estado",
         "reqby": "Pedido por",
@@ -89,7 +91,8 @@
         "subject": "Motivo",
         "late": "Chega <span style='color: red'>{minutes}</span> minutos tarde",
         "early": "Sae <span style='color: red'>{minutes}</span> minutos antes",
-        "absent": "<span style='color: red'>Non veu traballar</span>"
+        "absent": "<span style='color: red'>Non veu traballar</span>",
+        "reqPermit": "Permiso solicitado"
     },
     "breadcrumbs": {
         "dashboard": "Panel de control",
@@ -100,7 +103,8 @@
         "edit": "Editar perfil",
         "admin": "Administrador",
         "register": "Rexistrar",
-        "user": "Usuario"
+        "user": "Usuario",
+        "permitDetails": "Detalles do permiso"
     },
     "days": {
         "day": "Día",
@@ -130,12 +134,16 @@
         "passwordConfirm": "Repita novo contrasinal",
         "pic": "Foto de perfil",
         "save": "Gardar",
-        "cancel": "Cancelar"
+        "cancel": "Cancelar",
+        "required": "Obligatorio",
+        "invalidImage": "Imaxe non válida",
+        "notValidPass": "Os contrasinais non coinciden"
     },
     "dateformat": "DD-MM-YYYY",
     "employees": {
         "all": "Todos",
-        "teacher": "Mestre",
+        "teacher": "Docente",
+        "nonteacher": "Non docente",
         "administrative": "Administrativo",
         "cleaning": "Persoal de limpieza"
     },
@@ -146,6 +154,10 @@
             "hours" : "Horas totais",
             "affected" : "Grupos afectados"
         },
+        "startDate":"Data Inicio",
+        "endDate": "Data Fin",
+        "startHour": "Hora de Inicio",
+        "endHour": "Hora de Finalización",
         "data": "Datos do permiso",
         "type": "Tipo de permiso",
         "permits": "Permisos",
@@ -181,6 +193,12 @@
         "donationdoc":"Documento que acredite a doazón de sangue, médula ou plaquetas.",
         "athletedoc":"Documento que acredite a asistencia dos deportistas de alto nivel ás competicións de carácter internacional, así como as concentracións preparatorias destas.",
         "other":"Outros: ",
-        "send":"Solicitar"
+        "send":"Solicitar",
+        "justificationType": "Tipo de Xustificante",
+        "noJustif": "Non se ha achegou un xustificante",
+        "attachOrChange": "Cambiar/Engadir Xustificante",
+        "change": "Cambiar",
+        "attach": "Engadir",
+        "download": "Descargar Permiso"
     }
 }

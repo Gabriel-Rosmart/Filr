@@ -40,7 +40,7 @@
         <table class="table w-full">
             <thead>
                 <tr>
-                    <th>PID</th>
+                    <th>{{ t('table.reqPermit') }}</th>
                     <th>{{ t('table.reqby') }}</th>
                     <th>{{ t('table.reqat') }}</th>
                     <th></th>
@@ -48,8 +48,10 @@
             </thead>
             <tbody>
                 <tr v-for="permit of permits" class="hover">
-                    <td>
-                        {{ permit.uuid }}
+                    <td :title="t(`permits.${permit.permitType}`)" class="max-w-md text-ellipsis overflow-hidden">
+                        <Link :href="'/user/permit?uuid=' + permit.uuid" class="dark:hover:text-cyan-400 hover:underline">
+                            {{ t(`permits.${permit.permitType}`) }}
+                        </Link>
                     </td>
                     <td>
                         <Link class="dark:hover:text-cyan-400 hover:underline" :href="'/admin/details?id=' + permit.user.id">

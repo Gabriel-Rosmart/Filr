@@ -17,6 +17,16 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->nullable(false);
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->enum('permitType',['death','move','exam','prenat','fecAs','marriage','duties','particularBussines','unexpection']);
+
+            $table->date('start_date')->nullable(false);
+            $table->date('end_date')->nullable(false);
+            $table->time('start_time')->nullable(false);
+            $table->time('end_time')->nullable(false);
+
+            $table->string('fileType')->nullable(false);
+            $table->string('file')->nullable(true);
+
             $table->date('requested_at')->nullable(false);
             $table->enum('status', ['pending', 'accepted', 'denied'])->default('pending');
             $table->timestamps();

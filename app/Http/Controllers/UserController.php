@@ -6,6 +6,7 @@ use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
+use App\Models\Permit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -14,6 +15,11 @@ use App\Mail\permitReqUser;
 use App\Rules\IsValidDNI;
 use App\Rules\IsValidPhoneNumber;
 use App\Rules\IsValidPic;
+use App\Models\File;
+use App\Models\Role;
+use Dompdf\Dompdf;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -38,11 +44,33 @@ class UserController extends Controller
             //->orderBy('starts_at', 'asc')
             ->get();
 
+        $files = File::Where('user_id',$user->id, function ($query) {
+            $query->select('id')->filter(request(['search']));
+        })
+            ->when(request()->input('date') ?? false, function($query, $date){
+                $query->where('date', $date);
+            })
+            ->orderBy('date', 'desc')
+            ->orderBy('timestamp', 'asc')
+            ->paginate(20)
+            ->withPath('/user?component=1');
+                
+        $filter = request()->only('date');
+
+        if (isset($_GET['component'])) {
+            $component = (int)$_GET['component'];
+        } else {
+            $component = null;
+        }
+
         return Inertia::render('User/Dashboard', [
             'user' => $user,
             'timetable' => $timetable,
             'permits' => $user->permits,
             'incidents' => $user->incidences,
+            'files' => $files,
+            'componentIndex' => $component,
+            'filter' => $filter
         ]);
     }
     /**
@@ -121,7 +149,30 @@ class UserController extends Controller
     {
         return Inertia::render('User/PermitRequest', ['isAdmin' => Auth::user()->is_admin]);
     }
-    
+
+    public function permitDetails()
+    {
+        $uuid = request()->input('uuid');
+        $permit = Permit::where('uuid', $uuid)->first();
+
+        if ($permit == null) {
+            return redirect('/user');
+        }
+
+        return Inertia::render('User/PermitDetails', ['isAdmin' => Auth::user()->is_admin, 'permit' => $permit]);
+    }
+
+    public function permitUpdate(Request $request)
+    {
+        $validated = $request->validate([
+            'permit' => ['required'],
+            'file' => ['required', 'file'],
+        ]);
+
+        $request->file('file')->storeAs('justifications/' . $validated['permit']['user_id'] . '/', 'justificante-' . $validated['permit']['uuid'] . '.' . $validated['file']->getClientOriginalExtension());
+        DB::table('permits')->where('uuid', $validated['permit']['uuid'])->update(['file' => 'justificante-' . $validated['permit']['uuid'] . '.' . $validated['file']->getClientOriginalExtension()]);
+    }
+
     /**
      * Verifies permit request form.
      * If the uploaded data satisfies the requirements, uploads data to database,
@@ -133,48 +184,131 @@ class UserController extends Controller
      */
     public function permitSend(Request $request)
     {
+        //form validation
         if ($validated = $request->validate([
             'nDays' => ['required'],
             'day' => ['required'],
-            'nHours' => ['required'],
-            'file' => ['required', 'file', 'mimes:pdf,jpeg,png,jpg'],
             'type' => ['required'],
             'doctype' => ['required'],
-        ]))
-        {
+        ])) {
             if ($request->nDays == 'm')
+            {
+
                 $valiDATEd = $request->validate([
                     'dayOut' => ['required'],
                 ]);
+                $dayOut = $valiDATEd['dayOut'];
+                $hStart = '00:00';
+                $hEnd = '00:00';
+            }
             else
+            {
                 $valiDATEd = $request->validate([
                     'hStart' => ['required'],
                     'hEnd' => ['required']
                 ]);
-
-
+                $dayOut = $validated['day'];
+                $hStart = $valiDATEd['hStart'];
+                $hEnd = $valiDATEd['hEnd'];
+            }
         }
 
+        //db insertion
         $uuid = fake()->uuid();
-        DB::transaction(function () use ($uuid) {
+        $file = null;
+        $filename = "";
+        if ($request->file('file') != null)
+        {
+            $filename = 'justificante-' . $uuid . '.' .$request->file('file')->getClientOriginalExtension();
+            $file = $request->file('file');
+            $file->storeAs('justifications/' . Auth::user()->id, $filename);
+        }
+        DB::transaction(function () use ($uuid, $validated, $dayOut, $hStart, $hEnd, $filename) {
             DB::table('permits')->insertGetId([
                 'uuid' => $uuid,
                 'user_id' => Auth::user()->id,
+                'permitType' => $validated['type'],
                 'status' => 'pending',
+                'start_date' => $validated['day'],
+                'end_date' => $dayOut,
+                'start_time' => $hStart,
+                'end_time' => $hEnd,
+                'fileType' => $validated['doctype'],
                 'requested_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
+                'file' => $filename
             ]);
         });
-
-        $file = $request->file('file');
-        $file->storeAs('permitDocs', $uuid . '.' . $file->getClientOriginalExtension());
-
         //dd($_SERVER);
 
-        Mail::to('admin@gmail.com')->send(new permitReqAdmin(Auth::user()->name, $request->day, $uuid, $file->getClientOriginalExtension()));
+        //pdf generation
+        $fileName = self::pdfGenerate($uuid, Auth::user(), $validated['day'] ,$dayOut, $hStart, $hEnd);
+
+        $admins = User::where('is_admin', true)->get();
+
+
+        //email sending, sends email to all admins and to the requesting user
+        foreach ($admins as $admin)
+            Mail::to($admin->email)->send(new permitReqAdmin(Auth::user(), $request->day, $uuid));
         Mail::to(Auth::user()->email)->send(new permitReqUser($request->day, $uuid));
-        
-        return redirect('/user');
+
+        return redirect('/user?component=2');
+    }
+
+    public function justificationDownload(Request $request)
+    { 
+        $uuid = $request->input('uuid');
+        $permit = Permit::where('uuid', $uuid)->first();
+
+        if ($permit == null) {
+            return redirect('/user');
+        }
+
+        if ($permit->file == null) {
+            return redirect('/user/permit?uuid=' . $uuid);
+        }
+
+        return Storage::download('justifications/' . $permit->user_id . '/' . $permit->file);
+    }
+
+    public function permitDownload(Request $request)
+    {
+        $uuid = $request->input('uuid');
+        $permit = Permit::where('uuid', $uuid)->first();
+
+        if ($permit == null) {
+            return redirect('/user');
+        }
+
+        return Storage::download('permits/' . $permit->user_id . '/permiso_' . $uuid. '.pdf');
+    }
+
+    public function pdfGenerate(string $uuid, User $user, string $day, string $dayOut, string $hStart, string $hEnd)
+    {
+        $file = storage_path('permits.json');
+        $json = json_decode(file_get_contents($file), true);
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml(view('permiso', [
+            'uuid'          => $uuid,
+            'name'          => $user->name,
+            'dni'           => $user->dni,
+            'phone'         => $user->phone,
+            'email'         => $user->email,
+            'body'          => $json[Role::find($user->role_id)->role_name],
+            'date_st'       => $day,
+            'date_nd'       => $dayOut,
+            'entry'         => $hStart,
+            'exit'          => $hEnd,
+            'type'          => $json[Permit::where('uuid', $uuid)->first()->permitType],
+            'documentation' => $json[Permit::where('uuid', $uuid)->first()->fileType],
+        ]));
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $fileName = 'permits/'. $user->id .'/permiso_'. $uuid . '.pdf';
+        Storage::put($fileName, $dompdf->output());
+
+        return $fileName;
     }
 }

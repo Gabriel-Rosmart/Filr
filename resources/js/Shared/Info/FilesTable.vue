@@ -27,6 +27,16 @@
         return shifts
     }
 
+    const getAdditionalFiles = (otherFiles) => {
+        let files = []
+
+        for (let i = 4; i < otherFiles.length; i++) {
+            files.push(otherFiles[i].timestamp)           
+        }
+
+        return files
+    }
+
 </script>
 
 <template>
@@ -37,6 +47,7 @@
                     <th>{{ t('table.name') }}</th>
                     <th>{{ t('table.in') }}</th>
                     <th>{{ t('table.out') }}</th>
+                    <th>{{ t('table.other') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -55,6 +66,13 @@
                             <span v-for="shift of getAfternoonShift(user.files)" class="mb-2">
                                 {{ shift }}
                             </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flex flex-col">
+                            <span v-for="shift of getAdditionalFiles(user.files)" class="mb-2">
+                                {{ shift }}
+                            </span>         
                         </div>
                     </td>
                     <td>
