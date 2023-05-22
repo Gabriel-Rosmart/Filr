@@ -41,7 +41,33 @@ class checkFileOnTime
             ->where('ranges.end_date', '>=', DB::raw('curdate()'))
             ->where('s.day', '=', DB::raw('dayofweek(curdate())'))
             ->get();
+        $today_files = File::where('user_id', $file['user_id'])
+            ->where('date', DB::raw('curdate()'))
+            ->get();
 
-        dd($timetable);
+        //dd($timetable);
+        if (count($timetable) == 1)
+        {
+            $start  = $timetable[0]->starts_at;
+            $end    = $timetable[0]->ends_at;
+
+            $start = strtotime($start);
+            $end = strtotime($end);
+            $time = strtotime($file['timestamp']);
+
+            if (count($today_files) == 1)
+            {
+                if ($time > $start)
+                {
+                    DB::table('incidences')->insert([
+                        'user_id' => $file['user_id'],
+                        'date' => date('Y-m-d'),
+                        'subject' => 'late',
+                        'minutes' => ($time - $start) / 60
+                    ]);
+                }
+                
+            }
+        }
     }
 }
