@@ -55,7 +55,7 @@ const { t } = useI18n();
             </div>
         </div>
         <div class="navbar-center">
-            <a class="btn btn-ghost normal-case text-xl">
+            <a class="btn btn-ghost normal-case text-xl" href="/user">
                 <AppLogo class="w-6 fill-cyan-400" />
             </a>
         </div>

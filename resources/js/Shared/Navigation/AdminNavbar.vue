@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="navbar-center">
-            <a class="btn btn-ghost normal-case text-xl"><AppLogo class="w-6 fill-cyan-400"/></a>
+            <a class="btn btn-ghost normal-case text-xl" href="/admin"><AppLogo class="w-6 fill-cyan-400"/></a>
         </div>
         <div class="navbar-end">
             <LanguageDropdown/>
