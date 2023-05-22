@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5dc6ace00a06ee47c290c426cfb6ea8",
+    "content-hash": "38141544de0b6b0e73b08d584a1ec906",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2102,52 +2102,6 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.8.0"
             },
             "time": "2023-04-26T07:27:39+00:00"
-        },
-        {
-            "name": "mattkingshott/triggers",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mattkingshott/triggers.git",
-                "reference": "87ca303f766790f619663eb0be2ae29ddf1d7cad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mattkingshott/triggers/zipball/87ca303f766790f619663eb0be2ae29ddf1d7cad",
-                "reference": "87ca303f766790f619663eb0be2ae29ddf1d7cad",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.0",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Triggers\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A package to add database trigger support to Laravel",
-            "homepage": "https://github.com/mattkingshott/triggers",
-            "keywords": [
-                "database",
-                "laravel",
-                "php",
-                "triggers"
-            ],
-            "support": {
-                "issues": "https://github.com/mattkingshott/triggers/issues",
-                "source": "https://github.com/mattkingshott/triggers/tree/v1.0.1"
-            },
-            "abandoned": "caneara/triggers",
-            "time": "2022-09-20T07:05:30+00:00"
         },
         {
             "name": "monolog/monolog",
