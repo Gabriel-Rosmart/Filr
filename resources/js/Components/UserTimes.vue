@@ -69,7 +69,6 @@ props.weekend.forEach(element => {
 });
 
 for (const [key, value] of Object.entries(props.form.schedules)) {
-    console.log(key, value);
     if (value[0] > '14:00' && value[2] == null) {
         props.form.schedules[key][2] = value[0];
         props.form.schedules[key][3] = value[1];
