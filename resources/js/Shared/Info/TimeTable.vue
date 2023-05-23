@@ -15,8 +15,16 @@
         for (const shift of props.timetable)
             if (shift.day == day)
                 userWeek[week.indexOf(day)].push(shift);
-    console.table(userWeek);
-    
+
+    for (const schedule of userWeek) {
+        if(schedule!=undefined && schedule.length == 1 &&  schedule[0].starts_at > '14:00'){
+            let auxSchedule = schedule.pop()
+            schedule.push(null)
+            schedule.push(auxSchedule)
+        }
+    }
+
+    console.table(userWeek)    
     let i = -1;
 </script>
 
