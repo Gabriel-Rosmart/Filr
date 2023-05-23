@@ -14,11 +14,10 @@ function removeSeconds(time) {
             return time.slice(0, -3);
         else
             return time;
-    }else {
+    } else {
         return '00:00';
     }
 }
-
 props.weekend.forEach(element => {
     if (element.day == 'monday') {
         if (props.form.schedules.monday[0] == null) {
@@ -48,7 +47,7 @@ props.weekend.forEach(element => {
         }
     }
     if (element.day == 'thursday') {
-        if ( props.form.schedules.thursday[0] == null) {
+        if (props.form.schedules.thursday[0] == null) {
             props.form.schedules.thursday[0] = removeSeconds(element.starts_at);
             props.form.schedules.thursday[1] = removeSeconds(element.ends_at);
         } else {
@@ -69,6 +68,17 @@ props.weekend.forEach(element => {
     }
 });
 
+for (const [key, value] of Object.entries(props.form.schedules)) {
+    console.log(key, value);
+    if (value[0] > '14:00' && value[2] == null) {
+        props.form.schedules[key][2] = value[0];
+        props.form.schedules[key][3] = value[1];
+        props.form.schedules[key][0] = null;
+        props.form.schedules[key][1] = null;
+    }
+}
+
+
 
 </script>
 
@@ -88,16 +98,16 @@ props.weekend.forEach(element => {
                 <tr v-for="(day, index) in props.form.schedules" :key='index'>
                     <th>{{ t('days.' + index) }}</th>
                     <td>
-                        <InputForm type="time" v-model="form.schedules[index][0]"/>
+                        <InputForm type="time" v-model="form.schedules[index][0]" />
                     </td>
                     <td>
-                        <InputForm type="time" v-model="form.schedules[index][1]"/>
+                        <InputForm type="time" v-model="form.schedules[index][1]" />
                     </td>
                     <td>
-                        <InputForm type="time" v-model="form.schedules[index][2]"/>
+                        <InputForm type="time" v-model="form.schedules[index][2]" />
                     </td>
                     <td>
-                        <InputForm type="time" v-model="form.schedules[index][3]"/>
+                        <InputForm type="time" v-model="form.schedules[index][3]" />
                     </td>
                 </tr>
             </tbody>

@@ -231,6 +231,7 @@ class AdminController extends Controller
             $timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id')
                 ->join('date_range_user', 'date_range_user.date_range_id', '=', 'schedules.date_range_id')
                 ->where('user_id', $id)
+                ->orderBy('starts_at', 'asc')
                 ->orderBy('day', 'asc')
                 ->get();
 
