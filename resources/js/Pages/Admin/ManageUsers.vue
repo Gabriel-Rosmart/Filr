@@ -25,10 +25,10 @@
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], [t('breadcrumbs.manage'), '/admin/manage']]"/>
 
-        <div class="flex items-center mt-8">
+        <div class="flex md:flex-wrap items-center mt-8 gap-4">
             <FiltersUsers url="/admin/manage" :filters="filters" :roles="roles"/>
-            <Pagination class="ml-24" :links="users.links"/>
-            <div class="mr-8 w-full flex justify-end">
+            <Pagination class="ml-24 md:ml-4" :links="users.links"/>
+            <div class="flex justify-end ml-4">
                 <CreateUser class="btn-outline btn-primary"/>
             </div>
         </div>

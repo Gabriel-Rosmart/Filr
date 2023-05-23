@@ -24,9 +24,9 @@
     <AdminLayout>
         <Breadcrumbs class="ml-5 mt-6" :pages="[['Admin', '/admin'], [t('breadcrumbs.dashboard'), '/admin']]"/>
 
-        <div class="flex items-center mt-8">
+        <div class="flex md:flex-wrap items-center mt-8 gap-4">
             <FiltersDashboard url="/admin" :filters="filters" :roles="roles"/>
-            <Pagination class="ml-24" :links="users.links"/>
+            <Pagination class="ml-24 lg:mt-8 xl:mt-0" :links="users.links"/>
         </div>
 
         <div class="flex justify-center">

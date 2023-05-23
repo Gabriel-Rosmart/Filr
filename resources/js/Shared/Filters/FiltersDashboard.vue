@@ -75,7 +75,7 @@
     </select>
     <vue-tailwind-datepicker as-single :i18n="locale" :formatter="formatter" v-model="date" :key="updateKey"
     input-classes="input input-bordered w-full max-w-xs ml-4" id="datepicker" :placeholder="t('dateformat')" />
-    <button class="btn btn-ghost ml-8" @click="clearInput">Reset</button>
+    <button class="btn btn-ghost ml-8 md:mt-8 lg:mt-0" @click="clearInput">Reset</button>
 </template>
 
 <style scoped>
