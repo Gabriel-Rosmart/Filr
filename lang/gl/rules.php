@@ -13,5 +13,8 @@ return [
     'name_req' => 'O nombre é obligatorio',
     'email_req' => 'O email é obligatorio',
     'dni_req' => 'O dni é obligatorio',
-    'phone_req' => 'O teléfono é obligatorio'
+    'phone_req' => 'O teléfono é obligatorio',
+    'role_req' => 'Debe elixirse un rol',
+    'start_req' => 'O campo data de inicio é obligatorio',
+    'end_req' => 'O campo data de fin é obligatorio',
 ];

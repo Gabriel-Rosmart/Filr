@@ -13,5 +13,8 @@ return [
     'name_req' => 'Name if compulsory',
     'email_req' => 'Email is compulsory',
     'dni_req' => 'DNI is compulsory',
-    'phone_req' => 'Phone is compulsory'
+    'phone_req' => 'Phone is compulsory',
+    'role_req' => 'Selecting a role is compulsory',
+    'start_req' => 'Starting date is compulsory',
+    'end_req' => 'Ending date is compulsory',
 ];

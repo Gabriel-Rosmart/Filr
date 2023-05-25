@@ -320,7 +320,10 @@ class AdminController extends Controller
             'name.required' => trans('rules.name_req'),
             'dni.required' => trans('rules.dni_req'),
             'email.required' => trans('rules.email_req'),
-            'telephone.required' => trans('rules.phone_req')
+            'telephone.required' => trans('rules.phone_req'),
+            'role.required' => trans('rules.role_req'),
+            'dates.start.required' => trans('rules.start_req'),
+            'dates.end.required' => trans('rules.end_req')
         ]
     );
 
