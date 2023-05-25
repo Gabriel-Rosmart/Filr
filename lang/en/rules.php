@@ -18,4 +18,8 @@ return [
     'role_req' => 'Selecting a role is compulsory',
     'start_req' => 'Starting date is compulsory',
     'end_req' => 'Ending date is compulsory',
+    'nDays_req' => 'Days select is compulsory',
+    'day_req' => 'Day must be selected',
+    'type_req' => 'Type of permit must be selected',
+    'doctype_req' => 'Type of documentation attached must be selected'
 ];

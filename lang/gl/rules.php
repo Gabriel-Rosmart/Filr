@@ -18,4 +18,8 @@ return [
     'role_req' => 'Debe elixirse un rol',
     'start_req' => 'O campo data de inicio é obligatorio',
     'end_req' => 'O campo data de fin é obligatorio',
+    'nDays_req' => 'Debe elixirse número de días',
+    'day_req' => 'Debe elixirse o día',
+    'type_req' => 'Debe elixirse o tipo de permiso',
+    'doctype_req' => 'Debe elixirse o tipo de documentación a aportar'
 ];

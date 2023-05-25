@@ -205,6 +205,12 @@ class UserController extends Controller
             'day' => ['required'],
             'type' => ['required'],
             'doctype' => ['required'],
+        ],
+        [
+            'nDays.required' => trans('rules.nDays_req'),
+            'day.required' => trans('rules.day_req'),
+            'type.required' => trans('rules.type_req'),
+            'doctype.required' => trans('rules.doctype_req')
         ])) {
             if ($request->nDays == 'm')
             {
@@ -219,12 +225,21 @@ class UserController extends Controller
             else
             {
                 $valiDATEd = $request->validate([
-                    'hStart' => ['required'],
-                    'hEnd' => ['required']
+                    'hStart' => ['nullable'],
+                    'hEnd' => ['nullable']
                 ]);
                 $dayOut = $validated['day'];
-                $hStart = $valiDATEd['hStart'];
-                $hEnd = $valiDATEd['hEnd'];
+                
+                if ($valiDATEd['hStart'] == null){
+                    $hStart = '00:00';
+                } else {
+                    $hStart = $valiDATEd['hStart'];
+                }
+                if ($valiDATEd['hEnd'] == null){
+                    $hEnd = '00:00';
+                } else {
+                    $hEnd = $valiDATEd['hEnd'];
+                }
             }
         }
 

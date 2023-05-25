@@ -18,4 +18,8 @@ return [
     'role_req' => 'Debe seleccionarse un rol',
     'start_req' => 'El campo fecha de inicio es obligatorio',
     'end_req' => 'El campo fecha de fin es obligatorio',
+    'nDays_req' => 'Debe elegirse el número de días',
+    'day_req' => 'Debe elegirse el día',
+    'type_req' => 'Debe elegirse el tipo de permiso',
+    'doctype_req' => 'Debe elegirse el tipo de documentación a aportar'
 ];
