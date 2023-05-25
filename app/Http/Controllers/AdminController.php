@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isEmpty;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Validation\Rule;
+
 class AdminController extends Controller
 {
     /**
@@ -98,7 +100,7 @@ class AdminController extends Controller
 
     /**
      * Show a listing of all users
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function listAllUsers()
@@ -122,7 +124,7 @@ class AdminController extends Controller
 
     /**
      * Show a listing of all permits
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
 
@@ -151,7 +153,7 @@ class AdminController extends Controller
 
     /**
      * List all incidences
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
 
@@ -212,8 +214,8 @@ class AdminController extends Controller
                     ->orderBy('timestamp', 'asc')
                     ->paginate(20)
                     ->withQueryString();
-                    
-                
+
+
                 $filter = request()->only('date');
 
             return Inertia::render('Admin/UserDetails', [
@@ -260,7 +262,7 @@ class AdminController extends Controller
 
     /**
      *  Render the view for registering a user
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
 
@@ -277,7 +279,7 @@ class AdminController extends Controller
     /**
      * Process a user registration
      * Send an email to the user after registration is complete
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
 
@@ -296,11 +298,11 @@ class AdminController extends Controller
             'email' => ['required', 'email', 'unique:users'],
             'telephone' => ['required', new IsValidPhoneNumber],
             'admin' => ['boolean'],
-            'role' => ['nullable'],
+            'role' => ['nullable', Rule::requiredIf(!$request->input('substitute.is'))],
             'substitute.is' => ['boolean'],
             'substitute.name' => ['nullable'],
-            'dates.start' => ['nullable', 'date'],
-            'dates.end' => ['nullable', 'date'],
+            'dates.start' => ['nullable', 'date', Rule::requiredIf(!$request->input('substitute.is'))],
+            'dates.end' => ['nullable', 'date', Rule::requiredIf(!$request->input('substitute.is'))],
             'schedules.monday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.tuesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
             'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
@@ -334,7 +336,7 @@ class AdminController extends Controller
 
     /**
      * Process a user update
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
 
