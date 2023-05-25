@@ -41,12 +41,12 @@ class TokenController extends Controller
 
             //* Check if the user id exists. Get name if it does
             $user = User::select('name')
-                ->where('id', $request->id)
+                ->where('id', $request->user_id)
                 ->first();
-            Log::channel('daily')->info('INFO; User with id ' . $request->id . ' found: ' . $user->name);
+            Log::channel('daily')->info('INFO; User with id ' . $request->user_id . ' found: ' . $user->name);
 
             DB::table('files')->insert([
-                'user_id' => $request->id,
+                'user_id' => $request->user_id,
                 'date' => $date,
                 'timestamp' => $time
             ]);
@@ -89,8 +89,8 @@ class TokenController extends Controller
      * @param   Object  $data  Data received
      */
     public function checkData($data){
-        if(!isset($data->id) || !isset($data->date) || !isset($data->time)){
-            throw new Error("Submited data is not valid || Expected id(Number) date(Y-m-d) time(H:i:s) || Received " . $this->getSubmittedData($data->request));           
+        if(!isset($data->user_id) || !isset($data->date) || !isset($data->time)){
+            throw new Error("Submited data is not valid || Expected user_id(Number) date(Y-m-d) time(H:i:s) || Received " . $this->getSubmittedData($data->request));           
         }
     }
 
