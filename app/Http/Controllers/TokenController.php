@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use PDOException;
+use App\Events\fileDoneCorrectly;
 
 class TokenController extends Controller
 {
@@ -51,6 +52,15 @@ class TokenController extends Controller
                 'timestamp' => $time
             ]);
             Log::channel('daily')->info('INFO; Clocked in succesfuly');
+
+            //Event sender
+            fileDoneCorrectly::dispatch([
+                'user_id' => $request->id,
+                'date' => $date,
+                'timestamp' => $time
+            ]);
+
+
             return "User " . $user->name . " clocked in succesfuly at $time on $date";
         
         } catch (\Error $err) {
