@@ -77,6 +77,13 @@
             }
         }
     },
+    "login":{
+        "email": "Correo electrónico",
+        "pass": "Contraseña",
+        "remember": "Recordarme",
+        "forgotPass": "¿Olvidaste la contraseña?",
+        "logIn": "Entrar"
+    },
     "table": {
         "name": "Nombre",
         "in": "Entrada",

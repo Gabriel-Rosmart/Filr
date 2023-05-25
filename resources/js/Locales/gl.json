@@ -77,6 +77,13 @@
             }
         }
     },
+    "login":{
+        "email": "Enderezo electrónico",
+        "pass": "Contrasinal",
+        "remember": "Recordarme",
+        "forgotPass": "Esqueciches o contrasinal?",
+        "logIn": "Entrar"
+    },
     "table": {
         "name": "Nome",
         "in": "Entrada",

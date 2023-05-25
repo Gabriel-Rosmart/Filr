@@ -77,6 +77,13 @@
             }
         }
     },
+    "login":{
+        "email": "Email",
+        "pass": "Password",
+        "remember": "Remember me",
+        "forgotPass": "Forgot your password",
+        "logIn": "login"
+    },
     "table": {
         "name": "Name",
         "in": "In",
