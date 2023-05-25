@@ -13,7 +13,7 @@ class Helper
 {
     /**
      * Process the registration of a user
-     * 
+     *
      * @return void
      */
 
@@ -30,6 +30,11 @@ class Helper
         });
     }
 
+    /**
+     * Update User data
+     *
+     * @return void
+     */
     public static function updateUserCompleteRecord($validated, $user)
     {
         $validated['schedules'] = weedOut($validated['schedules']);
@@ -65,7 +70,7 @@ class Helper
 
 /**
  * Save a user from scratch
- * 
+ *
  * @return void
  */
 function saveFromScratch($validated, $fakepw)
@@ -118,7 +123,7 @@ function saveFromScratch($validated, $fakepw)
 
 /**
  * Save a user taking the values of another existing user
- * 
+ *
  * @return void
  */
 
@@ -165,7 +170,7 @@ function saveFromUser($validated, $fakepw)
 
 /**
  * Remove all null values of array
- * 
+ *
  * @return array
  */
 
@@ -173,7 +178,7 @@ function weedOut(array $array)
 {
 
     foreach ($array as $day => $_) {
-        $array[$day] = array_filter($array[$day], fn ($element) => !is_null($element));
+        $array[$day] = array_values(array_filter($array[$day], fn ($element) => !is_null($element)));
     }
 
     return $array;
@@ -181,7 +186,7 @@ function weedOut(array $array)
 
 /**
  * Determine if a user should be active based on the current data
- * 
+ *
  * @return bool
  */
 function determineIfUserShouldBeActive($startDate, $endDate)
