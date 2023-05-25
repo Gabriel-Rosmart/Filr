@@ -359,6 +359,13 @@ class AdminController extends Controller
             'email' => ['required', 'email'],
             'telephone' => ['required', new IsValidPhoneNumber],
             'schedules' => ['nullable'],
+        ],
+        [
+            'name.required' => trans('rules.name_req'),
+            'dni.required' => trans('rules.dni_req'),
+            'email.required' => trans('rules.email_req'),
+            'telephone.required' => trans('rules.phone_req'),
+            'role.required' => trans('rules.role_req'),
         ]);
 
         $user = User::select('users.id', 'name', 'dni', 'role_id', 'email', 'active', 'profile_pic', 'date_range_id', 'phone')

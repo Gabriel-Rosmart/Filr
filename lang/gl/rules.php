@@ -9,6 +9,7 @@ return [
     'image_size' => 'Imáxe moi grande',
     'image_format' => 'Imáxe cun formáto non válido',
     'image_error' => 'Erro coa subida da imaxe',
+    'pass_conf' => 'Os contrasinais deben coincidir',
     'required' => 'Falta campo obligatorio',
     'name_req' => 'O nombre é obligatorio',
     'email_req' => 'O email é obligatorio',

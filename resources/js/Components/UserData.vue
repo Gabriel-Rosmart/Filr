@@ -41,31 +41,31 @@ function onFileChange(e) {
             </div>
             <div>
                 <InputForm :title="t('forms.name')" type="text" v-model="form.name" :value='user.name' />
-                <FormInputError v-if="form.errors.name!=undefined" class="mt-2" :message="t('forms.required')" />
+                <FormInputError class="mt-2" :message="form.errors.name" />
             </div>
             <div>
                 <InputForm :title="t('forms.dni')" type="text" v-model="form.dni" :value='user.dni' />
-                <FormInputError v-if="form.errors.dni!=undefined" class="mt-2" :message="t('forms.required')" />
+                <FormInputError  class="mt-2" :message="form.errors.dni" />
             </div>
             <div>
                 <InputForm :title="t('forms.email')" type="email" v-model="form.email" :value='user.email' />
-                <FormInputError v-if="form.errors.email!=undefined" class="mt-2" :message="t('forms.required')" />
+                <FormInputError class="mt-2" :message="form.errors.email" />
             </div>
             <div class="flex flex-col gap-2">
                 <label for="pic">{{ t('forms.pic') }}</label>
                 <input type="file" name='pic' v-on:change="onFileChange"
                     class="file-input file-input-bordered w-full max-w-xs" />
-                <FormInputError v-if="form.errors.pic!=undefined" class="mt-2" :message="t('forms.invalidImage')" />
+                <FormInputError class="mt-2" :message="form.errors.pic" />
 
             </div>
             <div>
                 <InputForm :title="t('forms.telephone')" type="telephone" v-model="form.telephone" :value='user.phone' />
-                <FormInputError v-if="form.errors.phone!=undefined" class="mt-2" :message="t('forms.required')" />
+                <FormInputError class="mt-2" :message="form.errors.phone" />
             </div>
             <SelectForm v-if="isAdmin == 1" title="Role" :data='3' :rol="user.role_id" />
             <div>
                 <InputForm v-if="isAdmin == 0" :title="t('forms.password')" type="password" v-model="form.password" />
-                <FormInputError v-if="form.errors.password!=undefined" class="mt-2" :message="t('forms.notValidPass')" />
+                <FormInputError class="mt-2" :message="form.errors.password" />
             </div>
             <div>
                 <InputForm v-if="isAdmin == 0" :title="t('forms.passwordConfirm')" type="password"

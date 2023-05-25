@@ -9,6 +9,7 @@ return [
     'image_size' => 'Image too big',
     'image_format' => 'Image with invalid format',
     'image_error' => 'Error uploading image',
+    'pass_conf' => 'Passwords must match',
     'required' => 'Missing compulsory field',
     'name_req' => 'Name if compulsory',
     'email_req' => 'Email is compulsory',

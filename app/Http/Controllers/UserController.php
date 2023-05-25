@@ -112,6 +112,14 @@ class UserController extends Controller
             'telephone' => ['required', new IsValidPhoneNumber],
             'pic' => ['nullable', new IsValidPic],
             'password' => ['nullable', 'confirmed'],
+        ], 
+        [
+            'name.required' => trans('rules.name_req'),
+            'dni.required' => trans('rules.dni_req'),
+            'email.required' => trans('rules.email_req'),
+            'telephone.required' => trans('rules.phone_req'),
+            'role.required' => trans('rules.role_req'),
+            'password.confirmed' => trans('rules.pass_conf')
         ]);
 
         $uploadPic = '';
