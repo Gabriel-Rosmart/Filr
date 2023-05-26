@@ -55,7 +55,7 @@ class TokenController extends Controller
 
             //Event sender
             fileDoneCorrectly::dispatch([
-                'user_id' => $request->id,
+                'user_id' => $request->user_id,
                 'date' => $date,
                 'timestamp' => $time
             ]);
