@@ -216,13 +216,16 @@ class AdminController extends Controller
                     ->when(request()->input('date') ?? false, function($query, $date){
                         $query->where('date', $date);
                     })
+                    ->when(request()->input('month') ?? false, function($query, $month){
+                        $query->where(DB::raw('MONTH(date)') , $month);
+                    })
                     ->orderBy('date', 'desc')
                     ->orderBy('timestamp', 'asc')
                     ->paginate(20)
                     ->withQueryString();
 
-
-                $filter = request()->only('date');
+                    
+                $filter = request()->only('date','month');
 
             return Inertia::render('Admin/UserDetails', [
                 'user' => $user,

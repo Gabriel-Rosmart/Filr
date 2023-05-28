@@ -23,14 +23,17 @@
         search.value = ''
         opt.value = ''
         date.value = ''
+        month.value=''
         updateCurrentKey()
     }
 
     let date = ref(props.filter.date ?? '')
+    let month = ref(props.filter.month ?? '')
 
-    watch([date], throttle(([dval]) => {
+    watch([date, month], throttle(([dval, mval]) => {
         Inertia.get(props.url, {
-            date: dval
+            date: dval,
+            month: mval
         },
             {
                 preserveState: false,
@@ -46,9 +49,30 @@
 </script>
 
 <template>
+    <select name="dob-month" class="select select-bordered w-50 max-w-xs" v-model="month">
+        <option selected value="">Elegir mes</option>
+        <option value="01">Jan</option>
+        <option value="02">Feb</option>
+        <option value="03">Mar</option>
+        <option value="04">Apr</option>
+        <option value="05">May</option>
+        <option value="06">Jun</option>
+        <option value="07">Jul</option>
+        <option value="08">Aug</option>
+        <option value="09">Sep</option>
+        <option value="10">Oct</option>
+        <option value="11">Nov</option>
+        <option value="12">Dec</option>
+    </select>
     <vue-tailwind-datepicker as-single :i18n="locale" :formatter="formatter" v-model="date" :key="updateKey"
     input-classes="input input-bordered w-full max-w-xs ml-4" id="datepicker" :placeholder="t('dateformat')" />
-
+    <!--select class="select select-bordered w-full max-w-xs" v-model="opt">
+        <option disabled selected value="">{{ t('admin.query.incidence.main') }}</option>
+        <option value="">{{ t('admin.query.incidence.all') }}</option>
+        <option value="early">{{ t('admin.query.incidence.early') }}</option>
+        <option value="late">{{ t('admin.query.incidence.late') }}</option>
+        <option value="absent">{{ t('admin.query.incidence.absent') }}</option>
+    </select-->
 </template>
 
 <style scoped>
