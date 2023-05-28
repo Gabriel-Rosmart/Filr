@@ -28,6 +28,17 @@ const tabs = [[Files, props.files], [TimeTable, props.timetable], [Further, prop
 let currentComponentIndex = ref(0)
 let url = '/admin/details?id='+ props.user.id
 
+const fileIn = (id) => {
+    let today = new Date()
+    axios.post('/token', {
+        user_id: props.user.id,
+        time: today.toLocaleTimeString(),
+        date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getUTCDate()
+    })
+        .then(function (response) { console.log(response.data); })
+        .catch(function (error) { console.log(error); });
+}
+
 </script>
 
 <template>
@@ -40,8 +51,14 @@ let url = '/admin/details?id='+ props.user.id
         <div class="flex justify-center content-center mt-4">
             <div class="flex flex-col mt-10 mx-20 w-full">
                 <div class="flex items-end justify-between">
-                    <UserInfo :user="user" />
-                    <EditUser class="btn-outline btn-primary" :user="user.id"/>
+                    <UserInfo :user="user" />                    
+                       <div class=" flex flex-row justify-end content-end w-1/3">
+                            <button class="btn btn-outline btn-primary w-full max-w-xs mr-2"
+                                @click="fileIn(user.id)">
+                                Fichar
+                            </button>
+                        </div>
+                    <EditUser class="btn-outline btn-primary" :user="user.id"/>                    
                 </div>
                 <div class="divider divider-vertical"></div>
                 <div class="tabs mb-8">
