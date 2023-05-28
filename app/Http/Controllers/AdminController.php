@@ -195,37 +195,72 @@ class AdminController extends Controller
                 ->where('users.id', $id)
                 ->orderBy('starts_at', 'asc')
                 ->get();
-           /* $timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id')
-                ->join('date_range_user', 'date_range_user.date_range_id', '=', 'schedules.date_range_id')
-                ->where('user_id', $id)
-                ->orderBy('starts_at', 'asc')
-                ->orderBy('day', 'asc')
-                ->get();
-*/
-            $user = User::select('name', 'email', 'dni', 'phone', 'active', 'profile_pic', 'id', 'role_id')
-                ->with(['role' => function ($query) {
+           
+            $user = User::select('name', 'email', 'dni', 'phone', 'active', 'profile_pic', 'id', 'role_id')     
+            ->with(['role' => function ($query) {
                     $query->select('id', 'role_name');
                 }])
                 ->where('id', $id)
                 ->get()
                 ->first();
 
-                $files = File::Where('user_id',$id, function ($query) {
-                    $query->select('id')->filter(request(['search']));
-                })
+                $files = File::Where('user_id', $id)
                     ->when(request()->input('date') ?? false, function($query, $date){
-                        $query->where('date', $date);
-                    })
+                        $query->where('date',$date);
+                    })                      
                     ->when(request()->input('month') ?? false, function($query, $month){
                         $query->where(DB::raw('MONTH(date)') , $month);
                     })
+                    ->when(request()->input('incidence') ?? false, function($query, $incidence) use ($id){
+                        $query->select()
+                            ->from('incidences')
+                            ->where('user_id', $id)
+                            ->where('subject', $incidence);
+                    })          
                     ->orderBy('date', 'desc')
                     ->orderBy('timestamp', 'asc')
                     ->paginate(20)
                     ->withQueryString();
-
+/*
+                $prueba = User::select('id', 'name')
+                ->when(request()->input('date') ?? false, function($query, $date){
+                    $query->when(request()->input('incidence') ?? false, function($query, $incidence) use($date){
+                        $query->whereHas('incidences', function($query) use ($incidence, $date){
+                            $query->where(function($query) use ($incidence, $date){
+                                $query->where('subject', $incidence);
+                            });
+                        });
+                    })
+                    ->with('files', function($query) use ($date){
+                        $query->where('date', $date)
+                        ->orderBy('date', 'desc')
+                        ->orderBy('timestamp', 'asc')
+                        ->paginate(20);
+                    })
+                    ->with('incidences', function($query) use ($date){
+                        $query->where('date', $date);
+                    });
                     
-                $filter = request()->only('date','month');
+                }, function($query){
+                    $query->when(request()->input('incidence') ?? false, function($query, $incidence){
+                        $query->whereHas('incidences', function($query) use ($incidence){
+                            $query->where(function($query) use ($incidence){
+                                $query->where('subject', $incidence);
+                            });
+                        });
+                    })
+                    ->with([
+                        'files',                                      
+                        'incidences'
+                    ]);
+                })
+                
+                ;
+
+                   dd($prueba);
+                   
+*/
+                $filter = request()->only('date','month','incidence');
 
             return Inertia::render('Admin/UserDetails', [
                 'user' => $user,
