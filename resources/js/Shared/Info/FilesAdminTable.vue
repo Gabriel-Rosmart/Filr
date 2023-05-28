@@ -4,7 +4,8 @@
     const { t, d } = useI18n()
 
     const props = defineProps({
-        files: Array
+        files: Array,
+        incidences: Array
     })
 
     let orderedDate = []
@@ -68,19 +69,25 @@
                     <th>{{ t('table.in') }}</th>
                     <th>{{ t('table.out') }}</th>
                     <th>{{ t('table.other') }}</th>
+                    <th>Incidencias </th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="file in orderedDate" class="hover">
                     <td> {{ d(file.date, 'short') }} </td>
                     <td>
-                        <span v-for="(shift, i) in getMorningShift(file)" class="flex flex-col mb-2">{{ shift }}</span>                   
+                        <span v-for="shift in getMorningShift(file)" class="flex flex-col mb-2">{{ shift }}</span>                   
                     </td>  
                     <td>
                         <span v-for="shift of getAfternoonShift(file)" class="flex flex-col mb-2">{{ shift }}</span>         
                     </td> 
                     <td>
                         <span v-for="shift of getAdditionalFiles(file)" class="flex flex-col mb-2">{{ shift }}</span>         
+                    </td>
+                    <td>
+                        <div v-for="incidence in incidences" class="flex flex-col mb-2">
+                            <span v-if="incidence.date == file.date" v-html="t(`table.${incidence.subject}`, { minutes: incidence.minutes })"></span>
+                        </div>
                     </td>                                
                 </tr> 
             </tbody>

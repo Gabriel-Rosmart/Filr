@@ -9,7 +9,8 @@
     const props = defineProps({
         files: Array,
         filter: Object,
-        url: String
+        url: String,
+        incidences: Array
     })
 </script>
 <template>
@@ -21,7 +22,7 @@
     </div>
     <div v-if="files.data.length > 0">    
         <div class="flex justify-center mb-10">
-            <FilesTable class="w-full mx-4 mt-2" :files="files.data" />
+            <FilesTable class="w-full mx-4 mt-2" :files="files.data" :incidences="incidences"/>
         </div>
     </div>
     <div class="overflow-x-auto w-full" v-else>

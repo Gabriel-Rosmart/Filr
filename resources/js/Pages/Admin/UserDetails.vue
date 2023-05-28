@@ -53,7 +53,7 @@ const fileIn = (id) => {
                 <div class="flex items-end justify-between">
                     <UserInfo :user="user" />                    
                        <div class=" flex flex-row justify-end content-end w-1/3">
-                            <button class="btn btn-outline btn-primary w-full max-w-xs mr-2"
+                            <button :disabled="user.active == 0 ? true : false" class="btn btn-outline btn-primary w-full max-w-xs mr-2"
                                 @click="fileIn(user.id)">
                                 Fichar
                             </button>
