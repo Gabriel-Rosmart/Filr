@@ -390,13 +390,22 @@ class AdminController extends Controller
 
     public function updateUser(Request $request)
     {
+        $evenArray = new EvenArray();
+        $isTimeString = new IsTimeString();
+        $timeDoNotOverlap = new TimeDoNotOverlap(); 
+
         $validated = $request->validate([
             'id' => ['required'],
             'name' => ['required'],
             'dni' => ['required', new IsValidDNI],
             'email' => ['required', 'email'],
             'telephone' => ['required', new IsValidPhoneNumber],
-            'schedules' => ['nullable'],
+            'schedules.monday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.tuesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+
         ],
         [
             'name.required' => trans('rules.name_req'),

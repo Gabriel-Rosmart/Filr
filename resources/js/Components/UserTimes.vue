@@ -1,6 +1,7 @@
 <script setup>
 /** Component imports */
 import InputForm from "@/Components/InputForm.vue";
+import FormInputError from "@/Shared/Forms/FormInputError.vue";
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n()
@@ -76,40 +77,47 @@ for (const [key, value] of Object.entries(props.form.schedules)) {
         props.form.schedules[key][1] = null;
     }
 }
-
-
+for (const key in props.form.errors) {
+    console.log(props.form.errors[key])
+}
+console.table(props.form.errors['schedules.monday'])
 
 </script>
 
 <template>
-    <div class="flex justify-center">
-        <table class="table w-max">
-            <thead>
-                <tr class="">
-                    <th></th>
-                    <th>{{ t('forms.inmorning') }}</th>
-                    <th>{{ t('forms.outmorning') }}</th>
-                    <th>{{ t('forms.innoon') }}</th>
-                    <th>{{ t('forms.outnoon') }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(day, index) in props.form.schedules" :key='index'>
-                    <th>{{ t('days.' + index) }}</th>
-                    <td>
-                        <InputForm type="time" v-model="form.schedules[index][0]" />
-                    </td>
-                    <td>
-                        <InputForm type="time" v-model="form.schedules[index][1]" />
-                    </td>
-                    <td>
-                        <InputForm type="time" v-model="form.schedules[index][2]" />
-                    </td>
-                    <td>
-                        <InputForm type="time" v-model="form.schedules[index][3]" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="flex flex-col">
+        <span v-for="error in form.errors" class="block w-full text-center">
+            <FormInputError :message="error" />
+        </span>           
+        <div class="flex justify-center">  
+            <table class="table w-max">
+                <thead>
+                    <tr class="">
+                        <th></th>
+                        <th>{{ t('forms.inmorning') }}</th>
+                        <th>{{ t('forms.outmorning') }}</th>
+                        <th>{{ t('forms.innoon') }}</th>
+                        <th>{{ t('forms.outnoon') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(day, index) in props.form.schedules" :key='index'> 
+                        <th>{{ t('days.' + index) }}</th>
+                        <td>
+                            <InputForm type="time" v-model="form.schedules[index][0]" />
+                        </td>
+                        <td>
+                            <InputForm type="time" v-model="form.schedules[index][1]" />
+                        </td>
+                        <td>
+                            <InputForm type="time" v-model="form.schedules[index][2]" />
+                        </td>
+                        <td>
+                            <InputForm type="time" v-model="form.schedules[index][3]" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>      
     </div>
 </template>
