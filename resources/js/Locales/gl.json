@@ -96,8 +96,8 @@
         "employee": "Empregado",
         "date": "Data",
         "subject": "Motivo",
-        "late": "Chega <span style='color: red'>{minutes}</span> minutos tarde",
-        "early": "Sae <span style='color: red'>{minutes}</span> minutos antes",
+        "late": "Entrada retrasada por <span style='color: red'>{minutes}</span> minutos",
+        "early": "Saída anticipada por <span style='color: red'>{minutes}</span> minutos",
         "absent": "<span style='color: red'>Non veu traballar</span>",
         "reqPermit": "Permiso solicitado"
     },
