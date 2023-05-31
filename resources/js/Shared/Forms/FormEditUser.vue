@@ -26,7 +26,8 @@ var form = useForm({
         wednesday: [null, null, null, null],
         thursday: [null, null, null, null],
         friday: [null, null, null, null]
-    }
+    },
+    schedules_id: null,
 });
 
 function validate(object) {

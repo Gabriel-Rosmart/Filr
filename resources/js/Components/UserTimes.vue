@@ -18,7 +18,29 @@ function removeSeconds(time) {
         return '00:00';
     }
 }
-props.weekend.forEach(element => {
+
+console.log(props.weekend);
+
+const week = [];
+const ids = [];
+let cnt = 0;
+
+for (const [key, element] of Object.entries(props.weekend)) {
+    console.log(element);
+    if (week[element.date_range_id]){
+        week[element.date_range_id].push(element);
+    } else {
+        week[element.date_range_id] = [];
+        week[element.date_range_id].push(element);
+        ids.push(element.date_range_id);
+        cnt++;
+    }
+}
+
+console.log(week);
+console.log(ids);
+
+week[ids[0]].forEach(element => {
     if (element.day == 'monday') {
         if (props.form.schedules.monday[0] == null) {
             props.form.schedules.monday[0] = removeSeconds(element.starts_at);
