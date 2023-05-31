@@ -45,11 +45,11 @@ class Helper
                 'email' => $validated['email'],
                 'phone' => $validated['telephone'],
             ]);
-            DB::table('schedules')->where('date_range_id', $user->date_range_id)->delete();
+            DB::table('schedules')->where('date_range_id', $validated['schedules_id'])->delete();
             foreach ($validated['schedules'] as $key => $value) {
                 if (isset($value[0]) && isset($value[1])) {
                     DB::table('schedules')->insert([
-                        'date_range_id' => $user->date_range_id,
+                        'date_range_id' => $validated['schedules_id'],
                         'day' => $key,
                         'starts_at' => $value[0],
                         'ends_at' => $value[1]
@@ -57,7 +57,7 @@ class Helper
                 }
                 if (isset($value[2]) && isset($value[3])) {
                     DB::table('schedules')->insert([
-                        'date_range_id' => $user->date_range_id,
+                        'date_range_id' => $validated['schedules_id'],
                         'day' => $key,
                         'starts_at' => $value[2],
                         'ends_at' => $value[3]

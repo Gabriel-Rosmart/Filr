@@ -11,8 +11,11 @@ const { t } = useI18n()
 const props = defineProps({
     user: Object,
     timetable: Object,
-    isAdmin: Number
+    isAdmin: Number,
+    dates: Object
 })
+
+console.log(props.dates);
 
 </script>
 
@@ -22,7 +25,7 @@ const props = defineProps({
         <Breadcrumbs class="ml-5 mt-6"
             :pages="[['Admin', '/admin'], [t('breadcrumbs.manage'), '/admin/manage'],[props.user.name, '/admin/details?id=' + props.user.id],[t('breadcrumbs.edit'), '/admin/edit']]" />
         <div class="flex items-center mt-8">
-            <FormEditUser :user="user" :timetable="timetable" :isAdmin="isAdmin" />
+            <FormEditUser :user="user" :timetable="timetable" :isAdmin="isAdmin" :dates="dates"/>
         </div>
     </AdminLayout>
 </template>

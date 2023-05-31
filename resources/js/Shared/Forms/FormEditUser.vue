@@ -11,7 +11,8 @@ const { t } = useI18n()
 const props = defineProps({
     user: Object,
     timetable: Object,
-    isAdmin: Number
+    isAdmin: Number,
+    dates: Object
 })
 
 var form = useForm({
@@ -64,6 +65,7 @@ function validate(object) {
 
 const submit = () => {
     validate(form.schedules);
+    console.log(form);
     form.post('/admin/edit');
 };
 
@@ -76,7 +78,7 @@ const submit = () => {
         <form @submit.prevent="" class="w-full pr-10">
             <div class="grid grid-cols-2 w-auto">
                 <UserData :user="user" :form="form" :isAdmin="isAdmin" />
-                <UserTimes :weekend="timetable" :form="form" />
+                <UserTimes :weekend="timetable" :form="form" :dates="dates"/>
                 <div class="flex justify-center mt-8">
                     <Link as="button" :href="'/admin/details?id='+props.user.id" class="btn btn-outline btn-error mr-4">
                     {{ t('admin.buttons.cancel') }}

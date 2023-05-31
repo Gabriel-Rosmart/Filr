@@ -258,9 +258,16 @@ class AdminController extends Controller
                 ->get()
                 ->first();
 
+            $dates = DateRange::select('date_range_user.id', 'start_date', 'end_date')
+                ->join('date_range_user', 'date_range_user.date_range_id', '=', 'date_ranges.id')
+                ->where('date_range_user.user_id', $id)
+                ->orderBy('start_date', 'asc')
+                ->get();
+
             return Inertia::render('Admin/EditUsers', [
                 'user' => $user,
                 'timetable' => $timetable,
+                'dates' => $dates,
                 'isAdmin' => Auth::user()->is_admin
             ]);
         } else
@@ -359,6 +366,7 @@ class AdminController extends Controller
             'email' => ['required', 'email'],
             'telephone' => ['required', new IsValidPhoneNumber],
             'schedules' => ['nullable'],
+            'schedules_id' => ['nullable'],
         ],
         [
             'name.required' => trans('rules.name_req'),
