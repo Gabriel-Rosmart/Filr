@@ -109,7 +109,7 @@ class AdminController extends Controller
             'users' => User::query()
                 ->select('id', 'name', 'email', 'active', 'role_id', 'profile_pic')
                 ->filter(request(['search', 'active', 'type']))
-                ->when(request()->input('searchId') ?? false, function($query, $id){
+                ->when(request()->input('searchId') ?? false, function ($query, $id) {
                     $query->where('id', $id);
                 })
                 ->with(['role' => function ($query) {
@@ -210,19 +210,19 @@ class AdminController extends Controller
                 ->get()
                 ->first();
 
-                $files = File::Where('user_id',$id, function ($query) {
-                    $query->select('id')->filter(request(['search']));
+            $files = File::Where('user_id', $id, function ($query) {
+                $query->select('id')->filter(request(['search']));
+            })
+                ->when(request()->input('date') ?? false, function ($query, $date) {
+                    $query->where('date', $date);
                 })
-                    ->when(request()->input('date') ?? false, function($query, $date){
-                        $query->where('date', $date);
-                    })
-                    ->orderBy('date', 'desc')
-                    ->orderBy('timestamp', 'asc')
-                    ->paginate(20)
-                    ->withQueryString();
+                ->orderBy('date', 'desc')
+                ->orderBy('timestamp', 'asc')
+                ->paginate(20)
+                ->withQueryString();
 
 
-                $filter = request()->only('date');
+            $filter = request()->only('date');
 
             return Inertia::render('Admin/UserDetails', [
                 'user' => $user,
@@ -306,33 +306,34 @@ class AdminController extends Controller
         $timeDoNotOverlap = new TimeDoNotOverlap();
 
 
-        $validated = $request->validate([
-            'name' => ['required'],
-            'dni' => ['required', new IsValidDNI],
-            'email' => ['required', 'email', 'unique:users'],
-            'telephone' => ['required', new IsValidPhoneNumber],
-            'admin' => ['boolean'],
-            'role' => ['nullable', Rule::requiredIf(!$request->input('substitute.is'))],
-            'substitute.is' => ['boolean'],
-            'substitute.name' => ['nullable'],
-            'dates.start' => ['nullable', 'date', Rule::requiredIf(!$request->input('substitute.is'))],
-            'dates.end' => ['nullable', 'date', Rule::requiredIf(!$request->input('substitute.is'))],
-            'schedules.monday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-            'schedules.tuesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-            'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-            'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-            'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
-        ],
-        [
-            'name.required' => trans('rules.name_req'),
-            'dni.required' => trans('rules.dni_req'),
-            'email.required' => trans('rules.email_req'),
-            'telephone.required' => trans('rules.phone_req'),
-            'role.required' => trans('rules.role_req'),
-            'dates.start.required' => trans('rules.start_req'),
-            'dates.end.required' => trans('rules.end_req')
-        ]
-    );
+        $validated = $request->validate(
+            [
+                'name' => ['required'],
+                'dni' => ['required', new IsValidDNI],
+                'email' => ['required', 'email', 'unique:users'],
+                'telephone' => ['required', new IsValidPhoneNumber],
+                'admin' => ['boolean'],
+                'role' => ['nullable', Rule::requiredIf(!$request->input('substitute.is'))],
+                'substitute.is' => ['boolean'],
+                'substitute.name' => ['nullable'],
+                'dates.start' => ['nullable', 'date', Rule::requiredIf(!$request->input('substitute.is'))],
+                'dates.end' => ['nullable', 'date', Rule::requiredIf(!$request->input('substitute.is'))],
+                'schedules.monday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+                'schedules.tuesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+                'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+                'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+                'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            ],
+            [
+                'name.required' => trans('rules.name_req'),
+                'dni.required' => trans('rules.dni_req'),
+                'email.required' => trans('rules.email_req'),
+                'telephone.required' => trans('rules.phone_req'),
+                'role.required' => trans('rules.role_req'),
+                'dates.start.required' => trans('rules.start_req'),
+                'dates.end.required' => trans('rules.end_req')
+            ]
+        );
 
 
         // * Generate random password
@@ -359,22 +360,24 @@ class AdminController extends Controller
 
     public function updateUser(Request $request)
     {
-        $validated = $request->validate([
-            'id' => ['required'],
-            'name' => ['required'],
-            'dni' => ['required', new IsValidDNI],
-            'email' => ['required', 'email'],
-            'telephone' => ['required', new IsValidPhoneNumber],
-            'schedules' => ['nullable'],
-            'schedules_id' => ['nullable'],
-        ],
-        [
-            'name.required' => trans('rules.name_req'),
-            'dni.required' => trans('rules.dni_req'),
-            'email.required' => trans('rules.email_req'),
-            'telephone.required' => trans('rules.phone_req'),
-            'role.required' => trans('rules.role_req'),
-        ]);
+        $validated = $request->validate(
+            [
+                'id' => ['required'],
+                'name' => ['required'],
+                'dni' => ['required', new IsValidDNI],
+                'email' => ['required', 'email'],
+                'telephone' => ['required', new IsValidPhoneNumber],
+                'schedules' => ['nullable'],
+                'schedules_id' => ['nullable'],
+            ],
+            [
+                'name.required' => trans('rules.name_req'),
+                'dni.required' => trans('rules.dni_req'),
+                'email.required' => trans('rules.email_req'),
+                'telephone.required' => trans('rules.phone_req'),
+                'role.required' => trans('rules.role_req'),
+            ]
+        );
 
         $user = User::select('users.id', 'name', 'dni', 'role_id', 'email', 'active', 'profile_pic', 'date_range_id', 'phone')
             ->where('users.id', $validated['id'])
@@ -385,5 +388,41 @@ class AdminController extends Controller
         Helper::updateUserCompleteRecord($validated, $user);
 
         return redirect('/admin/edit?id=' . $validated['id']);
+    }
+
+    public function getDates()
+    {
+        $id = request()->input('id');
+        if (!empty($id)) {
+            $dates = DateRange::select('date_range_user.id', 'start_date', 'end_date')
+                ->join('date_range_user', 'date_range_user.date_range_id', '=', 'date_ranges.id')
+                ->where('date_range_user.user_id', $id)
+                ->orderBy('start_date', 'asc')
+                ->get();
+            $user = User::select('id', 'name', 'dni', 'phone', 'role_id', 'email', 'active', 'profile_pic')
+                ->where('id', $id)
+                ->get()
+                ->first();
+            return Inertia::render('Admin/AddDateRange', [
+                'dates' => $dates,
+                'user' => $user,
+                'isAdmin' => Auth::user()->is_admin
+            ]);
+        } else {
+            return redirect('/admin');
+        }
+    }
+
+    public function addDateRange(Request $request)
+    {
+        $validated = $request->validate(
+            
+        );
+
+        $user = null;
+
+        Helper::updateUserDates($validated, $user);
+
+        return redirect('/admin/dates?id=' . $validated['id']);
     }
 }

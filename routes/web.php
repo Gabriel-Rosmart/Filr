@@ -34,6 +34,7 @@ Route::middleware(['auth', 'admin', 'locale'])->group(function () {
     Route::get('/admin/incidences', [AdminController::class, 'listAllIncidences']);
     Route::get('/admin/register', [AdminController::class, 'registerNewUser']);
     Route::get('/admin/edit', [AdminController::class, 'edit']);
+    Route::get('/admin/dates', [AdminController::class, 'getDates']);
     Route::post('/permits', PermitController::class);
     Route::post('/admin/register', [AdminController::class, 'saveRegisteredUser']);
     Route::post('/admin/edit', [AdminController::class, 'updateUser']);

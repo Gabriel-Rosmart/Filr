@@ -1,5 +1,5 @@
 <script setup>
-import AdminLayout from '@/Layouts/AdminLayout.vue'
+import AdminLayout from '@/Layouts/AdminLayout.vue';
 import FormEditUser from '@/Shared/Forms/FormEditUser.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import { Head } from '@inertiajs/inertia-vue3';

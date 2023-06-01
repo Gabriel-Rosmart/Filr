@@ -43,6 +43,7 @@
             "denied": "Denegado"
         },
         "buttons": {
+            "dates": "Datas",
             "edit": "Modificar usuario",
             "adduser": "Engadir usuario",
             "accept": "Aceptar",

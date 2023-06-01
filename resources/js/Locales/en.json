@@ -43,6 +43,7 @@
             "denied": "Denied"
         },
         "buttons": {
+            "dates": "Dates",
             "edit": "Edit user",
             "adduser": "Add user",
             "accept": "Accept",

@@ -66,6 +66,10 @@ class Helper
             }
         });
     }
+
+    public static function updateUserDates($validated, $user){
+
+    }
 }
 
 /**

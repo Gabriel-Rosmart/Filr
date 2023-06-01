@@ -6,8 +6,9 @@ import UserInfo from '@/Shared/User/UserInfo.vue';
 import Incidents from '@/Shared/Info/IncidencesUserTable.vue';
 import Permits from '@/Shared/Info/PermitsAdminTable.vue';
 import EditUser from '@/Shared/Actions/EditUser.vue';
-import Further from '@/Shared/User/UserFurther.vue'
-import Files from '@/Shared/User/UserFiles.vue'
+import Further from '@/Shared/User/UserFurther.vue';
+import Files from '@/Shared/User/UserFiles.vue';
+import AddDateRange from '@/Shared/Actions/AddDates.vue';
 
 import { Head } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue'
@@ -58,6 +59,7 @@ const fileIn = (id) => {
                                 Fichar
                             </button>
                         </div>
+                    <AddDateRange class="btn-outline btn-primary" :user="user.id"/>
                     <EditUser class="btn-outline btn-primary" :user="user.id"/>                    
                 </div>
                 <div class="divider divider-vertical"></div>
