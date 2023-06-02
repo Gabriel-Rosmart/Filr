@@ -24,7 +24,6 @@ console.log(props.weekend);
 
 const week = [];
 const ids = [];
-let cnt = 0;
 
 for (const [key, element] of Object.entries(props.weekend)) {
     console.log(element);
@@ -33,10 +32,12 @@ for (const [key, element] of Object.entries(props.weekend)) {
     } else {
         week[element.date_range_id] = [];
         week[element.date_range_id].push(element);
-        ids.push(element.date_range_id);
-        cnt++;
     }
 }
+props.dates.forEach(element => {
+    console.log(element);
+    ids.push(element.id);
+});
 
 console.log(week);
 console.log(ids);
@@ -49,61 +50,63 @@ function linkwithform(id) {
         thursday: [null, null, null, null],
         friday: [null, null, null, null]
     }
-    week[ids[id]].forEach(element => {
-        if (element.day == 'monday') {
-            if (props.form.schedules.monday[0] == null) {
-                props.form.schedules.monday[0] = removeSeconds(element.starts_at);
-                props.form.schedules.monday[1] = removeSeconds(element.ends_at);
-            } else {
-                props.form.schedules.monday[2] = removeSeconds(element.starts_at);
-                props.form.schedules.monday[3] = removeSeconds(element.ends_at);
+    if (week[ids[id]]) {
+        week[ids[id]].forEach(element => {
+            if (element.day == 'monday') {
+                if (props.form.schedules.monday[0] == null) {
+                    props.form.schedules.monday[0] = removeSeconds(element.starts_at);
+                    props.form.schedules.monday[1] = removeSeconds(element.ends_at);
+                } else {
+                    props.form.schedules.monday[2] = removeSeconds(element.starts_at);
+                    props.form.schedules.monday[3] = removeSeconds(element.ends_at);
+                }
             }
-        }
-        if (element.day == 'tuesday') {
-            if (props.form.schedules.tuesday[0] == null) {
-                props.form.schedules.tuesday[0] = removeSeconds(element.starts_at);
-                props.form.schedules.tuesday[1] = removeSeconds(element.ends_at);
-            } else {
-                props.form.schedules.tuesday[2] = removeSeconds(element.starts_at);
-                props.form.schedules.tuesday[3] = removeSeconds(element.ends_at);
+            if (element.day == 'tuesday') {
+                if (props.form.schedules.tuesday[0] == null) {
+                    props.form.schedules.tuesday[0] = removeSeconds(element.starts_at);
+                    props.form.schedules.tuesday[1] = removeSeconds(element.ends_at);
+                } else {
+                    props.form.schedules.tuesday[2] = removeSeconds(element.starts_at);
+                    props.form.schedules.tuesday[3] = removeSeconds(element.ends_at);
+                }
             }
-        }
-        if (element.day == 'wednesday') {
-            if (props.form.schedules.wednesday[0] == null) {
-                props.form.schedules.wednesday[0] = removeSeconds(element.starts_at);
-                props.form.schedules.wednesday[1] = removeSeconds(element.ends_at);
-            } else {
-                props.form.schedules.wednesday[2] = removeSeconds(element.starts_at);
-                props.form.schedules.wednesday[3] = removeSeconds(element.ends_at);
+            if (element.day == 'wednesday') {
+                if (props.form.schedules.wednesday[0] == null) {
+                    props.form.schedules.wednesday[0] = removeSeconds(element.starts_at);
+                    props.form.schedules.wednesday[1] = removeSeconds(element.ends_at);
+                } else {
+                    props.form.schedules.wednesday[2] = removeSeconds(element.starts_at);
+                    props.form.schedules.wednesday[3] = removeSeconds(element.ends_at);
+                }
             }
-        }
-        if (element.day == 'thursday') {
-            if (props.form.schedules.thursday[0] == null) {
-                props.form.schedules.thursday[0] = removeSeconds(element.starts_at);
-                props.form.schedules.thursday[1] = removeSeconds(element.ends_at);
-            } else {
-                props.form.schedules.thursday[2] = removeSeconds(element.starts_at);
-                props.form.schedules.thursday[3] = removeSeconds(element.ends_at);
+            if (element.day == 'thursday') {
+                if (props.form.schedules.thursday[0] == null) {
+                    props.form.schedules.thursday[0] = removeSeconds(element.starts_at);
+                    props.form.schedules.thursday[1] = removeSeconds(element.ends_at);
+                } else {
+                    props.form.schedules.thursday[2] = removeSeconds(element.starts_at);
+                    props.form.schedules.thursday[3] = removeSeconds(element.ends_at);
+                }
             }
-        }
-        if (element.day == 'friday') {
-            if (props.form.schedules.friday[0] == null) {
-                props.form.schedules.friday[0] = removeSeconds(element.starts_at);
-                props.form.schedules.friday[1] = removeSeconds(element.ends_at);
-                props.form.schedules.friday[2] = null;
-                props.form.schedules.friday[3] = null;
-            } else {
-                props.form.schedules.friday[2] = removeSeconds(element.starts_at);
-                props.form.schedules.friday[3] = removeSeconds(element.ends_at);
+            if (element.day == 'friday') {
+                if (props.form.schedules.friday[0] == null) {
+                    props.form.schedules.friday[0] = removeSeconds(element.starts_at);
+                    props.form.schedules.friday[1] = removeSeconds(element.ends_at);
+                    props.form.schedules.friday[2] = null;
+                    props.form.schedules.friday[3] = null;
+                } else {
+                    props.form.schedules.friday[2] = removeSeconds(element.starts_at);
+                    props.form.schedules.friday[3] = removeSeconds(element.ends_at);
+                }
             }
-        }
-    });
-    for (const [key, value] of Object.entries(props.form.schedules)) {
-        if (value[0] > '14:00' && value[2] == null) {
-            props.form.schedules[key][2] = value[0];
-            props.form.schedules[key][3] = value[1];
-            props.form.schedules[key][0] = null;
-            props.form.schedules[key][1] = null;
+        });
+        for (const [key, value] of Object.entries(props.form.schedules)) {
+            if (value[0] > '14:00' && value[2] == null) {
+                props.form.schedules[key][2] = value[0];
+                props.form.schedules[key][3] = value[1];
+                props.form.schedules[key][0] = null;
+                props.form.schedules[key][1] = null;
+            }
         }
     }
 }
@@ -117,7 +120,7 @@ console.log(props.dates);
         <table class="table w-max">
             <thead>
                 <tr class="">
-                    <th><select v-model="form.schedules_id">
+                    <th><select class='bg-transparent input-bordered w-full max-w-xs' v-model="form.schedules_id">
                             <option v-for="id, index in ids" :key="index" :value="id" v-on:click="linkwithform(index)">{{ id
                             }} </option>
                         </select></th>

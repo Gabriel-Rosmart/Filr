@@ -2,7 +2,7 @@
 /** Component imports */
 import UserData from "@/Components/UserData.vue";
 import UserTimes from "@/Components/UserTimes.vue";
-import { useForm } from '@inertiajs/inertia-vue3'
+import { useForm } from '@inertiajs/inertia-vue3';
 import { Link } from '@inertiajs/inertia-vue3';
 import { useI18n } from 'vue-i18n';
 

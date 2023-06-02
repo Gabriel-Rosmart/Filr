@@ -394,7 +394,7 @@ class AdminController extends Controller
     {
         $id = request()->input('id');
         if (!empty($id)) {
-            $dates = DateRange::select('date_range_user.id', 'start_date', 'end_date')
+            $dates = DateRange::select('date_range_user.id', 'date_range_user.date_range_id', 'start_date', 'end_date')
                 ->join('date_range_user', 'date_range_user.date_range_id', '=', 'date_ranges.id')
                 ->where('date_range_user.user_id', $id)
                 ->orderBy('start_date', 'asc')
@@ -416,13 +416,23 @@ class AdminController extends Controller
     public function addDateRange(Request $request)
     {
         $validated = $request->validate(
-            
+            [
+                'id' => ['nullable'],
+                'user_id' => ['required'],
+                'dates' => ['required'],
+            ]
         );
 
-        $user = null;
+        $user = User::select('users.id', 'date_range_id')
+            ->where('users.id', $validated['user_id'])
+            ->join('date_range_user', 'date_range_user.user_id', '=', 'users.id')
+            ->get()
+            ->first();;
+
+        echo $user;
 
         Helper::updateUserDates($validated, $user);
 
-        return redirect('/admin/dates?id=' . $validated['id']);
+        return redirect('/admin/dates?id=' . $user->id);
     }
 }
