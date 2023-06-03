@@ -39,6 +39,7 @@ Route::middleware(['auth', 'admin', 'locale'])->group(function () {
     Route::post('/admin/register', [AdminController::class, 'saveRegisteredUser']);
     Route::post('/admin/edit', [AdminController::class, 'updateUser']);
     Route::post('/admin/fileReport', [AdminController::class, 'generateReport']);
+    Route::get('/admin/getReport', [AdminController::class, 'downloadReport']);
     Route::get('/permits/pending', function () {
         return Permit::where('status', 'pending')->count();
     });

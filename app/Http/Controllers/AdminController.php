@@ -19,10 +19,10 @@ use Illuminate\Http\Request;
 use App\Rules\TimeDoNotOverlap;
 use App\Rules\IsValidPhoneNumber;
 use Dompdf\Dompdf;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
-use function PHPUnit\Framework\isEmpty;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -450,11 +450,21 @@ class AdminController extends Controller
         ]));
         $pdf->setPaper('A4', 'portrait');
         $pdf->render();
-        $fileName = '/public/reports.pdf';
-        $pdf->stream($fileName, ['Attachment' => 0]);
+        $fileName = DIRECTORY_SEPARATOR.'reports'. DIRECTORY_SEPARATOR . date('Ymd').'__'. $UserData[0]->id . '.pdf';
+        //$pdf->stream($fileName, ['Attachment' => 0]);
         Storage::put($fileName, $pdf->output());
-        return $UserData;
+        return $fileName;
     }
+
+    public function downloadReport(Request $request){
+        
+            $headers = ['Content-Type: application/pdf'];
+            return Storage::download($request->query('path'), 'test.pdf', $headers);
+        
+         
+        
+    }
+
 
          
 }

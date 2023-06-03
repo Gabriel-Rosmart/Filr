@@ -99,7 +99,7 @@ if(!function_exists('exitFiles')){
                 </td>
             </tr>
         </table>
-        <p>franja entre {{ $range->start_date }} a {{ $range->end_date }}</p>
+        <p>Franja entre {{ $range->start_date }} a {{ $range->end_date }}</p>
        </div>
 
        <br>

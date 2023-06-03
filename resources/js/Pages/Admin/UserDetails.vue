@@ -12,6 +12,7 @@ import Files from '@/Shared/User/UserFiles.vue'
 import { Head } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n';
+import axios, { Axios } from 'axios';
 
 const { t } = useI18n()
 
@@ -40,7 +41,7 @@ const fileIn = (id) => {
 }
 
 const createFileReport = () => {
-    let pdf
+    let path = ''
     axios.post('/admin/fileReport', {
         user_id: props.user.id,
         year: props.filter.year,
@@ -48,8 +49,25 @@ const createFileReport = () => {
         day: props.filter.day,
     })
     .then(function (response){ 
-        console.log(response);
-        window.open(location.origin + '/storage/app/reports.pdf')
+        console.log(response.data);
+        path = response.data
+        axios({
+            url: '/admin/getReport?path=' + path,
+            method: 'GET',
+            responseType: 'blob'
+        }).then((response)=>{
+            console.log(response);
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "download.pdf");
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+ 
+        })
+        .catch(function(error){console.log(error);})
+        //window.open(location.origin + '/storage/app/reports.pdf')
         /*const fileWindow = window.open();
         const url = 'data:application/pdf;base64,' + btoa(
             new Uint8Array(response.data)
