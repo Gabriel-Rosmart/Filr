@@ -29,13 +29,11 @@
 
     let date = ref(props.filter.date ?? '')
     let month = ref(props.filter.month ?? '')
-    let incidence = ref(props.filter.incidence ?? '')
 
-    watch([date, month, incidence], throttle(([dval, mval, ival]) => {
+    watch([date, month], throttle(([dval, mval]) => {
         Inertia.get(props.url, {
             date: dval,
             month: mval,
-            incidence: ival
         },
             {
                 preserveState: false,
@@ -68,13 +66,6 @@
     </select>
     <vue-tailwind-datepicker as-single :start-from="new Date('2023', (Number(month)-1), 1)" :i18n="locale" :formatter="formatter" v-model="date" :key="updateKey"
     input-classes="input input-bordered w-full max-w-xs ml-4" id="datepicker" :placeholder="t('dateformat')" />
-    <select class="select select-bordered w-full max-w-xs" v-model="incidence">
-        <option disabled selected value="">{{ t('admin.query.incidence.main') }}</option>
-        <option value="">{{ t('admin.query.incidence.all') }}</option>
-        <option value="early">{{ t('admin.query.incidence.early') }}</option>
-        <option value="late">{{ t('admin.query.incidence.late') }}</option>
-        <option value="absent">{{ t('admin.query.incidence.absent') }}</option>
-    </select>
 </template>
 
 <style scoped>
