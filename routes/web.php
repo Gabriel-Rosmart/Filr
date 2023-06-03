@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\PermitController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,7 @@ Route::middleware(['auth', 'admin', 'locale'])->group(function () {
     Route::post('/permits', PermitController::class);
     Route::post('/admin/register', [AdminController::class, 'saveRegisteredUser']);
     Route::post('/admin/edit', [AdminController::class, 'updateUser']);
+    Route::post('/admin/fileReport', [AdminController::class, 'generateReport']);
     Route::get('/permits/pending', function () {
         return Permit::where('status', 'pending')->count();
     });
@@ -57,6 +59,7 @@ Route::middleware(['auth', 'locale'])->group(function () {
     });
 });
 
+//Route::post('/fileReport', [AdminController::class, 'generateReport']);
 Route::post('/token', TokenController::class);
 
 Route::get('/dashboard', function () {

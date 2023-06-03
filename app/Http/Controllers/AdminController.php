@@ -18,12 +18,13 @@ use App\Mail\AccountCreated;
 use Illuminate\Http\Request;
 use App\Rules\TimeDoNotOverlap;
 use App\Rules\IsValidPhoneNumber;
+use Dompdf\Dompdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isEmpty;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
@@ -381,4 +382,79 @@ class AdminController extends Controller
 
         return redirect('/admin/edit?id=' . $validated['id']);
     }
+
+    public function generateReport(Request $request)
+    {
+
+            $UserData = User::select('*')
+            ->when($request->day ?? $request->month ?? $request->year ?? false, function($query, $date){
+            $query->with([
+                'files' => function($query) use ($date){
+                    $query->when(strlen($date) == 10, function($query) use ($date){
+                        $query->where('date', $date);
+                    })
+                    ->when(strlen($date) == 2, function($query) use ($date){
+                        $query->whereMonth('date', $date);
+                    })
+                    ->when(strlen($date) == 4, function($query) use ($date){
+                        $query->whereYear('date', $date);
+                    })  
+                    ->orderBy('date', 'asc')  
+                    ->orderBy('timestamp', 'asc');                   
+                },
+                'incidences' => function($query) use ($date){
+                    $query->when(strlen($date) == 10, function($query) use ($date){
+                        $query->where('date', $date);
+                    })
+                    ->when(strlen($date) == 2, function($query) use ($date){
+                        $query->whereMonth('date', $date);
+                    })
+                    ->when(strlen($date) == 4, function($query) use ($date){
+                        $query->whereYear('date', $date);
+                    })
+                    ->orderBy('date', 'asc');                       
+                },
+                'role'
+            ]);
+        }, function($query){
+            $query->with(['files','incidences','role']);
+        })
+        ->where('id', request()->input('user_id'))
+        ->get();
+        //return $UserData;
+        //Log::channel('daily')->info('INFO; User with id ' . $request->user_id . ' found: ' . $UserData->name);
+
+        $range = DB::table('date_ranges as r')
+        ->select('r.start_date', 'r.end_date')
+        ->join('date_range_user as r_u', 'r.id', '=', 'r_u.date_range_id')
+        ->where('r_u.user_id', $request->user_id)
+        ->when($request->day ?? $request->month ?? $request->year ?? false, function($query,$date){
+            $query->when(strlen($date) == 10, function($query) use ($date){
+                $query->whereRaw("$date between start_date and end_date");
+            })
+            ->when(strlen($date) == 2, function($query) use ($date){
+                $query->where(DB::raw('MONTH(r.start_date)'), '<=', $date)
+                ->where(DB::raw('MONTH(end_date)'), '>=', $date);
+            })
+            ->when(strlen($date) == 4, function($query) use ($date){
+                $query->where(DB::raw('YEAR(start_date)'), '<=', $date)
+                ->where(DB::raw('YEAR(end_date)'), '>=', $date);
+            });
+        })
+        ->get();
+        $pdf = new Dompdf();
+        $pdf->loadHtml(view('fileReport',[
+            'user' => $UserData[0],
+            'range' => $range[0],
+            'period' => $request->day ?? $request->month ?? $request->year
+        ]));
+        $pdf->setPaper('A4', 'portrait');
+        $pdf->render();
+        $fileName = '/public/reports.pdf';
+        $pdf->stream($fileName, ['Attachment' => 0]);
+        Storage::put($fileName, $pdf->output());
+        return $UserData;
+    }
+
+         
 }

@@ -39,6 +39,36 @@ const fileIn = (id) => {
         .catch(function (error) { console.log(error); });
 }
 
+const createFileReport = () => {
+    let pdf
+    axios.post('/admin/fileReport', {
+        user_id: props.user.id,
+        year: props.filter.year,
+        month: props.filter.month,
+        day: props.filter.day,
+    })
+    .then(function (response){ 
+        console.log(response);
+        window.open(location.origin + '/storage/app/reports.pdf')
+        /*const fileWindow = window.open();
+        const url = 'data:application/pdf;base64,' + btoa(
+            new Uint8Array(response.data)
+            .reduce((data, byte) => data + String.fromCharCode(byte), '')
+        );
+        fileWindow.document.write(
+            '<title>Visualisation</title>' +
+            '<body style="overflow: hidden; margin: 0">' +
+            '<object width="100%" width="-webkit-fill-available" height="100%" height="-webkit-fill-available" type="application/pdf" data="' + encodeURI(url) + '"></object>' +
+            '</body>'
+        );*/
+        /*let pdf = open(); 
+        pdf.document.open("application/pdf")
+        pdf.document.write(response.data)*/
+    })
+    .catch(function (error){ console.log(error); })
+
+}
+
 </script>
 
 <template>
@@ -76,6 +106,23 @@ const fileIn = (id) => {
                 <div>
                     <component :is="tabs[currentComponentIndex][0]" :user="user" :timetable="timetable" :permits="permits" 
                         :incidences="incidences" :files="files" :filter="filter" :url="url"/>
+                </div>
+            </div>
+        </div>
+
+        <input type="checkbox" id="my-modal-2" class="modal-toggle"> 
+        <div class="modal">
+            <div class="modal-box">
+                <p>Se generará un informe con los siguientes del usuario {{ user.name }} con los siguientes datos: </p>
+                <ul>
+                    <li v-if="filter.year">Año : </li>
+                    <li v-if="filter.month">Mes : {{ filter.month }}</li>
+                    <li v-if="filter.day">Día : {{ filter.day }}</li>
+                </ul> 
+                <div class="modal-action">
+                    <a href=""></a>
+                    <label for="my-modal-2" class="btn btn-primary" @click="createFileReport()">Aceptar</label> 
+                    <label for="my-modal-2" class="btn">Cancelar</label>
                 </div>
             </div>
         </div>
