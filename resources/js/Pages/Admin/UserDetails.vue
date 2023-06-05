@@ -13,6 +13,7 @@ import AddDateRange from '@/Shared/Actions/AddDates.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n';
+import axios, { Axios } from 'axios';
 
 const { t } = useI18n()
 
@@ -40,6 +41,44 @@ const fileIn = (id) => {
         .catch(function (error) { console.log(error); });
 }
 
+const createFileReport = () => {
+    let path = ''
+    let name = ''
+    axios.post('/admin/fileReport', {
+        user_id: props.user.id,
+        year: props.filter.year,
+        month: props.filter.month,
+        day: props.filter.day,
+    })
+    .then(function (response){ 
+        console.log(response.data);
+        path = response.data
+        if (path.indexOf('\\') != -1) {
+            name = path.split('\\')[2]
+        } else {
+            name = path.split('/')[2]
+        }       
+        console.log(name);
+        axios({
+            url: '/admin/getReport?path=' + path,
+            method: 'GET',
+            responseType: 'blob'
+        }).then((response)=>{
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", name);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            axios.get('/admin/deleteReport?path='+path)
+        })
+        .catch(function(error){console.log(error);})
+    })
+    .catch(function (error){ console.log(error); })
+
+}
+
 </script>
 
 <template>
@@ -54,7 +93,7 @@ const fileIn = (id) => {
                 <div class="flex items-end justify-between">
                     <UserInfo :user="user" />                    
                        <div class=" flex flex-row justify-end content-end w-1/3">
-                            <button class="btn btn-outline btn-primary w-full max-w-xs mr-2"
+                            <button :disabled="user.active == 0 ? true : false" class="btn btn-outline btn-primary w-full max-w-xs mr-2"
                                 @click="fileIn(user.id)">
                                 Fichar
                             </button>
@@ -78,6 +117,23 @@ const fileIn = (id) => {
                 <div>
                     <component :is="tabs[currentComponentIndex][0]" :user="user" :timetable="timetable" :permits="permits" 
                         :incidences="incidences" :files="files" :filter="filter" :url="url"/>
+                </div>
+            </div>
+        </div>
+
+        <input type="checkbox" id="my-modal-2" class="modal-toggle"> 
+        <div class="modal">
+            <div class="modal-box">
+                <p>Se generará un informe con los siguientes del usuario {{ user.name }} con los siguientes datos: </p>
+                <ul>
+                    <li v-if="filter.year">Año : </li>
+                    <li v-if="filter.month">Mes : {{ filter.month }}</li>
+                    <li v-if="filter.day">Día : {{ filter.day }}</li>
+                </ul> 
+                <div class="modal-action">
+                    <a href=""></a>
+                    <label for="my-modal-2" class="btn btn-primary" @click="createFileReport()">Aceptar</label> 
+                    <label for="my-modal-2" class="btn">Cancelar</label>
                 </div>
             </div>
         </div>

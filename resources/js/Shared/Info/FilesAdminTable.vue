@@ -4,7 +4,8 @@
     const { t, d } = useI18n()
 
     const props = defineProps({
-        files: Array
+        files: Array,
+        incidences: Array
     })
 
     let orderedDate = []
@@ -29,30 +30,20 @@
 
     const getMorningShift = (mornFiles) => {
         let shifts = []
-
-        if(mornFiles.timestamp.length >= 1) shifts.push(mornFiles.timestamp[0])
-        if(mornFiles.timestamp.length >= 3) shifts.push(mornFiles.timestamp[2])
+            for (let j = 0; j < mornFiles.timestamp.length; j++) 
+                if( j % 2 == 0)
+                    shifts.push(mornFiles.timestamp[j])
         console.log(shifts);
         return shifts
     }
 
     const getAfternoonShift = (aftFiles) => {
         let shifts = []
-
-        if(aftFiles.timestamp.length >= 2) shifts.push(aftFiles.timestamp[1])
-        if(aftFiles.timestamp.length >= 4) shifts.push(aftFiles.timestamp[3])
-
+        for (let j = 0; j < aftFiles.timestamp.length; j++) 
+            if( j % 2 == 1)
+                shifts.push(aftFiles.timestamp[j])
+        console.log(shifts);
         return shifts
-    }
-
-    const getAdditionalFiles = (otherFiles) => {
-        let files = []
-
-        for (let i = 4; i < otherFiles.timestamp.length; i++) {
-            files.push(otherFiles.timestamp[i])           
-        }
-
-        return files
     }
 
     console.log(orderedDate);
@@ -67,20 +58,22 @@
                     <th>{{ t('table.date') }}</th>
                     <th>{{ t('table.in') }}</th>
                     <th>{{ t('table.out') }}</th>
-                    <th>{{ t('table.other') }}</th>
+                    <th>{{ t('admin.details.incidences') }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="file in orderedDate" class="hover">
                     <td> {{ d(file.date, 'short') }} </td>
                     <td>
-                        <span v-for="(shift, i) in getMorningShift(file)" class="flex flex-col mb-2">{{ shift }}</span>                   
+                        <span v-for="shift in getMorningShift(file)" class="flex flex-col mb-2">{{ shift }}</span>                   
                     </td>  
                     <td>
                         <span v-for="shift of getAfternoonShift(file)" class="flex flex-col mb-2">{{ shift }}</span>         
                     </td> 
                     <td>
-                        <span v-for="shift of getAdditionalFiles(file)" class="flex flex-col mb-2">{{ shift }}</span>         
+                        <div v-for="incidence in incidences" class="flex flex-col mb-2">
+                            <span v-if="incidence.date == file.date" v-html="t(`table.${incidence.subject}`, { minutes: incidence.minutes })"></span>
+                        </div>
                     </td>                                
                 </tr> 
             </tbody>

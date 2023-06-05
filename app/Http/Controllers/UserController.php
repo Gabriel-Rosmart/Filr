@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        /*$timetable = DB::table('schedules as s')
+        $timetable = DB::table('schedules as s')
             ->select('day', 'starts_at', 'ends_at')
             ->join('date_ranges as ranges', 's.date_range_id', '=', 'ranges.id')
             ->join('date_range_user as u_ranges', 'ranges.id', '=', 'u_ranges.id')
@@ -42,27 +42,23 @@ class UserController extends Controller
             ->where('ranges.start_date', '<=', DB::raw('curdate()'))
             ->where('ranges.end_date', '>=', DB::raw('curdate()'))
             //->orderBy('starts_at', 'asc')
-            ->get();*/
+            ->get();
 
-            $timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id')
-                ->join('date_range_user', 'date_range_user.date_range_id', '=', 'schedules.date_range_id')
-                ->where('user_id', $user->id)
-                ->orderBy('starts_at', 'asc')
-                ->orderBy('day', 'asc')
-                ->get();
-
-        $files = File::Where('user_id',$user->id, function ($query) {
-            $query->select('id')->filter(request(['search']));
-        })
+            $files = File::Where('user_id', $user->id)
             ->when(request()->input('date') ?? false, function($query, $date){
-                $query->where('date', $date);
-            })
+                $query->where('date',$date);
+            })                      
+            ->when(request()->input('month') ?? false, function($query, $month){
+                $query->whereMonth('date' , $month);
+            })        
             ->orderBy('date', 'desc')
             ->orderBy('timestamp', 'asc')
             ->paginate(20)
             ->withPath('/user?component=1');
+
+        $filter = request()->only('date','month');    
                 
-        $filter = request()->only('date');
+        $filter = request()->only('date, month');
 
         if (isset($_GET['component'])) {
             $component = (int)$_GET['component'];

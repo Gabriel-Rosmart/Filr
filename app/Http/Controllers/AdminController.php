@@ -18,12 +18,13 @@ use App\Mail\AccountCreated;
 use Illuminate\Http\Request;
 use App\Rules\TimeDoNotOverlap;
 use App\Rules\IsValidPhoneNumber;
+use Dompdf\Dompdf;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
-use function PHPUnit\Framework\isEmpty;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
@@ -186,7 +187,7 @@ class AdminController extends Controller
         //SELECT day, starts_at, ends_at, schedules.date_range_id FROM schedules INNER JOIN date_range_user ON schedules.date_range_id = date_range_user.date_range_id;
         $id = request()->input('id');
         if (!empty($id)) {
-            /*$timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id')
+            $timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id')
                 ->join('date_range_user', 'date_range_user.date_range_id', '=', 'schedules.date_range_id')
                 ->join('date_ranges', 'date_range_user.date_range_id', '=', 'date_ranges.id')
                 ->where('date_ranges.start_date', '<=', DB::raw('curdate()'))
@@ -194,35 +195,29 @@ class AdminController extends Controller
                 ->join('users', 'date_range_user.user_id', '=', 'users.id')
                 ->where('users.id', $id)
                 ->orderBy('starts_at', 'asc')
-                ->get();*/
-            $timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id')
-                ->join('date_range_user', 'date_range_user.date_range_id', '=', 'schedules.date_range_id')
-                ->where('user_id', $id)
-                ->orderBy('starts_at', 'asc')
-                ->orderBy('day', 'asc')
                 ->get();
-
-            $user = User::select('name', 'email', 'dni', 'phone', 'active', 'profile_pic', 'id', 'role_id')
-                ->with(['role' => function ($query) {
+           
+            $user = User::select('name', 'email', 'dni', 'phone', 'active', 'profile_pic', 'id', 'role_id')     
+            ->with(['role' => function ($query) {
                     $query->select('id', 'role_name');
                 }])
                 ->where('id', $id)
                 ->get()
                 ->first();
 
-            $files = File::Where('user_id', $id, function ($query) {
-                $query->select('id')->filter(request(['search']));
-            })
-                ->when(request()->input('date') ?? false, function ($query, $date) {
-                    $query->where('date', $date);
-                })
-                ->orderBy('date', 'desc')
-                ->orderBy('timestamp', 'asc')
-                ->paginate(20)
-                ->withQueryString();
+                $files = File::Where('user_id', $id)
+                    ->when(request()->input('date') ?? false, function($query, $date){
+                        $query->where('date',$date);
+                    })                      
+                    ->when(request()->input('month') ?? false, function($query, $month){
+                        $query->whereMonth('date' , $month);
+                    })        
+                    ->orderBy('date', 'desc')
+                    ->orderBy('timestamp', 'asc')
+                    ->paginate(20)
+                    ->withQueryString();
 
-
-            $filter = request()->only('date');
+                $filter = request()->only('date','month');
 
             return Inertia::render('Admin/UserDetails', [
                 'user' => $user,
@@ -360,24 +355,31 @@ class AdminController extends Controller
 
     public function updateUser(Request $request)
     {
-        $validated = $request->validate(
-            [
-                'id' => ['required'],
-                'name' => ['required'],
-                'dni' => ['required', new IsValidDNI],
-                'email' => ['required', 'email'],
-                'telephone' => ['required', new IsValidPhoneNumber],
-                'schedules' => ['nullable'],
-                'schedules_id' => ['nullable'],
-            ],
-            [
-                'name.required' => trans('rules.name_req'),
-                'dni.required' => trans('rules.dni_req'),
-                'email.required' => trans('rules.email_req'),
-                'telephone.required' => trans('rules.phone_req'),
-                'role.required' => trans('rules.role_req'),
-            ]
-        );
+        $evenArray = new EvenArray();
+        $isTimeString = new IsTimeString();
+        $timeDoNotOverlap = new TimeDoNotOverlap(); 
+        $validated = $request->validate([
+            'id' => ['required'],
+            'name' => ['required'],
+            'dni' => ['required', new IsValidDNI],
+            'email' => ['required', 'email'],
+            'telephone' => ['required', new IsValidPhoneNumber],
+            'schedules' => ['nullable'],
+            'schedules' => ['nullable'],
+            'schedules_id' => ['nullable'],
+            'schedules.monday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.tuesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.wednesday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.thursday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+            'schedules.friday' => [$evenArray, $isTimeString, $timeDoNotOverlap],
+        ],
+        [
+            'name.required' => trans('rules.name_req'),
+            'dni.required' => trans('rules.dni_req'),
+            'email.required' => trans('rules.email_req'),
+            'telephone.required' => trans('rules.phone_req'),
+            'role.required' => trans('rules.role_req'),
+        ]);
 
         $user = User::select('users.id', 'name', 'dni', 'role_id', 'email', 'active', 'profile_pic', 'date_range_id', 'phone')
             ->where('users.id', $validated['id'])
@@ -435,4 +437,88 @@ class AdminController extends Controller
 
         return redirect('/admin/dates?id=' . $user->id);
     }
+
+    public function generateReport(Request $request)
+    {
+
+            $UserData = User::select('*')
+            ->when($request->day ?? $request->month ?? $request->year ?? false, function($query, $date){
+            $query->with([
+                'files' => function($query) use ($date){
+                    $query->when(strlen($date) == 10, function($query) use ($date){
+                        $query->where('date', $date);
+                    })
+                    ->when(strlen($date) == 2, function($query) use ($date){
+                        $query->whereMonth('date', $date);
+                    })
+                    ->when(strlen($date) == 4, function($query) use ($date){
+                        $query->whereYear('date', $date);
+                    })  
+                    ->orderBy('date', 'asc')  
+                    ->orderBy('timestamp', 'asc');                   
+                },
+                'incidences' => function($query) use ($date){
+                    $query->when(strlen($date) == 10, function($query) use ($date){
+                        $query->where('date', $date);
+                    })
+                    ->when(strlen($date) == 2, function($query) use ($date){
+                        $query->whereMonth('date', $date);
+                    })
+                    ->when(strlen($date) == 4, function($query) use ($date){
+                        $query->whereYear('date', $date);
+                    })
+                    ->orderBy('date', 'asc');                       
+                },
+                'role'
+            ]);
+        }, function($query){
+            $query->with(['files','incidences','role']);
+        })
+        ->where('id', request()->input('user_id'))
+        ->get();
+        //return $UserData;
+        //Log::channel('daily')->info('INFO; User with id ' . $request->user_id . ' found: ' . $UserData->name);
+
+        $range = DB::table('date_ranges as r')
+        ->select('r.start_date', 'r.end_date')
+        ->join('date_range_user as r_u', 'r.id', '=', 'r_u.date_range_id')
+        ->where('r_u.user_id', $request->user_id)
+        ->when($request->day ?? $request->month ?? $request->year ?? false, function($query,$date){
+            $query->when(strlen($date) == 10, function($query) use ($date){
+                $query->whereRaw("$date between start_date and end_date");
+            })
+            ->when(strlen($date) == 2, function($query) use ($date){
+                $query->where(DB::raw('MONTH(r.start_date)'), '<=', $date)
+                ->where(DB::raw('MONTH(end_date)'), '>=', $date);
+            })
+            ->when(strlen($date) == 4, function($query) use ($date){
+                $query->where(DB::raw('YEAR(start_date)'), '<=', $date)
+                ->where(DB::raw('YEAR(end_date)'), '>=', $date);
+            });
+        })
+        ->get();
+        $pdf = new Dompdf();
+        $pdf->loadHtml(view('fileReport',[
+            'user' => $UserData[0],
+            'range' => $range[0],
+            'period' => $request->day ?? $request->month ?? $request->year
+        ]));
+        $pdf->setPaper('A4', 'portrait');
+        $pdf->render();
+        $fileName = DIRECTORY_SEPARATOR.'reports'. DIRECTORY_SEPARATOR . date('Ymd').'__'. $UserData[0]->id . '.pdf';
+        Storage::put($fileName, $pdf->output());
+        return $fileName;
+    }
+
+    public function downloadReport(Request $request){      
+        $headers = ['Content-Type: application/pdf'];
+        return Storage::download($request->query('path'), 'test.pdf', $headers);
+    }
+
+    public function deleteReport(Request $request){
+        return Storage::delete($request->query('path'));
+    }
+
+
+         
 }

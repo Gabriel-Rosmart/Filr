@@ -97,8 +97,8 @@
         "employee": "Empleado",
         "date": "Fecha",
         "subject": "Motivo",
-        "late": "Llega <span style='color: red'>{minutes}</span> minutos tarde",
-        "early": "Sale <span style='color: red'>{minutes}</span> minutos antes",
+        "late": "Entrada retrasada por <span style='color: red'>{minutes}</span> minutos",
+        "early": "Salida anticipada por <span style='color: red'>{minutes}</span> minutos",
         "absent": "<span style='color: red'>No vino a trabajar</span>",
         "reqPermit": "Permiso solicitado"
     },

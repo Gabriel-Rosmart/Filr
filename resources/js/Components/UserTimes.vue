@@ -1,6 +1,7 @@
 <script setup>
 /** Component imports */
 import InputForm from "@/Components/InputForm.vue";
+import FormInputError from "@/Shared/Forms/FormInputError.vue";
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n()
@@ -27,7 +28,7 @@ const ids = [];
 
 for (const [key, element] of Object.entries(props.weekend)) {
     console.log(element);
-    if (week[element.date_range_id]) {
+    if (key=='date_range_id'/*week[element.date_range_id]*/) {
         week[element.date_range_id].push(element);
     } else {
         week[element.date_range_id] = [];
@@ -50,6 +51,7 @@ function linkwithform(id) {
         thursday: [null, null, null, null],
         friday: [null, null, null, null]
     }
+    console.log(week);
     if (week[ids[id]]) {
         week[ids[id]].forEach(element => {
             if (element.day == 'monday') {
@@ -110,43 +112,51 @@ function linkwithform(id) {
         }
     }
 }
-
+for (const key in props.form.errors) {
+    console.log(props.form.errors[key])
+}
+console.table(props.form.errors['schedules.monday']);
 console.log(props.dates);
 
 </script>
 
 <template>
-    <div class="flex justify-center">
-        <table class="table w-max">
-            <thead>
-                <tr class="">
-                    <th><select class='bg-transparent input-bordered w-full max-w-xs' v-model="form.schedules_id">
-                            <option v-for="id, index in ids" :key="index" :value="id" v-on:click="linkwithform(index)">{{ id
+    <div class="flex flex-col">
+        <span v-for="error in form.errors" class="block w-full text-center">
+            <FormInputError :message="error" />
+        </span>           
+        <div class="flex justify-center">  
+            <table class="table w-max">
+                <thead>
+                    <tr class="">
+                        <th><select class='bg-transparent input-bordered w-full max-w-xs' v-model="form.schedules_id" @change="linkwithform(this.value)">
+                            <option v-for="id, index in ids" :key="index" :value="id">{{ id
                             }} </option>
                         </select></th>
-                    <th>{{ t('forms.inmorning') }}</th>
-                    <th>{{ t('forms.outmorning') }}</th>
-                    <th>{{ t('forms.innoon') }}</th>
-                    <th>{{ t('forms.outnoon') }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(day, index) in props.form.schedules" :key='index'>
-                    <th>{{ t('days.' + index) }}</th>
-                    <td>
-                        <InputForm type="time" v-model="form.schedules[index][0]" />
-                    </td>
-                    <td>
-                        <InputForm type="time" v-model="form.schedules[index][1]" />
-                    </td>
-                    <td>
-                        <InputForm type="time" v-model="form.schedules[index][2]" />
-                    </td>
-                    <td>
-                        <InputForm type="time" v-model="form.schedules[index][3]" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        <th>{{ t('forms.inmorning') }}</th>
+                        <th>{{ t('forms.outmorning') }}</th>
+                        <th>{{ t('forms.innoon') }}</th>
+                        <th>{{ t('forms.outnoon') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(day, index) in props.form.schedules" :key='index'> 
+                        <th>{{ t('days.' + index) }}</th>
+                        <td>
+                            <InputForm type="time" v-model="form.schedules[index][0]" />
+                        </td>
+                        <td>
+                            <InputForm type="time" v-model="form.schedules[index][1]" />
+                        </td>
+                        <td>
+                            <InputForm type="time" v-model="form.schedules[index][2]" />
+                        </td>
+                        <td>
+                            <InputForm type="time" v-model="form.schedules[index][3]" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>      
     </div>
 </template>

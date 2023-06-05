@@ -9,7 +9,8 @@
     const props = defineProps({
         files: Array,
         filter: Object,
-        url: String
+        url: String,
+        incidences: Array
     })
 </script>
 <template>
@@ -17,11 +18,11 @@
     
     <div class="flex justify-left mb-6 gap-6">
         <FilterFileDate :url="url" :filter = "filter"/>
-        <Pagination v-if="files.data.length > 0" :links="files.links"/>       
-    </div>
+        <Pagination v-if="files.data.length > 0" :links="files.links"/>  
+        <label for="my-modal-2" class="btn btn-primary modal-button">Generar informe de fichajes</label>     </div>
     <div v-if="files.data.length > 0">    
         <div class="flex justify-center mb-10">
-            <FilesTable class="w-full mx-4 mt-2" :files="files.data" />
+            <FilesTable class="w-full mx-4 mt-2" :files="files.data" :incidences="incidences"/>
         </div>
     </div>
     <div class="overflow-x-auto w-full" v-else>
@@ -36,4 +37,7 @@
             </div>
         </div>
     </div>
+    
+    
+    
 </template>
