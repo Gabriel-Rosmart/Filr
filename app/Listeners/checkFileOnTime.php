@@ -50,63 +50,119 @@ class checkFileOnTime
         {
             $start  = $timetable[0]->starts_at;
             $end    = $timetable[0]->ends_at;
-            if (count($timetable) > 1)
-            {
-                $start2  = $timetable[1]->starts_at;
-                $end2    = $timetable[1]->ends_at;
-            }
-
             $start = new DateTime($start);
             $end = new DateTime($end);
             $time = new DateTime($file['timestamp']);
 
+            if (count($timetable) > 1)
+            {
+                $start2  = $timetable[1]->starts_at;
+                $end2    = $timetable[1]->ends_at;
+                $start2 = new DateTime($start2);
+                $end2 = new DateTime($end2);
+
+                $times_array = array($start, $end, $start2, $end2, $time);
+            }
+            else
+                $times_array = array($start, $end, $time);
+
+            sort($times_array);
+            // dd($times_array);
+
+            switch (array_search($time, $times_array))
+            {
+                case 0:
+                    break;
+                case 1:
+                    if (count($today_files) == 1)
+                    {
+                        $diff = $start->diff($time)->format('%i') + $start->diff($time)->format('%h') * 60;
+                        if ($diff > 5)
+                        {
+                            DB::table('incidences')->insert([
+                                'user_id' => $file['user_id'],
+                                'date' => date('Y-m-d'),
+                                'subject' => 'late',
+                                'minutes' => $diff,
+                            ]);
+                        }   
+                    }
+                    if (count($today_files) == 2)
+                    {
+                        $diff = $end->diff($time)->format('%i') + $end->diff($time)->format('%h') * 60;
+                        if ($diff > 5)
+                        {
+                            DB::table('incidences')->insert([
+                                'user_id' => $file['user_id'],
+                                'date' => date('Y-m-d'),
+                                'subject' => 'early',
+                                'minutes' => $diff,
+                            ]);
+                        }   
+                    }
+                    break;
+                case 2:
+                    if (count($today_files) == 4 && isset($end2))
+                    {
+                        $diff = $end2->diff($time)->format('%i') + $end2->diff($time)->format('%h') * 60;
+                        if ($diff > 5)
+                        {
+                            DB::table('incidences')->insert([
+                                'user_id' => $file['user_id'],
+                                'date' => date('Y-m-d'),
+                                'subject' => 'early',
+                                'minutes' => $diff,
+                            ]);
+                        }   
+                    }
+                    break;
+                case 3:
+                    if (count($today_files) == 3 || count($today_files) == 1 && isset($start2))
+                    {
+                        $diff = $start2->diff($time)->format('%i') + $start2->diff($time)->format('%h') * 60;
+                        if ($diff > 5)
+                        {
+                            DB::table('incidences')->insert([
+                                'user_id' => $file['user_id'],
+                                'date' => date('Y-m-d'),
+                                'subject' => 'late',
+                                'minutes' => $diff,
+                            ]);
+                        }   
+                    }
+                    if (count($today_files) == 4 || count($today_files) == 2 && isset($end2))
+                    {
+                        $diff = $end2->diff($time)->format('%i') + $end2->diff($time)->format('%h') * 60;
+                        if ($diff > 5)
+                        {
+                            DB::table('incidences')->insert([
+                                'user_id' => $file['user_id'],
+                                'date' => date('Y-m-d'),
+                                'subject' => 'early',
+                                'minutes' => $diff,
+                            ]);
+                        }   
+                    }
+                    break;
+                case 4:
+                    if (count($today_files) == 3 || count($today_files) == 1 && isset($start2))
+                    {
+                        $diff = $start2->diff($time)->format('%i') + $start2->diff($time)->format('%h') * 60;
+                        if ($diff > 5)
+                        {
+                            DB::table('incidences')->insert([
+                                'user_id' => $file['user_id'],
+                                'date' => date('Y-m-d'),
+                                'subject' => 'late',
+                                'minutes' => $diff,
+                            ]);
+                        }   
+                    }
+                    break;
+            }
+
+
             //dd(date('Y-m-d || h:i:s', $start), date('Y-m-d || h:i:s', $end), date('Y-m-d || h:i:s', $time));
-
-            if (count($today_files) == 1 || count($today_files) == 3)
-            {
-                if (count($today_files) == 3)
-                {
-                    if (isset($start2) && $start2 != null)
-                        $start = $start2;
-                    else
-                        return;
-                }
-
-                if ($start != null && $time > $start && $start->diff($time)->format('%i') > 5)
-                {
-                    DB::table('incidences')->insert([
-                        'user_id' => $file['user_id'],
-                        'date' => date('Y-m-d'),
-                        'subject' => 'late',
-                        'minutes' => $start->diff($time)->format('%i'),
-                    ]);
-                }
-            }
-
-            if (count($today_files) == 2 || count($today_files) == 4)
-            {
-                if (count($today_files) == 4)
-                {
-                    if (isset($end2) && $end2 != null)
-                        $end = $end2;
-                    else
-                        return;
-                    $end = $end2;
-                }
-
-                if ($end != null && $time < $end && $end->diff($time)->format('%i') > 5)
-                {
-                    $hours = $end->diff($time, true)->format('%h');
-                    $min = $end->diff($time, true)->format('%i');
-                    $total = $hours * 60 + $min;
-                    DB::table('incidences')->insert([
-                        'user_id' => $file['user_id'],
-                        'date' => date('Y-m-d'),
-                        'subject' => 'early',
-                        'minutes' => $total,
-                    ]);
-                }
-            }
         }
     }
 }
