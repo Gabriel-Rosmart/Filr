@@ -52,7 +52,9 @@
             "prev": "Anterior",
             "send": "Enviar",
             "save": "Gardar",
-            "cancel": "Cancelar"
+            "cancel": "Cancelar",
+            "add": "Engadir",
+            "editSchedule": "Editar Horario"
         },
         "details": {
             "noCorrespondences": "Non se atoparon coincidencias",

@@ -52,7 +52,9 @@
             "prev": "Previous",
             "send": "Send",
             "save": "Save",
-            "cancel": "Cancel"
+            "cancel": "Cancel",
+            "add": "Add",
+            "editSchedule": "Edit schedule"
         },
         "details": {
             "noCorrespondences": "No matches founds",

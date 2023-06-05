@@ -63,8 +63,8 @@ if(form.errors.dates){
             <table class="table w-full">
                 <thead>
                     <th></th>
-                    <th>start date</th>
-                    <th>fecha fin</th>
+                    <th>{{ t('permits.startDate') }}</th>
+                    <th>{{ t('permits.endDate') }}</th>
                     <th></th>
                     <th></th>
                 </thead>
@@ -75,7 +75,7 @@ if(form.errors.dates){
                         </td>
                         <td><input form="formNew" class="bg-transparent input-bordered " type="date" v-model="n.start_date"></td>
                         <td><input form="formNew" class="bg-transparent input-bordered " type="date" v-model="n.end_date"></td>
-                        <td><button form="formNew" class="btn btn-outline btn-info " @click="submit(n.id, n.date_range_id, n.start_date, n.end_date)">Añadir</button></td>
+                        <td><button form="formNew" class="btn btn-outline btn-info " @click="submit(n.id, n.date_range_id, n.start_date, n.end_date)">{{t('admin.buttons.add')}}</button></td>
                         <td></td>
                     </tr>
                     
@@ -84,7 +84,7 @@ if(form.errors.dates){
                         <td><input :form="'form'+date.id" class="bg-transparent input-bordered" type="date" v-model="date.start_date"></td>
                         <td><input :form="'form'+date.id" class="bg-transparent input-bordered" type="date" v-model="date.end_date"></td>
                         <td><button :form="'form'+date.id" class="btn btn-outline btn-success " @click="submit(date.id, date.date_range_id, date.start_date, date.end_date)">{{ t('admin.buttons.save') }}</button></td>
-                        <td><Link class="btn btn-outline" as="button" :href="'/admin/edit?id=' + user.id + '&range=' + date.id">Editar horario</Link></td>
+                        <td><Link class="btn btn-outline" as="button" :href="'/admin/edit?id=' + user.id + '&range=' + date.id">{{t('admin.buttons.editSchedule')}}</Link></td>
                     </tr>                   
                 </tbody>
             </table>
