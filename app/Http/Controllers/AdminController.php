@@ -451,18 +451,17 @@ class AdminController extends Controller
         $pdf->setPaper('A4', 'portrait');
         $pdf->render();
         $fileName = DIRECTORY_SEPARATOR.'reports'. DIRECTORY_SEPARATOR . date('Ymd').'__'. $UserData[0]->id . '.pdf';
-        //$pdf->stream($fileName, ['Attachment' => 0]);
         Storage::put($fileName, $pdf->output());
         return $fileName;
     }
 
-    public function downloadReport(Request $request){
-        
-            $headers = ['Content-Type: application/pdf'];
-            return Storage::download($request->query('path'), 'test.pdf', $headers);
-        
-         
-        
+    public function downloadReport(Request $request){      
+        $headers = ['Content-Type: application/pdf'];
+        return Storage::download($request->query('path'), 'test.pdf', $headers);
+    }
+
+    public function deleteReport(Request $request){
+        return Storage::delete($request->query('path'));
     }
 
 

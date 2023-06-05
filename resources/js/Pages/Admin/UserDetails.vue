@@ -42,6 +42,7 @@ const fileIn = (id) => {
 
 const createFileReport = () => {
     let path = ''
+    let name = ''
     axios.post('/admin/fileReport', {
         user_id: props.user.id,
         year: props.filter.year,
@@ -51,37 +52,27 @@ const createFileReport = () => {
     .then(function (response){ 
         console.log(response.data);
         path = response.data
+        if (path.indexOf('\\') != -1) {
+            name = path.split('\\')[2]
+        } else {
+            name = path.split('/')[2]
+        }       
+        console.log(name);
         axios({
             url: '/admin/getReport?path=' + path,
             method: 'GET',
             responseType: 'blob'
         }).then((response)=>{
-            console.log(response);
             const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "download.pdf");
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
- 
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", name);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            axios.get('/admin/deleteReport?path='+path)
         })
         .catch(function(error){console.log(error);})
-        //window.open(location.origin + '/storage/app/reports.pdf')
-        /*const fileWindow = window.open();
-        const url = 'data:application/pdf;base64,' + btoa(
-            new Uint8Array(response.data)
-            .reduce((data, byte) => data + String.fromCharCode(byte), '')
-        );
-        fileWindow.document.write(
-            '<title>Visualisation</title>' +
-            '<body style="overflow: hidden; margin: 0">' +
-            '<object width="100%" width="-webkit-fill-available" height="100%" height="-webkit-fill-available" type="application/pdf" data="' + encodeURI(url) + '"></object>' +
-            '</body>'
-        );*/
-        /*let pdf = open(); 
-        pdf.document.open("application/pdf")
-        pdf.document.write(response.data)*/
     })
     .catch(function (error){ console.log(error); })
 
