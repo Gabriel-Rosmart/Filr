@@ -21,5 +21,8 @@ return [
     'nDays_req' => 'Debe elegirse el número de días',
     'day_req' => 'Debe elegirse el día',
     'type_req' => 'Debe elegirse el tipo de permiso',
-    'doctype_req' => 'Debe elegirse el tipo de documentación a aportar'
+    'doctype_req' => 'Debe elegirse el tipo de documentación a aportar',
+    'dates_req' => 'Es obligatorio escribir la fecha de inicio y de fin',
+    'date_start_invalid' => 'La fecha de inicio no puede ser menor que la fecha final del anterior al anterior rango',
+    'date_end_invalid' => 'La fecha de fin no puede ser mayor que la fecha de inicio del siguiente rango'
 ];

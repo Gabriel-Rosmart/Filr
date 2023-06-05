@@ -21,5 +21,9 @@ return [
     'nDays_req' => 'Debe elixirse número de días',
     'day_req' => 'Debe elixirse o día',
     'type_req' => 'Debe elixirse o tipo de permiso',
-    'doctype_req' => 'Debe elixirse o tipo de documentación a aportar'
+    'doctype_req' => 'Debe elixirse o tipo de documentación a aportar',
+    'date_order' => 'A data fin non pode ser anterior á data de comezo',
+    'dates_req' => 'É obligatorio escribir a data de comezo e de fin',
+    'date_start_invalid' => 'A data de comezo non pode ser menor á data final do anterior rango',
+    'date_end_invalid' => 'A data de fin non pode ser maior á data de inicio do seguinte rango'
 ];

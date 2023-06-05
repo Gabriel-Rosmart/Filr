@@ -1,6 +1,7 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
+import FormInputError from '@/Shared/Forms/FormInputError.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
@@ -10,7 +11,7 @@ const { t } = useI18n()
 
 const props = defineProps({
     user: Object,
-    dates: Object
+    dates: Object,
 })
 
 const n = {
@@ -20,7 +21,7 @@ const n = {
     end_date: null
 }
 
-var form = useForm({
+const form = useForm({
     id: null,
     user_id: props.user.id,
     dates:{
@@ -53,7 +54,8 @@ console.log(form);
             :pages="[['Admin', '/admin'], [t('breadcrumbs.manage'), '/admin/manage'], [user.name, '/admin/details?id=' + user.id], [t('admin.buttons.dates'), 'Dates']]" />
         <div class="ml-12">
             <form @submit.prevent="" v-for="date in dates">
-                <div class="grid items-center grid-cols-2 w-1/2 mt-12">
+                <FormInputError class="mt-12" :message="form.errors.dates"/>
+                <div class="grid items-center grid-cols-2 w-1/2 mt-4">
                     <label for="id">Id</label>
                     <p class="m-2">{{ date.date_range_id }}</p>
                     <label for="start_date">Start Date</label>
@@ -64,6 +66,7 @@ console.log(form);
                 </div>
             </form>
             <form @submit.prevent="">
+                <!-- <FormInputError :message="form.errors.dates"/> -->
                 <div class="grid items-center grid-cols-2 w-1/2 mt-12">
                     <label for="id">Id</label>
                     <input class="bg-transparent input-bordered w-full max-w-xs m-2" type="text" disabled placeholder="New">

@@ -15,9 +15,11 @@ use App\Models\Incidence;
 use App\Rules\IsValidDNI;
 use App\Rules\IsTimeString;
 use App\Mail\AccountCreated;
+use App\Rules\DatesDontOverlap;
 use Illuminate\Http\Request;
 use App\Rules\TimeDoNotOverlap;
 use App\Rules\IsValidPhoneNumber;
+use App\Rules\RangesDontOverlap;
 use Dompdf\Dompdf;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\DB;
@@ -417,11 +419,17 @@ class AdminController extends Controller
 
     public function addDateRange(Request $request)
     {
+        $datesDontOverlap = new DatesDontOverlap();
+        $rangesDontOverlap = new RangesDontOverlap($request->user_id, $request->id);
+
         $validated = $request->validate(
             [
                 'id' => ['nullable'],
                 'user_id' => ['required'],
-                'dates' => ['required'],
+                'dates' => ['required', $datesDontOverlap, $rangesDontOverlap],
+            ],
+            [
+                'dates.required' => trans('dates_req')
             ]
         );
 

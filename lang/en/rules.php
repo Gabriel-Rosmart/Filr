@@ -21,5 +21,9 @@ return [
     'nDays_req' => 'Days select is compulsory',
     'day_req' => 'Day must be selected',
     'type_req' => 'Type of permit must be selected',
-    'doctype_req' => 'Type of documentation attached must be selected'
+    'doctype_req' => 'Type of documentation attached must be selected',
+    'dates_req' => 'Start date and end date are compulsory',
+    'date_start_invalid' => 'The start date cannot be less than the end date of the previous range',
+    'date_end_invalid' => 'The end date may not be greater than the start date of the following range'
+
 ];
