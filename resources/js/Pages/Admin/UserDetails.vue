@@ -116,7 +116,7 @@ const createFileReport = () => {
                 </div>
                 <div>
                     <component :is="tabs[currentComponentIndex][0]" :user="user" :timetable="timetable" :permits="permits" 
-                        :incidences="incidences" :files="files" :filter="filter" :url="url"/>
+                        :incidences="incidences" :files="files" :filter="filter" :isAdmin="true" :url="url"/>
                 </div>
             </div>
         </div>
@@ -124,7 +124,7 @@ const createFileReport = () => {
         <input type="checkbox" id="my-modal-2" class="modal-toggle"> 
         <div class="modal">
             <div class="modal-box">
-                <p>Se generará un informe con los siguientes del usuario {{ user.name }} con los siguientes datos: </p>
+                <p>{{ t('file.filterSum') }}</p>
                 <ul>
                     <li v-if="filter.year">Año : </li>
                     <li v-if="filter.month">Mes : {{ filter.month }}</li>
@@ -132,8 +132,8 @@ const createFileReport = () => {
                 </ul> 
                 <div class="modal-action">
                     <a href=""></a>
-                    <label for="my-modal-2" class="btn btn-primary" @click="createFileReport()">Aceptar</label> 
-                    <label for="my-modal-2" class="btn">Cancelar</label>
+                    <label for="my-modal-2" class="btn btn-primary" @click="createFileReport()">{{ t('admin.buttons.accept') }}</label> 
+                    <label for="my-modal-2" class="btn">{{ t('admin.buttons.cancel') }}</label>
                 </div>
             </div>
         </div>

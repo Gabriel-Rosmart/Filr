@@ -210,5 +210,9 @@
         "change": "Cambiar",
         "attach": "Añadir",
         "download": "Descargar Permiso"
+    },
+    "file":{
+        "report" : "Generar infore de fichajes",
+        "filterSum" : "Se creará un informe de fichajes usando la siguiente información: "
     }
 }

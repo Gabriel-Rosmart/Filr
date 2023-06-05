@@ -210,5 +210,9 @@
         "change": "Change",
         "attach": "Attach",
         "download": "Download Permit"
+    },
+    "file":{
+        "report" : "Create file report",
+        "filterSum" : "A file report is going to be created with the following data"
     }
 }

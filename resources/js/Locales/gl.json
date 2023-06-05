@@ -210,5 +210,9 @@
         "change": "Cambiar",
         "attach": "Engadir",
         "download": "Descargar Permiso"
+    },
+    "file":{
+        "report" : "Xerar informe de fichaxes",
+        "filterSum" : "Crearase un informe usando os seguintes datos:"
     }
 }
