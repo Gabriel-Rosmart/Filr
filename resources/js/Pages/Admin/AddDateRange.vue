@@ -6,6 +6,7 @@ import { Head } from '@inertiajs/inertia-vue3';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { Link } from '@inertiajs/inertia-vue3'
 
 const { t } = useI18n()
 
@@ -43,6 +44,11 @@ console.log(props.user);
 console.log(props.dates);
 console.log(form);
 
+if(form.errors.dates){
+    let msg = form.errors.dates.split('/')[0]
+    let errorID = form.errors.dates.split('/')[1]
+    console.log(msg + errorID);
+}
 
 </script>
 
@@ -52,9 +58,10 @@ console.log(form);
         <Head title="Edit User" />
         <Breadcrumbs class="ml-5 mt-6"
             :pages="[['Admin', '/admin'], [t('breadcrumbs.manage'), '/admin/manage'], [user.name, '/admin/details?id=' + user.id], [t('admin.buttons.dates'), 'Dates']]" />
-        
+        <div class="container mt-10 mx-10">
+            <FormInputError :message="form.errors.dates"/>
             <div class="flex justify-center mb-10">
-            <table class="table w-full mx-10 mt-10">
+            <table class="table w-full">
                 <thead>
                     <th></th>
                     <th>start date</th>
@@ -62,25 +69,28 @@ console.log(form);
                     <th></th>
                     <th></th>
                 </thead>
-                <tbody>
-                   
-
+                <tbody>               
                     <tr>    
-                        <td><form id="formNew" @submit.prevent=""></form></td>
-
-                        <td><input form="formNew" class="bg-transparent input-bordered w-full max-w-xs m-2" type="date" v-model="n.start_date"></td>
-                        <td><input form="formNew" class="bg-transparent input-bordered w-full max-w-xs m-2" type="date" v-model="n.end_date"></td>
-                        <td><button form="formNew" class="btn btn-outline btn-info m-auto w-1/2" @click="submit(n.id, n.date_range_id, n.start_date, n.end_date)">Añadir</button></td>
+                        <td>
+                            <form id="formNew" @submit.prevent=""></form>
+                        </td>
+                        <td><input form="formNew" class="bg-transparent input-bordered " type="date" v-model="n.start_date"></td>
+                        <td><input form="formNew" class="bg-transparent input-bordered " type="date" v-model="n.end_date"></td>
+                        <td><button form="formNew" class="btn btn-outline btn-info " @click="submit(n.id, n.date_range_id, n.start_date, n.end_date)">Añadir</button></td>
+                        <td></td>
                     </tr>
                     
                     <tr v-for="date in dates">
                         <td><form :id="'form'+date.id" @submit.prevent=""></form></td>
-                        <td><input :form="'form'+date.id" class="bg-transparent input-bordered w-full max-w-xs m-2" type="date" v-model="date.start_date"></td>
-                        <td><input :form="'form'+date.id" class="bg-transparent input-bordered w-full max-w-xs m-2" type="date" v-model="date.end_date"></td>
-                        <td><button :form="'form'+date.id" class="btn btn-outline btn-success m-auto w-1/2" @click="submit(date.id, date.date_range_id, date.start_date, date.end_date)">{{ t('admin.buttons.save') }}</button></td>
+                        <td><input :form="'form'+date.id" class="bg-transparent input-bordered" type="date" v-model="date.start_date"></td>
+                        <td><input :form="'form'+date.id" class="bg-transparent input-bordered" type="date" v-model="date.end_date"></td>
+                        <td><button :form="'form'+date.id" class="btn btn-outline btn-success " @click="submit(date.id, date.date_range_id, date.start_date, date.end_date)">{{ t('admin.buttons.save') }}</button></td>
+                        <td><Link class="btn btn-outline" as="button" :href="'/admin/edit?id=' + user.id">Editar horario</Link></td>
                     </tr>                   
                 </tbody>
             </table>
         </div>
+    </div>
+            
             
 </AdminLayout></template>

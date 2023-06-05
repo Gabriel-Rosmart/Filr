@@ -37,9 +37,9 @@ class RangesDontOverlap implements InvokableRule
         if($this->rangeId != null){   
             for ($i = 0; $i < count($range); $i++) { 
                 if($range[$i]->id == $this->rangeId){
-                    if($value['start_date'] < $range[$i-1]->end_date){
+                    if(isset($range[$i - 1]) && $value['start_date'] < $range[$i-1]->end_date){
                         $fail(trans('rules.date_start_invalid'));
-                    } else if($value['end_date'] > $range[$i + 1]->start_date){
+                    } else if(isset($range[$i + 1]) && $value['end_date'] > $range[$i + 1]->start_date){
                         $fail(trans('rules.date_end_invalid'));
                     }
                 }
