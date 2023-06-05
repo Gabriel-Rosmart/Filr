@@ -28,22 +28,24 @@ const ids = [];
 
 for (const [key, element] of Object.entries(props.weekend)) {
     console.log(element);
-    if (key=='date_range_id'/*week[element.date_range_id]*/) {
+    if (week[element.date_range_id]) {
         week[element.date_range_id].push(element);
     } else {
         week[element.date_range_id] = [];
         week[element.date_range_id].push(element);
     }
 }
+
 props.dates.forEach(element => {
     console.log(element);
     ids.push(element.id);
 });
 
-console.log(week);
+console.table(week);
 console.log(ids);
 
-function linkwithform(id) {
+function linkwithform(event) {
+    let id = event.target.value
     props.form.schedules = {
         monday: [null, null, null, null],
         tuesday: [null, null, null, null],
@@ -51,9 +53,8 @@ function linkwithform(id) {
         thursday: [null, null, null, null],
         friday: [null, null, null, null]
     }
-    console.log(week);
-    if (week[ids[id]]) {
-        week[ids[id]].forEach(element => {
+    if (week[id]) {
+        week[id].forEach(element => {
             if (element.day == 'monday') {
                 if (props.form.schedules.monday[0] == null) {
                     props.form.schedules.monday[0] = removeSeconds(element.starts_at);
@@ -129,8 +130,8 @@ console.log(props.dates);
             <table class="table w-max">
                 <thead>
                     <tr class="">
-                        <th><select class='bg-transparent input-bordered w-full max-w-xs' v-model="form.schedules_id" @change="linkwithform(this.value)">
-                            <option v-for="id, index in ids" :key="index" :value="id">{{ id
+                        <th><select class='bg-transparent input-bordered w-full max-w-xs' @change="linkwithform($event)" v-model="form.schedules_id" >
+                            <option v-for="id, index in ids" :key="index" :value="id" >{{ id
                             }} </option>
                         </select></th>
                         <th>{{ t('forms.inmorning') }}</th>

@@ -429,9 +429,7 @@ class AdminController extends Controller
             ->where('users.id', $validated['user_id'])
             ->join('date_range_user', 'date_range_user.user_id', '=', 'users.id')
             ->get()
-            ->first();;
-
-        echo $user;
+            ->first();
 
         Helper::updateUserDates($validated, $user);
 
