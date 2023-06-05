@@ -12,7 +12,8 @@ const props = defineProps({
     user: Object,
     timetable: Object,
     isAdmin: Number,
-    dates: Object
+    dates: Object,
+    range : Number
 })
 
 console.log(props.dates);
@@ -25,7 +26,7 @@ console.log(props.dates);
         <Breadcrumbs class="ml-5 mt-6"
             :pages="[['Admin', '/admin'], [t('breadcrumbs.manage'), '/admin/manage'],[props.user.name, '/admin/details?id=' + props.user.id],[t('breadcrumbs.edit'), '/admin/edit']]" />
         <div class="flex items-center mt-8">
-            <FormEditUser :user="user" :timetable="timetable" :isAdmin="isAdmin" :dates="dates"/>
+            <FormEditUser :user="user" :timetable="timetable" :isAdmin="isAdmin" :dates="dates" :range="range"/>
         </div>
     </AdminLayout>
 </template>

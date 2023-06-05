@@ -8,7 +8,8 @@ const { t } = useI18n()
 const props = defineProps({
     weekend: Object,
     form: Object,
-    dates: Object
+    dates: Object,
+    range: Object
 })
 function removeSeconds(time) {
     if (time != null) {
@@ -20,6 +21,8 @@ function removeSeconds(time) {
         return '00:00';
     }
 }
+
+let rangeSelect = props.range
 
 console.log(props.weekend);
 
@@ -41,7 +44,7 @@ props.dates.forEach(element => {
     ids.push(element.id);
 });
 
-console.table(week);
+console.table(props.dates);
 console.log(ids);
 
 function linkwithform(event) {
@@ -112,12 +115,21 @@ function linkwithform(event) {
             }
         }
     }
+
 }
 for (const key in props.form.errors) {
     console.log(props.form.errors[key])
 }
 console.table(props.form.errors['schedules.monday']);
 console.log(props.dates);
+
+function getDates(id) {
+    for (let i = 0; i < props.dates.length; i++) {
+        if(props.dates[i].id == id){
+            return props.dates[i].start_date + ' / ' + props.dates[i].end_date
+        }
+    }
+}
 
 </script>
 
@@ -126,14 +138,17 @@ console.log(props.dates);
         <span v-for="error in form.errors" class="block w-full text-center">
             <FormInputError :message="error" />
         </span>           
-        <div class="flex justify-center">  
+        <select class='bg-transparent input-bordered w-full max-w-xs mb-4' @change="linkwithform($event)" v-model="form.schedules_id" >
+            <option selected value="" >Rangos de fechas del usuario</option>
+            <option v-for="id, index in ids" :key="index" :value="id" >
+                {{ getDates(id)}} 
+            </option>
+        </select>  
+        <div class="flex justify-center">
             <table class="table w-max">
                 <thead>
                     <tr class="">
-                        <th><select class='bg-transparent input-bordered w-full max-w-xs' @change="linkwithform($event)" v-model="form.schedules_id" >
-                            <option v-for="id, index in ids" :key="index" :value="id" >{{ id
-                            }} </option>
-                        </select></th>
+                        <th></th>
                         <th>{{ t('forms.inmorning') }}</th>
                         <th>{{ t('forms.outmorning') }}</th>
                         <th>{{ t('forms.innoon') }}</th>

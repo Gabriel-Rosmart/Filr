@@ -12,7 +12,8 @@ const props = defineProps({
     user: Object,
     timetable: Object,
     isAdmin: Number,
-    dates: Object
+    dates: Object,
+    range: Number
 })
 
 var form = useForm({
@@ -30,6 +31,8 @@ var form = useForm({
     },
     schedules_id: null,
 });
+
+props.range != null ? form.schedules_id = Number(props.range) : form.schedules_id = null
 
 function validate(object) {
     var regex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
@@ -78,7 +81,7 @@ const submit = () => {
         <form @submit.prevent="" class="w-full pr-10">
             <div class="grid grid-cols-2 w-auto">
                 <UserData :user="user" :form="form" :isAdmin="isAdmin" />
-                <UserTimes :weekend="timetable" :form="form" :dates="dates"/>
+                <UserTimes :weekend="timetable" :form="form" :dates="dates" :range="range"/>
                 <div class="flex justify-center mt-8">
                     <Link as="button" :href="'/admin/details?id='+props.user.id" class="btn btn-outline btn-error mr-4">
                     {{ t('admin.buttons.cancel') }}

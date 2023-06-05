@@ -242,6 +242,7 @@ class AdminController extends Controller
     {
         //SELECT day, starts_at, ends_at, schedules.date_range_id FROM schedules INNER JOIN date_range_user ON schedules.date_range_id = date_range_user.date_range_id;
         $id = request()->input('id');
+        $range = request()->input('range');
         if (!empty($id)) {
             $timetable = Schedule::select('day', 'starts_at', 'ends_at', 'schedules.date_range_id')
                 ->join('date_range_user', 'date_range_user.date_range_id', '=', 'schedules.date_range_id')
@@ -265,7 +266,8 @@ class AdminController extends Controller
                 'user' => $user,
                 'timetable' => $timetable,
                 'dates' => $dates,
-                'isAdmin' => Auth::user()->is_admin
+                'isAdmin' => Auth::user()->is_admin,
+                'range' => $range
             ]);
         } else
             return redirect('/admin');

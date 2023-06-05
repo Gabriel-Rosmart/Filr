@@ -47,7 +47,6 @@ console.log(form);
 if(form.errors.dates){
     let msg = form.errors.dates.split('/')[0]
     let errorID = form.errors.dates.split('/')[1]
-    console.log(msg + errorID);
 }
 
 </script>
@@ -85,7 +84,7 @@ if(form.errors.dates){
                         <td><input :form="'form'+date.id" class="bg-transparent input-bordered" type="date" v-model="date.start_date"></td>
                         <td><input :form="'form'+date.id" class="bg-transparent input-bordered" type="date" v-model="date.end_date"></td>
                         <td><button :form="'form'+date.id" class="btn btn-outline btn-success " @click="submit(date.id, date.date_range_id, date.start_date, date.end_date)">{{ t('admin.buttons.save') }}</button></td>
-                        <td><Link class="btn btn-outline" as="button" :href="'/admin/edit?id=' + user.id">Editar horario</Link></td>
+                        <td><Link class="btn btn-outline" as="button" :href="'/admin/edit?id=' + user.id + '&range=' + date.id">Editar horario</Link></td>
                     </tr>                   
                 </tbody>
             </table>
