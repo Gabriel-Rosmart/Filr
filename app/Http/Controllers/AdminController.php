@@ -404,6 +404,10 @@ class AdminController extends Controller
         return redirect('/admin/edit?id=' . $validated['id']);
     }
 
+    /**
+     * Retrieve date ranges from specific user
+     * @return  \Illuminate\Http\Response
+     */
     public function getDates()
     {
         $id = request()->input('id');
@@ -413,10 +417,12 @@ class AdminController extends Controller
                 ->where('date_range_user.user_id', $id)
                 ->orderBy('start_date', 'asc')
                 ->get();
+
             $user = User::select('id', 'name', 'dni', 'phone', 'role_id', 'email', 'active', 'profile_pic')
                 ->where('id', $id)
                 ->get()
                 ->first();
+
             return Inertia::render('Admin/AddDateRange', [
                 'dates' => $dates,
                 'user' => $user,
@@ -427,8 +433,14 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Create new date range
+     * @param   Request  $request  New range data
+     * @return  \Illuminate\Http\Response
+     */
     public function addDateRange(Request $request)
     {
+        // * Use Rules to validate dates
         $datesDontOverlap = new DatesDontOverlap();
         $rangesDontOverlap = new RangesDontOverlap($request->user_id, $request->id);
 
@@ -454,10 +466,14 @@ class AdminController extends Controller
         return redirect('/admin/dates?id=' . $user->id);
     }
 
+    /**
+     * Create a PDF file with data from filters
+     * @param   Request $request    Data needed to create the pdf     *
+     * @return  String  $fileName   Name of the created file
+     */
     public function generateReport(Request $request)
-    {
-            
-            $UserData = User::select('*')
+    {          
+        $UserData = User::select('*')
             ->when($request->day ?? $request->month ?? $request->year ?? false, function($query, $date){
             $query->with([
                 'files' => function($query) use ($date){
@@ -492,8 +508,6 @@ class AdminController extends Controller
         })
         ->where('id', request()->input('user_id'))
         ->get();
-        //return $UserData;
-        //Log::channel('daily')->info('INFO; User with id ' . $request->user_id . ' found: ' . $UserData->name);
         
         $range = DB::table('date_ranges', 'r')
         ->select('r.start_date', 'r.end_date')
@@ -515,7 +529,9 @@ class AdminController extends Controller
         }, function($query){
             $query->where('r.start_date', '<', DB::raw('CURDATE()'));
         })
-        ->get();
+        ->get(); 
+
+        // * PDF Generate
         $pdf = new Dompdf();
         $pdf->loadHtml(view('fileReport',[
             'user' => $UserData[0],
@@ -525,15 +541,26 @@ class AdminController extends Controller
         $pdf->setPaper('A4', 'portrait');
         $pdf->render();
         $fileName = DIRECTORY_SEPARATOR.'reports'. DIRECTORY_SEPARATOR . date('Ymd').'__'. $UserData[0]->id . '.pdf';
+        
         Storage::put($fileName, $pdf->output());
         return $fileName;
     }
 
+    /**
+     * Automatically download the report
+     * @param   Request $request    Data to find the file    
+     * @return  Storage             Download file
+     */
     public function downloadReport(Request $request){      
         $headers = ['Content-Type: application/pdf'];
         return Storage::download($request->query('path'), 'test.pdf', $headers);
     }
 
+    /**
+     * Automatically delete the report
+     * @param   Request  $request   Data to find the file
+     * @return  Storage             Delete file
+     */
     public function deleteReport(Request $request){
         return Storage::delete($request->query('path'));
     }

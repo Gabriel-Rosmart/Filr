@@ -8,7 +8,6 @@ class DatesDontOverlap implements InvokableRule
 {
     /**
      * Ensuring that dates in date_ranges don't overlap
-     *
      * @return void
      */
     public function __invoke($attribute, $value, $fail)
