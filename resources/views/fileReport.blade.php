@@ -99,7 +99,12 @@ if(!function_exists('exitFiles')){
                 </td>
             </tr>
         </table>
-        <p>Franja entre {{ $range->start_date }} a {{ $range->end_date }}</p>
+        <div>
+            <p><b>Franjas comprendidas:</b></p>
+            @foreach ($range as $rng)
+                <p>{{ $rng->start_date }} a {{ $rng->end_date }}</p>
+            @endforeach
+        </div>
        </div>
 
        <br>

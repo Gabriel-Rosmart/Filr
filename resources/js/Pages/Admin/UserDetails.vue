@@ -48,7 +48,7 @@ const createFileReport = () => {
         user_id: props.user.id,
         year: props.filter.year,
         month: props.filter.month,
-        day: props.filter.day,
+        day: props.filter.date,
     })
     .then(function (response){ 
         console.log(response.data);
@@ -128,7 +128,7 @@ const createFileReport = () => {
                 <ul>
                     <li v-if="filter.year">Año : </li>
                     <li v-if="filter.month">Mes : {{ filter.month }}</li>
-                    <li v-if="filter.day">Día : {{ filter.day }}</li>
+                    <li v-if="filter.date">Día : {{ filter.date }}</li>
                 </ul> 
                 <div class="modal-action">
                     <a href=""></a>

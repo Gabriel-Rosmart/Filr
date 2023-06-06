@@ -448,7 +448,7 @@ class AdminController extends Controller
 
     public function generateReport(Request $request)
     {
-
+            
             $UserData = User::select('*')
             ->when($request->day ?? $request->month ?? $request->year ?? false, function($query, $date){
             $query->with([
@@ -486,29 +486,32 @@ class AdminController extends Controller
         ->get();
         //return $UserData;
         //Log::channel('daily')->info('INFO; User with id ' . $request->user_id . ' found: ' . $UserData->name);
-
-        $range = DB::table('date_ranges as r')
+        
+        $range = DB::table('date_ranges', 'r')
         ->select('r.start_date', 'r.end_date')
         ->join('date_range_user as r_u', 'r.id', '=', 'r_u.date_range_id')
         ->where('r_u.user_id', $request->user_id)
         ->when($request->day ?? $request->month ?? $request->year ?? false, function($query,$date){
             $query->when(strlen($date) == 10, function($query) use ($date){
-                $query->whereRaw("$date between start_date and end_date");
+                $query->where("r.start_date", '<=', $date)
+                    ->where('r.end_date', '>=', $date);
             })
             ->when(strlen($date) == 2, function($query) use ($date){
                 $query->where(DB::raw('MONTH(r.start_date)'), '<=', $date)
                 ->where(DB::raw('MONTH(end_date)'), '>=', $date);
             })
             ->when(strlen($date) == 4, function($query) use ($date){
-                $query->where(DB::raw('YEAR(start_date)'), '<=', $date)
-                ->where(DB::raw('YEAR(end_date)'), '>=', $date);
+                $query->where(DB::raw('YEAR(r.start_date)'), '<=', $date)
+                ->where(DB::raw('YEAR(r.end_date)'), '>=', $date);
             });
+        }, function($query){
+            $query->where('r.start_date', '<', DB::raw('CURDATE()'));
         })
         ->get();
         $pdf = new Dompdf();
         $pdf->loadHtml(view('fileReport',[
             'user' => $UserData[0],
-            'range' => $range[0],
+            'range' => $range,
             'period' => $request->day ?? $request->month ?? $request->year
         ]));
         $pdf->setPaper('A4', 'portrait');
