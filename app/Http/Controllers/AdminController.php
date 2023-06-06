@@ -531,12 +531,18 @@ class AdminController extends Controller
         })
         ->get(); 
 
+        if(isset($request->month) && isset($request->year)){
+            $month = $request->year . "-" . $request->month;
+        } else{
+            $month = $request->month;
+        }
+
         // * PDF Generate
         $pdf = new Dompdf();
         $pdf->loadHtml(view('fileReport',[
             'user' => $UserData[0],
             'range' => $range,
-            'period' => $request->day ?? $request->month ?? $request->year
+            'period' => $request->day ?? $month ?? $request->year
         ]));
         $pdf->setPaper('A4', 'portrait');
         $pdf->render();
