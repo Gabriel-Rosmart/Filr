@@ -49,16 +49,24 @@ class UserController extends Controller
                 $query->where('date',$date);
             })                      
             ->when(request()->input('month') ?? false, function($query, $month){
-                $query->whereMonth('date' , $month);
-            })        
+                $query->whereMonth('date', $month)
+                ->when(request()->input('year') ?? false, function($query, $year){
+                    $query->whereYear('date' , $year);
+                });
+
+            })
+            ->when(request()->input('year') ?? false, function($query, $year){
+                $query->when(request()->input('month') === null, function($query) use ($year){
+                    $query->whereYear('date' , $year);
+                });
+            })         
             ->orderBy('date', 'desc')
             ->orderBy('timestamp', 'asc')
             ->paginate(20)
+            ->withQueryString()
             ->withPath('/user?component=1');
-
-        $filter = request()->only('date','month');    
                 
-        $filter = request()->only('date, month');
+        $filter = request()->only('date', 'month', 'year');
 
         if (isset($_GET['component'])) {
             $component = (int)$_GET['component'];
