@@ -95,7 +95,7 @@ const createFileReport = () => {
                        <div class=" flex flex-row justify-end content-end w-1/3">
                             <button :disabled="user.active == 0 ? true : false" class="btn btn-outline btn-primary w-full max-w-xs mr-2"
                                 @click="fileIn(user.id)">
-                                Fichar
+                                {{ t('file.file') }}
                             </button>
                         </div>
                     <AddDateRange class="btn-outline btn-primary" :user="user.id"/>
@@ -126,9 +126,9 @@ const createFileReport = () => {
             <div class="modal-box">
                 <p>{{ t('file.filterSum') }}</p>
                 <ul>
-                    <li v-if="filter.year">Año : </li>
-                    <li v-if="filter.month">Mes : {{ filter.month }}</li>
-                    <li v-if="filter.date">Día : {{ filter.date }}</li>
+                    <li v-if="filter.year">{{ t('file.year.year') }} : {{ filter.year }}</li>
+                    <li v-if="filter.month">{{ t('file.month.month') }} : {{ filter.month }}</li>
+                    <li v-if="filter.date">{{ t('file.day.day') }} : {{ filter.date }}</li>
                 </ul> 
                 <div class="modal-action">
                     <a href=""></a>

@@ -206,20 +206,28 @@ class AdminController extends Controller
                 ->where('id', $id)
                 ->get()
                 ->first();
-
                 $files = File::Where('user_id', $id)
                     ->when(request()->input('date') ?? false, function($query, $date){
                         $query->where('date',$date);
                     })                      
                     ->when(request()->input('month') ?? false, function($query, $month){
-                        $query->whereMonth('date' , $month);
-                    })        
+                        $query->whereMonth('date', $month)
+                        ->when(request()->input('year') ?? false, function($query, $year){
+                            $query->whereYear('date' , $year);
+                        });
+
+                    })
+                    ->when(request()->input('year') ?? false, function($query, $year){
+                        $query->when(request()->input('month') === null, function($query) use ($year){
+                            $query->whereYear('date' , $year);
+                        });
+                    })         
                     ->orderBy('date', 'desc')
                     ->orderBy('timestamp', 'asc')
                     ->paginate(20)
                     ->withQueryString();
 
-                $filter = request()->only('date','month');
+                $filter = request()->only('date','month','year');
 
             return Inertia::render('Admin/UserDetails', [
                 'user' => $user,

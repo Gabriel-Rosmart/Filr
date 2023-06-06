@@ -212,7 +212,28 @@
         "download": "Download Permit"
     },
     "file":{
+        "file" : "File",
         "report" : "Create file report",
-        "filterSum" : "A file report is going to be created with the following data"
+        "filterSum" : "A file report is going to be created with the following data",
+        "month" : {
+            "choose" : "Choose month",
+            "month" : "Month",
+            "Jan" : "January",
+            "Feb" : "February",
+            "Mar" : "March",
+            "Apr" : "April",
+            "May" : "May",
+            "Jun" : "June",
+            "Jul" : "July",
+            "Aug" : "August",
+            "Sep" : "September",
+            "Oct" : "October",
+            "Nov" : "November",
+            "Dec" : "December"
+        },
+        "year": {
+            "year" : "Year",
+            "choose" : "Choose year"
+        }
     }
 }

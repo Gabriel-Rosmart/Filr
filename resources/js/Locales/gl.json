@@ -212,7 +212,28 @@
         "download": "Descargar Permiso"
     },
     "file":{
+        "file" : "Fichar",
         "report" : "Xerar informe de fichaxes",
-        "filterSum" : "Crearase un informe usando os seguintes datos:"
+        "filterSum" : "Crearase un informe usando os seguintes datos:",
+        "month" : {
+            "choose" : "Elixe mes",
+            "month" : "Mes",
+            "Jan" : "Xaneiro",
+            "Feb" : "Febrero",
+            "Mar" : "Marzo",
+            "Apr" : "Abril",
+            "May" : "Maio",
+            "Jun" : "Xuño",
+            "Jul" : "Xullo",
+            "Aug" : "Agosto",
+            "Sep" : "Setembro",
+            "Oct" : "Outubro",
+            "Nov" : "Novembro",
+            "Dec" : "Decembro"
+        },
+        "year": {
+            "year" : "Ano",
+            "choose" : "Elixe ano"
+        }
     }
 }

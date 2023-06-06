@@ -212,7 +212,28 @@
         "download": "Descargar Permiso"
     },
     "file":{
+        "file" : "Fichar",
         "report" : "Generar infore de fichajes",
-        "filterSum" : "Se creará un informe de fichajes usando la siguiente información: "
+        "filterSum" : "Se creará un informe de fichajes usando la siguiente información: ",
+        "month" : {
+            "choose" : "Elige mes",
+            "month" : "Mes",
+            "Jan" : "Enero",
+            "Feb" : "Febrero",
+            "Mar" : "Marzo",
+            "Apr" : "Abril",
+            "May" : "Mayo",
+            "Jun" : "Junio",
+            "Jul" : "Julio",
+            "Aug" : "Agosto",
+            "Sep" : "Septiembre",
+            "Oct" : "Octubre",
+            "Nov" : "Noviembre",
+            "Dec" : "Diciembre"
+        },
+        "year": {
+            "year" : "Año",
+            "choose" : "Elige año"
+        }
     }
 }
