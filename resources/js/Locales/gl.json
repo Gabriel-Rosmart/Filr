@@ -43,6 +43,7 @@
             "denied": "Denegado"
         },
         "buttons": {
+            "dates": "Datas",
             "edit": "Modificar usuario",
             "adduser": "Engadir usuario",
             "accept": "Aceptar",
@@ -51,7 +52,9 @@
             "prev": "Anterior",
             "send": "Enviar",
             "save": "Gardar",
-            "cancel": "Cancelar"
+            "cancel": "Cancelar",
+            "add": "Engadir",
+            "editSchedule": "Editar Horario"
         },
         "details": {
             "noCorrespondences": "Non se atoparon coincidencias",
@@ -96,8 +99,8 @@
         "employee": "Empregado",
         "date": "Data",
         "subject": "Motivo",
-        "late": "Chega <span style='color: red'>{minutes}</span> minutos tarde",
-        "early": "Sae <span style='color: red'>{minutes}</span> minutos antes",
+        "late": "Entrada retrasada por <span style='color: red'>{minutes}</span> minutos",
+        "early": "Saída anticipada por <span style='color: red'>{minutes}</span> minutos",
         "absent": "<span style='color: red'>Non veu traballar</span>",
         "reqPermit": "Permiso solicitado"
     },
@@ -207,5 +210,31 @@
         "change": "Cambiar",
         "attach": "Engadir",
         "download": "Descargar Permiso"
+    },
+    "file":{
+        "file" : "Fichar",
+        "report" : "Xerar informe de fichaxes",
+        "filterSum" : "Crearase un informe usando os seguintes datos:",
+        "month" : {
+            "choose" : "Elixe mes",
+            "month" : "Mes",
+            "Jan" : "Xaneiro",
+            "Feb" : "Febrero",
+            "Mar" : "Marzo",
+            "Apr" : "Abril",
+            "May" : "Maio",
+            "Jun" : "Xuño",
+            "Jul" : "Xullo",
+            "Aug" : "Agosto",
+            "Sep" : "Setembro",
+            "Oct" : "Outubro",
+            "Nov" : "Novembro",
+            "Dec" : "Decembro"
+        },
+        "year": {
+            "year" : "Ano",
+            "choose" : "Elixe ano"
+        },
+        "historical": "Hitórico de fichaxes"
     }
 }

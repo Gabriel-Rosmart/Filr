@@ -43,6 +43,7 @@
             "denied": "Denied"
         },
         "buttons": {
+            "dates": "Dates",
             "edit": "Edit user",
             "adduser": "Add user",
             "accept": "Accept",
@@ -51,7 +52,9 @@
             "prev": "Previous",
             "send": "Send",
             "save": "Save",
-            "cancel": "Cancel"
+            "cancel": "Cancel",
+            "add": "Add",
+            "editSchedule": "Edit schedule"
         },
         "details": {
             "noCorrespondences": "No matches founds",
@@ -96,8 +99,8 @@
         "employee": "Employee",
         "date": "Date",
         "subject": "Subject",
-        "late": "Employee is late by <span style='color: red'>{minutes}</span> minutes",
-        "early": "Employee is early by <span style='color: red'>{minutes}</span> minutes",
+        "late": "Delayed entry by <span style='color: red'>{minutes}</span> minutes",
+        "early": "Early departure by <span style='color: red'>{minutes}</span> minutes",
         "absent": "<span style='color: red'>Did not come to work</span>",
         "reqPermit": "Requested permit"
     },
@@ -207,5 +210,31 @@
         "change": "Change",
         "attach": "Attach",
         "download": "Download Permit"
+    },
+    "file":{
+        "file" : "File",
+        "report" : "Create file report",
+        "filterSum" : "A file report is going to be created with the following data",
+        "month" : {
+            "choose" : "Choose month",
+            "month" : "Month",
+            "Jan" : "January",
+            "Feb" : "February",
+            "Mar" : "March",
+            "Apr" : "April",
+            "May" : "May",
+            "Jun" : "June",
+            "Jul" : "July",
+            "Aug" : "August",
+            "Sep" : "September",
+            "Oct" : "October",
+            "Nov" : "November",
+            "Dec" : "December"
+        },
+        "year": {
+            "year" : "Year",
+            "choose" : "Choose year"
+        },
+        "historical": "File historical"
     }
 }

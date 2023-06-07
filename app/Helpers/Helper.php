@@ -45,11 +45,11 @@ class Helper
                 'email' => $validated['email'],
                 'phone' => $validated['telephone'],
             ]);
-            DB::table('schedules')->where('date_range_id', $user->date_range_id)->delete();
+            DB::table('schedules')->where('date_range_id', $validated['schedules_id'])->delete();
             foreach ($validated['schedules'] as $key => $value) {
                 if (isset($value[0]) && isset($value[1])) {
                     DB::table('schedules')->insert([
-                        'date_range_id' => $user->date_range_id,
+                        'date_range_id' => $validated['schedules_id'],
                         'day' => $key,
                         'starts_at' => $value[0],
                         'ends_at' => $value[1]
@@ -57,12 +57,42 @@ class Helper
                 }
                 if (isset($value[2]) && isset($value[3])) {
                     DB::table('schedules')->insert([
-                        'date_range_id' => $user->date_range_id,
+                        'date_range_id' => $validated['schedules_id'],
                         'day' => $key,
                         'starts_at' => $value[2],
                         'ends_at' => $value[3]
                     ]);
                 }
+            }
+        });
+    }
+
+    public static function updateUserDates($validated, $user)
+    {
+        DB::transaction(function () use ($validated, $user) {
+            if ($validated['id'] != null) {
+                /*DB::table('date_ranges')->where('id', $validated['id'])->delete();
+                DB::table('date_ranges')->insert([
+                    'id' => $validated['id'],
+                    'start_date' => $validated['dates']['start_date'],
+                    'end_date' => $validated['dates']['end_date'],
+                ]);*/
+                DB::table('date_ranges')->where('id', $validated['id'])->update([
+                    'start_date' => $validated['dates']['start_date'],
+                    'end_date' => $validated['dates']['end_date'],
+                ]);
+            }
+            else{
+                DB::table('date_ranges')->insert([
+                    'start_date' => $validated['dates']['start_date'],
+                    'end_date' => $validated['dates']['end_date'],
+                ]);
+                $dateid=DB::table('date_ranges')->select('id')->where('start_date',$validated['dates']['start_date'])->where('end_date',$validated['dates']['end_date'])->get()->last();
+                echo $dateid->id;
+                DB::table('date_range_user')->insert([
+                    'user_id' => $user->id,
+                    'date_range_id' => $dateid->id
+                ]);
             }
         });
     }

@@ -1,5 +1,5 @@
 <script setup>
-import AdminLayout from '@/Layouts/AdminLayout.vue'
+import AdminLayout from '@/Layouts/AdminLayout.vue';
 import FormEditUser from '@/Shared/Forms/FormEditUser.vue';
 import Breadcrumbs from '@/Shared/Navigation/Breadcrumbs.vue';
 import { Head } from '@inertiajs/inertia-vue3';
@@ -11,8 +11,12 @@ const { t } = useI18n()
 const props = defineProps({
     user: Object,
     timetable: Object,
-    isAdmin: Number
+    isAdmin: Number,
+    dates: Object,
+    range : Number
 })
+
+console.log(props.dates);
 
 </script>
 
@@ -22,7 +26,7 @@ const props = defineProps({
         <Breadcrumbs class="ml-5 mt-6"
             :pages="[['Admin', '/admin'], [t('breadcrumbs.manage'), '/admin/manage'],[props.user.name, '/admin/details?id=' + props.user.id],[t('breadcrumbs.edit'), '/admin/edit']]" />
         <div class="flex items-center mt-8">
-            <FormEditUser :user="user" :timetable="timetable" :isAdmin="isAdmin" />
+            <FormEditUser :user="user" :timetable="timetable" :isAdmin="isAdmin" :dates="dates" :range="range"/>
         </div>
     </AdminLayout>
 </template>

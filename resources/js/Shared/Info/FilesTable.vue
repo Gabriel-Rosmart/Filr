@@ -11,30 +11,18 @@
 
     const getMorningShift = (files) => {
         let shifts = []
-
-        if(files.length >= 1) shifts.push(files[0].timestamp)
-        if(files.length >= 3) shifts.push(files[2].timestamp)
-
+            for (let j = 0; j < files.length; j++) 
+                if( j % 2 == 0)
+                    shifts.push(files[j].timestamp)
         return shifts
     }
 
     const getAfternoonShift = (files) => {
         let shifts = []
-
-        if(files.length >= 2) shifts.push(files[1].timestamp)
-        if(files.length >= 4) shifts.push(files[3].timestamp)
-
+        for (let j = 0; j < files.length; j++) 
+            if( j % 2 == 1)
+                shifts.push(files[j].timestamp)
         return shifts
-    }
-
-    const getAdditionalFiles = (otherFiles) => {
-        let files = []
-
-        for (let i = 4; i < otherFiles.length; i++) {
-            files.push(otherFiles[i].timestamp)           
-        }
-
-        return files
     }
 
 </script>
@@ -47,7 +35,6 @@
                     <th>{{ t('table.name') }}</th>
                     <th>{{ t('table.in') }}</th>
                     <th>{{ t('table.out') }}</th>
-                    <th>{{ t('table.other') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -66,13 +53,6 @@
                             <span v-for="shift of getAfternoonShift(user.files)" class="mb-2">
                                 {{ shift }}
                             </span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="flex flex-col">
-                            <span v-for="shift of getAdditionalFiles(user.files)" class="mb-2">
-                                {{ shift }}
-                            </span>         
                         </div>
                     </td>
                     <td>

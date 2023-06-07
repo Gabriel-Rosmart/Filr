@@ -43,6 +43,7 @@
             "denied": "Denegado"
         },
         "buttons": {
+            "dates": "Fechas",
             "edit": "Editar usuario",
             "adduser": "Añadir usuario",
             "accept": "Aceptar",
@@ -51,7 +52,9 @@
             "prev": "Anterior",
             "send": "Enviar",
             "save": "Guardar",
-            "cancel": "Cancelar"
+            "cancel": "Cancelar",
+            "add": "Añadir",
+            "editSchedule": "Editar Horario"
         },
         "details": {
             "noCorrespondences": "No se encontraron coincidencias",
@@ -96,8 +99,8 @@
         "employee": "Empleado",
         "date": "Fecha",
         "subject": "Motivo",
-        "late": "Llega <span style='color: red'>{minutes}</span> minutos tarde",
-        "early": "Sale <span style='color: red'>{minutes}</span> minutos antes",
+        "late": "Entrada retrasada por <span style='color: red'>{minutes}</span> minutos",
+        "early": "Salida anticipada por <span style='color: red'>{minutes}</span> minutos",
         "absent": "<span style='color: red'>No vino a trabajar</span>",
         "reqPermit": "Permiso solicitado"
     },
@@ -207,5 +210,31 @@
         "change": "Cambiar",
         "attach": "Añadir",
         "download": "Descargar Permiso"
+    },
+    "file":{
+        "file" : "Fichar",
+        "report" : "Generar infore de fichajes",
+        "filterSum" : "Se creará un informe de fichajes usando la siguiente información: ",
+        "month" : {
+            "choose" : "Elige mes",
+            "month" : "Mes",
+            "Jan" : "Enero",
+            "Feb" : "Febrero",
+            "Mar" : "Marzo",
+            "Apr" : "Abril",
+            "May" : "Mayo",
+            "Jun" : "Junio",
+            "Jul" : "Julio",
+            "Aug" : "Agosto",
+            "Sep" : "Septiembre",
+            "Oct" : "Octubre",
+            "Nov" : "Noviembre",
+            "Dec" : "Diciembre"
+        },
+        "year": {
+            "year" : "Año",
+            "choose" : "Elige año"
+        },
+        "historical": "Histórico de fichajes"
     }
 }

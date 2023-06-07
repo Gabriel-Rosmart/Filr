@@ -2,7 +2,7 @@
 /** Component imports */
 import UserData from "@/Components/UserData.vue";
 import UserTimes from "@/Components/UserTimes.vue";
-import { useForm } from '@inertiajs/inertia-vue3'
+import { useForm } from '@inertiajs/inertia-vue3';
 import { Link } from '@inertiajs/inertia-vue3';
 import { useI18n } from 'vue-i18n';
 
@@ -11,7 +11,9 @@ const { t } = useI18n()
 const props = defineProps({
     user: Object,
     timetable: Object,
-    isAdmin: Number
+    isAdmin: Number,
+    dates: Object,
+    range: Number
 })
 
 var form = useForm({
@@ -26,8 +28,11 @@ var form = useForm({
         wednesday: [null, null, null, null],
         thursday: [null, null, null, null],
         friday: [null, null, null, null]
-    }
+    },
+    schedules_id: null,
 });
+
+props.range != null ? form.schedules_id = Number(props.range) : form.schedules_id = ""
 
 function validate(object) {
     var regex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
@@ -63,6 +68,7 @@ function validate(object) {
 
 const submit = () => {
     validate(form.schedules);
+    console.log(form);
     form.post('/admin/edit');
 };
 
@@ -75,7 +81,7 @@ const submit = () => {
         <form @submit.prevent="" class="w-full pr-10">
             <div class="grid grid-cols-2 w-auto">
                 <UserData :user="user" :form="form" :isAdmin="isAdmin" />
-                <UserTimes :weekend="timetable" :form="form" />
+                <UserTimes :weekend="timetable" :form="form" :dates="dates" :range="range"/>
                 <div class="flex justify-center mt-8">
                     <Link as="button" :href="'/admin/details?id='+props.user.id" class="btn btn-outline btn-error mr-4">
                     {{ t('admin.buttons.cancel') }}

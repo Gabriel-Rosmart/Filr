@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\PermitController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,9 +35,14 @@ Route::middleware(['auth', 'admin', 'locale'])->group(function () {
     Route::get('/admin/incidences', [AdminController::class, 'listAllIncidences']);
     Route::get('/admin/register', [AdminController::class, 'registerNewUser']);
     Route::get('/admin/edit', [AdminController::class, 'edit']);
+    Route::get('/admin/dates', [AdminController::class, 'getDates']);
     Route::post('/permits', PermitController::class);
+    Route::post('/admin/dates', [AdminController::class, 'addDateRange']);
     Route::post('/admin/register', [AdminController::class, 'saveRegisteredUser']);
     Route::post('/admin/edit', [AdminController::class, 'updateUser']);
+    Route::post('/admin/fileReport', [AdminController::class, 'generateReport']);
+    Route::get('/admin/getReport', [AdminController::class, 'downloadReport']);
+    Route::get('/admin/deleteReport', [AdminController::class, 'deleteReport']);
     Route::get('/permits/pending', function () {
         return Permit::where('status', 'pending')->count();
     });
@@ -57,6 +63,7 @@ Route::middleware(['auth', 'locale'])->group(function () {
     });
 });
 
+//Route::post('/fileReport', [AdminController::class, 'generateReport']);
 Route::post('/token', TokenController::class);
 
 Route::get('/dashboard', function () {
