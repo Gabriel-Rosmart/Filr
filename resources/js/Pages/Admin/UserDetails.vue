@@ -131,7 +131,7 @@ const createFileReport = () => {
                     <li v-if="filter.date">{{ t('file.day.day') }} : {{ filter.date }}</li>
                 </ul> 
                 <ul v-else>
-                    <li>{{ t('files.historical') }}</li>
+                    <li>{{ t('file.historical') }}</li>
                 </ul>
                 <div class="modal-action">
                     <a href=""></a>
