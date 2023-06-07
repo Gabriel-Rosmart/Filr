@@ -234,6 +234,7 @@
         "year": {
             "year" : "Ano",
             "choose" : "Elixe ano"
-        }
+        },
+        "historical": "Hitórico de fichaxes"
     }
 }

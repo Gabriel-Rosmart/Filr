@@ -125,11 +125,14 @@ const createFileReport = () => {
         <div class="modal">
             <div class="modal-box">
                 <p>{{ t('file.filterSum') }}</p>
-                <ul>
+                <ul v-if="filter.date != null || filter.month != null || filter.year != null ">
                     <li v-if="filter.year">{{ t('file.year.year') }} : {{ filter.year }}</li>
                     <li v-if="filter.month">{{ t('file.month.month') }} : {{ filter.month }}</li>
                     <li v-if="filter.date">{{ t('file.day.day') }} : {{ filter.date }}</li>
                 </ul> 
+                <ul v-else>
+                    <li>{{ t('files.historical') }}</li>
+                </ul>
                 <div class="modal-action">
                     <a href=""></a>
                     <label for="my-modal-2" class="btn btn-primary" @click="createFileReport()">{{ t('admin.buttons.accept') }}</label> 

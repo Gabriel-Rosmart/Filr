@@ -234,6 +234,7 @@
         "year": {
             "year" : "Year",
             "choose" : "Choose year"
-        }
+        },
+        "historical": "File historical"
     }
 }
