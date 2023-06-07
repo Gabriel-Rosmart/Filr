@@ -32,7 +32,7 @@ var form = useForm({
     schedules_id: null,
 });
 
-props.range != null ? form.schedules_id = Number(props.range) : form.schedules_id = null
+props.range != null ? form.schedules_id = Number(props.range) : form.schedules_id = ""
 
 function validate(object) {
     var regex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;

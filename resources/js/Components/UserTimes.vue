@@ -48,7 +48,7 @@ console.table(props.dates);
 console.log(ids);
 
 function linkwithform(event) {
-    let id = event.target.value
+    let id = event
     props.form.schedules = {
         monday: [null, null, null, null],
         tuesday: [null, null, null, null],
@@ -131,6 +131,10 @@ function getDates(id) {
     }
 }
 
+if(props.range !== null){
+    linkwithform(Number(props.range))
+}
+
 </script>
 
 <template>
@@ -138,7 +142,7 @@ function getDates(id) {
         <span v-for="error in form.errors" class="block w-full text-center">
             <FormInputError :message="error" />
         </span>           
-        <select class='bg-transparent input-bordered w-full max-w-xs mb-4' @change="linkwithform($event)" v-model="form.schedules_id" >
+        <select class='bg-transparent input-bordered w-full max-w-xs mb-4' @change="linkwithform($event.target.value)" v-model="form.schedules_id" >
             <option selected value="" >Rangos de fechas del usuario</option>
             <option v-for="id, index in ids" :key="index" :value="id" >
                 {{ getDates(id)}} 
