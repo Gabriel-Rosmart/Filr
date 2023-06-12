@@ -35,5 +35,7 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: php artisan migrate --seed
+    - name: NPM dependencies
+      run: npm install
     - name: build project
       run: npm run build
